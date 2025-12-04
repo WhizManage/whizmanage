@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 1724 1492" width="1280" height="1280" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a21caf; stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#a21caf; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#db2777; stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a21caf; stop-opacity:1" />
+      <stop offset="10%" style="stop-color:#a21caf; stop-opacity:1" />
+      <stop offset="45%" style="stop-color:#db2777; stop-opacity:1" />
+      <stop offset="55%" style="stop-color:#db2777; stop-opacity:1" />
+      <stop offset="90%" style="stop-color:#c026d3; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c026d3; stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#db2777; stop-opacity:1" />
+      <stop offset="20%" style="stop-color:#db2777; stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c026d3; stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <g>
+    <path transform="translate(83,72)" d="m0 0h324l8 16 9 19 26 56 18 39 13 28 13 29 7 15 11 23 13 28 18 39 14 30 17 37 32 69 51 110 13 29 7 15 11 23 13 28 18 39 32 69 18 39 26 56 19 41 12 26 32 69 9 20-1 5-176 352-3-3-15-32-12-27-36-80-16-36-17-37-11-25-13-29-19-42-13-29-16-36-16-35-13-29-18-40-16-36-16-35-16-36-19-42-13-29-16-36-16-35-12-27-13-29-19-42-13-29-16-36-16-35-16-36-19-42-13-29-18-40-13-29-19-42-13-29-16-36-16-35-12-27-26-58-7-15z" fill="url(#grad1)"/>
+    <path transform="translate(712,72)" d="m0 0h324l3 4 11 24 24 52 51 110 13 29 7 15 11 23 13 28 18 39 14 30 17 37 32 69 51 110 13 29 7 15 11 23 13 28 18 39 14 30 17 37 58 125 17 37 15 32 12 26-1 6-176 352h-2l-16-36-19-42-18-40-16-36-17-37-11-25-16-35-18-41-11-24-16-36-16-35-13-29-18-40-13-29-36-80-13-29-18-40-16-36-17-37-11-25-13-29-19-42-13-29-16-36-16-35-13-29-18-40-16-36-16-35-16-36-19-42-13-29-16-36-16-35-12-27-13-29-19-42-12-27z" fill="url(#grad2)"/>
+    <path transform="translate(1357,72)" d="m0 0h324l3 5 2 4-1 7-8 18-70 140-11 23-64 128-11 23-3 6-3-1-7-14-16-36-12-26-12-27-15-33-26-58-18-40-13-29-15-33-24-54z" fill="url(#grad3)"/>
+  </g>
+</svg>
+
+
+
+
+
+
+
+

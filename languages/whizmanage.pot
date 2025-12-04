@@ -1,0 +1,4296 @@
+# Copyright (C) 2025 WhizManage
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: WhizManage 1.3.3\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/whizmanage\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-11-16T09:49:54+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: whizmanage\n"
+
+#. Plugin Name of the plugin
+#. Author of the plugin
+#: whizmanage.php
+#: includes/class-whizmanage.php:36
+#: includes/class-whizmanage.php:37
+msgid "WhizManage"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: whizmanage.php
+msgid "https://whizmanage.com/"
+msgstr ""
+
+#. Description of the plugin
+#: whizmanage.php
+msgid "Easily manage your WooCommerce store with advanced bulk editing, product organization, and smart tools."
+msgstr ""
+
+#: includes/class-whizmanage.php:48
+#: includes/class-whizmanage.php:49
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:358
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:645
+#: src/pages/products/_components/header/add/variation/GenerateRowItem.jsx:82
+#: src/pages/products/_components/table/edit/attributes/AttributeRowItem.jsx:92
+msgid "Product"
+msgstr ""
+
+#: includes/class-whizmanage.php:58
+#: includes/class-whizmanage.php:59
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:464
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:258
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:613
+msgid "Coupons"
+msgstr ""
+
+#: includes/coupons/rest-functions-coupons.php:87
+#: includes/orders/rest-functions-orders.php:670
+#: includes/products/rest-functions-product.php:924
+#: includes/rest-functions-main.php:405
+msgid "You do not have permissions to access this."
+msgstr ""
+
+#: whizmanage.php:65
+#: whizmanage.php:83
+msgid "WhizManage requires WooCommerce to be installed and active."
+msgstr ""
+
+#: whizmanage.php:66
+msgid "Go back"
+msgstr ""
+
+#: whizmanage.php:147
+msgid "Products Editor"
+msgstr ""
+
+#: whizmanage.php:157
+msgid "Go Pro"
+msgstr ""
+
+#: src/components/CustomConfirm.jsx:113
+#: src/layout/editor/components/ImageEditorDialog.jsx:731
+#: src/layout/editor/components/ImageSelector.jsx:142
+#: src/layout/editor/components/TableDialog.jsx:197
+#: src/layout/editor/components/TableEditorDialog.jsx:325
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:96
+#: src/layout/editor/components/VideoDialog.jsx:859
+#: src/layout/editor/components/VideoSelector.jsx:93
+#: src/layout/editor/HtmlEditor.jsx:635
+#: src/layout/editor/HtmlEditor.jsx:649
+#: src/pages/coupons/_components/header/EditAll.jsx:135
+#: src/pages/coupons/_components/header/TopPanel.jsx:49
+#: src/pages/coupons/_components/table/edit/MultiSelectEditItem.jsx:66
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:59
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:113
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:159
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:884
+#: src/pages/orders/_components/header/DateFilterTabs.jsx:317
+#: src/pages/orders/_components/header/EditAll.jsx:130
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:376
+#: src/pages/orders/_components/table/EditableItemsCell.jsx:135
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:820
+#: src/pages/products/_components/header/add/variation/AddFromTermsItem.jsx:59
+#: src/pages/products/_components/header/add/variation/SelectAttributeItem.jsx:68
+#: src/pages/products/_components/header/add/variation/SelectTermItem.jsx:59
+#: src/pages/products/_components/header/EditAll.jsx:197
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:98
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:107
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:72
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:134
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:154
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:42
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:66
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:275
+msgid "Cancel"
+msgstr ""
+
+#: src/components/CustomConfirm.jsx:122
+msgid "Confirm"
+msgstr ""
+
+#: src/components/PDFPreview.jsx:56
+msgid "Click to preview"
+msgstr ""
+
+#: src/components/PDFPreview.jsx:67
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:74
+#: src/pages/orders/_components/table/edit/MetaData.jsx:85
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:62
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:178
+msgid "Open"
+msgstr ""
+
+#: src/components/PDFPreview.jsx:77
+msgid "PDF Preview"
+msgstr ""
+
+#: src/components/PDFPreview.jsx:100
+msgid "Open in New Tab"
+msgstr ""
+
+#: src/components/PDFPreview.jsx:159
+msgid "Open PDF"
+msgstr ""
+
+#: src/ErrorBoundary.jsx:68
+msgid "Something went wrong!"
+msgstr ""
+
+#: src/ErrorBoundary.jsx:77
+#: src/layout/_components/DesktopSidebar.jsx:127
+msgid "Back to wordpress"
+msgstr ""
+
+#: src/ErrorBoundary.jsx:88
+msgid "Try again"
+msgstr ""
+
+#: src/layout/editor/components/EditingArea.jsx:97
+msgid "copied"
+msgstr ""
+
+#: src/layout/editor/components/EditingArea.jsx:97
+msgid "copy"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:334
+msgid "Edit Image"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:372
+msgid "Size & Alignment"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:379
+msgid "Size"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:394
+msgid "Maintain aspect ratio"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:399
+#: src/layout/editor/components/TableDialog.jsx:125
+#: src/layout/editor/components/TableEditorDialog.jsx:195
+#: src/layout/editor/components/VideoDialog.jsx:472
+#: src/layout/editor/components/VideoDialog.jsx:632
+#: src/layout/editor/components/VideoDialog.jsx:807
+#: src/pages/products/_components/table/Columns.jsx:1231
+#: src/pages/products/_components/table/edit/DimensionsEdit.jsx:46
+msgid "Width"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:407
+msgid "Width in pixels"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:417
+#: src/layout/editor/components/VideoDialog.jsx:487
+#: src/layout/editor/components/VideoDialog.jsx:647
+#: src/layout/editor/components/VideoDialog.jsx:818
+#: src/pages/products/_components/table/Columns.jsx:1235
+#: src/pages/products/_components/table/edit/DimensionsEdit.jsx:47
+msgid "Height"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:425
+msgid "Height in pixels"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:441
+msgid "Reset to original size"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:447
+msgid "Alignment"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:457
+#: src/layout/editor/components/TableEditorDialog.jsx:257
+msgid "None"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:467
+#: src/layout/editor/components/ImageEditorDialog.jsx:505
+msgid "Left"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:477
+msgid "Center"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:487
+#: src/layout/editor/components/ImageEditorDialog.jsx:515
+msgid "Right"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:494
+msgid "Rotate"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:527
+msgid "Style"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:534
+msgid "Border Radius"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:540
+msgid "Round corners"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:570
+msgid "Apply shadow"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:577
+msgid "Border"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:583
+#: src/layout/editor/components/TableEditorDialog.jsx:240
+msgid "Border width"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:608
+#: src/layout/editor/components/TableEditorDialog.jsx:250
+msgid "Border style"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:622
+#: src/layout/editor/components/TableEditorDialog.jsx:253
+msgid "Solid"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:623
+#: src/layout/editor/components/TableEditorDialog.jsx:254
+msgid "Dashed"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:624
+#: src/layout/editor/components/TableEditorDialog.jsx:255
+msgid "Dotted"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:625
+#: src/layout/editor/components/TableEditorDialog.jsx:256
+msgid "Double"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:632
+#: src/layout/editor/components/TableDialog.jsx:147
+#: src/layout/editor/components/TableEditorDialog.jsx:262
+msgid "Border color"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:672
+msgid "Properties"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:678
+msgid "Alt Text"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:685
+msgid "Alternative text for the image"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:690
+msgid "Describe the image for accessibility and SEO purposes"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:695
+msgid "Link URL"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:703
+msgid "URL if the image is a link"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:708
+msgid "Leave empty if the image should not be clickable"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:726
+#: src/layout/editor/components/ImageSelector.jsx:141
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:95
+#: src/layout/editor/components/VideoSelector.jsx:92
+#: src/layout/menu/History.jsx:295
+#: src/layout/menu/History.jsx:304
+#: src/layout/menu/HistoryItem.jsx:95
+#: src/layout/menu/HistoryItem.jsx:96
+#: src/pages/coupons/_components/table/edit/MultiSelectEditItem.jsx:65
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:58
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:313
+#: src/pages/products/_components/header/add/variation/AddFromTermsItem.jsx:58
+#: src/pages/products/_components/header/add/variation/SelectAttributeItem.jsx:67
+#: src/pages/products/_components/header/add/variation/SelectTermItem.jsx:58
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:97
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:106
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:71
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:270
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:133
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:153
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:357
+msgid "Delete"
+msgstr ""
+
+#: src/layout/editor/components/ImageEditorDialog.jsx:742
+#: src/layout/editor/components/TableEditorDialog.jsx:327
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:499
+#: src/pages/orders/_components/header/DateFilterTabs.jsx:325
+msgid "Apply"
+msgstr ""
+
+#: src/layout/editor/components/ImageSelector.jsx:139
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:93
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:214
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:104
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:69
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:131
+msgid "Delete Image"
+msgstr ""
+
+#: src/layout/editor/components/ImageSelector.jsx:140
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:94
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:105
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:70
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:132
+msgid "Are you sure you want to delete this image?"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:43
+#: src/layout/editor/components/TableEditorDialog.jsx:301
+msgid "Header"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:105
+#: src/layout/editor/components/TableDialog.jsx:198
+#: src/layout/editor/components/Toolbar/InsertTools.jsx:65
+msgid "Insert Table"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:107
+msgid "Generate Variations Table"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:113
+msgid "Rows"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:119
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:199
+#: src/pages/orders/_components/header/DisplayColumns.jsx:227
+#: src/pages/products/_components/header/DisplayColumns.jsx:214
+msgid "Columns"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:136
+msgid "Add border"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:142
+msgid "Add header row"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:159
+#: src/layout/editor/components/TableEditorDialog.jsx:286
+#: src/layout/editor/components/VideoDialog.jsx:540
+#: src/layout/editor/components/VideoDialog.jsx:700
+#: src/layout/editor/components/VideoDialog.jsx:787
+msgid "Preview"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:165
+msgid "H"
+msgstr ""
+
+#: src/layout/editor/components/TableDialog.jsx:190
+msgid "Preview shows up to 5 rows/columns"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:187
+msgid "Edit Table"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:192
+msgid "General"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:210
+msgid "Header row"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:214
+msgid "Appearance"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:218
+msgid "Zebra rows"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:223
+msgid "Alternate row color"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:237
+msgid "Borders"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:272
+msgid "Cell padding"
+msgstr ""
+
+#: src/layout/editor/components/TableEditorDialog.jsx:313
+msgid "Cell"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:442
+msgid "Table settings"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:445
+msgid "Delete table"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:458
+msgid "Row operations"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:460
+msgid "Row"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:465
+msgid "Insert above"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:468
+msgid "Insert below"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:472
+msgid "Delete row"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:484
+msgid "Column operations"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:486
+msgid "Column"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:491
+msgid "Insert left"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:494
+msgid "Insert right"
+msgstr ""
+
+#: src/layout/editor/components/TableSelector.jsx:498
+msgid "Delete column"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/AlignmentTools.jsx:27
+msgid "Align Left"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/AlignmentTools.jsx:42
+msgid "Align Center"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/AlignmentTools.jsx:57
+msgid "Align Right"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/AlignmentTools.jsx:72
+msgid "Justify"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/CodeTools.jsx:171
+msgid "Inline code"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ColorTools.jsx:339
+msgid "Reset Text Color"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ColorTools.jsx:339
+#: src/layout/editor/components/Toolbar/ColorTools.jsx:343
+msgid "Text Color"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ColorTools.jsx:380
+msgid "Reset Background Color"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ColorTools.jsx:380
+#: src/layout/editor/components/Toolbar/ColorTools.jsx:384
+msgid "Background Color"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/FontTools.jsx:44
+msgid "Font"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/FontTools.jsx:79
+msgid "Decrease Font Size"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/FontTools.jsx:97
+msgid "Increase Font Size"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/HistoryTools.jsx:13
+msgid "Undo"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/HistoryTools.jsx:28
+msgid "Redo"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/index.jsx:213
+msgid "Show Less"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/index.jsx:213
+msgid "Show More"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/InsertTools.jsx:20
+#: src/layout/editor/HtmlEditor.jsx:632
+msgid "Insert Link"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/InsertTools.jsx:34
+#: src/layout/editor/HtmlEditor.jsx:646
+msgid "Insert Image"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/InsertTools.jsx:48
+msgid "Upload Image"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/InsertTools.jsx:51
+#: src/layout/editor/components/VideoDialog.jsx:424
+#: src/layout/editor/components/VideoDialog.jsx:866
+msgid "Insert Video"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/InsertTools.jsx:79
+msgid "Insert Horizontal Line"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ListTools.jsx:26
+msgid "Bulleted List"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ListTools.jsx:40
+msgid "Numbered List"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/TextFormatting.jsx:25
+msgid "Bold"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/TextFormatting.jsx:38
+msgid "Italic"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/TextFormatting.jsx:51
+msgid "Underline"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:58
+msgid "Link copied"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:64
+msgid "Failed to copy link"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:105
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:116
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:81
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:142
+msgid "The image has been deleted successfully"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:151
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:209
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:271
+msgid "Select Image"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:165
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:229
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:223
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:281
+msgid "Search image..."
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:201
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:258
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:258
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:313
+msgid "Copy link"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:245
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:292
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:300
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:354
+msgid "No images found"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:249
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:296
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:304
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:358
+msgid "No images match your search. Try different keywords or upload new images."
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:253
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:308
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:362
+msgid "No images in your media library yet. Upload your first image to get started."
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/UploadImages.jsx:266
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:307
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:309
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:317
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:371
+msgid "Clear search"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ViewTools.jsx:20
+msgid "Print"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ViewTools.jsx:34
+msgid "Show Editor"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ViewTools.jsx:34
+msgid "Show HTML"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ViewTools.jsx:50
+msgid "Exit Full Screen"
+msgstr ""
+
+#: src/layout/editor/components/Toolbar/ViewTools.jsx:50
+msgid "Full Screen"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:165
+msgid "Your browser does not support the video tag."
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:318
+msgid "The file is too large for the server limit. Please increase upload_max_filesize/post_max_size or choose a smaller file."
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:325
+msgid "Server error during upload. If the file is large, increase upload limits (upload_max_filesize/post_max_size)."
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:331
+msgid "Video upload failed: "
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:442
+msgid "URL"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:450
+msgid "Video URL"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:462
+msgid "Supported: YouTube, Vimeo, direct video files (.mp4, .webm, .ogg)"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:511
+#: src/layout/editor/components/VideoDialog.jsx:671
+#: src/layout/editor/components/VideoDialog.jsx:832
+msgid "Maintain aspect ratio (16:9)"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:524
+#: src/layout/editor/components/VideoDialog.jsx:684
+#: src/layout/editor/components/VideoDialog.jsx:836
+msgid "Show controls"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:534
+#: src/layout/editor/components/VideoDialog.jsx:694
+#: src/layout/editor/components/VideoDialog.jsx:840
+msgid "Autoplay"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:548
+msgid "Enter a video URL to see preview"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:563
+msgid "Upload File"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:570
+msgid "Video File"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:593
+msgid "Video selected & uploaded"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:594
+msgid "Click to select video file"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:597
+msgid "Supported formats: MP4, WebM, OGG"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:604
+msgid "Uploading video..."
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:605
+msgid "Uploading video... please wait"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:711
+msgid "Select a video file to upload & preview"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:734
+msgid "Media Library"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:749
+msgid "No videos found"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:773
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:263
+#: src/pages/orders/_components/header/DisplayColumns.jsx:291
+#: src/pages/products/_components/header/add/variation/AddFromTerms.jsx:151
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:319
+#: src/pages/products/_components/header/DisplayColumns.jsx:279
+msgid "Selected"
+msgstr ""
+
+#: src/layout/editor/components/VideoDialog.jsx:798
+msgid "Select a video to see preview"
+msgstr ""
+
+#: src/layout/editor/components/VideoSelector.jsx:90
+msgid "Delete Video"
+msgstr ""
+
+#: src/layout/editor/components/VideoSelector.jsx:91
+msgid "Are you sure you want to delete this video?"
+msgstr ""
+
+#: src/layout/editor/components/VideoSelector.jsx:163
+msgid "Resize video"
+msgstr ""
+
+#: src/layout/editor/components/VideoSelector.jsx:173
+msgid "Delete video"
+msgstr ""
+
+#: src/layout/editor/HtmlEditor.jsx:633
+msgid "Please enter the link URL:"
+msgstr ""
+
+#: src/layout/editor/HtmlEditor.jsx:634
+#: src/layout/editor/HtmlEditor.jsx:648
+msgid "Insert"
+msgstr ""
+
+#: src/layout/editor/HtmlEditor.jsx:647
+msgid "Please enter the image URL:"
+msgstr ""
+
+#: src/layout/editor/RichEditorModal.jsx:69
+#: src/layout/editor/RichEditorModal.jsx:91
+#: src/pages/coupons/_components/table/edit/AllowedEmailsEdit.jsx:58
+#: src/pages/coupons/_components/table/edit/EditorEdit.jsx:54
+#: src/pages/coupons/_components/table/edit/EditorEdit.jsx:92
+#: src/pages/orders/_components/table/edit/AllowedEmailsEdit.jsx:58
+#: src/pages/orders/_components/table/edit/EditorEdit.jsx:54
+#: src/pages/orders/_components/table/edit/EditorEdit.jsx:92
+#: src/pages/products/_components/table/edit/EditorEdit.jsx:55
+#: src/pages/products/_components/table/edit/EditorEdit.jsx:93
+#: src/pages/products/_components/table/edit/meta_data/WysiwygEditor.jsx:251
+#: src/pages/products/_components/table/edit/meta_data/WysiwygEditor.jsx:280
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:341
+msgid "Edit"
+msgstr ""
+
+#: src/layout/editor/RichEditorModal.jsx:103
+#: src/layout/menu/History.jsx:623
+#: src/pages/coupons/_components/table/edit/EditorEdit.jsx:119
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:218
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:433
+#: src/pages/orders/_components/table/edit/EditorEdit.jsx:119
+#: src/pages/orders/_components/table/edit/MetaData.jsx:229
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:435
+#: src/pages/orders/_components/table/OrderActions.jsx:205
+#: src/pages/products/_components/table/edit/EditorEdit.jsx:120
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:109
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:469
+#: src/pages/products/_components/table/edit/meta_data/WysiwygEditor.jsx:296
+msgid "Close"
+msgstr ""
+
+#: src/layout/editor/RichEditorModal.jsx:104
+#: src/pages/coupons/_components/header/add/coupon/AddCoupon.jsx:247
+#: src/pages/coupons/_components/header/EditAll.jsx:157
+#: src/pages/coupons/_components/table/edit/AllowedEmailsEdit.jsx:139
+#: src/pages/coupons/_components/table/edit/EditorEdit.jsx:127
+#: src/pages/coupons/_components/table/edit/gallery/GalleryEdit.jsx:188
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:227
+#: src/pages/coupons/_components/table/edit/MultiSelectEditItem.jsx:161
+#: src/pages/orders/_components/header/add/order/AddOrder.jsx:295
+#: src/pages/orders/_components/header/EditAll.jsx:156
+#: src/pages/orders/_components/table/edit/AllowedEmailsEdit.jsx:139
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:433
+#: src/pages/orders/_components/table/edit/EditorEdit.jsx:127
+#: src/pages/orders/_components/table/edit/MetaData.jsx:238
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:435
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:831
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:411
+#: src/pages/products/_components/header/add/variation/AddFromTermsItem.jsx:125
+#: src/pages/products/_components/header/add/variation/SelectAttributeItem.jsx:135
+#: src/pages/products/_components/header/add/variation/SelectOptionsItem.jsx:180
+#: src/pages/products/_components/header/EditAll.jsx:230
+#: src/pages/products/_components/table/edit/attributes/SelectOptionsItem.jsx:153
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:295
+#: src/pages/products/_components/table/edit/EditorEdit.jsx:128
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:140
+#: src/pages/products/_components/table/edit/gallery/GalleryEdit.jsx:190
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:116
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:161
+#: src/pages/products/_components/table/edit/meta_data/GalleryMetaEdit.jsx:344
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:478
+#: src/pages/products/_components/table/edit/meta_data/WysiwygEditor.jsx:299
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:305
+msgid "Save"
+msgstr ""
+
+#: src/layout/menu/History.jsx:255
+#: src/layout/menu/MenuOrder.jsx:121
+msgid "History"
+msgstr ""
+
+#: src/layout/menu/History.jsx:261
+msgid "Loading..."
+msgstr ""
+
+#: src/layout/menu/History.jsx:280
+#: src/layout/menu/History.jsx:289
+#: src/layout/menu/HistoryItem.jsx:84
+#: src/layout/menu/HistoryItem.jsx:85
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:158
+msgid "Restore"
+msgstr ""
+
+#: src/layout/menu/History.jsx:312
+#: src/layout/menu/HistoryItem.jsx:73
+msgid "By"
+msgstr ""
+
+#: src/layout/menu/History.jsx:312
+#: src/layout/menu/HistoryItem.jsx:73
+msgid "At"
+msgstr ""
+
+#: src/layout/menu/History.jsx:328
+msgid "ID"
+msgstr ""
+
+#: src/layout/menu/History.jsx:331
+#: src/layout/menu/HistoryItem.jsx:35
+msgid "Field"
+msgstr ""
+
+#: src/layout/menu/History.jsx:334
+#: src/layout/menu/HistoryItem.jsx:36
+msgid "Old Value"
+msgstr ""
+
+#: src/layout/menu/History.jsx:337
+#: src/layout/menu/HistoryItem.jsx:37
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:120
+#: src/pages/orders/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:118
+msgid "New Value"
+msgstr ""
+
+#: src/layout/menu/History.jsx:417
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:272
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:650
+msgid "Key"
+msgstr ""
+
+#: src/layout/menu/History.jsx:420
+msgid "Old"
+msgstr ""
+
+#: src/layout/menu/History.jsx:423
+msgid "New"
+msgstr ""
+
+#: src/layout/menu/History.jsx:616
+msgid "No history items to show"
+msgstr ""
+
+#: src/layout/menu/HistoryItem.jsx:10
+msgid "Added"
+msgstr ""
+
+#: src/layout/menu/HistoryItem.jsx:11
+msgid "Updated"
+msgstr ""
+
+#: src/layout/menu/HistoryItem.jsx:12
+msgid "Deleted"
+msgstr ""
+
+#: src/layout/menu/HistoryItem.jsx:13
+msgid "Duplicated"
+msgstr ""
+
+#: src/layout/menu/HistoryItem.jsx:14
+msgid "Performed"
+msgstr ""
+
+#: src/layout/menu/HistoryItem.jsx:20
+msgid "items"
+msgstr ""
+
+#: src/layout/menu/MenuOrder.jsx:96
+msgid "Help"
+msgstr ""
+
+#: src/layout/menu/MenuOrder.jsx:110
+msgid "Store display"
+msgstr ""
+
+#: src/layout/menu/MenuOrder.jsx:121
+msgid "(Beta)"
+msgstr ""
+
+#: src/layout/menu/MenuOrder.jsx:130
+msgid "Log out"
+msgstr ""
+
+#: src/layout/ModeToggle.jsx:21
+msgid "Theme"
+msgstr ""
+
+#: src/layout/ModeToggle.jsx:30
+msgid "Light"
+msgstr ""
+
+#: src/layout/ModeToggle.jsx:37
+msgid "Dark"
+msgstr ""
+
+#: src/layout/ModeToggle.jsx:44
+msgid "System"
+msgstr ""
+
+#: src/layout/Navbar.jsx:24
+msgid "Upgrade to pro for advanced features now!"
+msgstr ""
+
+#: src/layout/_components/DesktopSidebar.jsx:136
+msgid "Version"
+msgstr ""
+
+#: src/pages/coupons/page.jsx:251
+msgid "Coupons are currently disabled."
+msgstr ""
+
+#: src/pages/coupons/page.jsx:254
+msgid "Enable them to allow customers to apply coupon codes from the cart and checkout pages."
+msgstr ""
+
+#: src/pages/coupons/page.jsx:269
+msgid "Enable Coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:64
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:95
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:64
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:95
+#: src/pages/products/_components/footer/DataTablePagination.jsx:64
+#: src/pages/products/_components/footer/DataTablePagination.jsx:95
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:59
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:84
+msgid "of"
+msgstr ""
+
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:66
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:66
+#: src/pages/products/_components/footer/DataTablePagination.jsx:66
+msgid "rows selected"
+msgstr ""
+
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:70
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:77
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:70
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:77
+#: src/pages/products/_components/footer/DataTablePagination.jsx:70
+#: src/pages/products/_components/footer/DataTablePagination.jsx:77
+msgid "Go to first page"
+msgstr ""
+
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:81
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:88
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:81
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:88
+#: src/pages/products/_components/footer/DataTablePagination.jsx:81
+#: src/pages/products/_components/footer/DataTablePagination.jsx:88
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:73
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:74
+msgid "Go to previous page"
+msgstr ""
+
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:93
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:93
+#: src/pages/products/_components/footer/DataTablePagination.jsx:93
+msgid "Page"
+msgstr ""
+
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:98
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:105
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:98
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:105
+#: src/pages/products/_components/footer/DataTablePagination.jsx:98
+#: src/pages/products/_components/footer/DataTablePagination.jsx:105
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:92
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:93
+msgid "Go to next page"
+msgstr ""
+
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:109
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:116
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:109
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:116
+#: src/pages/products/_components/footer/DataTablePagination.jsx:109
+#: src/pages/products/_components/footer/DataTablePagination.jsx:116
+msgid "Go to last page"
+msgstr ""
+
+#: src/pages/coupons/_components/footer/DataTablePagination.jsx:123
+#: src/pages/orders/_components/footer/DataTablePagination.jsx:123
+#: src/pages/products/_components/footer/DataTablePagination.jsx:123
+msgid "Rows per page"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AddCoupon.jsx:79
+msgid "A new coupon added"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AddCoupon.jsx:124
+msgid "Add coupon"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AddCoupon.jsx:164
+msgid "Create a new coupon"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AddCoupon.jsx:206
+#: src/pages/orders/_components/header/add/order/AddOrder.jsx:261
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:310
+msgid "Reset form"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AddCoupon.jsx:232
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:390
+msgid "Select status"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AddCoupon.jsx:238
+msgid "Save coupon"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:45
+msgid "Advanced Usage Restrictions"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:56
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:67
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:309
+msgid "Products"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:58
+msgid "Products that the coupon will be applied to, or that need to be in the cart in order for the \"Fixed cart discount\" to be applied."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:87
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:139
+#: src/pages/coupons/_components/table/Columns.jsx:536
+#: src/pages/coupons/_components/table/Columns.jsx:587
+#: src/pages/products/_components/table/Columns.jsx:1304
+#: src/pages/products/_components/table/Columns.jsx:1327
+msgid "No products"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:108
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:119
+msgid "Exclude products"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:111
+msgid "Products that the coupon will not be applied to, or that cannot be in the cart in order for the \"Fixed cart discount\" to be applied."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:160
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:172
+#: src/pages/products/_components/header/add/product/LabelsGroup.jsx:46
+msgid "Product categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:163
+msgid "Product categories that the coupon will be applied to, or that need to be in the cart in order for the \"Fixed cart discount\" to be applied."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:191
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:201
+msgid "Exclude categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/AdvancedUsageRestrictions.jsx:194
+msgid "Product categories that the coupon will be applied to"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:48
+msgid "Coupon Details"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:58
+msgid "Coupon Coder"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:60
+msgid "The unique identifier for the coupon, used by customers to apply the discount at checkout."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:68
+msgid "Coupon Code"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:76
+msgid "Code"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:80
+msgid "Coupon code is required"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:83
+#: src/pages/coupons/_components/table/Columns.jsx:129
+msgid "Generate"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:109
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:119
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:221
+msgid "Amount"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:111
+msgid "The value of the discount the coupon provides, either as a fixed amount or a percentage."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:141
+msgid "Price cannot be less than 0"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:160
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:173
+msgid "Discount type"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:162
+msgid "Fixed Product - Discount per product."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:165
+msgid "Fixed Cart - Discount on total cart."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:168
+msgid "Percentage - % off products or cart."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:190
+#: src/pages/coupons/_components/table/Columns.jsx:309
+msgid "Select discount type"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:218
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:229
+msgid "Coupon start date and time"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:221
+msgid "The date and time when the coupon becomes active and can be used."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:276
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:287
+msgid "Coupon expiry date"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:279
+msgid "The last date the coupon can be used. The coupon will expire at 00:00:00 (midnight) on this date."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:332
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:342
+msgid "Description"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:334
+msgid "Optional field to provide details or notes about the coupon for internal use or customer reference."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:349
+msgid "Description (optional)"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:367
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:374
+msgid "Free shipping"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:369
+msgid "Check this box if the coupon grants free shipping."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/CouponDetails.jsx:386
+msgid "Allow free shipping"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:43
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:43
+msgid "General Restrictions"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:54
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:64
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:54
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:64
+msgid "Minimum spend"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:56
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:56
+msgid "This field allows you to set the minimum spend (subtotal) allowed to use the coupon."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:80
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:80
+msgid "Minimum spend cannot be less than 0"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:99
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:109
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:99
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:109
+msgid "Maximum spend"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:101
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:101
+msgid "This field allows you to set the maximum spend (subtotal) allowed when using the coupon."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:125
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:125
+#: src/pages/products/_components/header/add/product/PricesGroup.jsx:59
+msgid "Sale price cannot be less than 0"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:144
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:155
+#: src/pages/coupons/_components/table/edit/AllowedEmailsEdit.jsx:66
+#: src/pages/coupons/_components/table/edit/AllowedEmailsEdit.jsx:75
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:144
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:155
+#: src/pages/orders/_components/table/edit/AllowedEmailsEdit.jsx:66
+#: src/pages/orders/_components/table/edit/AllowedEmailsEdit.jsx:75
+msgid "Allowed emails"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:146
+#: src/pages/coupons/_components/table/edit/AllowedEmailsEdit.jsx:78
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:146
+#: src/pages/orders/_components/table/edit/AllowedEmailsEdit.jsx:78
+msgid "List of allowed billing emails to check against when an order is placed. Separate email addresses with commas. You can also use an asterisk (*) to match parts of an email. For example \"*@gmail.com\" would match all gmail addresses."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:175
+#: src/pages/coupons/_components/table/edit/AllowedEmailsEdit.jsx:108
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:175
+#: src/pages/orders/_components/table/edit/AllowedEmailsEdit.jsx:108
+msgid "No email restrictions"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:197
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:220
+#: src/pages/coupons/_components/table/edit/AllowedEmailsEdit.jsx:130
+#: src/pages/coupons/_components/table/edit/MultiSelectEdit.jsx:150
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/AddLabelsItem.jsx:157
+#: src/pages/orders/_components/header/add/order/CustomFieldInput.jsx:74
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:197
+#: src/pages/orders/_components/table/edit/AllowedEmailsEdit.jsx:130
+#: src/pages/orders/_components/table/toolbar/bulk-edit/AddLabelsItem.jsx:139
+#: src/pages/products/_components/header/add/product/MultiSelectInput.jsx:270
+#: src/pages/products/_components/header/add/variation/AddFromTerms.jsx:183
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:115
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:231
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:105
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:148
+#: src/pages/products/_components/table/edit/attributes/AddFromTerms.jsx:98
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:186
+#: src/pages/products/_components/table/edit/attributes/SelectProductOptions.jsx:77
+#: src/pages/products/_components/table/edit/MultiSelectEdit.jsx:268
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:454
+msgid "Add"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:209
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:219
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:209
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:219
+msgid "Individual use"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:211
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:211
+msgid "Check this box if the coupon cannot be used in conjunction with other coupons."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:232
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:232
+msgid "Individual use only"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:243
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:253
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:266
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:243
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:253
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:266
+msgid "Exclude sale items"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/GeneralRestrictions.jsx:245
+#: src/pages/orders/_components/header/add/order/GeneralRestrictions.jsx:245
+msgid "Check this box if the coupon should not apply to items on sale. Per-item coupons will only work if the item is not on sale. Per-cart coupons will only work if there are items in the cart that are not on sale."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:175
+msgid "No excluded categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:175
+msgid "No categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:192
+msgid "Select excluded categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:193
+msgid "Select categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:206
+msgid "new excluded categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:206
+msgid "new categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:237
+msgid "Find excluded categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:237
+msgid "Find categories"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:254
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:244
+#: src/pages/coupons/_components/table/edit/MultiSelectEdit.jsx:184
+#: src/pages/coupons/_components/table/edit/ProductIds.jsx:108
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/AddLabelsItem.jsx:191
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/SelectedRows.jsx:84
+#: src/pages/orders/_components/header/DisplayColumns.jsx:272
+#: src/pages/orders/_components/table/edit/ProductIds.jsx:108
+#: src/pages/orders/_components/table/toolbar/bulk-edit/AddLabelsItem.jsx:173
+#: src/pages/orders/_components/table/toolbar/bulk-edit/SelectedRows.jsx:84
+#: src/pages/products/_components/header/add/product/MultiSelectInput.jsx:304
+#: src/pages/products/_components/header/add/variation/AddFromTerms.jsx:123
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:289
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:182
+#: src/pages/products/_components/header/DisplayColumns.jsx:258
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:243
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:275
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:222
+#: src/pages/products/_components/table/edit/MultiSelectEdit.jsx:302
+msgid "No results found."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:258
+msgid "excluded categories exist"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:258
+msgid "categories exist"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:284
+msgid "No categories yet"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:287
+msgid "Create your first category to get started"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/MultiSelectInput.jsx:297
+msgid "Create Category"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:21
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:21
+msgid "Usage Limits"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:32
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:40
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:93
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:102
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:32
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:40
+msgid "Usage limit per coupon"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:35
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:96
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:35
+msgid "How many times this coupon can be used before it is void."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:47
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:84
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:121
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:47
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:84
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:121
+msgid "Unlimited usage"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:64
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:76
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:121
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:133
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:64
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:76
+msgid "Usage limit per user"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:67
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:124
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:67
+msgid "How many times this coupon can be used by an individual user. Uses billing email for guests, and user ID for logged in users."
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:101
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:113
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:152
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:164
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:101
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:113
+msgid "Limit usage to X items"
+msgstr ""
+
+#: src/pages/coupons/_components/header/add/coupon/UsageLimits.jsx:104
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:155
+#: src/pages/orders/_components/header/add/order/UsageLimits.jsx:104
+msgid "The maximum number of individual items this coupon can apply to when using product discounts. Leave blank to apply to all qualifying items in cart."
+msgstr ""
+
+#: src/pages/coupons/_components/header/ColumnFilter.jsx:202
+#: src/pages/orders/_components/header/ColumnFilter.jsx:210
+#: src/pages/products/_components/header/ColumnFilter.jsx:297
+msgid "Enable"
+msgstr ""
+
+#: src/pages/coupons/_components/header/ColumnFilter.jsx:259
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:202
+#: src/pages/orders/_components/header/ColumnFilter.jsx:266
+#: src/pages/orders/_components/table/edit/MetaData.jsx:213
+#: src/pages/products/_components/header/ColumnFilter.jsx:351
+#: src/pages/products/_components/table/edit/meta_data/CustomEditor.jsx:24
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:60
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:69
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:72
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:75
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:110
+msgid "No Value"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:60
+#: src/pages/orders/_components/header/DisplayColumns.jsx:85
+#: src/pages/products/_components/header/DisplayColumns.jsx:61
+msgid "New view has been saved successfully"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:88
+#: src/pages/coupons/_components/table/DataTable.jsx:132
+#: src/pages/orders/_components/header/DisplayColumns.jsx:117
+#: src/pages/orders/_components/table/DataTable.jsx:132
+#: src/pages/products/_components/header/DisplayColumns.jsx:87
+#: src/pages/products/_components/table/DataTable.jsx:313
+msgid "The new column order has been updated successfully"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:135
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:237
+#: src/pages/orders/_components/header/DisplayColumns.jsx:156
+#: src/pages/orders/_components/header/DisplayColumns.jsx:265
+#: src/pages/products/_components/header/DisplayColumns.jsx:144
+#: src/pages/products/_components/header/DisplayColumns.jsx:251
+msgid "Reset Table"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:136
+#: src/pages/orders/_components/header/DisplayColumns.jsx:157
+#: src/pages/products/_components/header/DisplayColumns.jsx:145
+msgid "Are you sure you want to reset the table?"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:137
+#: src/pages/coupons/_components/header/EditAll.jsx:123
+#: src/pages/orders/_components/header/DisplayColumns.jsx:158
+#: src/pages/orders/_components/header/EditAll.jsx:117
+#: src/pages/products/_components/header/DisplayColumns.jsx:146
+#: src/pages/products/_components/table/Columns.jsx:886
+#: src/pages/products/_components/table/Columns.jsx:972
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:79
+msgid "Yes"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:138
+#: src/pages/coupons/_components/header/EditAll.jsx:124
+#: src/pages/orders/_components/header/DisplayColumns.jsx:159
+#: src/pages/orders/_components/header/EditAll.jsx:118
+#: src/pages/products/_components/header/DisplayColumns.jsx:147
+#: src/pages/products/_components/table/Columns.jsx:886
+#: src/pages/products/_components/table/Columns.jsx:972
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:79
+msgid "No"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:171
+#: src/pages/orders/_components/header/DisplayColumns.jsx:190
+#: src/pages/products/_components/header/DisplayColumns.jsx:178
+msgid "The table was reset successfully"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:199
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:269
+#: src/pages/orders/_components/header/DisplayColumns.jsx:227
+#: src/pages/orders/_components/header/DisplayColumns.jsx:297
+#: src/pages/products/_components/header/DisplayColumns.jsx:214
+#: src/pages/products/_components/header/DisplayColumns.jsx:285
+msgid "Custom fields columns"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:218
+#: src/pages/orders/_components/header/DisplayColumns.jsx:246
+#: src/pages/products/_components/header/DisplayColumns.jsx:233
+msgid "Display columns"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:227
+#: src/pages/orders/_components/header/DisplayColumns.jsx:255
+#: src/pages/products/_components/header/DisplayColumns.jsx:242
+msgid "Save as default"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:240
+#: src/pages/orders/_components/header/DisplayColumns.jsx:268
+#: src/pages/products/_components/header/DisplayColumns.jsx:254
+msgid "Find column to show/hide"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:245
+#: src/pages/orders/_components/header/DisplayColumns.jsx:273
+#: src/pages/products/_components/header/DisplayColumns.jsx:261
+msgid "All columns"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:259
+#: src/pages/orders/_components/header/DisplayColumns.jsx:287
+#: src/pages/products/_components/header/DisplayColumns.jsx:275
+msgid "Hide All Columns"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:260
+#: src/pages/orders/_components/header/DisplayColumns.jsx:288
+#: src/pages/products/_components/header/DisplayColumns.jsx:276
+msgid "Show All Columns"
+msgstr ""
+
+#: src/pages/coupons/_components/header/DisplayColumns.jsx:269
+#: src/pages/orders/_components/header/DisplayColumns.jsx:297
+#: src/pages/products/_components/header/DisplayColumns.jsx:285
+msgid "Item columns"
+msgstr ""
+
+#: src/pages/coupons/_components/header/EditAll.jsx:52
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:139
+msgid "Some updates failed."
+msgstr ""
+
+#: src/pages/coupons/_components/header/EditAll.jsx:60
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:147
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:285
+#: src/pages/orders/_components/header/EditAll.jsx:84
+#: src/pages/products/_components/header/EditAll.jsx:50
+msgid "The updates have been saved successfully."
+msgstr ""
+
+#: src/pages/coupons/_components/header/EditAll.jsx:121
+#: src/pages/orders/_components/header/EditAll.jsx:115
+#: src/pages/products/_components/header/EditAll.jsx:183
+msgid "Cancel Edits"
+msgstr ""
+
+#: src/pages/coupons/_components/header/EditAll.jsx:122
+#: src/pages/orders/_components/header/EditAll.jsx:116
+#: src/pages/products/_components/header/EditAll.jsx:184
+msgid "Are you sure you want to cancel all edits?"
+msgstr ""
+
+#: src/pages/coupons/_components/header/EditAll.jsx:157
+#: src/pages/orders/_components/header/EditAll.jsx:156
+#: src/pages/products/_components/header/EditAll.jsx:232
+msgid "Edit All"
+msgstr ""
+
+#: src/pages/coupons/_components/header/TopPanel.jsx:43
+#: src/pages/coupons/_components/header/TopPanel.jsx:170
+msgid "Disable Coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/header/TopPanel.jsx:44
+msgid "Are you sure you want to disable coupons? This will prevent users from applying any coupons during checkout."
+msgstr ""
+
+#: src/pages/coupons/_components/header/TopPanel.jsx:48
+msgid "Disable"
+msgstr ""
+
+#: src/pages/coupons/_components/header/TopPanel.jsx:82
+#: src/pages/orders/_components/header/TopPanel.jsx:116
+#: src/pages/products/_components/header/TopPanel.jsx:68
+msgid "Filters"
+msgstr ""
+
+#: src/pages/coupons/_components/header/TopPanel.jsx:133
+msgid "Back to Coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/header/TopPanel.jsx:133
+#: src/pages/orders/_components/header/TopPanel.jsx:167
+#: src/pages/products/_components/header/TopPanel.jsx:127
+msgid "Trash"
+msgstr ""
+
+#: src/pages/coupons/_components/header/TopPanel.jsx:149
+#: src/pages/orders/_components/header/TopPanel.jsx:181
+#: src/pages/products/_components/header/TopPanel.jsx:148
+msgid "Search"
+msgstr ""
+
+#: src/pages/coupons/_components/table/Columns.jsx:631
+#: src/pages/coupons/_components/table/Columns.jsx:654
+#: src/pages/coupons/_components/table/Columns.jsx:701
+#: src/pages/coupons/_components/table/Columns.jsx:722
+msgid "No category"
+msgstr ""
+
+#: src/pages/coupons/_components/table/Columns.jsx:770
+#: src/pages/coupons/_components/table/Columns.jsx:777
+msgid "No email"
+msgstr ""
+
+#: src/pages/coupons/_components/table/Columns.jsx:825
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:217
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:231
+msgid "Unlimited"
+msgstr ""
+
+#: src/pages/coupons/_components/table/Columns.jsx:867
+#: src/pages/orders/_components/table/Columns.jsx:372
+#: src/pages/orders/_components/table/Columns.jsx:381
+#: src/pages/products/_components/table/Columns.jsx:446
+#: src/pages/products/_components/table/Columns.jsx:468
+#: src/pages/products/_components/table/edit/DimensionsEdit.jsx:31
+msgid "Not defined"
+msgstr ""
+
+#: src/pages/coupons/_components/table/Columns.jsx:924
+#: src/pages/coupons/_components/table/Columns.jsx:958
+#: src/pages/coupons/_components/table/Columns.jsx:992
+#: src/pages/products/_components/table/edit/meta_data/CustomEditor.jsx:239
+msgid "yes"
+msgstr ""
+
+#: src/pages/coupons/_components/table/Columns.jsx:924
+#: src/pages/coupons/_components/table/Columns.jsx:958
+#: src/pages/coupons/_components/table/Columns.jsx:992
+#: src/pages/products/_components/table/edit/meta_data/CustomEditor.jsx:239
+msgid "no"
+msgstr ""
+
+#: src/pages/coupons/_components/table/DataTable.jsx:101
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:70
+#: src/pages/orders/_components/table/DataTable.jsx:101
+#: src/pages/products/_components/table/DataTable.jsx:134
+msgid "You have unsaved changes. Are you sure you want to leave?"
+msgstr ""
+
+#: src/pages/coupons/_components/table/DataTable.jsx:509
+msgid "No coupons found"
+msgstr ""
+
+#: src/pages/coupons/_components/table/DataTable.jsx:512
+#: src/pages/orders/_components/table/DataTable.jsx:513
+#: src/pages/products/_components/table/DataTable.jsx:743
+msgid "Try changing the date range or filters"
+msgstr ""
+
+#: src/pages/coupons/_components/table/DataTable.jsx:523
+#: src/pages/products/_components/table/DataTable.jsx:754
+msgid "Reset Filters"
+msgstr ""
+
+#: src/pages/coupons/_components/table/DataTableColumnHeader.jsx:154
+#: src/pages/orders/_components/table/DataTableColumnHeader.jsx:159
+#: src/pages/products/_components/table/DataTableColumnHeader.jsx:223
+msgid "Asc"
+msgstr ""
+
+#: src/pages/coupons/_components/table/DataTableColumnHeader.jsx:161
+#: src/pages/orders/_components/table/DataTableColumnHeader.jsx:166
+#: src/pages/products/_components/table/DataTableColumnHeader.jsx:230
+msgid "Desc"
+msgstr ""
+
+#: src/pages/coupons/_components/table/DataTableColumnHeader.jsx:174
+#: src/pages/orders/_components/table/DataTableColumnHeader.jsx:179
+#: src/pages/products/_components/table/DataTableColumnHeader.jsx:243
+msgid "Pinned"
+msgstr ""
+
+#: src/pages/coupons/_components/table/DataTableColumnHeader.jsx:184
+#: src/pages/orders/_components/table/DataTableColumnHeader.jsx:189
+#: src/pages/products/_components/table/DataTableColumnHeader.jsx:253
+msgid "Hide"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/AllowedEmailsEdit.jsx:139
+#: src/pages/orders/_components/table/edit/AllowedEmailsEdit.jsx:139
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:831
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:140
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:161
+msgid "Saving..."
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/gallery/GalleryEdit.jsx:88
+#: src/pages/products/_components/table/edit/gallery/GalleryEdit.jsx:90
+#: src/pages/products/_components/table/edit/meta_data/GalleryMetaEdit.jsx:244
+msgid "Add Images"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/gallery/GalleryEdit.jsx:127
+#: src/pages/products/_components/table/edit/gallery/GalleryEdit.jsx:129
+#: src/pages/products/_components/table/edit/meta_data/GalleryMetaEdit.jsx:283
+msgid "Edit Gallery"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/gallery/GalleryEdit.jsx:166
+#: src/pages/products/_components/table/Columns.jsx:1416
+#: src/pages/products/_components/table/edit/gallery/GalleryEdit.jsx:168
+#: src/pages/products/_components/table/edit/meta_data/GalleryMetaEdit.jsx:227
+#: src/pages/products/_components/table/edit/meta_data/GalleryMetaEdit.jsx:322
+msgid "No images"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:116
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:123
+#: src/pages/orders/_components/table/edit/MetaData.jsx:127
+#: src/pages/orders/_components/table/edit/MetaData.jsx:134
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:232
+msgid "Meta Data"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:125
+#: src/pages/orders/_components/table/edit/MetaData.jsx:136
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:235
+msgid "Meta data values are fields that originate from external plugins supported by WooCommerce. These fields allow you to store additional information related to your products, enhancing their details and functionality within your store."
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:138
+#: src/pages/orders/_components/table/edit/MetaData.jsx:149
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:248
+msgid "To edit the meta data values, please switch the product to edit mode."
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:184
+#: src/pages/orders/_components/table/edit/MetaData.jsx:195
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:333
+msgid "Select an option"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MetaData.jsx:211
+#: src/pages/orders/_components/table/edit/MetaData.jsx:222
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:462
+msgid "No Meta Data"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MultiSelectEditItem.jsx:63
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:151
+msgid "Delete Item"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MultiSelectEditItem.jsx:64
+msgid "Are you sure you want to permanently delete this"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MultiSelectEditItem.jsx:77
+msgid "The"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/MultiSelectEditItem.jsx:77
+#: src/pages/products/_components/header/add/variation/SelectAttributeItem.jsx:79
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:174
+msgid "has been permanently deleted"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/ProductIds.jsx:95
+#: src/pages/orders/_components/table/edit/ProductIds.jsx:95
+msgid "Select Products"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/ProductIds.jsx:102
+#: src/pages/orders/_components/table/edit/ProductIds.jsx:102
+msgid "Find Products"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/ProductIds.jsx:112
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/SelectedRows.jsx:85
+#: src/pages/orders/_components/table/edit/ProductIds.jsx:112
+msgid "Products exist"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/ProductIds.jsx:145
+#: src/pages/orders/_components/table/edit/ProductIds.jsx:145
+msgid "No products available"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/ProductIds.jsx:148
+#: src/pages/orders/_components/table/edit/ProductIds.jsx:148
+msgid "No products found in the system. Create products first to use this feature."
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:24
+msgid "Manage limits"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:36
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:45
+msgid "Usage & Limit"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:48
+msgid "Control and monitor the application of this coupon with respect to overall usage, specific user limitations, and the number of items it can be applied to. Proper management ensures optimal benefit from promotional strategies."
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:66
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:76
+msgid "Usage"
+msgstr ""
+
+#: src/pages/coupons/_components/table/edit/UsageLimit.jsx:68
+msgid "The number of times this coupon has already been used. This allows you to track its usage and ensure the coupon is being utilized as intended."
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:312
+#: src/pages/products/_components/table/toolbar/MultipleRowsToolbar.jsx:53
+msgid "Bulk edit"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:358
+msgid "Bulk Edit"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:371
+msgid "Coupon Scope"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:378
+#: src/pages/products/_components/header/add/variation/GenerateVariations.jsx:86
+#: src/pages/products/_components/table/edit/attributes/AttributesTable.jsx:34
+msgid "Type"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:381
+msgid "Items"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:407
+msgid "Edit fields"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:414
+msgid "Field to Edit"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:417
+msgid "Change Amount"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:420
+msgid "Change Type"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:423
+msgid "Value Type"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:426
+msgid "Reference Base"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEdit.jsx:453
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:533
+#: src/pages/products/_components/table/edit/attributes/AttributesEdit.jsx:166
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:234
+msgid "Save changes"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:56
+#: src/pages/orders/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:54
+msgid "No Change"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:103
+#: src/pages/orders/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:101
+msgid "Increase"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:111
+#: src/pages/orders/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:109
+msgid "Decrease"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:193
+#: src/pages/orders/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:186
+msgid "Sale price"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:201
+#: src/pages/orders/_components/table/toolbar/bulk-edit/BulkEditRow.jsx:194
+#: src/pages/products/_components/header/add/product/PricesGroup.jsx:17
+msgid "Regular price"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/SelectedRows.jsx:67
+#: src/pages/orders/_components/table/toolbar/bulk-edit/SelectedRows.jsx:67
+msgid "Change rows"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/SelectedRows.jsx:80
+#: src/pages/orders/_components/table/toolbar/bulk-edit/SelectedRows.jsx:80
+msgid "Find product"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/bulk-edit/SelectedRows.jsx:129
+#: src/pages/orders/_components/table/toolbar/bulk-edit/SelectedRows.jsx:128
+msgid "Selected rows"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/MultipleRowsToolbar.jsx:30
+#: src/pages/coupons/_components/table/toolbar/SingleRowToolbar.jsx:17
+#: src/pages/orders/_components/table/toolbar/MultipleRowsToolbar.jsx:30
+#: src/pages/orders/_components/table/toolbar/SingleRowToolbar.jsx:17
+#: src/pages/products/_components/table/toolbar/MultipleRowsToolbar.jsx:30
+#: src/pages/products/_components/table/toolbar/SingleRowToolbar.jsx:19
+msgid "Dismiss"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/MultipleRowsToolbar.jsx:42
+msgid "Restore selected coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/MultipleRowsToolbar.jsx:62
+msgid "Duplicate selected coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/MultipleRowsToolbar.jsx:81
+#: src/pages/coupons/_components/table/toolbar/SingleRowToolbar.jsx:65
+#: src/pages/orders/_components/table/toolbar/MultipleRowsToolbar.jsx:80
+#: src/pages/orders/_components/table/toolbar/SingleRowToolbar.jsx:65
+#: src/pages/products/_components/table/toolbar/MultipleRowsToolbar.jsx:75
+#: src/pages/products/_components/table/toolbar/SingleRowToolbar.jsx:83
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:51
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:65
+msgid "Move to Trash"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/MultipleRowsToolbar.jsx:91
+msgid "Delete permanently coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/SingleRowToolbar.jsx:29
+msgid "Restore selected coupon"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/SingleRowToolbar.jsx:39
+msgid "Duplicate selected coupon"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/SingleRowToolbar.jsx:49
+#: src/pages/orders/_components/table/toolbar/SingleRowToolbar.jsx:49
+#: src/pages/products/_components/table/toolbar/SingleRowToolbar.jsx:67
+msgid "Edit in WooCommerce"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/SingleRowToolbar.jsx:74
+msgid "Delete permanently coupon"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:47
+msgid "Delete Coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:50
+msgid "Are you sure you want to permanently delete the selected coupons? This action cannot be undone."
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:54
+msgid "Are you sure you want to move the selected coupons to the trash?"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:110
+msgid "Duplicate Coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:111
+msgid "Are you sure you want to duplicate the selected coupons?"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:112
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:274
+msgid "Duplicate"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:156
+msgid "Restore Coupons"
+msgstr ""
+
+#: src/pages/coupons/_components/table/toolbar/Toolbar.jsx:157
+msgid "Are you sure you want to restore the selected coupons?"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/AddOrder.jsx:120
+msgid "A new order added"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/AddOrder.jsx:179
+msgid "Add order"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/AddOrder.jsx:220
+msgid "Create a new order"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/AddOrder.jsx:286
+msgid "Save order"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:133
+msgid "Select existing customer"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:136
+msgid "Choose customer"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:153
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:219
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:581
+msgid "Billing Information"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:159
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:312
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:227
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:228
+msgid "First Name"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:171
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:324
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:244
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:245
+msgid "Last Name"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:181
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:394
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:395
+msgid "Email"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:192
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:413
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:414
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:244
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:252
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:567
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:598
+msgid "Phone"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:202
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:337
+msgid "Company (optional)"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:212
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:350
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:283
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:284
+msgid "Address Line 1"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:223
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:363
+msgid "Address Line 2 (optional)"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:234
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:376
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:321
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:322
+msgid "City"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:244
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:386
+msgid "State/Province"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:254
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:396
+msgid "Postal Code"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:264
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:408
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:375
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:376
+msgid "Country"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:291
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:220
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:550
+msgid "Shipping Information"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomerDetails.jsx:305
+msgid "Shipping address same as billing"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/CustomFieldInput.jsx:42
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:264
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:277
+msgid "Custom Fields"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderDetails.jsx:41
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:392
+msgid "Order Details"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderDetails.jsx:45
+msgid "Order Status"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderDetails.jsx:71
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:550
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:178
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:444
+msgid "Payment Method"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderDetails.jsx:98
+msgid "Order Date"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderDetails.jsx:129
+msgid "Payment Status"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderDetails.jsx:142
+msgid "Mark as paid"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderDetails.jsx:147
+msgid "Customer Note"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderDetails.jsx:152
+msgid "Add a note for the customer (optional)"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:188
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:193
+msgid "Error applying coupon"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:277
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:184
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:459
+msgid "Order Items"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:281
+msgid "Add Products"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:289
+msgid "Search for products"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:296
+msgid "Search products"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:304
+msgid "Loading products..."
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:306
+msgid "Type to search products"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:307
+#: src/pages/products/_components/table/DataTable.jsx:740
+msgid "No products found"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:350
+msgid "No items in this order yet"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:352
+msgid "Search for products to add them to the order"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:359
+msgid "Price"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:360
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:189
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:487
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:60
+msgid "Quantity"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:361
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:174
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:191
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:438
+msgid "Total"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:473
+msgid "Enter coupon code"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:499
+msgid "Applying..."
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:539
+msgid "Applied Coupons"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:542
+msgid "Recalculating..."
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:578
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:215
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:512
+msgid "Refunds"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:586
+msgid "Process Refund"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:595
+msgid "Subtotal"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:604
+msgid "Discount"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/OrderLineItems.jsx:613
+msgid "Order Total"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:328
+msgid "Please fill all required fields and ensure refund amount is greater than 0"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:342
+msgid "Please select at least one item or amount to refund"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:464
+msgid "Refund processed successfully!"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:466
+msgid " (Automatically refunded to payment method)"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:467
+msgid " (Manual refund - please process payment manually)"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:474
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:478
+msgid "Failed to process refund"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:512
+msgid "Process Refund for Order"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:556
+msgid "Can refund back to this method"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:561
+msgid "Manual refund only"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:572
+msgid "Refund Summary"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:576
+msgid "Order Total:"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:584
+msgid "Already Refunded:"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:593
+msgid "Available to Refund:"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:609
+msgid "Partial Refund"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:610
+msgid "Refund selected items with custom amounts"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:614
+msgid "Full Refund"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:617
+msgid "Not available - order fully refunded"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:618
+msgid "Refund remaining order amount"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:646
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:190
+msgid "Unit Price"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:647
+msgid "Ordered"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:648
+msgid "Refunded"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:649
+msgid "Refund Qty"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:650
+msgid "Custom Amount"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:695
+msgid "Total:"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:702
+msgid "Refunded:"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:724
+msgid "Fully Refunded"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:726
+msgid "Available:"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:794
+msgid "Max:"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:798
+msgid "Will refund:"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:804
+msgid "No Amount Available"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:819
+msgid "Total Refund Amount"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:829
+msgid "Full refund will include only the remaining refundable amount"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:841
+msgid "Refund Reason"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:849
+msgid "Select refund reason"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:863
+msgid "Refund Note"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:864
+msgid "(Optional)"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:867
+msgid "Add a note about this refund"
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:899
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:918
+msgid "Processing..."
+msgstr ""
+
+#: src/pages/orders/_components/header/add/order/RefundModal.jsx:904
+msgid "Manual Refund"
+msgstr ""
+
+#: src/pages/orders/_components/header/DateFilterTabs.jsx:270
+msgid "Start Date"
+msgstr ""
+
+#: src/pages/orders/_components/header/DateFilterTabs.jsx:273
+msgid "Select start date"
+msgstr ""
+
+#: src/pages/orders/_components/header/DateFilterTabs.jsx:286
+msgid "End Date"
+msgstr ""
+
+#: src/pages/orders/_components/header/DateFilterTabs.jsx:289
+msgid "Select end date"
+msgstr ""
+
+#: src/pages/orders/_components/header/TopPanel.jsx:167
+msgid "Back to Orders"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:384
+#: src/pages/products/_components/table/Columns.jsx:471
+msgid "Invalid date"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:856
+msgid "Source"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:902
+msgid "Unknown"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:962
+msgid "Source Type"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:966
+msgid "Origin"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:973
+msgid "Device"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:976
+msgid "Page Views"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:979
+msgid "Referring Domain"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:987
+msgid "UTM Parameters"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:995
+msgid "Copy UTM query"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1005
+msgid "Open referrer"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1011
+msgid "UTM Source"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1012
+msgid "UTM Medium"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1013
+msgid "UTM Campaign"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1014
+msgid "UTM Content"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1015
+msgid "UTM Term"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1024
+msgid "Source details"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1035
+msgid "Campaign"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1480
+msgid "Choose Payment Method"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1483
+msgid "Credit Card"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1484
+msgid "PayPal"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1485
+msgid "Bank Transfer"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1486
+msgid "Cash on Delivery (COD)"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1487
+msgid "Bit (Israeli Payment App)"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1488
+msgid "Apple Pay"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1489
+msgid "Google Pay"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1490
+msgid "Manual Payment"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1491
+msgid "Check"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1493
+msgid "Standing Order / Direct Debit"
+msgstr ""
+
+#: src/pages/orders/_components/table/Columns.jsx:1650
+msgid "Order total"
+msgstr ""
+
+#: src/pages/orders/_components/table/DataTable.jsx:510
+msgid "No orders found"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:93
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:94
+msgid "Column has been exported successfully"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:94
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:95
+msgid "Column has been unexported successfully"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:152
+msgid "Remove this field from the table and keep it only in the billing details"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:156
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:157
+msgid "Display this field as a separate column in the table"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:183
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:219
+msgid "Edit Billing Information"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:183
+msgid "View Billing Information"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:264
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:265
+msgid "Company"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:301
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:302
+msgid "Address Line 2"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:338
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:339
+msgid "State"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/BillingEdit.jsx:355
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:356
+msgid "Postcode"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:126
+msgid "Are you sure you want to delete this note?"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:143
+msgid "Failed to delete note"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:147
+msgid "An error occurred while deleting the note"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:211
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:248
+msgid "Order Notes"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:265
+msgid "Customer"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:267
+msgid "To Customer"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:268
+msgid "Internal Note"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:326
+msgid "No notes yet"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:327
+msgid "Start a conversation..."
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:343
+msgid "Write a note to the customer..."
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:344
+msgid "Write an internal note..."
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:388
+msgid "Add Private Note"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/OrderNotesChat.jsx:396
+msgid "Add Customer Note"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:153
+msgid "Remove this field from the table and keep it only in the shipping details"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:184
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:220
+msgid "Edit Shipping Information"
+msgstr ""
+
+#: src/pages/orders/_components/table/edit/ShippingEdit.jsx:184
+msgid "View Shipping Information"
+msgstr ""
+
+#: src/pages/orders/_components/table/EditableItemsCell.jsx:105
+msgid "Edit Items"
+msgstr ""
+
+#: src/pages/orders/_components/table/EditableItemsCell.jsx:121
+msgid "Edit Order Items"
+msgstr ""
+
+#: src/pages/orders/_components/table/EditableItemsCell.jsx:138
+msgid "Save Changes"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:117
+msgid "Choose action..."
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:142
+msgid "Order Actions"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:149
+#: src/pages/orders/_components/table/OrderActions.jsx:150
+msgid "Choose action"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:165
+msgid "(Optional) customer email to send/update"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:174
+msgid "Choose email template"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:177
+#: src/pages/orders/_components/table/OrderActions.jsx:187
+msgid "Choose template"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:187
+msgid "Loading templates..."
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:191
+msgid "No templates available for this order"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderActions.jsx:217
+msgid "Perform"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:103
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:157
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:377
+msgid "Order Summary"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:162
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:403
+msgid "Order ID"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:166
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:220
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:412
+msgid "Date"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:170
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:422
+msgid "Status"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:179
+msgid "UNKNOWN"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:188
+msgid "item"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:219
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:523
+msgid "Reason"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:227
+msgid "Refund"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:239
+msgid "Shipping Address"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:247
+msgid "Billing Address"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:268
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:641
+msgid "Additional Information"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:273
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:653
+msgid "Value"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:289
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:678
+msgid "Total Amount"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:498
+msgid "each"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:694
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:727
+msgid "Customize Fields"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:703
+msgid "Print Order"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:735
+msgid "Select All"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:742
+#: src/pages/products/_components/table/edit/SaleDurationEditor.jsx:138
+msgid "Clear"
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:755
+msgid "Search field..."
+msgstr ""
+
+#: src/pages/orders/_components/table/OrderSummaryModal.jsx:802
+msgid "Remove"
+msgstr ""
+
+#: src/pages/orders/_components/table/toolbar/bulk-edit/SelectedRows.jsx:85
+msgid "Orders exist"
+msgstr ""
+
+#: src/pages/orders/_components/table/toolbar/MultipleRowsToolbar.jsx:42
+msgid "Restore selected orders"
+msgstr ""
+
+#: src/pages/orders/_components/table/toolbar/MultipleRowsToolbar.jsx:61
+msgid "Duplicate selected orders"
+msgstr ""
+
+#: src/pages/orders/_components/table/toolbar/MultipleRowsToolbar.jsx:90
+msgid "Delete permanently orders"
+msgstr ""
+
+#: src/pages/orders/_components/table/toolbar/SingleRowToolbar.jsx:29
+msgid "Restore selected order"
+msgstr ""
+
+#: src/pages/orders/_components/table/toolbar/SingleRowToolbar.jsx:39
+msgid "Duplicate selected order"
+msgstr ""
+
+#: src/pages/orders/_components/table/toolbar/SingleRowToolbar.jsx:74
+msgid "Delete permanently order"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:97
+msgid "The product has been updated successfully"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:148
+msgid "A new product added"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:200
+msgid "Add product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:240
+msgid "Create a new product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:264
+msgid "Purchase note (email to customer)"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:277
+msgid "send automaticly message after purchase"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:340
+msgid "Select product type"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:355
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:96
+msgid "Product Type"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:358
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:97
+msgid "Simple product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:361
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:98
+msgid "Grouped product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:364
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:66
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:75
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:100
+msgid "External/Affiliate product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:367
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:103
+msgid "Variable product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/AddProduct.jsx:396
+msgid "Save product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:153
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:264
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:211
+msgid "Select"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:198
+msgid "Enabled"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:198
+msgid "Disabled"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:253
+msgid "Unsupported field type"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:267
+msgid "No custom fields available"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:288
+msgid "Custom Product Fields"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:291
+msgid "fields available"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/CustomFieldsGroup.jsx:342
+msgid "Default"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/DescriptionGroup.jsx:65
+msgid "Describe your product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/DescriptionGroup.jsx:69
+msgid "Product Name"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/DescriptionGroup.jsx:74
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:245
+msgid "Name"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/DescriptionGroup.jsx:76
+msgid "Product name is required"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:17
+msgid "Inventory"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:20
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:25
+msgid "SKU"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:32
+msgid "Stock management"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:42
+msgid "Track stock quantity for this product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:57
+msgid "Inventory tracking"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:72
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:103
+msgid "Allow backorders?"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:79
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:113
+msgid "Do not allow"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:81
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:115
+msgid "Allow, but notify customer"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:83
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:117
+msgid "Allow"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:88
+msgid "Set status"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:90
+msgid "Stock status"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:97
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:131
+msgid "In stock"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:98
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:140
+msgid "Out of stock"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/InventoryGroup.jsx:99
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:149
+msgid "On backorder"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/LabelsGroup.jsx:38
+msgid "Tags & Categories & Taxonomies"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/LabelsGroup.jsx:42
+msgid "Product tags"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/LabelsGroup.jsx:62
+msgid "Additional Taxonomies"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/PhotosGroup.jsx:61
+msgid "Product image & Gallery"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/PhotosGroup.jsx:64
+msgid "Product image"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/PhotosGroup.jsx:68
+msgid "Product gallery"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/PricesGroup.jsx:14
+msgid "Product prices"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/PricesGroup.jsx:32
+msgid "Regular price cannot be less than 0"
+msgstr ""
+
+#: src/pages/products/_components/header/add/product/PricesGroup.jsx:44
+msgid "Sale price (optional)"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddFromTerms.jsx:110
+msgid "Select from terms"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddFromTerms.jsx:120
+msgid "Find in terms"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddFromTerms.jsx:134
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:303
+msgid "Select all"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddFromTerms.jsx:145
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:314
+msgid "Clear all"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddFromTermsItem.jsx:53
+msgid "Delete Attribute Option"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:66
+msgid "Step 1: "
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:69
+msgid "Add Attributes to the Product"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:76
+msgid "Attributes are characteristics that define a product and enable variations. Here’s how you can add them:"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:82
+msgid "First, click the 'Add Attribute' button and select the type of attribute you wish to add. There are two types of attributes as follows:"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:89
+msgid "Product Attribute:"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:91
+msgid "Select this option to add attributes that are unique to this specific product, such as \"Storage Capacity\" for electronics or \"Frame Material\" for glasses."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:98
+msgid "Global Attribute:"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:100
+msgid "Select this for attributes like \"Size\" or \"Color\" that are common across multiple products. Creating a global attribute once allows you to reuse it, avoiding repetitive setup for each product."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:106
+msgid "After selecting the desired attribute type, a list of existing attributes will appear. Choose the attribute you wish to add to your product. If the attribute is not listed, click the plus button to add it."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:125
+msgid "Step 2: "
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:127
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:189
+msgid "Define Attribute Options"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:133
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:195
+msgid "After selecting an attribute for your product, you now need to define the available options. For instance, if the attribute is 'Color', you will need to specify the available colors."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:139
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:201
+msgid "The default option is 'Any', which will display all available options for the attribute to the customers in the store. This is suitable when you do not wish to specify different settings for each variation, such as different prices, stock levels, or images. If the attribute is global, options can be imported from existing terms instead of creating them individually."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:145
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:207
+msgid "Alternatively, instead of choosing 'Any', you can select specific options that you want to manage differently for each variation. This is ideal if you want to manage different prices, stock levels, or images for each variation. You can mark the existing options from the list or create new ones. For global attributes, options can be imported as mentioned earlier."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:158
+msgid "Step 3: "
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:161
+msgid "Combine and Generate Variations"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:168
+msgid "At this stage, by clicking 'Generate', you will create combinations of the selected attributes and options for your product, resulting in new variations. For example, selecting 'Color' with options 'Blue' and 'Green', and 'Size' with options 'Small' and 'Large', will generate four product variations: Small Blue, Large Blue, Small Green, and Large Green."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:174
+msgid "If the 'Any' option is chosen for an attribute, no distinct variations for each option are created. Instead, a selection list will be included in the main product, which prevents the seller from setting different prices for each variation. Customers can choose their preferred option directly from the product page."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:187
+msgid "Step 4: "
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:364
+msgid "Variations updates have been saved successfully."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:391
+msgid "Manage variations"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:445
+msgid "Manage Variations of"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:455
+msgid "Variations"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:458
+msgid "Variations are different versions of a product, each with unique attributes such as size, color, or material. By using variations, you can offer multiple options for a single product, allowing customers to choose exactly what they prefer. This feature simplifies inventory management and enhances the shopping experience by grouping similar items under one product listing. For a guided tour of how to use variations, please visit this link:"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:467
+msgid "Take a tour"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:477
+msgid "View variations documentation"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:489
+#: src/pages/products/_components/table/edit/attributes/AttributesEdit.jsx:146
+msgid "Existing product attributes"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/AddVariotions.jsx:507
+msgid "Existing product variations"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateRowItem.jsx:71
+#: src/pages/products/_components/table/edit/attributes/AttributeRowItem.jsx:81
+msgid "Delete attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateRowItem.jsx:82
+#: src/pages/products/_components/table/edit/attributes/AttributeRowItem.jsx:92
+msgid "Global"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateRowItem.jsx:123
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:337
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:198
+#: src/pages/products/_components/header/add/variation/VariationNameEdit.jsx:44
+#: src/pages/products/_components/header/add/variation/VariationNameEdit.jsx:69
+#: src/pages/products/_components/table/edit/attributes/AttributeRowItem.jsx:131
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:259
+msgid "Any"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateVariations.jsx:83
+#: src/pages/products/_components/table/edit/attributes/AttributesTable.jsx:31
+msgid "Attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateVariations.jsx:89
+#: src/pages/products/_components/table/edit/attributes/AttributesTable.jsx:37
+msgid "For variations"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateVariations.jsx:92
+#: src/pages/products/_components/table/edit/attributes/AttributesTable.jsx:40
+msgid "Options"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateVariations.jsx:118
+#: src/pages/products/_components/table/edit/attributes/AttributesTable.jsx:66
+msgid "Add attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateVariations.jsx:125
+#: src/pages/products/_components/table/edit/attributes/AttributesTable.jsx:72
+msgid "Attribute Type"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/GenerateVariations.jsx:152
+msgid "Combine & Generate"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectAttributeItem.jsx:49
+msgid "The attribute has been successfully updated to"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectAttributeItem.jsx:62
+msgid "Delete Attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectAttributeItem.jsx:63
+msgid "Are you sure you want to permanently delete this attribute?"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectAttributeItem.jsx:79
+msgid "The attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:91
+msgid "Global Attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:101
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:91
+msgid "new attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:130
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:120
+msgid "Find attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:147
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:137
+msgid "No attributes found."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:151
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:141
+msgid "Existing attributes"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:175
+msgid "No attributes yet"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:178
+msgid "Create your first global attribute to get started"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalAttribute.jsx:188
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:178
+msgid "Create Attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:201
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:118
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:156
+msgid "Add options"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:217
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:134
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:172
+msgid "new option"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:263
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:165
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:217
+msgid "Find option"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:345
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:203
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:264
+msgid "Options exist"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:373
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:226
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:290
+msgid "No options yet"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:376
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:229
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:293
+msgid "Create your first option to get started"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectGlobalOptions.jsx:386
+#: src/pages/products/_components/header/add/variation/SelectProductOptions.jsx:239
+#: src/pages/products/_components/table/edit/attributes/SelectGlobalOptions.jsx:303
+msgid "Create Option"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectOptionsItem.jsx:74
+#: src/pages/products/_components/table/edit/attributes/SelectOptionsItem.jsx:59
+msgid "The options has been successfully updated to"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectOptionsItem.jsx:121
+#: src/pages/products/_components/table/edit/attributes/SelectOptionsItem.jsx:95
+msgid "The option"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectOptionsItem.jsx:121
+#: src/pages/products/_components/table/edit/attributes/SelectOptionsItem.jsx:95
+msgid "has been successfully deleted"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:81
+msgid "Product Attribute"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:165
+msgid "No product attributes yet"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectProductAttribute.jsx:168
+msgid "Create your first product attribute to get started"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/SelectTermItem.jsx:53
+msgid "Delete Term"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/VariationsTable.jsx:425
+#: src/pages/products/_components/header/add/variation/VariationsTable.jsx:445
+#: src/pages/products/_components/table/edit/PriceEdit.jsx:21
+#: src/pages/products/_components/table/edit/PriceEdit.jsx:38
+msgid "No price"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/VariationsTable.jsx:460
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:432
+msgid "Delete variation"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/VariationsTable.jsx:496
+msgid "Search variation..."
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/VariationsTable.jsx:548
+msgid "No variations found"
+msgstr ""
+
+#: src/pages/products/_components/header/add/variation/VariationsTable.jsx:594
+msgid "Variation"
+msgstr ""
+
+#: src/pages/products/_components/header/ColumnFilter.jsx:336
+msgid "No options available"
+msgstr ""
+
+#: src/pages/products/_components/header/DisplayColumns.jsx:300
+msgid "No custom field columns found"
+msgstr ""
+
+#: src/pages/products/_components/header/DisplayColumns.jsx:301
+msgid "No columns available"
+msgstr ""
+
+#: src/pages/products/_components/header/EditAll.jsx:185
+msgid "Yes, Cancel"
+msgstr ""
+
+#: src/pages/products/_components/header/EditAll.jsx:186
+msgid "No, Keep Editing"
+msgstr ""
+
+#: src/pages/products/_components/header/EditAll.jsx:230
+msgid "Table mode"
+msgstr ""
+
+#: src/pages/products/_components/header/EditAll.jsx:232
+msgid "Edit mode"
+msgstr ""
+
+#: src/pages/products/_components/header/import/Import.jsx:33
+msgid "Import"
+msgstr ""
+
+#: src/pages/products/_components/header/import/Import.jsx:40
+msgid "File type"
+msgstr ""
+
+#: src/pages/products/_components/header/import/Import.jsx:54
+msgid "Google sheets file"
+msgstr ""
+
+#: src/pages/products/_components/header/TopPanel.jsx:127
+msgid "Back to Products"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:624
+msgid "No password"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:821
+#: src/pages/products/_components/table/Columns.jsx:828
+msgid "From"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:830
+#: src/pages/products/_components/table/Columns.jsx:843
+msgid "Not scheduled"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:836
+#: src/pages/products/_components/table/Columns.jsx:841
+msgid "To"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:939
+msgid "Select delivery type"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:989
+msgid "Switch to multiple quantity sales"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:990
+msgid "Switch to single item sales"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:994
+msgid "Allow the product to be purchased in multiple quantities per order."
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:998
+msgid "Allow only one item to be purchased per order."
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:1172
+msgid "Barcode"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:1206
+msgid "Enter barcode"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:1239
+#: src/pages/products/_components/table/edit/DimensionsEdit.jsx:48
+msgid "Length"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:1310
+msgid "Up"
+msgstr ""
+
+#: src/pages/products/_components/table/Columns.jsx:1335
+msgid "Cross"
+msgstr ""
+
+#: src/pages/products/_components/table/DataTable.jsx:191
+msgid "Some items failed to update"
+msgstr ""
+
+#: src/pages/products/_components/table/DataTable.jsx:257
+msgid "Product order updated successfully"
+msgstr ""
+
+#: src/pages/products/_components/table/DataTable.jsx:259
+msgid "products updated"
+msgstr ""
+
+#: src/pages/products/_components/table/DataTable.jsx:276
+msgid "Failed to update product order"
+msgstr ""
+
+#: src/pages/products/_components/table/DataTableColumnHeader.jsx:167
+msgid "Drag to reorder column"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/AddFromTerms.jsx:52
+msgid "Failed to add term"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/AddFromTerms.jsx:89
+msgid "New term"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/AddFromTerms.jsx:114
+msgid "Search terms"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/AddFromTerms.jsx:126
+msgid "No terms found"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/AttributesEdit.jsx:64
+msgid "Manage attributes"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/AttributesEdit.jsx:120
+msgid "Manage Attributes of"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/AttributesEdit.jsx:132
+msgid "Product Attributes"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/AttributesEdit.jsx:135
+msgid "Product attributes allow you"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/SelectProductOptions.jsx:50
+msgid "Failed to add option"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/SelectProductOptions.jsx:56
+msgid "Add option"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/attributes/SelectProductOptions.jsx:68
+msgid "New option"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:95
+msgid "Delete File"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:96
+msgid "Are you sure you want to delete this file?"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:108
+msgid "The file has been deleted successfully"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:140
+msgid "Choose file"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:171
+msgid "Select File"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:190
+msgid "All"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:197
+msgid "Images"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:204
+msgid "Files"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:211
+msgid "Search file..."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:286
+msgid "No files found"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:287
+msgid "No files available"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:291
+msgid "No files match your search. Try different keywords or upload new files."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:295
+msgid "No files in your media library yet. Upload your first file to get started."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ChooseFile.jsx:324
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:62
+msgid "media items"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:119
+msgid "Downloadable"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:119
+msgid "Undownloadable"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:127
+msgid "Switch to Downloadable Product"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:128
+msgid "Switch to Undownloadable Product"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:182
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:200
+msgid "Downloadable files"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:209
+msgid "Download Expiry (days)"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:223
+msgid "Download Limit"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:257
+msgid "File URL:"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:275
+msgid "Delete file"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/DownloadableEdit.jsx:292
+msgid "Add file"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:83
+msgid "Changes saved! You can now close the grouped product window and continue editing the new product form."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:103
+msgid "The product group has been updated successfully"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:136
+msgid "Manage group"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:190
+msgid "Manage"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:192
+msgid "Group"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:201
+msgid "Grouped Product"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:204
+msgid "A grouped product allows you to combine multiple related products that can be purchased together. Customers can select individual items from the group or buy the entire set."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:271
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:218
+msgid "Find"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:276
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:223
+msgid "exist"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/EditGrouped.jsx:465
+msgid "No product grouped"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:78
+msgid "An external or affiliate product links to a product on another website. Customers are redirected to the external site to complete their purchase."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:90
+msgid "Product URL"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:98
+msgid "Enter the external URL to the product."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:111
+msgid "Button text"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/ExternalProductEdit.jsx:119
+msgid "This text will be shown on the button linking to the external product."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/ImageName.jsx:33
+msgid "The image has been successfully edited"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:150
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:120
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:191
+msgid "Link copied to clipboard"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:164
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:189
+msgid "Add images"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:212
+msgid "Select Photos from your gallery or upload new"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:292
+msgid "No images in gallery"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/MediaClient.jsx:300
+msgid "Your media library is empty. Upload your first images to get started."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/UploadMediaClient.jsx:72
+msgid "The image has been uploaded successfully"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/UploadMediaClient.jsx:91
+msgid "Error uploading media: "
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/UploadMediaClient.jsx:151
+msgid "Error occurred during uploading"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/UploadMediaClient.jsx:228
+msgid "Uploading..."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/UploadMediaClient.jsx:254
+msgid "Drag and drop some files here, or click to select files"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/UploadMediaClient.jsx:258
+msgid "Drop the files here..."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/UploadMediaClient.jsx:264
+msgid "Unsupported file type..."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/gallery/UploadMediaClient.jsx:265
+msgid "The file is too large."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:184
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:247
+msgid "Add image"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/Image/ImageEdit.jsx:300
+#: src/pages/products/_components/table/edit/meta_data/ImageMetaEdit.jsx:354
+msgid "No images available"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:57
+msgid "Showing"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/Image/ModalFooterPagination.jsx:84
+msgid "page"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:48
+msgid "Manage stock"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:64
+msgid "Stock quantity"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:68
+msgid "Enter quantity"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:83
+msgid "Low stock threshold"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/InventoryEdit.jsx:88
+msgid "Enter low stock amount"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:73
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:82
+msgid "Linked Products"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:85
+msgid "Linked products are related items that appear on the product page as additional or complementary suggestions. This enhances the shopping experience by offering customers more options."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:98
+msgid "To edit the linked products, please switch the product to edit mode."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:107
+msgid "Up sells"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:114
+msgid "Upsells"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:116
+msgid "Upsells are products which you recommend instead of the currently viewed product, for example, products that are more profitable or better quality or more expensive."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:132
+msgid "Cross sells"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:140
+msgid "Cross-sells"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/LinkedProducts.jsx:143
+msgid "Cross-sells are products which you promote in the cart, based on the current product."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:222
+msgid "Yoast SEO"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:223
+msgid "Custom fields"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/meta_data/MetaData.jsx:365
+msgid "Enter your text here"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:133
+msgid "The item has been successfully updated to"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:142
+msgid "Failed to update the item. Please try again later."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:152
+msgid "Are you sure you want to permanently delete"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:152
+msgid "this item"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:152
+msgid "This action cannot be undone."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:174
+msgid "Item"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:189
+msgid "Failed to delete the item. Please try again later."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/MultiSelectEditItem.jsx:381
+msgid "Add subcategory"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/PriceEdit.jsx:26
+msgid "Sale"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/SaleDurationEditor.jsx:100
+msgid "Schedule"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/SaleDurationEditor.jsx:106
+msgid "Select sale duration"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:36
+msgid "Delete Product Variations"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:37
+msgid "Please confirm that you understand deleting the product variations is irreversible and cannot be undone. This action will permanently remove all variations associated with this product from the system."
+msgstr ""
+
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:41
+msgid "Delete Variations"
+msgstr ""
+
+#: src/pages/products/_components/table/edit/TypeEdit.jsx:129
+msgid "Variant"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/MultipleRowsToolbar.jsx:42
+msgid "Restore selected products"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/MultipleRowsToolbar.jsx:59
+#: src/pages/products/_components/table/toolbar/SingleRowToolbar.jsx:41
+msgid "Duplicate selected product"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/MultipleRowsToolbar.jsx:85
+#: src/pages/products/_components/table/toolbar/SingleRowToolbar.jsx:93
+msgid "Delete permanently product"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/SingleRowToolbar.jsx:31
+msgid "Restore selected product"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/SingleRowToolbar.jsx:54
+msgid "View in WooCommerce"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:51
+msgid "Delete Products Permanently"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:54
+msgid "Are you sure you want to permanently delete the selected products? This action cannot be undone."
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:58
+msgid "Are you sure you want to move the selected products to the trash? Any selected variations will be permanently deleted. This action cannot be undone."
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:64
+msgid "Delete Permanently"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:236
+msgid "Are you sure you want to restore the selected products? This action will update their status to 'publish'."
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:272
+msgid "Duplicate Products"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:273
+msgid "Are you sure you want to duplicate the selected products?"
+msgstr ""
+
+#: src/pages/products/_components/table/toolbar/Toolbar.jsx:285
+msgid "Cannot duplicate variations. Please select only products."
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:101
+msgid "Focus keyphrase is set"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:102
+msgid "You've set a focus keyphrase - great start!"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:109
+msgid "No focus keyphrase set"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:110
+msgid "Set a focus keyphrase to optimize your content for search engines"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:126
+msgid "Keyphrase length is optimal"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:127
+msgid "Your keyphrase has 1-4 words - perfect length!"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:134
+msgid "Keyphrase is too long"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:137
+msgid "Try to shorten your keyphrase to 1-4 words for better focus"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:141
+msgid "Add a focus keyphrase of 1-4 words"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:153
+msgid "Keyphrase appears in SEO title"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:154
+msgid "Great! Your keyphrase is in the title"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:163
+msgid "Add keyphrase to SEO title"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:164
+msgid "Keyphrase in title"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:167
+msgid "Include your focus keyphrase in the SEO title for better rankings"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:171
+msgid "Set a focus keyphrase first, then include it in the title"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:182
+msgid "Keyphrase appears in URL"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:183
+msgid "Good! Your URL contains the keyphrase"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:192
+msgid "Add keyphrase to URL"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:193
+msgid "Keyphrase in URL"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:196
+msgid "Include your keyphrase in the URL slug for better SEO"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:197
+msgid "Set a focus keyphrase first, then include it in the URL"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:208
+msgid "Keyphrase in meta description"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:209
+msgid "Perfect! Your description contains the keyphrase"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:218
+msgid "Add keyphrase to description"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:219
+msgid "Keyphrase in description"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:222
+msgid "Include your keyphrase in the meta description"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:223
+msgid "Set a focus keyphrase first, then include it in the description"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:238
+msgid "SEO title length is perfect"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:247
+msgid "SEO title is too short"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:256
+msgid "SEO title is too long"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:264
+msgid "No SEO title set"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:265
+msgid "Add an SEO title between 50-60 characters"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:277
+msgid "Meta description length is ideal"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:286
+msgid "Meta description is too short"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:295
+msgid "Meta description is too long"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:303
+msgid "No meta description"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:304
+msgid "Add a meta description between 120-160 characters"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:315
+msgid "URL slug is set"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:316
+msgid "Good! You have a custom URL"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:323
+msgid "No URL slug"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:324
+msgid "Set a URL slug for better SEO"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:339
+msgid "Social media optimized"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:340
+msgid "Great! Your content is ready for social sharing"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:348
+msgid "Incomplete social settings"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:349
+msgid "Complete both social title and description"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:356
+msgid "No social media settings"
+msgstr ""
+
+#: src/pages/products/_components/table/YoastSEOModal.jsx:357
+msgid "Add social title and description for better sharing"
+msgstr ""

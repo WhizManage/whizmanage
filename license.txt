@@ -1,0 +1,32 @@
+WhizManage – License Information
+================================
+
+WhizManage is a free WordPress plugin that helps you easily manage and organize your WooCommerce store.
+This plugin is distributed under the GNU General Public License, version 2 or later (GPLv2+).
+
+License
+-------
+WhizManage is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+WhizManage is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this plugin. If not, see: https://www.gnu.org/licenses/gpl-2.0.html
+
+Source Code and Assets
+----------------------
+This plugin includes JavaScript and CSS assets in compiled (minified) form.
+The original development source files (such as React components, JSX, SCSS, and build tools)
+are not required to be distributed under the GPL and are not included here.
+
+All PHP files and compiled assets necessary for the plugin to function
+are included in this distribution.
+
+For documentation, updates, and contribution information:
+https://whizmanage.com/

@@ -1,0 +1,3522 @@
+{
+  "translation-revision-date": "2025-10-28 11:30+0200",
+  "generator": "manual",
+  "domain": "whizmanage",
+  "locale_data": {
+    "whizmanage": {
+      "": {
+        "domain": "whizmanage",
+        "lang": "he_IL",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      " (Automatically refunded to payment method)": [
+        " (הוחזר באופן אוטומטי לאמצעי התשלום)"
+      ],
+      " (beta)": [
+        " (בהרצה)"
+      ],
+      " (Manual refund - please process payment manually)": [
+        " (החזר ידני - עליך לעבד את ההחזר באופן ידני)"
+      ],
+      " Please enter the license key you received after purchase. You can always find it in your": [
+        "אנא הזן את מפתח הרישיון שקיבלת לאחר הרכישה. תוכל תמיד למצוא אותו ב-"
+      ],
+      "(Manual refund only)": [
+        "(החזר ידני בלבד)"
+      ],
+      "(Optional)": [
+        "(רשות)"
+      ],
+      "(Optional) customer email to send/update": [
+        "(אופציונלי) אימייל לקוח לשליחה/עדכון"
+      ],
+      "(Supports automatic refunds)": [
+        "(תומך בהחזרים אוטומטיים)"
+      ],
+      "A grouped product allows you to combine multiple related products that can be purchased together. Customers can select individual items from the group or buy the entire set.": [
+        "מוצר מקובץ מאפשר לשלב מספר מוצרים קשורים שניתן לרכוש יחד. לקוחות יכולים לבחור פריטים בודדים מהקבוצה או לרכוש את כל הסט."
+      ],
+      "A new product added": [
+        "מוצר חדש נוסף"
+      ],
+      "Actions": [
+        "פעולות"
+      ],
+      "Activate License": [
+        "הפעל רישיון"
+      ],
+      "Add": [
+        "הוסף"
+      ],
+      "Add a focus keyphrase of 1-4 words": [
+        "הוסף מילת מפתח באורך 1-4 מילים"
+      ],
+      "Add a meta description between 120-160 characters": [
+        "הוסף תיאור מטא באורך 120 עד 160 תווים"
+      ],
+      "Add a note about this refund": [
+        "הוספת הערה על ההחזר"
+      ],
+      "Add a note about this refund (visible to customer)": [
+        "הוסף הערה על ההחזר הזה (גלוי ללקוח)"
+      ],
+      "Add a note for the customer (optional)": [
+        "הוסף הערה ללקוח (אופציונלי)"
+      ],
+      "Add an SEO title between 50-60 characters": [
+        "הוסף כותרת SEO בין 50 ל-60 תווים"
+      ],
+      "Add attribute": [
+        "הוסף תכונה"
+      ],
+      "Add Attributes to the Product": [
+        "הוספת תכונות למוצר"
+      ],
+      "Add border": [
+        "הוסף מסגרת"
+      ],
+      "Add coupon": [
+        "הוסף קופון"
+      ],
+      "Add file": [
+        "הוסף קובץ"
+      ],
+      "Add header row": [
+        "הוסף שורת כותרת"
+      ],
+      "Add image": [
+        "הוסף תמונה"
+      ],
+      "Add images": [
+        "הוסף תמונות"
+      ],
+      "Add Images": [
+        "הוסף תמונות"
+      ],
+      "Add keyphrase to description": [
+        "הוסף מילת מפתח לתיאור"
+      ],
+      "Add keyphrase to SEO title": [
+        "הוסף מילת מפתח לכותרת"
+      ],
+      "Add keyphrase to URL": [
+        "הוסף מילת מפתח לכתובת ה-URL"
+      ],
+      "Add labels": [
+        "הוסף תוויות"
+      ],
+      "Add new product": [
+        "הוסף מוצר חדש"
+      ],
+      "Add options": [
+        "הוסף אפשרויות"
+      ],
+      "Add order": [
+        "הוסף הזמנה"
+      ],
+      "Add product": [
+        "הוסף מוצר"
+      ],
+      "Add Products": [
+        "הוסף מוצרים"
+      ],
+      "Add social title and description for better sharing": [
+        "הוסף כותרת ותיאור לשיתוף טוב יותר"
+      ],
+      "Add subcategory": [
+        "הוסף תת קטגוריה"
+      ],
+      "Additional Information": [
+        "מידע נוסף"
+      ],
+      "Additional Taxonomies": [
+        "מונחי טקסונומיה נוספים"
+      ],
+      "Address 1": [
+        "כתובת מס 1"
+      ],
+      "Address 2": [
+        "כתובת מס 2"
+      ],
+      "Address Line 1": [
+        "כתובת מס 1"
+      ],
+      "Address Line 2": [
+        "כתובת מס 2"
+      ],
+      "Address Line 2 (optional)": [
+        "כתובת מס 2 (אופציונלי)"
+      ],
+      "Admin": [
+        "אדמין"
+      ],
+      "Advanced": [
+        "מתקדם"
+      ],
+      "Advanced Settings": [
+        "הגדרות מתקדמות"
+      ],
+      "Advanced Usage Restrictions": [
+        "הגבלות שימוש מתקדמות"
+      ],
+      "After selecting an attribute for your product, you now need to define the available options. For instance, if the attribute is 'Color', you will need to specify the available colors.": [
+        "לאחר שבחרת תכונה עבור המוצר שלך, עליך כעת להגדיר את האפשרויות הזמינות. לדוגמה, אם התכונה היא 'צבע', יהיה עליך לציין את הצבעים הזמינים."
+      ],
+      "After selecting the desired attribute type, a list of existing attributes will appear. Choose the attribute you wish to add to your product. If the attribute is not listed, click the plus button to add it.": [
+        "לאחר שתבחר בסוג התכונה הרצוי, תפתח לך רשימת התכונות הקיימות. בחר מתוכה את התכונה שתרצה להוסיף למוצר שלך. במידה והתכונה אינה מופיעה ברשימה, לחץ על כפתור הפלוס כדי להוסיפה."
+      ],
+      "After updating the file, you can edit or add products to your site via the file by clicking the 'Update Site' button.": [
+        "לאחר עדכון הקובץ, תוכל לערוך או להוסיף מוצרים לאתר שלך דרך הקובץ, על ידי לחיצה על כפתור 'עדכון האתר'."
+      ],
+      "Alignment": [
+        "יישור"
+      ],
+      "All": [
+        "הכל"
+      ],
+      "All columns": [
+        "כל העמודות"
+      ],
+      "All products have been updated successfully!": [
+        "כל המוצרים עודכנו בהצלחה!"
+      ],
+      "Allow": [
+        "אפשר"
+      ],
+      "Allow backorders?": [
+        "אפשר הזמנות חוזרות?"
+      ],
+      "Allow free shipping": [
+        "אפשר משלוח חינם"
+      ],
+      "Allow only one item to be purchased per order.": [
+        "אפשר רכישת פריט אחד בלבד להזמנה."
+      ],
+      "Allow the product to be purchased in multiple quantities per order.": [
+        "אפשר רכישת המוצר בכמויות מרובות להזמנה."
+      ],
+      "Allow, but notify customer": [
+        "אפשר, אך הודע ללקוח"
+      ],
+      "Allowed emails": [
+        "אימיילים מאושרים"
+      ],
+      "Already Refunded:": [
+        "כבר הוחזר:"
+      ],
+      "Alt Text": [
+        "טקסט חלופי"
+      ],
+      "Alternatively, instead of choosing 'Any', you can select specific options that you want to manage differently for each variation. This is ideal if you want to manage different prices, stock levels, or images for each variation. You can mark the existing options from the list or create new ones. For global attributes, options can be imported as mentioned earlier.": [
+        "כחלופה, במקום לבחור ב-'כל האפשרויות', תוכל לבחור אפשרויות ספציפיות שברצונך לנהל באופן שונה לכל וריאציה. זה מתאים אם אתה מעוניין לנהל מחירים שונים, רמות מלאי או תמונות שונות לכל וריאציה. תוכל לסמן את האפשרויות הקיימות ברשימה או ליצור חדשות."
+      ],
+      "amazing-product": [
+        "מוצר-מדהים"
+      ],
+      "Amount": [
+        "סכום"
+      ],
+      "Amount calculated based on selected items": [
+        "הסכום מחושב לפי הפריטים שנבחרו"
+      ],
+      "An external or affiliate product links to a product on another website. Customers are redirected to the external site to complete their purchase.": [
+        "מוצר חיצוני או שותפים מקשר למוצר באתר אחר. הלקוחות מופנים לאתר החיצוני להשלמת הרכישה."
+      ],
+      "Any": [
+        "כל ה"
+      ],
+      "Appearance": [
+        "מראה"
+      ],
+      "Apple Pay": [
+        "Apple Pay"
+      ],
+      "Apply": [
+        "החל"
+      ],
+      "Apply shadow": [
+        "הוספת צל"
+      ],
+      "Are you sure you want to cancel all edits?": [
+        "שים לב! ייתכן שהשינויים שביצעת לא יישמרו"
+      ],
+      "Are you sure you want to deactivate the license?": [
+        "האם אתה בטוח שברצונך לכבות את הרישיון?"
+      ],
+      "Are you sure you want to delete the selected coupons?": [
+        "האם אתה בטוח שברצונך למחוק את הקופונים שנבחרו?"
+      ],
+      "Are you sure you want to delete this file?": [
+        "האם אתה בטוח שברצונך למחוק קובץ זה?"
+      ],
+      "Are you sure you want to delete this image?": [
+        "האם אתה בטוח שברצונך למחוק תמונה זו?"
+      ],
+      "Are you sure you want to delete this video?": [
+        "האם אתה בטוח שברצונך למחוק את הסרטון?"
+      ],
+      "Are you sure you want to disable coupons? This will prevent users from applying any coupons during checkout.": [
+        "האם אתה בטוח שברצונך להשבית את הקופונים? פעולה זו תמנע מהמשתמשים להחיל קופונים בעת ביצוע התשלום."
+      ],
+      "Are you sure you want to duplicate the selected products?": [
+        "האם אתה בטוח שברצונך לשכפל את המוצרים שנבחרו?"
+      ],
+      "Are you sure you want to move the selected cuopuns to the trash?": [
+        "האם אתה בטוח שברצונך להעביר את הקופונים שנבחרו לאשפה"
+      ],
+      "Are you sure you want to move the selected orders to the trash?": [
+        "האם אתה בטוח שברצונך להעביר הזמנות אלו לאשפה?"
+      ],
+      "Are you sure you want to move the selected products to the trash? Any selected variations will be permanently deleted. This action cannot be undone.": [
+        "האם אתה בטוח שברצונך להעביר את המוצרים שנבחרו לאשפה? כל הוריאציות שנבחרו יימחקו לצמיתות. פעולה זו לא ניתנת לביטול."
+      ],
+      "Are you sure you want to permanently delete the selected coupons? This action cannot be undone.": [
+        "האם אתה בטוח שברצונך למחוק לצמיתות את הקופונים שנבחרו? פעולה זו לא ניתנת לביטול."
+      ],
+      "Are you sure you want to permanently delete the selected orders? This action cannot be undone.": [
+        "האם אתה בטוח שברצונך למחוק הזמנות שנבחרו לצמיתות? פעולה זו לא ניתנת לביטול"
+      ],
+      "Are you sure you want to permanently delete the selected products? This action cannot be undone.": [
+        "האם אתה בטוח שברצונך למחוק לצמיתות את המוצרים שנבחרו? פעולה זו לא ניתנת לביטול."
+      ],
+      "Are you sure you want to permanently delete this": [
+        "האם אתה בטוח שברצונך למחוק לצמיתות את"
+      ],
+      "Are you sure you want to permanently delete this attribute?": [
+        "האם אתה בטוח שברצונך למחוק לצמיתות את התכונה הזו?"
+      ],
+      "Are you sure you want to reset the table?": [
+        "האם אתה בטוח שברצונך לאפס את הטבלה?"
+      ],
+      "Are you sure you want to restore the selected coupons?": [
+        "האם אתה בטוח שברצונך לשחזר את הקופונים שנבחרו?"
+      ],
+      "Are you sure you want to restore the selected orders?": [
+        "האם אתה בטוח שברצונך לשחזר הזמנות אלו?"
+      ],
+      "Are you sure you want to restore the selected products? This action will update their status to 'publish'.": [
+        "האם אתה בטוח שברצונך לשחזר את המוצרים הנבחרים? פעולה זו תעדכן את הסטטוס שלהם ל-'פרסום'."
+      ],
+      "Asc": [
+        "עולה"
+      ],
+      "at": [
+        "בשעה"
+      ],
+      "At": [
+        "בתאריך"
+      ],
+      "At this stage, by clicking 'Generate', you will create combinations of the selected attributes and options for your product, resulting in new variations. For example, selecting 'Color' with options 'Blue' and 'Green', and 'Size' with options 'Small' and 'Large', will generate four product variations: Small Blue, Large Blue, Small Green, and Large Green.": [
+        "בשלב זה, על ידי לחיצה על 'צור', תיצור עבורך שילובים של התכונות והאפשרויות שנבחרו למוצר שלך, ותציג בטבלה התחתונה ווריאציות חדשות. לדוגמה, בחירה בתכונה 'צבע' עם האפשרויות 'כחול' ו'ירוק', ובתכונה 'מידה' עם האפשרויות 'קטן' ו'גדול', תיצור ארבע ווריאציות של המוצר: כחול קטן, כחול גדול, ירוק קטן, וירוק גדול."
+      ],
+      "Attribute": [
+        "תכונה"
+      ],
+      "Attribute Type": [
+        "סוג תכונה"
+      ],
+      "Attributes": [
+        "תכונות"
+      ],
+      "Attributes are characteristics that define a product and enable variations. Here’s how you can add them:": [
+        "תכונות הן מאפיינים המגדירים מוצר ומאפשרים ווריאציות. כך תוכל להוסיף אותן:"
+      ],
+      "Auto Refund": [
+        "החזר אוטומטי"
+      ],
+      "Autoplay": [
+        "נגינה אוטומטית"
+      ],
+      "Available to Refund:": [
+        "סכום זמין להחזר:"
+      ],
+      "Available:": [
+        "זמין:"
+      ],
+      "Back to Coupons": [
+        "חזרה לקופונים"
+      ],
+      "Back to Orders": [
+        "חזרה להזמנות"
+      ],
+      "Back to Products": [
+        "צא מהאשפה"
+      ],
+      "Back to WordPress": [
+        "חזרה לוורדפרס"
+      ],
+      "Back to wordpress": [
+        "חזרה לוורדפרס"
+      ],
+      "Background Color": [
+        "צבע רקע"
+      ],
+      "backordered": [
+        "בהזמנה מראש"
+      ],
+      "Backorders": [
+        "אפשר הזמנות מראש"
+      ],
+      "bacs": [
+        "העברה בנקאית אוטומטית"
+      ],
+      "Bank Transfer": [
+        "העברה בנקאית"
+      ],
+      "bank_transfer": [
+        "העברה בנקאית"
+      ],
+      "Barcode": [
+        "ברקוד"
+      ],
+      "Basic SEO Settings": [
+        "הגדרות SEO בסיסיות"
+      ],
+      "Billing": [
+        "חיוב"
+      ],
+      "Billing Address": [
+        "כתובת לחיוב"
+      ],
+      "Billing Address 1": [
+        "כתובת לחיוב 1"
+      ],
+      "Billing Address 2": [
+        "כתובת לחיוב 2"
+      ],
+      "Billing City": [
+        "עיר לחיוב"
+      ],
+      "Billing Company": [
+        "חברת לחיוב"
+      ],
+      "Billing Country": [
+        "מדינה לחיוב"
+      ],
+      "Billing Email": [
+        "אימייל לחיוב"
+      ],
+      "Billing Information": [
+        "פרטי חיוב"
+      ],
+      "Billing Name": [
+        "שם לחיוב"
+      ],
+      "Billing Phone": [
+        "טלפון לחיוב"
+      ],
+      "Billing Postcode": [
+        "מיקוד חיוב"
+      ],
+      "Billing State": [
+        "מחוז חיוב"
+      ],
+      "Bit (Israeli Payment App)": [
+        "ביט (אפליקציית תשלום ישראלית)"
+      ],
+      "Border": [
+        "מסגרת"
+      ],
+      "Border color": [
+        "צבע מסגרת"
+      ],
+      "Border Radius": [
+        "עיגול פינות"
+      ],
+      "Border style": [
+        "סגנון מסגרת"
+      ],
+      "Border width": [
+        "רוחב מסגרת"
+      ],
+      "Borders": [
+        "מסגרות"
+      ],
+      "Breadcrumb Title": [
+        "כותרת ניווט (Breadcrumb)"
+      ],
+      "Bulk edit": [
+        "עריכה בכמות גדולה"
+      ],
+      "Bulk Edit": [
+        "עריכה בכמות גדולה"
+      ],
+      "By": [
+        "על ידי"
+      ],
+      "Campaign": [
+        "קמפיין"
+      ],
+      "Can refund back to this method": [
+        "ניתן להחזיר דרך אמצעי זה"
+      ],
+      "Cancel": [
+        "ביטול"
+      ],
+      "Cancel Edits": [
+        "בטל עריכה"
+      ],
+      "cancelled": [
+        "בוטל"
+      ],
+      "Cannot duplicate variations. Please select only products.": [
+        "לא ניתן לשכפל וריאציות. אנא בחר רק מוצרים."
+      ],
+      "Canonical URL": [
+        "כתובת קנונית"
+      ],
+      "Canonical URL for avoiding duplicate content issues.": [
+        "כתובת קבועה למניעת בעיות של תוכן כפול."
+      ],
+      "cart_summary_many": [
+        "{{count}} פריטים (₪{{total}})"
+      ],
+      "cart_summary_one": [
+        "{{count}} פריט (₪{{total}})"
+      ],
+      "cart_summary_other": [
+        "{{count}} פריטים (₪{{total}})"
+      ],
+      "cart_summary_two": [
+        "{{count}} פריטים (₪{{total}})"
+      ],
+      "Cash on Delivery (COD)": [
+        "תשלום במעמד המסירה (COD)"
+      ],
+      "Categories": [
+        "קטגוריות"
+      ],
+      "categories": [
+        "קטגוריות"
+      ],
+      "categories exist": [
+        "קטגוריות קיימות"
+      ],
+      "Cell padding": [
+        "ריווח בתא"
+      ],
+      "Center": [
+        "מרכז"
+      ],
+      "Change Amount": [
+        "שנה כמות"
+      ],
+      "Change license": [
+        "החלף רישיון"
+      ],
+      "Change Link": [
+        "החלף קישור"
+      ],
+      "Change rows": [
+        "שנה שורות"
+      ],
+      "Change Type": [
+        "שנה סוג"
+      ],
+      "Changes saved! You can now close the grouped product window and continue editing the new product form.": [
+        "השינויים נשמרו! כעת ניתן לסגור את חלון המוצר המקובץ ולהמשיך לערוך את טופס המוצר החדש."
+      ],
+      "characters": [
+        "תווים"
+      ],
+      "Check": [
+        "צ'ק"
+      ],
+      "Check this box if the coupon cannot be used in conjunction with other coupons.": [
+        "סמן תיבה זו אם הקופון אינו יכול לשמש יחד עם קופונים אחרים."
+      ],
+      "Check this box if the coupon grants free shipping.": [
+        "סמן תיבה זו אם הקופון מקנה משלוח חינם."
+      ],
+      "Check this box if the coupon should not apply to items on sale. Per-item coupons will only work if the item is not on sale. Per-cart coupons will only work if there are items in the cart that are not on sale.": [
+        "סמן תיבה זו אם הקופון לא אמור לחול על מוצרים שנמצאים במבצע. קופוני הנחה למוצרים ספציפיים יעבדו רק אם המוצר אינו במבצע. קופוני הנחה על כל הסל יעבדו רק אם ישנם פריטים בסל שאינם במבצע."
+      ],
+      "cheque": [
+        "צ'ק"
+      ],
+      "Choose action": [
+        "בחר פעולה"
+      ],
+      "Choose action...": [
+        "בחר פעולה..."
+      ],
+      "Choose email template": [
+        "בחר תבנית אימייל"
+      ],
+      "Choose file": [
+        "בחר קובץ"
+      ],
+      "Choose Payment Method": [
+        "בחר אמצעי תשלום"
+      ],
+      "Choose template": [
+        "בחר תבנית"
+      ],
+      "City": [
+        "עיר"
+      ],
+      "Clear": [
+        "נקה"
+      ],
+      "Clear filters": [
+        "ניקוי סינונים"
+      ],
+      "Clear selection": [
+        "ניקוי בחירה"
+      ],
+      "Click to select video file": [
+        "לחץ לבחירת קובץ וידאו"
+      ],
+      "Close": [
+        "סגור"
+      ],
+      "cod": [
+        "תשלום במזומן בעת קבלה"
+      ],
+      "Code": [
+        "קוד"
+      ],
+      "Column": [
+        "עמודה"
+      ],
+      "Column has been exported successfully": [
+        "העמודה יוצאה בהצלחה"
+      ],
+      "Column has been unexported successfully": [
+        "הייצוא של העמודה בוטל בהצלחה"
+      ],
+      "Columns": [
+        "עמודות"
+      ],
+      "Combine & Generate": [
+        "שלב וייצר"
+      ],
+      "Combine and Generate Variations": [
+        "שילוב ויצירת ווריאציות"
+      ],
+      "Company": [
+        "חברה"
+      ],
+      "Company (optional)": [
+        "חברה (אופציונלי)"
+      ],
+      "completed": [
+        "הושלם"
+      ],
+      "Completed order": [
+        "הזמנה הושלמה"
+      ],
+      "Connect and import products from Google Sheets": [
+        "חיבור וייבוא מוצרים מגוגל שיטס"
+      ],
+      "Control and monitor the application of this coupon with respect to overall usage, specific user limitations, and the number of items it can be applied to. Proper management ensures optimal benefit from promotional strategies.": [
+        "שלוט ונטר את השימוש בקופון זה ביחס לשימוש הכללי, הגבלות על משתמשים ספציפיים, וכמות הפריטים עליהם ניתן להחיל את הקופון. ניהול נכון מבטיח ניצול מיטבי של אסטרטגיות קידום מכירות."
+      ],
+      "Copied": [
+        "הועתק"
+      ],
+      "Copy failed": [
+        "ההעתקה נכשלה"
+      ],
+      "Copy raw JSON": [
+        "העתקת JSON גולמי"
+      ],
+      "Copy UTM query": [
+        "העתקת שאילתת UTM"
+      ],
+      "Country": [
+        "מדינה"
+      ],
+      "Coupon Code": [
+        "קוד קופון"
+      ],
+      "Coupon code is required": [
+        "נדרש להזין קוד קופון"
+      ],
+      "Coupon Coder": [
+        "קוד קופון"
+      ],
+      "Coupon Details": [
+        "פרטי הקופון"
+      ],
+      "Coupon expiry date": [
+        "תאריך תפוגת הקופון"
+      ],
+      "Coupon Scope": [
+        "תחום הקופון"
+      ],
+      "Coupon start date and time": [
+        "תאריך ושעת תחילת תוקף הקופון"
+      ],
+      "Coupons": [
+        "קופונים"
+      ],
+      "Coupons are currently disabled.": [
+        "קופונים מושבתים כרגע."
+      ],
+      "Create a new coupon": [
+        "יצירת קופון חדש"
+      ],
+      "Create a new order": [
+        "צור הזמנה חדשה"
+      ],
+      "Create a new product": [
+        "הוסף מוצר חדש"
+      ],
+      "Create Attribute": [
+        "צור תכונה"
+      ],
+      "Create category": [
+        "צור קטגוריה"
+      ],
+      "Create Option": [
+        "צור אפשרות"
+      ],
+      "Create your first category to get started": [
+        "צור את הקטגוריה הראשונה שלך כדי להתחיל"
+      ],
+      "Create your first global attribute to get started": [
+        "צור את התכונה הגלובלית הראשונה שלך כדי להתחיל"
+      ],
+      "Create your first option to get started": [
+        "צור את האפשרות הראשונה שלך כדי להתחיל"
+      ],
+      "Create your first product attribute to get started": [
+        "צור את תכונת המוצר הראשונה שלך כדי להתחיל"
+      ],
+      "Created via": [
+        "נוצר באמצעות"
+      ],
+      "Created Via": [
+        "נוצר באמצעות"
+      ],
+      "Credit Card": [
+        "כרטיס אשראי"
+      ],
+      "Cross": [
+        "מקושר"
+      ],
+      "Cross sells": [
+        "מוצרים מוצלבים"
+      ],
+      "Cross-sells": [
+        "המלצות לחציית מכירה"
+      ],
+      "Cross-sells are products which you promote in the cart, based on the current product.": [
+        "מוצרים מוצלבים הם מוצרים שאתם מקדמים בעגלת הקניות, בהתבסס על המוצר הנוכחי."
+      ],
+      "Current Google Sheets Link": [
+        "קישור גוגל שיטס נוכחי"
+      ],
+      "Custom Amount": [
+        "סכום מותאם"
+      ],
+      "Custom breadcrumb title shown in navigational paths.": [
+        "כותרת מותאמת אישית שתוצג בנתיב הניווט באתר."
+      ],
+      "Custom fields": [
+        "שדות מותאמים אישית"
+      ],
+      "Custom Fields": [
+        "שדות מותאמים אישית"
+      ],
+      "Custom fields columns": [
+        "עמודות שדות מותאמים אישית"
+      ],
+      "Custom fields selected": [
+        "שדות מותאמים אישית שנבחרו"
+      ],
+      "Custom fields Selection for Sheets": [
+        "בחירת שדות מותאמים אישית עבור sheets"
+      ],
+      "custom fields Selection for Sheets": [
+        "בחירת שדות מותאמים אישית עבור Sheets"
+      ],
+      "Custom Product Fields": [
+        "שדות מוצר מותאמים אישית"
+      ],
+      "Custom Range": [
+        "טווח מותאם אישית"
+      ],
+      "Customer Note": [
+        "הערת לקוח"
+      ],
+      "Customer note": [
+        "הערת לקוח"
+      ],
+      "Customer request": [
+        "בקשת לקוח"
+      ],
+      "customer request": [
+        "בקשת לקוח"
+      ],
+      "Customize Fields": [
+        "ערוך שדות"
+      ],
+      "Damaged during shipping": [
+        "ניזוק במהלך המשלוח"
+      ],
+      "damaged during shipping": [
+        "ניזוק במהלך המשלוח"
+      ],
+      "Dark": [
+        "כהה"
+      ],
+      "Dashboard": [
+        "לוח מחוונים"
+      ],
+      "Dashed": [
+        "מקווקו"
+      ],
+      "Date": [
+        "תאריך"
+      ],
+      "Date created": [
+        "תאריך יצירה"
+      ],
+      "Date Created": [
+        "תאריך יצירה"
+      ],
+      "Date expires": [
+        "תאריך תפוגה"
+      ],
+      "Date Expires": [
+        "תאריך תפוגה"
+      ],
+      "Date modified": [
+        "תאריך שינוי"
+      ],
+      "Date Modified": [
+        "תאריך שינוי"
+      ],
+      "Date On Sale Form": [
+        "תאריך תחילת המבצע"
+      ],
+      "Date On Sale From": [
+        "משך המבצע"
+      ],
+      "Deactivate": [
+        "כבה רישיון"
+      ],
+      "Decrease": [
+        "הפחת"
+      ],
+      "Default": [
+        "ברירת מחדל"
+      ],
+      "Defective item": [
+        "פריט פגום"
+      ],
+      "defective item": [
+        "פריט פגום"
+      ],
+      "Define Attribute Options": [
+        "הגדרת אפשרויות התכונה"
+      ],
+      "Delete": [
+        "מחק"
+      ],
+      "Delete attribute": [
+        "מחק תכונה"
+      ],
+      "Delete column": [
+        "מחק עמודה"
+      ],
+      "Delete Coupons": [
+        "מחיקת קופונים"
+      ],
+      "Delete file": [
+        "מחק קובץ"
+      ],
+      "Delete Image": [
+        "מחיקת תמונה"
+      ],
+      "Delete Order": [
+        "מחק הזמנה"
+      ],
+      "Delete Orders": [
+        "מחק הזמנות"
+      ],
+      "Delete Permanently": [
+        "מחק לצמיתות"
+      ],
+      "Delete permanently coupon": [
+        "מחק קופון לצמיתות"
+      ],
+      "Delete permanently coupons": [
+        "מחק קופונים לצמיתות"
+      ],
+      "Delete permanently order": [
+        "מחק הזמנה זאת לצמיתות"
+      ],
+      "Delete permanently orders": [
+        "מחק הזמנות לצמיתות"
+      ],
+      "Delete permanently product": [
+        "מחק מוצר לצמיתות"
+      ],
+      "Delete row": [
+        "מחק שורה"
+      ],
+      "Delete selected coupon": [
+        "מחק קופון נבחר"
+      ],
+      "Delete selected coupons": [
+        "מחק קופונים נבחרים"
+      ],
+      "Delete selected product": [
+        "מחק מוצר נבחר"
+      ],
+      "Delete variation": [
+        "מחק וריאציה"
+      ],
+      "Delete Video": [
+        "מחק סרטון"
+      ],
+      "Delivery management": [
+        "ניהול משלוחים"
+      ],
+      "Desc": [
+        "יורד"
+      ],
+      "desc_length_long_help": [
+        "{{count}} תווים - קיצור ל-160 תווים לכל היותר"
+      ],
+      "desc_length_ok_help": [
+        "{{count}} תווים - מושלם עבור תוצאות חיפוש"
+      ],
+      "desc_length_short_help": [
+        "{{count}} תווים - נסה להגיע בין 120 ל-160 תווים"
+      ],
+      "Describe the image for accessibility and SEO purposes": [
+        "תיאור התמונה לצרכי נגישות ו-SEO"
+      ],
+      "Describe your product": [
+        "תאר את המוצר שלך"
+      ],
+      "Description": [
+        "תיאור מפורט"
+      ],
+      "description": [
+        "תיאור מפורט"
+      ],
+      "Description (optional)": [
+        "תיאור (אופציונלי)"
+      ],
+      "Description for Facebook and Twitter": [
+        "תיאור מותאם לשיתוף ברשתות החברתיות"
+      ],
+      "Description shown on social media (e.g., Facebook) when sharing.": [
+        "תיאור שמוצג בשיתוף ברשתות חברתיות כמו פייסבוק."
+      ],
+      "Description tag shown in search engine results. Helps with click-through rates.": [
+        "תג תיאור שמופיע בתוצאות החיפוש. עוזר לשכנע משתמשים להקליק."
+      ],
+      "Description used specifically for Twitter cards.": [
+        "תיאור מותאם לתצוגה בטוויטר (Twitter Card)."
+      ],
+      "Device": [
+        "מכשיר"
+      ],
+      "Dimensions": [
+        "מידות"
+      ],
+      "Direct": [
+        "ישיר"
+      ],
+      "Disable": [
+        "כבה"
+      ],
+      "Disable Coupons": [
+        "השבתת קופונים"
+      ],
+      "Disabled": [
+        "מושבת"
+      ],
+      "Discount type": [
+        "סוג הנחה"
+      ],
+      "Discount Type": [
+        "סוג הנחה"
+      ],
+      "Discount_type": [
+        "סוג הנחה"
+      ],
+      "Dismiss": [
+        "התעלם"
+      ],
+      "Display columns": [
+        "הצגת עמודות"
+      ],
+      "Display this field as a separate column in the table": [
+        "הצג שדה זה כעמודה נפרדת בטבלה"
+      ],
+      "Do not allow": [
+        "אל תאפשר"
+      ],
+      "Done": [
+        "סיום"
+      ],
+      "Dotted": [
+        "נקודתי"
+      ],
+      "Double": [
+        "כפול"
+      ],
+      "Download Expiry (days)": [
+        "תוקף ההורדה (ימים)"
+      ],
+      "Download file example": [
+        "הורדת קובץ לדוגמא"
+      ],
+      "Download Limit": [
+        "מגבלת הורדות"
+      ],
+      "Downloadable": [
+        "ניתן להורדה"
+      ],
+      "downloadable": [
+        "ניתן להורדה"
+      ],
+      "Downloadable files": [
+        "קבצים להורדה"
+      ],
+      "draft": [
+        "טיוטה"
+      ],
+      "Drag and drop some files here, or click to select files": [
+        "גרור ושחרר קבצים כאן, או לחץ כדי לבחור קבצים"
+      ],
+      "Drag to reorder columns": [
+        "גרור כדי לשנות את סדר העמודות"
+      ],
+      "Drop the files here...": [
+        "שחרר את הקבצים כאן..."
+      ],
+      "Duplicate": [
+        "שכפל"
+      ],
+      "Duplicate order": [
+        "הזמנה כפולה"
+      ],
+      "duplicate order": [
+        "הזמנה כפולה"
+      ],
+      "Duplicate Products": [
+        "שכפל מוצרים"
+      ],
+      "Duplicate selected coupon": [
+        "שכפל קופון נבחר"
+      ],
+      "Duplicate selected coupons": [
+        "שכפל קופונים נבחרים"
+      ],
+      "Duplicate selected order": [
+        "שכפל הזמנה"
+      ],
+      "Duplicate selected orders": [
+        "שכפל הזמנות נבחרות"
+      ],
+      "Duplicate selected product": [
+        "שכפל מוצר נבחר"
+      ],
+      "each": [
+        "ליחידה"
+      ],
+      "Edit": [
+        "ערוך"
+      ],
+      "Edit All": [
+        "ערוך הכל"
+      ],
+      "Edit Billing Information": [
+        "עריכת פרטי חיוב"
+      ],
+      "Edit coupon": [
+        "ערוך קופון"
+      ],
+      "Edit fields": [
+        "ערוך שדות"
+      ],
+      "Edit Gallery": [
+        "ערוך גלריה"
+      ],
+      "Edit Image": [
+        "עריכת תמונה"
+      ],
+      "Edit in WooCommerce": [
+        "ערוך ב-ווקומרס"
+      ],
+      "Edit Items": [
+        "ערוך פריטים"
+      ],
+      "Edit mode": [
+        "מצב עריכה"
+      ],
+      "Edit order": [
+        "ערוך הזמנה"
+      ],
+      "Edit Order Items": [
+        "ערוך פריטי הזמנה"
+      ],
+      "Edit product": [
+        "ערוך מוצר"
+      ],
+      "Edit SEO settings": [
+        "עריכת הגדרות SEO"
+      ],
+      "Edit Shipping Information": [
+        "עריכת פרטי משלוח"
+      ],
+      "Edit Table": [
+        "ערוך טבלה"
+      ],
+      "Email": [
+        "אימייל"
+      ],
+      "Email class not available": [
+        "מחלקת האימייל אינה זמינה"
+      ],
+      "Email Restrictions": [
+        "אימיילים מאושרים"
+      ],
+      "Email sent successfully": [
+        "האימייל נשלח בהצלחה"
+      ],
+      "Email template not applicable for this order/status or disabled.": [
+        "תבנית האימייל לא רלוונטית להזמנה/לסטטוס או מושבתת."
+      ],
+      "Enable": [
+        "הפעל"
+      ],
+      "Enable Coupons": [
+        "הפעלת קופונים"
+      ],
+      "Enable them to allow customers to apply coupon codes from the cart and checkout pages.": [
+        "הפעל אותם כדי לאפשר ללקוחות להזין קודי קופון מדפי הסל והרכישה."
+      ],
+      "Enabled": [
+        "מופעל"
+      ],
+      "End Date": [
+        "תאריך סיום"
+      ],
+      "Enter a video URL to see preview": [
+        "הכנס כתובת סרטון לתצוגה מקדימה"
+      ],
+      "Enter barcode": [
+        "הזן ברקוד"
+      ],
+      "Enter coupon code": [
+        "הזן קוד קופון"
+      ],
+      "Enter Google Sheets link": [
+        "הכנס קישור לגוגל שיטס"
+      ],
+      "Enter low stock amount": [
+        "הכנס סף למלאי נמוך"
+      ],
+      "Enter new height:": [
+        "הכנס גובה חדש:"
+      ],
+      "Enter new width:": [
+        "הכנס רוחב חדש:"
+      ],
+      "Enter quantity": [
+        "הכנס כמות"
+      ],
+      "Enter the external URL to the product.": [
+        "הזן את כתובת ה-URL החיצונית למוצר."
+      ],
+      "Enter your description here": [
+        "הכנס את התיאור שלך כאן"
+      ],
+      "Enter your license key": [
+        "הכנס את מפתח הרישיון שלך"
+      ],
+      "Error uploading media: ": [
+        "שגיאה בהעלאת המדיה: "
+      ],
+      "Exclude categories": [
+        "החרגת קטגוריות"
+      ],
+      "Exclude products": [
+        "החרגת מוצרים"
+      ],
+      "Exclude sale items": [
+        "החרגת מוצרים במבצע"
+      ],
+      "Exclude Sale Items": [
+        "החרגת מוצרים במבצע"
+      ],
+      "Excluded Product Categories": [
+        "החרגת קטגוריות"
+      ],
+      "Excluded Product Ids": [
+        "החרגת מוצרים"
+      ],
+      "Excluded Products": [
+        "החרגת מוצרים"
+      ],
+      "exist": [
+        "קיים"
+      ],
+      "Existing attributes": [
+        "מאפיינים קיימים"
+      ],
+      "Existing product attributes": [
+        "תכונות קיימות במוצר"
+      ],
+      "Existing product variations": [
+        "ווריאציות קיימות במוצר"
+      ],
+      "Exit Edit Mode": [
+        "צא ממצב עריכה"
+      ],
+      "Exit Full Screen": [
+        "צא ממסך מלא"
+      ],
+      "Exit import": [
+        "בטל יבוא"
+      ],
+      "Expiry Date": [
+        "תאריך תפוגה"
+      ],
+      "Expiry date": [
+        "תאריך תפוגה"
+      ],
+      "External/Affiliate product": [
+        "מוצר חיצוני/שותפים"
+      ],
+      "Facebook & Twitter": [
+        "פייסבוק וטוויטר"
+      ],
+      "failed": [
+        "נכשל"
+      ],
+      "Failed to activate the license. Please try again.": [
+        ".הפעלת הרישיון נכשלה, נסה שוב"
+      ],
+      "Failed to process refund": [
+        "נכשל בעיבוד ההחזר"
+      ],
+      "Failed to send email: {{message}}": [
+        "שליחת האימייל נכשלה: {{message}}"
+      ],
+      "Featured": [
+        "מומלץ"
+      ],
+      "Field": [
+        "שדה"
+      ],
+      "Field to Edit": [
+        "שדה לעריכה"
+      ],
+      "fields available": [
+        "שדות זמינים"
+      ],
+      "File type": [
+        "סוג קובץ"
+      ],
+      "File uploaded successfully": [
+        "הקובץ הועלה בהצלחה"
+      ],
+      "File URL:": [
+        "כתובת URL של הקובץ:"
+      ],
+      "Files": [
+        "קבצים"
+      ],
+      "Filter by Category": [
+        "סינון לפי קטגוריה"
+      ],
+      "Filters": [
+        "סינון"
+      ],
+      "Find": [
+        "מצא"
+      ],
+      "Find attribute": [
+        "מצא תכונה"
+      ],
+      "Find categories": [
+        "מצא קטגוריות"
+      ],
+      "Find column to show/hide": [
+        "מצא עמודה להציג/להסתיר"
+      ],
+      "Find custom fields": [
+        "חפש שדות מותאמים אישית"
+      ],
+      "Find in terms": [
+        "מצא מונח"
+      ],
+      "Find option": [
+        "מצא אפשרות"
+      ],
+      "Find product": [
+        "מצא מוצר"
+      ],
+      "Find Products": [
+        "חיפוש מוצרים"
+      ],
+      "Find tags": [
+        "מצא תגיות"
+      ],
+      "Find term": [
+        "מצא מונח"
+      ],
+      "First Name": [
+        "שם פרטי"
+      ],
+      "First, click the 'Add Attribute' button and select the type of attribute you wish to add. There are two types of attributes as follows:": [
+        "ראשית, לחץ על כפתור 'הוסף תכונה' ובחר את סוג התכונה אותה תרצה להוסיף. קיימות שתי סוגי תכונות כדלהלן:"
+      ],
+      "Fixed cart": [
+        "הנחה קבועה"
+      ],
+      "Fixed Cart - Discount on total cart.": [
+        "הנחה קבועה - הנחה על כל סל הקניות."
+      ],
+      "Fixed product": [
+        "הנחת מוצר קבועה"
+      ],
+      "Fixed Product - Discount per product.": [
+        "הנחת מוצר קבועה - הנחה לכל מוצר בנפרד."
+      ],
+      "fixed_cart": [
+        "הנחה קבועה על סל הקניות"
+      ],
+      "fixed_product": [
+        "הנחה קבועה על מוצר"
+      ],
+      "Focus keyphrase is set": [
+        "מילת מפתח מוגדרת"
+      ],
+      "Focus Keyword": [
+        "מילת מפתח ממוקדת"
+      ],
+      "Focus Keyword (text input)": [
+        "מילת מפתח (קלט טקסט)"
+      ],
+      "For variations": [
+        "לווריאציות"
+      ],
+      "Free shipping": [
+        "משלוח חינם"
+      ],
+      "Free Shipping": [
+        "משלוח חינם"
+      ],
+      "From": [
+        "מ-"
+      ],
+      "Full Refund": [
+        "החזר מלא"
+      ],
+      "Full refund will include only the remaining refundable amount": [
+        "החזר מלא יכלול רק את הסכום שנשאר להחזר"
+      ],
+      "Full Screen": [
+        "מסך מלא"
+      ],
+      "Fully Refunded": [
+        "הוחזר במלואו"
+      ],
+      "gateway": [
+        {
+          "paypal": "פייפאל",
+          "ppcp-gateway": "פייפאל (PPCP)",
+          "stripe": "סטרייפ",
+          "stripe_cc": "סטרייפ",
+          "stripe_sepa": "סטרייפ SEPA",
+          "woocommerce_payments": "WooPayments",
+          "square": "סקוור",
+          "braintree_cc": "בריינטרי (כרטיס)",
+          "braintree_paypal": "בריינטרי (פייפאל)",
+          "2checkout": "2Checkout",
+          "authorize_net_cim": "Authorize.Net",
+          "klarna_payments": "קלארנה",
+          "afterpay": "Afterpay",
+          "razorpay": "Razorpay",
+          "mollie_wc_gateway_ideal": "Mollie iDEAL",
+          "mollie_wc_gateway_creditcard": "Mollie (כרטיס)",
+          "mollie_wc_gateway_paypal": "Mollie (פייפאל)",
+          "payplus-payment-gateway": "PayPlus",
+          "bacs": "העברה בנקאית",
+          "cheque": "צ׳ק",
+          "cod": "מזומן בעת המסירה",
+          "bank_transfer": "העברה בנקאית",
+          "cash": "מזומן",
+          "offline": "אופליין"
+        }
+      ],
+      "General": [
+        "כללי"
+      ],
+      "General Restrictions": [
+        "הגבלות כלליות"
+      ],
+      "Generate": [
+        "יצירה אוטומטית"
+      ],
+      "Generate Variations Table": [
+        "יצירת טבלת וריאציות"
+      ],
+      "generated on": [
+        "נוצר בתאריך"
+      ],
+      "generated_on": [
+        "נוצר בתאריך {{date}} בשעה {{time}}"
+      ],
+      "Global": [
+        "גלובלי"
+      ],
+      "Global Attribute": [
+        "תכונה גלובלית"
+      ],
+      "Global Attribute:": [
+        "תכונה גלובלית:"
+      ],
+      "Global Unique Id": [
+        "ברקוד"
+      ],
+      "Go to first page": [
+        "עבור לדף הראשון"
+      ],
+      "Go to last page": [
+        "עבור לדף האחרון"
+      ],
+      "Go to next page": [
+        "עבור לעמוד הבא"
+      ],
+      "Go to previous page": [
+        "חזור לעמוד הקודם"
+      ],
+      "Good! You have a custom URL": [
+        "מעולה! יש לך מזהה כתובת מותאם אישית"
+      ],
+      "Good! Your URL contains the keyphrase": [
+        "מעולה! כתובת ה-URL שלך כוללת את מילת המפתח"
+      ],
+      "Google Pay": [
+        "Google Pay"
+      ],
+      "Google Sheets Link": [
+        "קישור גוגל שיטס"
+      ],
+      "Great! Your keyphrase is in the title": [
+        "מצוין! מילת המפתח שלך בכותרת"
+      ],
+      "Grouped product": [
+        "מוצר מקובץ"
+      ],
+      "has been permanently deleted": [
+        "נמחקה לצמיתות"
+      ],
+      "has been successfully deleted": [
+        "נמחק בהצלחה"
+      ],
+      "Header row": [
+        "שורת כותרת"
+      ],
+      "Height": [
+        "גובה"
+      ],
+      "Help": [
+        "עזרה"
+      ],
+      "help": [
+        "גרסה ידידותית לכתובת URL של כותרת העמוד/הפוסט, משמשת בקישור הקבוע (Permalink)."
+      ],
+      "Hide": [
+        "הסתר"
+      ],
+      "Hide All Columns": [
+        "הסתר את כל העמודות"
+      ],
+      "History": [
+        "היסטוריה"
+      ],
+      "history": [
+        {
+          "updated": {
+            "products_one": "עודכן מוצר אחד",
+            "products_two": "עודכנו שני מוצרים",
+            "products_many": "עודכנו {{count}} מוצרים",
+            "products_other": "עודכנו {{count}} מוצרים",
+            "orders_one": "עודכנה הזמנה אחת",
+            "orders_two": "עודכנו שתי הזמנות",
+            "orders_many": "עודכנו {{count}} הזמנות",
+            "orders_other": "עודכנו {{count}} הזמנות",
+            "items_one": "עודכן פריט אחד",
+            "items_two": "עודכנו שני פריטים",
+            "items_many": "עודכנו {{count}} פריטים",
+            "items_other": "עודכנו {{count}} פריטים"
+          },
+          "added": {
+            "products_one": "נוסף מוצר אחד",
+            "products_two": "נוספו שני מוצרים",
+            "products_many": "נוספו {{count}} מוצרים",
+            "products_other": "נוספו {{count}} מוצרים",
+            "orders_one": "נוספה הזמנה אחת",
+            "orders_two": "נוספו שתי הזמנות",
+            "orders_many": "נוספו {{count}} הזמנות",
+            "orders_other": "נוספו {{count}} הזמנות",
+            "items_one": "נוסף פריט אחד",
+            "items_two": "נוספו שני פריטים",
+            "items_many": "נוספו {{count}} פריטים",
+            "items_other": "נוספו {{count}} פריטים"
+          },
+          "deleted": {
+            "products_one": "נמחק מוצר אחד",
+            "products_two": "נמחקו שני מוצרים",
+            "products_many": "נמחקו {{count}} מוצרים",
+            "products_other": "נמחקו {{count}} מוצרים",
+            "orders_one": "נמחקה הזמנה אחת",
+            "orders_two": "נמחקו שתי הזמנות",
+            "orders_many": "נמחקו {{count}} הזמנות",
+            "orders_other": "נמחקו {{count}} הזמנות",
+            "items_one": "נמחק פריט אחד",
+            "items_two": "נמחקו שני פריטים",
+            "items_many": "נמחקו {{count}} פריטים",
+            "items_other": "נמחקו {{count}} פריטים"
+          },
+          "duplicated": {
+            "products_one": "שוכפל מוצר אחד",
+            "products_two": "שוכפלו שני מוצרים",
+            "products_many": "שוכפלו {{count}} מוצרים",
+            "products_other": "שוכפלו {{count}} מוצרים",
+            "orders_one": "שוכפלה הזמנה אחת",
+            "orders_two": "שוכפלו שתי הזמנות",
+            "orders_many": "שוכפלו {{count}} הזמנות",
+            "orders_other": "שוכפלו {{count}} הזמנות",
+            "items_one": "שוכפל פריט אחד",
+            "items_two": "שוכפלו שני פריטים",
+            "items_many": "שוכפלו {{count}} פריטים",
+            "items_other": "שוכפלו {{count}} פריטים"
+          }
+        }
+      ],
+      "How many times this coupon can be used before it is void.": [
+        "מספר הפעמים שניתן להשתמש בקופון לפני שהוא מבוטל."
+      ],
+      "How many times this coupon can be used by an individual user. Uses billing email for guests, and user ID for logged in users.": [
+        "מספר הפעמים שמשתמש בודד יכול להשתמש בקופון. עבור אורחים, השימוש מבוסס על כתובת האימייל לחיוב, ועבור משתמשים מחוברים – על מזהה המשתמש."
+      ],
+      "https://mysite.com/product/": [
+        "https://mysite.com/product/"
+      ],
+      "ID": [
+        "מזהה"
+      ],
+      "If the 'Any' option is chosen for an attribute, no distinct variations for each option are created. Instead, a selection list will be included in the main product, which prevents the seller from setting different prices for each variation. Customers can choose their preferred option directly from the product page.": [
+        "אם האפשרות 'כל האפשרויות' נבחרה לתכונה, לא יווצרו ווריאציות שונות לכל אפשרות. במקום זאת, רשימת בחירה תיכלל במוצר הראשי, מה שמונע מהמוכר להגדיר מחירים שונים לכל וריאציה. הלקוחות יכולים לבחור את האופציה המועדפת עליהם ישירות מעמוד המוצר."
+      ],
+      "Image": [
+        "תמונה"
+      ],
+      "image": [
+        "תמונה"
+      ],
+      "Image shown when sharing this content on social platforms (Open Graph / Twitter).": [
+        "תמונה שתוצג כאשר משתפים תוכן זה ברשתות חברתיות (Open Graph / Twitter)."
+      ],
+      "Image that will be shown when sharing this content on social platforms (Open Graph / Twitter).": [
+        "תמונה שתוצג כאשר משתפים את התוכן הזה ברשתות החברתיות (Open Graph / טוויטר)."
+      ],
+      "Images": [
+        "גלרית מוצרים"
+      ],
+      "Import": [
+        "ייבוא"
+      ],
+      "Import another file": [
+        "יבוא קובץ אחר"
+      ],
+      "Import from Google Sheets": [
+        "יבוא מגוגל שיטס"
+      ],
+      "Import Products": [
+        "ייבוא מוצרים"
+      ],
+      "Improvement Tip": [
+        "טיפ לשיפור"
+      ],
+      "in Stock": [
+        "במלאי"
+      ],
+      "In stock": [
+        "במלאי"
+      ],
+      "In the top menu, a new tab named 'WhizManage' will appear. Click 'Update File'.": [
+        "בתפריט העליון יופיע לשונית חדשה בשם 'WhizManage'. לחץ על 'עדכון הקובץ'."
+      ],
+      "Include your focus keyphrase in the SEO title for better rankings": [
+        "כלול את מילת המפתח בכותרת ה-SEO כדי לשפר דירוגים"
+      ],
+      "Include your focus keyword in the title and description": [
+        "כלול את מילת המפתח המרכזית שלך בכותרת ובתיאור"
+      ],
+      "Include your keyphrase in the meta description": [
+        "כלול את מילת המפתח בתיאור המטא"
+      ],
+      "Include your keyphrase in the URL slug for better SEO": [
+        "כלול את מילת המפתח בכתובת ה-URL לשיפור SEO"
+      ],
+      "Incomplete social settings": [
+        "הגדרות הרשתות החברתיות אינן מלאות"
+      ],
+      "Increase": [
+        "הוסף"
+      ],
+      "Individual use": [
+        "שימוש בלעדי"
+      ],
+      "Individual Use": [
+        "שימוש בלעדי"
+      ],
+      "Individual use only": [
+        "לשימוש בלעדי בלבד"
+      ],
+      "Individually": [
+        "באופן אישי"
+      ],
+      "Insert above": [
+        "הכנס מעל"
+      ],
+      "Insert below": [
+        "הכנס מתחת"
+      ],
+      "Insert Horizontal Line": [
+        "הוספת קו אופקי"
+      ],
+      "Insert Image": [
+        "הוספת תמונה"
+      ],
+      "Insert left": [
+        "הכנס משמאל"
+      ],
+      "Insert Link": [
+        "הוספת קישור"
+      ],
+      "Insert right": [
+        "הכנס מימין"
+      ],
+      "Insert Table": [
+        "הוספת טבלה"
+      ],
+      "Insert Video": [
+        "הוסף סרטון"
+      ],
+      "instock": [
+        "במלאי"
+      ],
+      "Instructions": [
+        "הוראות"
+      ],
+      "Inventory": [
+        "ניהול מלאי"
+      ],
+      "Inventory tracking": [
+        "מעקב מלאי"
+      ],
+      "Invoice / Order details": [
+        "חשבונית / פרטי הזמנה"
+      ],
+      "Is Vat Exempt": [
+        "פטור ממע'מ"
+      ],
+      "is_vat_exempt": [
+        "פטור ממעמ"
+      ],
+      "item": [
+        "פריט"
+      ],
+      "Item columns": [
+        "עמודות פריט"
+      ],
+      "Item not as described": [
+        "הפריט לא תואם לתיאור"
+      ],
+      "item not as described": [
+        "הפריט אינו כפי שתואר"
+      ],
+      "Items": [
+        "פריטים"
+      ],
+      "items": [
+        "מוצרים"
+      ],
+      "Keep your title between 50-60 characters": [
+        "שמור על הכותרת שלך בין 50 ל-60 תווים"
+      ],
+      "Key": [
+        "מפתח"
+      ],
+      "Keyphrase appears in SEO title": [
+        "מילת המפתח מופיעה בכותרת"
+      ],
+      "Keyphrase appears in URL": [
+        "מילת המפתח מופיעה בכתובת ה-URL"
+      ],
+      "Keyphrase in description": [
+        "מילת מפתח בתיאור"
+      ],
+      "Keyphrase in meta description": [
+        "מילת המפתח בתיאור המטא"
+      ],
+      "Keyphrase in title": [
+        "מילת מפתח בכותרת"
+      ],
+      "Keyphrase in URL": [
+        "מילת מפתח בכתובת ה-URL"
+      ],
+      "Keyphrase is too long": [
+        "מילת המפתח ארוכה מדי"
+      ],
+      "Keyphrase length is optimal": [
+        "אורך מילת המפתח תקין"
+      ],
+      "label": [
+        "שם כתובת (Slug)"
+      ],
+      "Last Month": [
+        "חודש שעבר"
+      ],
+      "Last Name": [
+        "שם משפחה"
+      ],
+      "Leave empty if the image should not be clickable": [
+        "השאר ריק אם התמונה לא צריכה להיות לחיצה"
+      ],
+      "Leave empty to use the current URL": [
+        "השאר ריק כדי להשתמש בכתובת הנוכחית"
+      ],
+      "Left": [
+        "שמאל"
+      ],
+      "Length": [
+        "אורך"
+      ],
+      "License": [
+        "רשיון"
+      ],
+      "License activated successfully.": [
+        "הרישיון הופעל בהצלחה."
+      ],
+      "License deactivate successfully.": [
+        "הרישיון כובה בהצלחה!"
+      ],
+      "License Key": [
+        "מפתח רישיון"
+      ],
+      "Light": [
+        "בהיר"
+      ],
+      "Limit usage to X items": [
+        "הגבלת שימוש ל-X פריטים"
+      ],
+      "Limit usage to x items": [
+        "הגבלת שימוש ל-X פריטים"
+      ],
+      "Link copied to clipboard": [
+        "הקישור הועתק ללוח"
+      ],
+      "Linked Products": [
+        "מוצרים קשורים"
+      ],
+      "Linked products are related items that appear on the product page as additional or complementary suggestions. This enhances the shopping experience by offering customers more options.": [
+        "מוצרים מקושרים הם פריטים קשורים המופיעים בעמוד המוצר כהצעות נוספות או משלימות. זה משפר את חוויית הקנייה בכך שהוא מציע ללקוחות עוד אפשרויות."
+      ],
+      "List of allowed billing emails to check against when an order is placed. Separate email addresses with commas. You can also use an asterisk (*) to match parts of an email. For example \"*@gmail.com\" would match all gmail addresses.": [
+        "רשימת כתובות האימייל לחיוב המורשות לשימוש בעת ביצוע הזמנה. יש להפריד כתובות אימייל בפסיקים. ניתן גם להשתמש בכוכבית (*) כדי להתאים חלקים מכתובת האימייל. לדוגמה, \"*@gmail.com\" יתאים לכל כתובות ה-Gmail."
+      ],
+      "Loading templates...": [
+        "טוען תבניות..."
+      ],
+      "Loading...": [
+        "טוען..."
+      ],
+      "Log out": [
+        "התנתקות"
+      ],
+      "Low stock amount": [
+        "כמות מלאי נמוכה"
+      ],
+      "Low stock threshold": [
+        "ערך סף של מלאי מועט"
+      ],
+      "Main keyword for the page": [
+        "מילת המפתח הראשית לעמוד"
+      ],
+      "Main keyword or phrase you are targeting for this content.": [
+        "המילה או הביטוי המרכזי שאתה מנסה לקדם בדף הזה."
+      ],
+      "Maintain aspect ratio": [
+        "שמירה על יחס ממדים"
+      ],
+      "Maintain aspect ratio (16:9)": [
+        "שמור יחס גובה-רוחב (16:9)"
+      ],
+      "Make sure the focus keyword appears in both the title and description for better results": [
+        "ודא שמילת המפתח הראשית מופיעה גם בכותרת וגם בתיאור לתוצאות טובות יותר"
+      ],
+      "Manage attributes": [
+        "ניהול מאפיינים"
+      ],
+      "Manage Attributes of": [
+        "ניהול תכונות של"
+      ],
+      "Manage License": [
+        "ניהול רשיון"
+      ],
+      "Manage limits": [
+        "ניהול הגבלות"
+      ],
+      "Manage stock": [
+        "נהל מלאי"
+      ],
+      "Manage variations": [
+        "ניהול ווריאציות"
+      ],
+      "Manage Variations of": [
+        "ניהול ווריאציות של"
+      ],
+      "Manual Payment": [
+        "תשלום ידני"
+      ],
+      "Manual Refund": [
+        "החזר ידני"
+      ],
+      "Manual refund only": [
+        "החזר ידני בלבד"
+      ],
+      "Mark as paid": [
+        "סמן כשולם"
+      ],
+      "Max": [
+        "מקסימום"
+      ],
+      "Max:": [
+        "מקסימום:"
+      ],
+      "Maximum amount": [
+        "סכום מרבי"
+      ],
+      "Maximum spend": [
+        "סכום מקסימלי לרכישה"
+      ],
+      "Maximum Spend": [
+        "קניה מקסימלית"
+      ],
+      "media items": [
+        "פריטי מדיה"
+      ],
+      "Menu Order": [
+        "סדר השורות"
+      ],
+      "Message to customer": [
+        "הודעה ללקוח"
+      ],
+      "Meta Data": [
+        "נתונים מותאמים אישית"
+      ],
+      "Meta data values are fields that originate from external plugins supported by WooCommerce. These fields allow you to store additional information related to your products, enhancing their details and functionality within your store.": [
+        "ערכי מטא דאטה הם שדות שמקורם בתוספים חיצוניים הנתמכים על ידי ווקןמרס. שדות אלה מאפשרים לך לאחסן מידע נוסף הקשור למוצרים שלך, ולהעשיר את פרטיהם ותפקודם בתוך החנות."
+      ],
+      "Meta Description": [
+        "תיאור מטא"
+      ],
+      "Meta description is too long": [
+        "תיאור המטא ארוך מדי"
+      ],
+      "Meta description is too short": [
+        "תיאור המטא קצר מדי"
+      ],
+      "Meta description length is ideal": [
+        "אורך תיאור המטא אידיאלי"
+      ],
+      "Meta Robots: nofollow": [
+        "Meta Robots: ללא מעקב קישורים"
+      ],
+      "Meta Robots: noindex": [
+        "Meta Robots: ללא אינדוקס"
+      ],
+      "meta_data": [
+        "נתונים מותאמים אישית"
+      ],
+      "Middle Menu": [
+        "תפריט אמצעי"
+      ],
+      "Minimum amount": [
+        "סכום מינימלי"
+      ],
+      "Minimum spend": [
+        "סכום מינימלי לרכישה"
+      ],
+      "Minimum Spend": [
+        "קניה מינימלית"
+      ],
+      "Minimum spend cannot be less than 0": [
+        "סכום הרכישה המינימלי לא יכול להיות נמוך מ-0"
+      ],
+      "Move to Trash": [
+        "העבר לאשפה"
+      ],
+      "Multiple": [
+        "מרובה"
+      ],
+      "Name": [
+        "שם"
+      ],
+      "name": [
+        "שם"
+      ],
+      "Name the file using the same name as your website's URL.": [
+        "תן לקובץ שם זהה לכתובת ה-URL של האתר שלך."
+      ],
+      "New": [
+        "חדש"
+      ],
+      "new attribute": [
+        "תכונה חדשה"
+      ],
+      "new categories": [
+        "קטגוריות חדשות"
+      ],
+      "new option": [
+        "אפשרות חדשה"
+      ],
+      "New Order (Admin)": [
+        "הזמנה חדשה (אדמין)"
+      ],
+      "New Products": [
+        "מוצרים חדשים"
+      ],
+      "new tags": [
+        "תגיות חדשות"
+      ],
+      "New Value": [
+        "ערך חדש"
+      ],
+      "New view has been saved successfully": [
+        "התצוגה החדשה נשמרה בהצלחה"
+      ],
+      "No": [
+        "לא"
+      ],
+      "no": [
+        "לא"
+      ],
+      "No Address": [
+        "אין כתובת"
+      ],
+      "No Amount Available": [
+        "אין סכום זמין"
+      ],
+      "No attributes yet": [
+        "אין תכונות עדיין"
+      ],
+      "No categories": [
+        "אין קטגוריות"
+      ],
+      "No categories yet": [
+        "אין קטגוריות עדיין"
+      ],
+      "No Change": [
+        "אין שינוי"
+      ],
+      "No City": [
+        "אין עיר"
+      ],
+      "No Company": [
+        "אין חברה"
+      ],
+      "No Country": [
+        "אין מדינה"
+      ],
+      "No email": [
+        "אין אימייל"
+      ],
+      "No Email": [
+        "אין אימייל"
+      ],
+      "No email restrictions": [
+        "ללא הגבלות על כתובות אימייל"
+      ],
+      "No files": [
+        "אין קבצים"
+      ],
+      "No files available": [
+        "אין קבצים זמינים"
+      ],
+      "No files in your media library yet. Upload your first file to get started.": [
+        "אין קבצים בספריית המדיה שלך עדיין. העלה את הקובץ הראשון שלך כדי להתחיל."
+      ],
+      "No files match your search. Try different keywords or upload new files.": [
+        "אין קבצים התואמים את החיפוש שלך. נסה מילות מפתח שונות או העלה קבצים חדשים."
+      ],
+      "No focus keyphrase set": [
+        "לא הוגדרה מילת מפתח"
+      ],
+      "No Follow - prevent Google from following links on this page": [
+        "No Follow - מנע מגוגל לעקוב אחר הקישורים בדף"
+      ],
+      "No images": [
+        "אין תמונות"
+      ],
+      "No Index - prevent Google from indexing this page": [
+        "No Index - מנע מגוגל לאנדקס את הדף הזה"
+      ],
+      "No items in this order yet": [
+        "אין פריטים בהזמנה זו עדיין"
+      ],
+      "No Meta Data": [
+        "אין מטא דאטה"
+      ],
+      "No meta description": [
+        "לא הוגדר תיאור מטא"
+      ],
+      "No options available": [
+        "אין אפשרויות זמינות"
+      ],
+      "No options yet": [
+        "אין אפשרויות עדיין"
+      ],
+      "No orders found": [
+        "לא נמצאו הזמנות"
+      ],
+      "No password": [
+        "ללא סיסמה"
+      ],
+      "No Phone": [
+        "אין טלפון"
+      ],
+      "No Postcode": [
+        "אין מיקוד"
+      ],
+      "No price": [
+        "ללא מחיר"
+      ],
+      "No product attributes yet": [
+        "אין תכונות מוצר עדיין"
+      ],
+      "No products": [
+        "אין מוצרים"
+      ],
+      "No products found": [
+        "לא נמצאו מוצרים"
+      ],
+      "No results found.": [
+        "לא נמצאו תוצאות."
+      ],
+      "No SEO title set": [
+        "לא הוגדרה כותרת SEO"
+      ],
+      "No social media settings": [
+        "לא הוגדרו הגדרות לרשתות חברתיות"
+      ],
+      "No State": [
+        "אין מדינה"
+      ],
+      "No templates available for this order": [
+        "אין תבניות זמינות להזמנה זו"
+      ],
+      "No URL slug": [
+        "לא הוגדר מזהה כתובת"
+      ],
+      "No Value": [
+        "אין ערך"
+      ],
+      "No variations found": [
+        "לא נמצאו ווריאציות"
+      ],
+      "No, Keep Editing": [
+        "לא, המשך בעריכה"
+      ],
+      "None": [
+        "ללא"
+      ],
+      "Not available - order fully refunded": [
+        "לא זמין - ההזמנה הוחזרה במלואה"
+      ],
+      "Not defined": [
+        "לא מוגדר"
+      ],
+      "Not scheduled": [
+        "לא מתוזמן"
+      ],
+      "Note": [
+        "הערה"
+      ],
+      "notify": [
+        "אפשר אך הודע ללקוח"
+      ],
+      "of": [
+        "מתוך"
+      ],
+      "Old": [
+        "ישן"
+      ],
+      "Old Value": [
+        "ערך ישן"
+      ],
+      "On backorder": [
+        "בהזמנה חוזרת"
+      ],
+      "On hold": [
+        "בהמתנה"
+      ],
+      "on-hold": [
+        "בהמתנה"
+      ],
+      "onbackorder": [
+        "בהזמנה מראש"
+      ],
+      "Only numbers and dashes (-) are allowed": [
+        "רק ספרות ומקפים מותרים"
+      ],
+      "Open": [
+        "פתח"
+      ],
+      "Open referrer": [
+        "פתיחת אתר המפנה"
+      ],
+      "Open the attached sample file and click 'Make a copy' to save itin your Google account. You must also transfer the attached script.": [
+        "פתח את קובץ הדוגמה המצורף ולחץ על 'יצירת עותק' כדי לשמור אותו בחשבון ה-Google שלך. עליך להעביר גם את הסקריפט המצורף."
+      ],
+      "OpenGraph Description": [
+        "תיאור OpenGraph"
+      ],
+      "OpenGraph Title": [
+        "כותרת OpenGraph"
+      ],
+      "Optimization Tips": [
+        "טיפים לאופטימיזציה"
+      ],
+      "Optimize your content for search engines": [
+        "אופטימיזציה של התוכן שלך למנועי חיפוש"
+      ],
+      "Optional": [
+        "רשות"
+      ],
+      "Optional field to provide details or notes about the coupon for internal use or customer reference.": [
+        "שדה אופציונלי להוספת פרטים או הערות על הקופון, לשימוש פנימי או לעיון הלקוח."
+      ],
+      "Options": [
+        "אפשרויות"
+      ],
+      "Options exist": [
+        "אפשרויות קיימות"
+      ],
+      "Order": [
+        "הזמנה"
+      ],
+      "Order Actions": [
+        "פעולות הזמנה"
+      ],
+      "Order Date": [
+        "תאריך הזמנה"
+      ],
+      "Order Details": [
+        "פרטי הזמנה"
+      ],
+      "Order fulfilled and complete. Requires no further action.": [
+        "ההזמנה סופקה והושלמה. אין צורך בפעולות נוספות."
+      ],
+      "Order ID": [
+        "מספר הזמנה"
+      ],
+      "Order Items": [
+        "פריטי הזמנה"
+      ],
+      "Order not found": [
+        "הזמנה לא נמצאה"
+      ],
+      "Order Notes": [
+        "הערות הזמנה"
+      ],
+      "Order Status": [
+        "סטטוס הזמנה"
+      ],
+      "Order Summary": [
+        "סיכום הזמנה"
+      ],
+      "Order Total": [
+        "סך הכל להזמנה"
+      ],
+      "Order Total:": [
+        "סכום הזמנה:"
+      ],
+      "Ordered": [
+        "הוזמן"
+      ],
+      "Orders": [
+        "הזמנות"
+      ],
+      "Orders are automatically put in the Refunded status when an admin or shop manager has fully refunded the order’s value.": [
+        "ההזמנה סומנה כהחזר לאחר שמנהל המערכת או מנהל החנות החזירו את מלוא סכום ההזמנה."
+      ],
+      "Organic Search": [
+        "חיפוש אורגני"
+      ],
+      "Origin": [
+        "מקור"
+      ],
+      "Other": [
+        "אחר"
+      ],
+      "other": [
+        "אחר"
+      ],
+      "out of Stock": [
+        "לא במלאי"
+      ],
+      "Out of stock": [
+        "לא במלאי"
+      ],
+      "outofstock": [
+        "לא במלאי"
+      ],
+      "page": [
+        "עמוד"
+      ],
+      "Page": [
+        "דף"
+      ],
+      "Page description will appear here in Google search results...": [
+        "תיאור הדף יופיע כאן בתוצאות החיפוש של גוגל..."
+      ],
+      "Page Title": [
+        "כותרת הדף"
+      ],
+      "Page title for search results": [
+        "כותרת הדף לתוצאות החיפוש"
+      ],
+      "Page Views": [
+        "צפיות בעמוד"
+      ],
+      "Paid": [
+        "שולם"
+      ],
+      "Partial Refund": [
+        "החזר חלקי"
+      ],
+      "Password": [
+        "סיסמה"
+      ],
+      "Payment has been received (paid), and the stock has been reduced. The order is awaiting fulfillment.": [
+        "התשלום התקבל והמלאי הופחת. ההזמנה ממתינה לטיפול."
+      ],
+      "Payment Method": [
+        "אמצעי תשלום"
+      ],
+      "Payment method": [
+        "שיטת תשלום"
+      ],
+      "Payment Status": [
+        "סטטוס תשלום"
+      ],
+      "PayPal": [
+        "פייפאל"
+      ],
+      "paypal": [
+        "פייפאל"
+      ],
+      "pending": [
+        "ממתין"
+      ],
+      "percent": [
+        "אחוזים"
+      ],
+      "Percentage": [
+        "אחוזי הנחה"
+      ],
+      "Percentage - % off products or cart.": [
+        "הנחה באחוזים - הנחה באחוזים על מוצרים או על סל הקניות."
+      ],
+      "Perfect! Your description contains the keyphrase": [
+        "מעולה! התיאור שלך כולל את מילת המפתח"
+      ],
+      "Perform": [
+        "בצע"
+      ],
+      "personal area here": [
+        "האזור האישי שלך כאן"
+      ],
+      "Phone": [
+        "טלפון"
+      ],
+      "Pin": [
+        "הצמד"
+      ],
+      "Pinned": [
+        "מוצמד"
+      ],
+      "Please enter a valid video URL": [
+        "אנא הכנס כתובת סרטון תקינה"
+      ],
+      "Please fill all required fields and ensure refund amount is greater than 0": [
+        "אנא מלא את כל השדות הנדרשים וודא שסכום ההחזר גדול מ־0"
+      ],
+      "Please provide a meta description by editing the snippet below. If you don't, Google will try to find a relevant part of your post to show in the search results.": [
+        "אנא ספק תיאור מטא על ידי עריכת הקטע למטה. אם לא תעשה זאת, גוגל תנסה למצוא חלק רלוונטי מהפוסט שלך כדי להציג בתוצאות החיפוש."
+      ],
+      "Please select at least one item or amount to refund": [
+        "אנא בחר לפחות פריט אחד או סכום להחזר"
+      ],
+      "Post Password": [
+        "סיסמה"
+      ],
+      "Postal Code": [
+        "מיקוד"
+      ],
+      "Postcode": [
+        "מיקוד"
+      ],
+      "ppcp-gateway": [
+        "שער תשלום Ppcp"
+      ],
+      "Prevents search engines from following links on this page.": [
+        "מונע ממנועי חיפוש לעקוב אחרי קישורים בדף הזה."
+      ],
+      "Prevents the page from being indexed by search engines.": [
+        "מונע ממנועי חיפוש לאנדקס את הדף הזה."
+      ],
+      "Preview": [
+        "תצוגה מקדימה"
+      ],
+      "Price": [
+        "מחיר"
+      ],
+      "price": [
+        "מחיר"
+      ],
+      "Price cannot be less than 0": [
+        "המחיר לא יכול להיות פחות מ-0"
+      ],
+      "Primary Product Brand": [
+        "מותג מוצר ראשי"
+      ],
+      "Primary Product Category": [
+        "קטגוריית מוצר ראשית"
+      ],
+      "Print": [
+        "הדפסה"
+      ],
+      "Print Order": [
+        "הדפס הזמנה"
+      ],
+      "private": [
+        "פרטי"
+      ],
+      "Private note": [
+        "הודעה פרטית"
+      ],
+      "Process Refund": [
+        "בצע החזר"
+      ],
+      "Process Refund for Order": [
+        "עיבוד החזר עבור הזמנה"
+      ],
+      "processing": [
+        "בעיבוד"
+      ],
+      "Processing order": [
+        "הזמנה בעיבוד"
+      ],
+      "Processing...": [
+        "מעבד..."
+      ],
+      "Product": [
+        "מוצר"
+      ],
+      "Product Attribute": [
+        "תכונת מוצר"
+      ],
+      "Product Attribute:": [
+        "תכונת מוצר:"
+      ],
+      "Product Attributes": [
+        "תכונות מוצר"
+      ],
+      "Product attributes allow you": [
+        "מאפייני המוצר מאפשרים לך להגדיר תכונות ספציפיות למוצרים שלך, כמו מידות, צבעים, חומרים ועוד. על ידי הגדרת מאפיינים, תוכל לתאר את המוצר בצורה מדויקת יותר ולעזור ללקוחות להבין את התכונות השונות שלו. הגדרת מאפיינים מסייעת בניהול המלאי ומשפרת את חוויית הקנייה על ידי הצגת מידע ברור ומאורגן."
+      ],
+      "Product categories": [
+        "קטגוריות מוצר"
+      ],
+      "Product Categories": [
+        "קטגוריות מוצר"
+      ],
+      "Product categories that the coupon will be applied to": [
+        "קטגוריות מוצרים שהקופון יחול עליהן, או קטגוריות שחייבות להיות בסל הקניות כדי שההנחה הקבועה על סל הקניות תוחל."
+      ],
+      "Product categories that the coupon will be applied to, or that need to be in the cart in order for the \"Fixed cart discount\" to be applied.": [
+        "קטגוריות מוצרים שהקופון יחול עליהן, או קטגוריות שחייבות להיות בסל הקניות כדי שההנחה הקבועה על סל הקניות תוחל."
+      ],
+      "Product Description": [
+        "תיאור המוצר"
+      ],
+      "Product gallery": [
+        "גלריית מוצרים"
+      ],
+      "Product Ids": [
+        "מוצרים"
+      ],
+      "Product image": [
+        "תמונת מוצר"
+      ],
+      "Product image & Gallery": [
+        "תמונת מוצר וגלריה"
+      ],
+      "Product Name": [
+        "שם המוצר"
+      ],
+      "Product name is required": [
+        "נדרש שם המוצר"
+      ],
+      "Product prices": [
+        "מחירי המוצר"
+      ],
+      "Product Short description": [
+        "תיאור קצר של המוצר"
+      ],
+      "Product tags": [
+        "תגיות מוצר"
+      ],
+      "Product Type": [
+        "סוג מוצר"
+      ],
+      "Product {{label}}": [
+        "מוצר {{label}}"
+      ],
+      "product-slug": [
+        "product-slug"
+      ],
+      "Products": [
+        "מוצרים"
+      ],
+      "Products exist": [
+        "מוצרים קיימים"
+      ],
+      "products selected": [
+        "מוצרים נבחרו"
+      ],
+      "Products Selection for Sheets Filer": [
+        "בחירת מוצרים עבור קובץ Sheets"
+      ],
+      "Products that the coupon will be applied to, or that need to be in the cart in order for the \"Fixed cart discount\" to be applied.": [
+        "מוצרים שהקופון יחול עליהם, או מוצרים שחייבים להיות בסל הקניות כדי שההנחה הקבועה על סל הקניות תוחל."
+      ],
+      "Products that the coupon will not be applied to, or that cannot be in the cart in order for the \"Fixed cart discount\" to be applied.": [
+        "מוצרים שהקופון לא יחול עליהם, או שאסור שיהיו בסל הקניות כדי שההנחה הקבועה על סל הקניות תוחל."
+      ],
+      "Properties": [
+        "מאפיינים"
+      ],
+      "publish": [
+        "פרסם"
+      ],
+      "Purchase Note": [
+        "הערת רכישה"
+      ],
+      "Purchase note (email to customer)": [
+        "הערת רכישה (נשלחת ללקוח בדוא״ל)"
+      ],
+      "Quantity": [
+        "כמות"
+      ],
+      "Raw focus keyword field input by user (used internally by Yoast).": [
+        "קלט חופשי של מילת מפתח, לשימוש פנימי של Yoast."
+      ],
+      "Recommended: 120-160 characters": [
+        "מומלץ: 120-160 תווים"
+      ],
+      "Recommended: 30-60 characters": [
+        "מומלץ: 30-60 תווים"
+      ],
+      "Reference Base": [
+        "בסיס הפניה"
+      ],
+      "Referral": [
+        "הפניה"
+      ],
+      "Referring Domain": [
+        "דומיין מפנה"
+      ],
+      "Refund Amount": [
+        "סכום ההחזר"
+      ],
+      "Refund entire order": [
+        "החזר את ההזמנה כולה"
+      ],
+      "Refund Note": [
+        "הערת החזר"
+      ],
+      "Refund processed successfully": [
+        "ההחזר עובד בהצלחה"
+      ],
+      "Refund processed successfully!": [
+        "ההחזר בוצע בהצלחה!"
+      ],
+      "Refund processed successfully! Refund ID:": [
+        "ההחזר בוצע בהצלחה!"
+      ],
+      "Refund Qty": [
+        "כמות להחזר"
+      ],
+      "Refund Reason": [
+        "סיבת החזר"
+      ],
+      "Refund remaining order amount": [
+        "החזר את סכום ההזמנה שנותר"
+      ],
+      "Refund selected items only": [
+        "החזר פריטים נבחרים בלבד"
+      ],
+      "Refund selected items with custom amounts": [
+        "החזר פריטים נבחרים עם סכומים מותאמים אישית"
+      ],
+      "Refund Summary": [
+        "תקציר החזר"
+      ],
+      "Refund Type": [
+        "סוג ההחזר"
+      ],
+      "Refund via {{gateway}}": [
+        "החזר דרך {{gateway}}"
+      ],
+      "Refunded": [
+        "הוחזר"
+      ],
+      "refunded": [
+        "הוחזר"
+      ],
+      "Refunded:": [
+        "הוחזר:"
+      ],
+      "Refunds": [
+        "החזרים"
+      ],
+      "Regenerate download permissions": [
+        "רענן הרשאות הורדה"
+      ],
+      "Regular price": [
+        "מחיר רגיל"
+      ],
+      "Regular Price": [
+        "מחיר רגיל"
+      ],
+      "Regular price cannot be less than 0": [
+        "המחיר הרגיל לא יכול להיות פחות מ-0"
+      ],
+      "Remove this field from the table and keep it only in the billing details": [
+        "הסר שדה זה מהטבלה והשאר אותו רק בפרטי החשבון"
+      ],
+      "Remove this field from the table and keep it only in the shipping details": [
+        "הסר שדה זה מהטבלה והשאר אותו רק בפרטי המשלוח"
+      ],
+      "Replace file": [
+        "החלף קובץ"
+      ],
+      "Resend email / choose template": [
+        "שלח מייל מחדש / בחר תבנית"
+      ],
+      "Reset Background Color": [
+        "איפוס צבע רקע"
+      ],
+      "Reset Filters": [
+        "איפוס סינונים"
+      ],
+      "Reset form": [
+        "אפס טופס"
+      ],
+      "Reset Table": [
+        "איפוס טבלה"
+      ],
+      "Reset Text Color": [
+        "איפוס צבע טקסט"
+      ],
+      "Reset to original size": [
+        "איפוס לגודל המקורי"
+      ],
+      "Resize video": [
+        "שנה גודל סרטון"
+      ],
+      "Restore": [
+        "שחזר"
+      ],
+      "Restore coupon": [
+        "שחזר קופון"
+      ],
+      "Restore Coupons": [
+        "שיחזור קופונים"
+      ],
+      "Restore order": [
+        "שחזר הזמנה"
+      ],
+      "Restore Order": [
+        "שחזר הזמנה"
+      ],
+      "Restore Orders": [
+        "שחזר הזמנות"
+      ],
+      "Restore product": [
+        "שחזר מוצר"
+      ],
+      "Restore selected coupon": [
+        "שחזר קופון נבחר"
+      ],
+      "Restore selected coupons": [
+        "שחזר קופונים נבחרים"
+      ],
+      "Restore selected order": [
+        "שחזר הזמנה זאת"
+      ],
+      "Restore selected orders": [
+        "שחזר הזמנות נבחרות"
+      ],
+      "Restore selected product": [
+        "שחזר מוצר נבחר"
+      ],
+      "Restore selected products": [
+        "שחזר מוצרים נבחרים"
+      ],
+      "Restoring...": [
+        "משחזר..."
+      ],
+      "Right": [
+        "ימין"
+      ],
+      "Robots Settings": [
+        "הגדרות רובוטים"
+      ],
+      "Rotate": [
+        "סיבוב"
+      ],
+      "Round corners": [
+        "עיגול פינות"
+      ],
+      "Row": [
+        "שורה"
+      ],
+      "Rows": [
+        "שורות"
+      ],
+      "Rows per page": [
+        "שורות לכל דף"
+      ],
+      "rows selected": [
+        "שורות נבחרו"
+      ],
+      "Sale": [
+        "מבצע"
+      ],
+      "Sale Duration": [
+        "משך המבצע"
+      ],
+      "Sale price": [
+        "מחיר מבצע"
+      ],
+      "Sale Price": [
+        "מחיר מבצע"
+      ],
+      "Sale price (optional)": [
+        "מחיר מבצע (אופציונלי)"
+      ],
+      "Sale price cannot be less than 0": [
+        "מחיר המבצע לא יכול להיות פחות מ-0"
+      ],
+      "Sale price cannot be more than regular price": [
+        "מחיר המכירה לא יכול להיות גבוה ממחיר רגיל"
+      ],
+      "Save": [
+        "שמור"
+      ],
+      "Save All Settings": [
+        "שמירת כל ההגדרות"
+      ],
+      "Save as default": [
+        "שמור כברירת מחדל"
+      ],
+      "Save changes": [
+        "שמור שינויים"
+      ],
+      "Save Changes": [
+        "שמור שינויים"
+      ],
+      "Save coupon": [
+        "שמירת קופון"
+      ],
+      "Save Import": [
+        "שמירת היבוא"
+      ],
+      "Save Link": [
+        "שמירת קישור"
+      ],
+      "Save product": [
+        "שמור מוצר"
+      ],
+      "Saving...": [
+        "שומר..."
+      ],
+      "Schedule": [
+        "לוח זמנים"
+      ],
+      "Search": [
+        "חיפוש"
+      ],
+      "Search categories...": [
+        "חיפוש קטגוריות..."
+      ],
+      "Search file...": [
+        "חפש קובץ..."
+      ],
+      "Search for products": [
+        "חפש מוצרים"
+      ],
+      "Search for products to add them to the order": [
+        "חפש מוצרים כדי להוסיף אותם להזמנה"
+      ],
+      "Search image...": [
+        "חפש תמונה..."
+      ],
+      "Search products": [
+        "חפש מוצרים"
+      ],
+      "Search Result Preview": [
+        "תצוגה מקדימה של תוצאות חיפוש"
+      ],
+      "Search variation...": [
+        "חפש ווריאציה..."
+      ],
+      "Select": [
+        "בחר"
+      ],
+      "Select a video file to see preview": [
+        "בחר קובץ וידאו לתצוגה מקדימה"
+      ],
+      "Select an option": [
+        "בחר אפשרות"
+      ],
+      "Select categories": [
+        "בחר קטגוריות"
+      ],
+      "Select custom fields": [
+        "בחירת שדות מותאמים אישית"
+      ],
+      "Select delivery type": [
+        "בחר סוג משלוח"
+      ],
+      "Select discount type": [
+        "בחר סוג הנחה"
+      ],
+      "Select File": [
+        "בחר קובץ"
+      ],
+      "Select from terms": [
+        "בחר מתוך שורת המונחים"
+      ],
+      "Select Image": [
+        "בחר תמונה"
+      ],
+      "Select Items to Refund": [
+        "בחר פריטים להחזר"
+      ],
+      "Select items to refund and provide a reason for the refund": [
+        "בחר פריטים להחזר וספק סיבה להחזר"
+      ],
+      "Select Photos from your gallery or upload new": [
+        "בחר תמונות מהגלריה שלך או העלה תמונות חדשות"
+      ],
+      "Select Products": [
+        "בחירת מוצרים"
+      ],
+      "Select Products for sheets file": [
+        "בחירת מוצרים לקובץ שיטס"
+      ],
+      "Select refund reason": [
+        "בחר סיבה להחזר"
+      ],
+      "Select status": [
+        "בחר סטטוס"
+      ],
+      "Select tags": [
+        "בחר תגיות"
+      ],
+      "Select this for attributes like \"Size\" or \"Color\" that are common across multiple products. Creating a global attribute once allows you to reuse it, avoiding repetitive setup for each product.": [
+        "בחר באפשרות זו לתכונות כמו \"גודל\" או \"צבע\" שנפוצות במספר מוצרים. יצירת תכונה גלובלית פעם אחת מאפשרת לך להשתמש בה שוב ולהמנע מהגדרה חוזרת עבור כל מוצר."
+      ],
+      "Select this option to add attributes that are unique to this specific product, such as \"Storage Capacity\" for electronics or \"Frame Material\" for glasses.": [
+        "בחר באפשרות זו כדי להוסיף תכונות שהן ייחודיות למוצר זה בלבד, כמו \"נפח אחסון\" למוצרי אלקטרוניקה או \"הרכב המסגרת\" למשקפיים."
+      ],
+      "Select {{columnLabel}}": [
+        "בחר {{columnLabel}}"
+      ],
+      "Selected": [
+        "נבחרו"
+      ],
+      "selected": [
+        "נבחרו"
+      ],
+      "Selected rows": [
+        "שורות נבחרות"
+      ],
+      "send automaticly message after purchase": [
+        "שלח הודעה אוטומטית לאחר הרכישה"
+      ],
+      "Send order details to customer": [
+        "שלח פרטי הזמנה ללקוח"
+      ],
+      "SEO Analysis": [
+        "ניתוח SEO"
+      ],
+      "SEO helper score": [
+        "ציון עזר SEO"
+      ],
+      "SEO Score": [
+        "ציון SEO"
+      ],
+      "SEO Settings": [
+        "הגדרות SEO"
+      ],
+      "SEO Title": [
+        "כותרת SEO"
+      ],
+      "SEO title is too long": [
+        "הכותרת ארוכה מדי"
+      ],
+      "SEO title is too short": [
+        "הכותרת קצרה מדי"
+      ],
+      "SEO title length is perfect": [
+        "אורך הכותרת מושלם"
+      ],
+      "Set a focus keyphrase first, then include it in the description": [
+        "הגדר מילת מפתח תחילה ואז הוסף אותה לתיאור"
+      ],
+      "Set a focus keyphrase first, then include it in the title": [
+        "הגדר מילת מפתח תחילה ואז הוסף אותה לכותרת"
+      ],
+      "Set a focus keyphrase first, then include it in the URL": [
+        "הגדר מילת מפתח תחילה ואז הוסף אותה לכתובת ה-URL"
+      ],
+      "Set a focus keyphrase to optimize your content for search engines": [
+        "הגדר מילת מפתח כדי לבצע אופטימיזציה של התוכן שלך למנועי חיפוש"
+      ],
+      "Set status": [
+        "הגדר סטטוס"
+      ],
+      "Set the file's sharing permissions to 'View only' for everyone, then copy the link and paste it here in the provided box.": [
+        "הגדר את הרשאות השיתוף של הקובץ ל'צפייה בלבד' עבור כולם, לאחר מכן העתק את הקישור והדבק אותו כאן בתיבה המיועדת לכך."
+      ],
+      "Shipping": [
+        "משלוח"
+      ],
+      "Shipping Address": [
+        "כתובת למשלוח"
+      ],
+      "Shipping Address 1": [
+        "כתובת משלוח 1"
+      ],
+      "Shipping Address 2": [
+        "כתובת משלוח 2"
+      ],
+      "Shipping address same as billing": [
+        "כתובת המשלוח זהה לכתובת החיוב"
+      ],
+      "Shipping City": [
+        "עיר משלוח"
+      ],
+      "Shipping Class": [
+        "סוג משלוח"
+      ],
+      "Shipping Company": [
+        "חברת משלוח"
+      ],
+      "Shipping Country": [
+        "מדינת משלוח"
+      ],
+      "Shipping Information": [
+        "פרטי משלוח"
+      ],
+      "Shipping Name": [
+        "שם במשלוח"
+      ],
+      "Shipping Phone": [
+        "טלפון למשלוח"
+      ],
+      "Shipping Postcode": [
+        "מיקוד משלוח"
+      ],
+      "Shipping State": [
+        "מחוז/מדינה למשלוח"
+      ],
+      "Short Description": [
+        "תיאור קצר"
+      ],
+      "Short description": [
+        "תיאור קצר"
+      ],
+      "Short description of the page for search results": [
+        "תיאור קצר של הדף לתוצאות החיפוש"
+      ],
+      "short_description": [
+        "תיאור קצר"
+      ],
+      "Show All Columns": [
+        "הצג את כל העמודות"
+      ],
+      "Show controls": [
+        "הצג בקרים"
+      ],
+      "Show Editor": [
+        "הצג עורך טקסט"
+      ],
+      "Show HTML": [
+        "הצגת HTML"
+      ],
+      "Show raw attribution meta": [
+        "הצגת מטא אטריביושן גולמי"
+      ],
+      "Show Store": [
+        "הצג חנות"
+      ],
+      "Showing": [
+        "מציג"
+      ],
+      "simple": [
+        "פשוט"
+      ],
+      "Simple product": [
+        "מוצר פשוט"
+      ],
+      "Size & Alignment": [
+        "גודל ויישור"
+      ],
+      "SKU": [
+        "מק״ט (מספר קטלוגי)"
+      ],
+      "Sku": [
+        "מק״ט (מספר קטלוגי)"
+      ],
+      "Slug": [
+        "מזהה כתובת (Slug)"
+      ],
+      "Slug (URL)": [
+        "Slug (כתובת URL)"
+      ],
+      "slug-here": [
+        "slug-כאן"
+      ],
+      "Social": [
+        "רשתות חברתיות"
+      ],
+      "Social Description": [
+        "תיאור לשיתוף ברשתות החברתיות"
+      ],
+      "Social Image": [
+        "תמונה לשיתוף ברשתות החברתיות"
+      ],
+      "Social Media Description": [
+        "תיאור לרשתות חברתיות"
+      ],
+      "Social Media Image": [
+        "תמונה לשיתוף"
+      ],
+      "Social media optimized": [
+        "הוגדר אופטימיזציה לרשתות חברתיות"
+      ],
+      "Social Media Settings": [
+        "הגדרות רשתות חברתיות"
+      ],
+      "Social Media Title": [
+        "כותרת לרשתות חברתיות"
+      ],
+      "Social Title": [
+        "כותרת לשיתוף ברשתות החברתיות"
+      ],
+      "Sold individually": [
+        "נמכר בנפרד"
+      ],
+      "Sold Individually": [
+        "נמכר בנפרד"
+      ],
+      "Solid": [
+        "מלא"
+      ],
+      "Some files were rejected based on file type": [
+        "חלק מהקבצים נדחו עקב סוג קובץ לא נתמך"
+      ],
+      "Something went wrong!": [
+        "משהו השתבש!"
+      ],
+      "Source": [
+        "מקור"
+      ],
+      "Standing Order / Direct Debit": [
+        "הוראת קבע / חיוב ישיר"
+      ],
+      "Start": [
+        "החל"
+      ],
+      "Start creating Products": [
+        "התחל ייבוא"
+      ],
+      "Start Date": [
+        "תאריך התחלה"
+      ],
+      "State": [
+        "מחוז"
+      ],
+      "State/Province": [
+        "מדינה/מחוז"
+      ],
+      "Status": [
+        "מצב"
+      ],
+      "status": [
+        "סטטוס"
+      ],
+      "Step 1: ": [
+        "שלב 1: "
+      ],
+      "Step 2: ": [
+        "שלב 2: "
+      ],
+      "Step 3: ": [
+        "שלב 3: "
+      ],
+      "Stock management": [
+        "ניהול מלאי"
+      ],
+      "Stock Quantity": [
+        "כמות במלאי"
+      ],
+      "Stock quantity": [
+        "כמות במלאי"
+      ],
+      "Stock status": [
+        "מצב מלאי"
+      ],
+      "Stock Status": [
+        "מצב מלאי"
+      ],
+      "Store display": [
+        "תצוגת חנות"
+      ],
+      "Style": [
+        "סגנון"
+      ],
+      "Subcategory to {{name}}": [
+        "תת־קטגוריה עבור {{name}}"
+      ],
+      "Subtotal": [
+        "סכום ביניים"
+      ],
+      "Supported formats: MP4, WebM, OGG": [
+        "פורמטים נתמכים: MP4, WebM, OGG"
+      ],
+      "Supported: YouTube, Vimeo, direct video files (.mp4, .webm)": [
+        "נתמך: YouTube, Vimeo, קבצי וידאו ישירים (.mp4, .webm)"
+      ],
+      "Switch to Downloadable Product": [
+        "החלף למוצר להורדה"
+      ],
+      "Switch to multiple quantity sales": [
+        "החלף למכירת כמויות מרובות"
+      ],
+      "Switch to Simple Product": [
+        "החלף למוצר פשוט"
+      ],
+      "Switch to single item sales": [
+        "החלף למכירת פריט בודד"
+      ],
+      "Switch to Undownloadable Product": [
+        "החלף למוצר לא להורדה"
+      ],
+      "Switch to Variable Product": [
+        "החלף למוצר עם וריאציות"
+      ],
+      "System": [
+        "ברירת מחדל"
+      ],
+      "Table mode": [
+        "מצב טבלה"
+      ],
+      "Tags": [
+        "תגיות"
+      ],
+      "tags": [
+        "תגיות"
+      ],
+      "Tags & Categories & Taxonomies": [
+        "תגיות קטגוריות וטקסונומיות"
+      ],
+      "tags exist": [
+        "תגיות קיימות"
+      ],
+      "Take a tour": [
+        "צא לסיור"
+      ],
+      "Tax": [
+        "מס"
+      ],
+      "Text Color": [
+        "צבע טקסט"
+      ],
+      "Thank you for choosing the #1 product for managing your WooCommerce store! We are excited to help you manage your store with ease and efficiency.": [
+        "תודה שבחרת במוצר מספר 1 לניהול חנות הווקומרס שלך! אנו נרגשים לסייע לך לנהל את החנות שלך בקלות וביעילות."
+      ],
+      "The": [
+        "ה"
+      ],
+      "The attribute": [
+        "התכונה"
+      ],
+      "The attribute has been successfully updated to": [
+        "התכונה עודכנה בהצלחה ל"
+      ],
+      "The categories has been successfully updated to ": [
+        "הקטגוריות עודכנו בהצלחה ל-"
+      ],
+      "The coupon has been updated successfully": [
+        "הקופון עודכן בהצלחה"
+      ],
+      "The customer’s payment failed or was declined, and no payment has been successfully made.": [
+        "התשלום נכשל או נדחה."
+      ],
+      "The date and time when the coupon becomes active and can be used.": [
+        "התאריך והשעה בהם הקופון יהפוך לפעיל וניתן יהיה להשתמש בו."
+      ],
+      "The default option is 'Any', which will display all available options for the attribute to the customers in the store. This is suitable when you do not wish to specify different settings for each variation, such as different prices, stock levels, or images. If the attribute is global, options can be imported from existing terms instead of creating them individually.": [
+        "האפשרות המוגדרת כברירת מחדל היא 'כל האפשרויות', שבה כל האפשרויות הזמינות לתכונה יוצגו ללקוחות בחנות. זה מתאים כאשר אינך מעוניין לציין הגדרות שונות לכל וריאציה, כמו מחירים שונים, רמות מלאי, או תמונות שונות. אם מדובר בתכונה גלובלית, ניתן לייבא את האפשרויות ממונחים קיימים במקום ליצור אותם באופן עצמאי."
+      ],
+      "The file has been deleted successfully": [
+        "הקובץ נמחק בהצלחה"
+      ],
+      "The file is too large.": [
+        "הקובץ גדול מדי."
+      ],
+      "The first time you do this, you will be prompted to authorize your account for the attached script.": [
+        "בפעם הראשונה שתעשה זאת, תתבקש לאשר את החשבון שלך עבור הסקריפט המצורף."
+      ],
+      "The ID of the primary brand for this product (used in SEO and schema).": [
+        "מזהה המותג הראשי של המוצר (משפיע על SEO ו־Schema)."
+      ],
+      "The ID of the primary category for this product (used in breadcrumbs and SEO).": [
+        "מזהה הקטגוריה הראשית של המוצר (משמש ל־Breadcrumb ו־SEO)."
+      ],
+      "The image has been deleted successfully": [
+        "התמונה נמחקה בהצלחה"
+      ],
+      "The image has been successfully edited": [
+        "התמונה נערכה בהצלחה"
+      ],
+      "The image has been uploaded successfully": [
+        "התמונה הועלתה בהצלחה"
+      ],
+      "The last date the coupon can be used. The coupon will expire at 00:00:00 (midnight) on this date.": [
+        "המועד האחרון שבו ניתן להשתמש בקופון. הקופון יפוג בשעה 00:00:00 (חצות) בתאריך זה."
+      ],
+      "The license has expired": [
+        "פג תוקף הרישיון"
+      ],
+      "The license was not found.": [
+        "לא נמצא רישיון"
+      ],
+      "The maximum number of individual items this coupon can apply to when using product discounts. Leave blank to apply to all qualifying items in cart.": [
+        "המספר המרבי של פריטים בודדים אליהם ניתן להחיל את הקופון בעת שימוש בהנחות מוצר. השאר ריק כדי להחיל על כל הפריטים הזכאים בסל הקניות."
+      ],
+      "The new column order has been updated successfully": [
+        "סדר העמודות החדש עודכן בהצלחה"
+      ],
+      "The number of times this coupon has already been used. This allows you to track its usage and ensure the coupon is being utilized as intended.": [
+        "מספר הפעמים שהקופון כבר נוצל. זה מאפשר לך לעקוב אחר השימוש בו ולוודא שהוא מנוצל בהתאם לכוונה המקורית."
+      ],
+      "The option": [
+        "האפשרות"
+      ],
+      "The options has been successfully updated to": [
+        "האפשרויות עודכנו בהצלחה ל"
+      ],
+      "The order has been received, but no payment has been made.": [
+        "ההזמנה התקבלה אך לא בוצע תשלום."
+      ],
+      "The order has been updated successfully": [
+        "ההזמנה עודכנה בהצלחה"
+      ],
+      "The order is awaiting payment confirmation. Stock is reduced, but you need to confirm payment.": [
+        "ההזמנה ממתינה לאישור תשלום. המלאי הופחת, אך יש לאשר את התשלום."
+      ],
+      "The order was canceled by an admin or the customer.": [
+        "ההזמנה בוטלה על ידי מנהל המערכת או הלקוח."
+      ],
+      "The product has been updated successfully": [
+        "המוצר עודכן בהצלחה"
+      ],
+      "The table was reset successfully": [
+        "הטבלה אופסה בהצלחה"
+      ],
+      "The tags has been successfully updated to ": [
+        "התגיות עודכנו בהצלחה ל-"
+      ],
+      "The unique identifier for the coupon, used by customers to apply the discount at checkout.": [
+        "המזהה הייחודי של הקופון, המשמש את הלקוחות להחלת ההנחה בתהליך הקופה."
+      ],
+      "The updates have been saved successfully.": [
+        "העדכון עבר בהצלחה"
+      ],
+      "The value of the discount the coupon provides, either as a fixed amount or a percentage.": [
+        "ערך ההנחה שהקופון מעניק, בין אם כסכום קבוע או כאחוז מהסכום הכולל."
+      ],
+      "Theme": [
+        "ערכות נושא"
+      ],
+      "There is a new version available (version number ": [
+        "קיימת גרסה חדשה זמינה (מספר גרסה"
+      ],
+      "This feature allows you to import new products with variations or update existing products. Choose whether you want to add new products or update current ones. If you select 'Add New Products,' the popup closes, and the product table transforms into an editable CSV table. After making changes, click 'Save Import' to complete the process.": [
+        "פיצ'ר זה מאפשר ייבוא של מוצרים חדשים עם וריאציות או עדכון מוצרים קיימים. בחר האם להוסיף מוצרים חדשים או לעדכן מוצרים קיימים. אם תבחר 'הוספת מוצרים חדשים', הפופאפ ייסגר והטבלה של המוצרים תשתנה לטבלת קובץ היבוא הניתנת לעריכה. לאחר ביצוע השינויים, לחץ על 'שמור ייבוא' להשלמת התהליך."
+      ],
+      "This feature allows you to integrate your website with a Google Sheets file.": [
+        "תכונה זו מאפשרת לשלב את האתר שלך עם קובץ Google Sheets."
+      ],
+      "This field allows you to set the maximum spend (subtotal) allowed when using the coupon.": [
+        "שדה זה מאפשר להגדיר סכום רכישה מקסימלי (סכום ביניים) בעת שימוש בקופון."
+      ],
+      "This field allows you to set the minimum spend (subtotal) allowed to use the coupon.": [
+        "שדה זה מאפשר להגדיר סכום רכישה מינימלי (סכום ביניים) לשימוש בקופון."
+      ],
+      "This license is identical to the current license. Please change the license number.": [
+        "רישיון זה זהה לרישון הנוכחי אנא שנה מספר רישיון"
+      ],
+      "This Month": [
+        "החודש"
+      ],
+      "This text will be shown on the button linking to the external product.": [
+        "טקסט זה יוצג על הכפתור המקשר למוצר החיצוני."
+      ],
+      "Title for Facebook and Twitter": [
+        "כותרת מותאמת לפייסבוק וטוויטר"
+      ],
+      "Title shown when sharing the page on social media platforms (e.g., Facebook).": [
+        "כותרת שתוצג כשמשתפים את הדף ברשתות חברתיות (למשל פייסבוק)."
+      ],
+      "Title tag shown in search engines. Can override default title.": [
+        "תג הכותרת שיוצג במנועי חיפוש. יכול להחליף את כותרת ברירת המחדל של העמוד."
+      ],
+      "Title used specifically for Twitter cards.": [
+        "כותרת מותאמת לתצוגה בטוויטר (Twitter Card)."
+      ],
+      "title_length_long_help": [
+        "{{count}} תווים - קיצור ל-60 תווים לכל היותר"
+      ],
+      "title_length_ok_help": [
+        "{{count}} תווים - אורך אידיאלי לתוצאות חיפוש"
+      ],
+      "title_length_short_help": [
+        "{{count}} תווים - נסה להגיע בין 50 ל-60 תווים"
+      ],
+      "To": [
+        "ל-"
+      ],
+      "To edit the linked products, please switch the product to edit mode.": [
+        "כדי לערוך את המוצרים המקושרים, יש להעביר את המוצר למצב עריכה."
+      ],
+      "To edit the meta data values, please switch the product to edit mode.": [
+        "כדי לערוך את ערכי המטא דאטה, יש להעביר את המוצר למצב עריכה."
+      ],
+      "Today": [
+        "היום"
+      ],
+      "Token": [
+        "מזהה יחודי"
+      ],
+      "tooltip": [
+        {
+          "hideColumn": "הסתר עמודת {{label}}",
+          "showColumn": "הצג עמודת {{label}}"
+        }
+      ],
+      "Top Menu": [
+        "תפריט עליון"
+      ],
+      "Total": [
+        "סך הכל"
+      ],
+      "Total Amount": [
+        "סכום כולל"
+      ],
+      "Total Refund Amount": [
+        "סכום החזר כולל"
+      ],
+      "Total:": [
+        "סה\"כ:"
+      ],
+      "Track stock quantity for this product": [
+        "עקוב אחר כמות המלאי של מוצר זה"
+      ],
+      "Trash": [
+        "אשפה"
+      ],
+      "TRASH": [
+        "אשפה"
+      ],
+      "Try again": [
+        "נסה שוב"
+      ],
+      "Try changing the date range or filters": [
+        "נסה לשנות את טווח התאריכים או הסינונים"
+      ],
+      "Try to shorten your keyphrase to 1-4 words for better focus": [
+        "נסה לקצר את מילת המפתח ל-1–4 מילים למיקוד טוב יותר"
+      ],
+      "Twitter Description": [
+        "תיאור Twitter"
+      ],
+      "Twitter Title": [
+        "כותרת Twitter"
+      ],
+      "Type": [
+        "סוג"
+      ],
+      "type": [
+        "סוג"
+      ],
+      "Type a description here.": [
+        "הקלד כאן תיאור."
+      ],
+      "Type a short_description here.": [
+        "הקלד כאן תיאור קצר."
+      ],
+      "Undownloadable": [
+        "לא להורדה"
+      ],
+      "undownloadable": [
+        "בלתי ניתן להורדה"
+      ],
+      "Unit Price": [
+        "מחיר ליחידה"
+      ],
+      "UNKNOWN": [
+        "לא ידוע"
+      ],
+      "Unknown": [
+        "לא ידוע"
+      ],
+      "Unlimited": [
+        "ללא הגבלה"
+      ],
+      "Unlimited usage": [
+        "שימוש בלתי מוגבל"
+      ],
+      "unpaid": [
+        "לא שולם"
+      ],
+      "Unpin": [
+        "בטל הצמדה"
+      ],
+      "Unsupported file type...": [
+        "סוג קובץ לא נתמך..."
+      ],
+      "Up": [
+        "משודרג"
+      ],
+      "Up sells": [
+        "מוצרים לשדרוג"
+      ],
+      "Update now": [
+        "עדכן עכשיו"
+      ],
+      "Update products": [
+        "עדכון מוצרים"
+      ],
+      "Upload File": [
+        "העלה קובץ"
+      ],
+      "Uploading...": [
+        "מעלה..."
+      ],
+      "Upon selecting custom fields, corresponding columns will be automatically added to the Sheets file, enabling direct editing through the spreadsheet.": [
+        "בעת בחירת שדות מותאמים אישית, עמודות תואמות יתווספו אוטומטית לקובץ ה־Sheets, מה שיאפשר עריכה ישירה דרך הגיליון. אם אתה נמצא בתהליך יבוא, יש לרשום את השדות המותאמים אישית תחילה באמצעות התוסף הייעודי."
+      ],
+      "Upsell Ids": [
+        "מוצרים משלימים"
+      ],
+      "Upsells": [
+        "המלצות לשדרוג"
+      ],
+      "Upsells are products which you recommend instead of the currently viewed product, for example, products that are more profitable or better quality or more expensive.": [
+        "מוצרים לשדרוג הם מוצרים שאתם ממליצים במקום המוצר הנוכחי שנצפה, לדוגמה, מוצרים רווחיים יותר, איכותיים יותר או יקרים יותר."
+      ],
+      "URL": [
+        "קישור"
+      ],
+      "URL slug is set": [
+        "מזהה כתובת (slug) מוגדר"
+      ],
+      "Usage": [
+        "שימוש"
+      ],
+      "Usage & Limit": [
+        "שימוש והגבלות"
+      ],
+      "Usage / Limit": [
+        "שימוש / הגבלה"
+      ],
+      "Usage limit": [
+        "הגבלת שימוש"
+      ],
+      "Usage Limit": [
+        "שימוש/הגבלה"
+      ],
+      "Usage limit per coupon": [
+        "הגבלת שימוש לכל קופון"
+      ],
+      "Usage limit per user": [
+        "הגבלת שימוש לכל משתמש"
+      ],
+      "Usage Limits": [
+        "הגבלות שימוש"
+      ],
+      "UTM Campaign": [
+        "UTM קמפיין"
+      ],
+      "UTM Content": [
+        "UTM תוכן"
+      ],
+      "UTM Medium": [
+        "UTM מדיום"
+      ],
+      "UTM Parameters": [
+        "פרמטרי UTM"
+      ],
+      "UTM Source": [
+        "UTM מקור"
+      ],
+      "UTM Term": [
+        "UTM מונח"
+      ],
+      "UTM: {{value}}": [
+        "UTM: {{value}}"
+      ],
+      "Value": [
+        "ערך"
+      ],
+      "Value Type": [
+        "סוג ערך"
+      ],
+      "variable": [
+        "עם וריאציות"
+      ],
+      "Variable product": [
+        "מוצר עם וריאציות"
+      ],
+      "Variations": [
+        "ווריאציות"
+      ],
+      "Variations are different versions of a product, each with unique attributes such as size, color, or material. By using variations, you can offer multiple options for a single product, allowing customers to choose exactly what they prefer. This feature simplifies inventory management and enhances the shopping experience by grouping similar items under one product listing. For a guided tour of how to use variations, please visit this link:": [
+        "ווריאציות הן גרסאות שונות של מוצר, כל אחת עם תכונות ייחודיות כמו גודל, צבע או חומר. באמצעות שימוש בווריאציות, ניתן להציע מספר אופציות למוצר בודד, מה שמאפשר ללקוחות לבחור בדיוק את מה שהם מעדיפים. תכונה זו מפשטת את ניהול המלאי ומשפרת את חוויית הקניות על ידי קיבוץ פריטים דומים תחת רישום מוצר אחד. לסיור מודרך בנושא שימוש בווריאציות, אנא בקר בקישור הבא:"
+      ],
+      "Variations updates have been saved successfully.": [
+        "עדכוני הווריאציות נשמרו בהצלחה."
+      ],
+      "Version": [
+        "גירסה"
+      ],
+      "Video File": [
+        "קובץ וידאו"
+      ],
+      "Video URL": [
+        "כתובת סרטון"
+      ],
+      "View and manage your license details. Click edit to make changes.": [
+        "צפה ונהל את פרטי הרישיון שלך. לחץ על ערוך כדי לבצע שינויים."
+      ],
+      "View Billing Information": [
+        "צפייה בפרטי חיוב"
+      ],
+      "View example spreadsheet": [
+        "קובץ שיטס לדוגמא"
+      ],
+      "View import documentation": [
+        "צפה בתיעוד עבור ייבוא מוצרים"
+      ],
+      "View in WooCommerce": [
+        "הצג ב-ווקומרס"
+      ],
+      "View Shipping Information": [
+        "צפייה בפרטי משלוח"
+      ],
+      "View variations documentation": [
+        "צפה בתיעוד עבור ווריאציות"
+      ],
+      "Weight": [
+        "משקל"
+      ],
+      "Welcome to WhizManage!": [
+        "ברוכים הבאים ל Whizmanage"
+      ],
+      "When selecting custom fields, new columns will be added to the Sheets file based on your selection, allowing you to edit them directly from the Sheets file.": [
+        "בעת בחירת שדות מותאמים אישית, יתווספו עמודות חדשות לקובץ השיטס בהתאם לבחירה, ותוכל לערוך אותן ישירות דרך הקובץ."
+      ],
+      "When selecting products, only the selected items will appear in the Sheets file.If no selection is made, all products will be included.": [
+        "בעת בחירת מוצרים, רק הפריטים שנבחרו יופיעו בקובץ Sheets. אם לא נעשתה בחירה, כל המוצרים ייכללו."
+      ],
+      "Width": [
+        "רוחב"
+      ],
+      "Will refund:": [
+        "יוחזר:"
+      ],
+      "WordPress control panel": [
+        "לוח בקרה וורדפרס"
+      ],
+      "Write a compelling description between 120-160 characters": [
+        "כתוב תיאור משכנע בין 120 ל-160 תווים"
+      ],
+      "Wrong item sent": [
+        "נשלח פריט שגוי"
+      ],
+      "wrong item sent": [
+        "נשלח פריט שגוי"
+      ],
+      "Yes": [
+        "כן"
+      ],
+      "yes": [
+        "כן"
+      ],
+      "Yes, Cancel": [
+        "כן, צא"
+      ],
+      "Yesterday": [
+        "אתמול"
+      ],
+      "Yoast SEO": [
+        "יואסט SEO"
+      ],
+      "You've set a focus keyphrase - great start!": [
+        "הגדרת מילת מפתח - התחלה מצוינת!"
+      ],
+      "Your browser does not support the video tag.": [
+        "הדפדפן שלך לא תומך בתגית הוידאו."
+      ],
+      "Your keyphrase has 1-4 words - perfect length!": [
+        "למילת המפתח שלך יש 1–4 מילים - אורך מצוין!"
+      ],
+      "Your license was deactivated on {{date}}. If you wish to continue using this site, please reactivate your license.": [
+        "הרישיון שלך כובה בתאריך {{date}}. אם ברצונך להמשיך להשתמש באתר זה, אנא הפעל את הרישיון מחדש."
+      ],
+      "Zebra rows": [
+        "שורות זברה"
+      ],
+       "Upgrade to pro for advanced features now!": [
+        "שדרגו עכשיו לקבלת תכונות מתקדמות!"
+      ]
+    }
+  }
+}
