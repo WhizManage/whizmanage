@@ -3,12 +3,9 @@ import Navbar from "./Navbar";
 import { ThemeProvider } from "./ThemeProvider";
 import DesktopSidebar from "./_components/DesktopSidebar";
 import { RefreshCcw } from "lucide-react";
-import axios from "axios";
 import ProductsPage from "@/pages/products/page";
 import CouponsPage from "@/pages/coupons/page";
-// import OrdersPage from "@/pages/orders/page";
-// import TestsPage from "@/pages/Tests/page";
-// import OpenAIAp from "./OpenAIApi";
+
 
 // פתרון בעיית ריקורסיה בצד העיצוב במיוחד בטבלה של הווריאציות
 export function useSafeFocusPatch() {
@@ -78,11 +75,7 @@ export default function Layout() {
                   window.siteUrl +
                     "/wp-admin/admin.php?page=whizmanage-coupons" ? (
                   <CouponsPage />
-                ) : window.location.href ===
-                  window.siteUrl +
-                    "/wp-admin/admin.php?page=whizmanage-orders" ? (
-                  <OrdersPage />
-                ) : null}
+                )  : null}
               </Suspense>
               {console.log("free")}
               {/* {console.log(window.listExport)} */}

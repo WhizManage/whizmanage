@@ -60,13 +60,6 @@ Add attributes, create variations, edit SKU/stock/pricing/images — all in one 
 
 🔢 Advanced import/export options
 
-📸 Screenshots
-
-Products Dashboard – advanced, spreadsheet-like management interface
-
-Variations Editor – manage hundreds of variations instantly
-
-Coupons Manager – create and manage coupons with ease
 
 📚 Documentation
 

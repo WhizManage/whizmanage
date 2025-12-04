@@ -2,7 +2,7 @@
 Contributors: whizmanage, yosefelishayov
 Tags: woocommerce, bulk edit, google sheets, product management, variations
 Requires at least: 6.4
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.3.3
 License: GPLv2 or later
@@ -56,6 +56,19 @@ Whether you’re updating stock, creating discounts, or syncing with Google Shee
 Built with performance, usability, and scalability in mind —  
 so your store runs smoothly even with thousands of products.
 
+---
+
+== Source Code ==
+
+The full, non-minified source code for WhizManage (including the React application and build tools)  
+is publicly available on GitHub:
+
+👉 https://github.com/WhizManage/whizmanage
+
+This repository contains the original `/src` files and build instructions used to generate the `/build` assets included in the plugin.
+
+---
+
 == Installation ==
 
 1. Upload the plugin files to `/wp-content/plugins/whizmanage` or install directly via the WordPress plugin installer.
@@ -75,7 +88,7 @@ These integrations make it easy to manage your store data without switching betw
 
 = 📚 Is there documentation available? =
 Yes! Full documentation, tutorials, and setup guides are available at:  
-👉 [https://docs.whizmanage.com/](https://docs.whizmanage.com/)
+👉 https://docs.whizmanage.com/
 
 == Screenshots ==
 
