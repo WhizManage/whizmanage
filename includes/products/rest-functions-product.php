@@ -76,15 +76,7 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
 				)
 			);
 
-			register_rest_route(
-				'whizmanage/v1',
-				'/get-products-by-skus',
-				array(
-					'methods'             => 'POST',
-					'callback'            => array($this, 'get_products_by_skus'),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
+	
 
 			register_rest_route(
 				'whizmanage/v1',
@@ -550,82 +542,6 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
 		}
 
 		/**
-		 * Upload multiple images from URLs and return attachment IDs + URLs.
-		 */
-		public function handle_image_upload($request)
-		{
-			$images_array = $request->get_param('images');
-
-			if (! is_array($images_array)) {
-				return new WP_Error('invalid_data', 'Invalid images array', array('status' => 400));
-			}
-
-			$uploaded_images = array();
-
-			foreach ($images_array as $image_url) {
-				$upload_id = $this->upload_image_from_url($image_url);
-
-				if (is_wp_error($upload_id) || ! $upload_id) {
-					$uploaded_images[] = array('id' => null, 'url' => null);
-				} else {
-					$uploaded_images[] = array(
-						'id'  => $upload_id,
-						'url' => wp_get_attachment_url($upload_id),
-					);
-				}
-			}
-
-			return new WP_REST_Response($uploaded_images, 200);
-		}
-
-		/**
-		 * Fetch products by a list of SKUs (exact match), returns basic fields.
-		 */
-		public function get_products_by_skus(WP_REST_Request $request)
-		{
-			$skus = $request->get_param('skus');
-
-			if (empty($skus) || ! is_array($skus)) {
-				return new WP_Error('invalid_sku', 'SKUs are required and should be an array', array('status' => 400));
-			}
-
-			$args = array(
-				'post_type'      => 'product',
-				'posts_per_page' => -1,
-				'meta_query'     => array(
-					array(
-						'key'     => '_sku',
-						'value'   => $skus,
-						'compare' => 'IN',
-					),
-				),
-			);
-
-			$products_query = new WP_Query($args);
-			$products       = array();
-
-			if ($products_query->have_posts()) {
-				while ($products_query->have_posts()) {
-					$products_query->the_post();
-
-					$product_id = get_the_ID();
-					$product    = wc_get_product($product_id);
-
-					$products[] = array(
-						'id'    => $product_id,
-						'sku'   => $product->get_sku(),
-						'name'  => $product->get_name(),
-						'price' => $product->get_regular_price(),
-						'type'  => $product->get_type(),
-					);
-				}
-				wp_reset_postdata();
-			}
-
-			return rest_ensure_response($products);
-		}
-
-		/**
 		 * Trash or permanently delete products in bulk.
 		 */
 		public function trash_products($request)
@@ -750,13 +666,12 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
 						}
 					}
 
-					// Image upload (by URL).
-					if (! empty($variation_data['image']['src'])) {
-						$image_id = $this->upload_image_from_url($variation_data['image']['src']);
-						if (! is_wp_error($image_id) && $image_id) {
-							$variation->set_image_id($image_id);
-						}
-					}
+				    // --- ✅ התיקון לתמונות: תמיכה ב-ID קיים ---
+                    if (!empty($variation_data['image']['id'])) {
+                        // אם נשלח ID של תמונה (מה שקורה בדרך כלל בעריכה)
+                        $variation->set_image_id($variation_data['image']['id']);
+                    } 
+
 
 					// Meta data passthrough.
 					if (! empty($variation_data['meta_data'])) {
@@ -782,116 +697,6 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
 			);
 		}
 
-		/**
-		 * Upload an image by URL and return attachment ID.
-		 * Kept logic close to original; removed early file_get_contents() null-return,
-		 * rely on wp_remote_get (already present in your code).
-		 */
-		public function upload_image_from_url($image_url)
-		{
-
-			$siteUrl = get_option('siteurl');
-
-			// If image is already on this site, try to resolve attachment by URL.
-			if (0 === strpos($image_url, $siteUrl)) {
-				$existing_attachment_id = attachment_url_to_postid($image_url);
-				if ($existing_attachment_id) {
-					return $existing_attachment_id;
-				}
-			}
-
-			try {
-				$upload_dir = wp_upload_dir();
-
-				// Fetch via HTTP (more reliable than file_get_contents for remote hosts).
-				$response = wp_remote_get(
-					$image_url,
-					array(
-						'timeout'     => 10,
-						'redirection' => 5,
-						'headers'     => array(
-							'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-						),
-					)
-				);
-
-				if (is_wp_error($response)) {
-					return new WP_Error('image_upload_failed', 'Failed to retrieve image data.');
-				}
-
-				$image_data = wp_remote_retrieve_body($response);
-				if (! $image_data) {
-					return new WP_Error('image_upload_failed', 'Failed to retrieve image data.');
-				}
-
-				$content_type = wp_remote_retrieve_header($response, 'content-type');
-				$ext          = '';
-				if ($content_type) {
-					$mime_map = array(
-						'image/jpeg' => 'jpg',
-						'image/png'  => 'png',
-						'image/gif'  => 'gif',
-						'image/webp' => 'webp',
-					);
-					if (isset($mime_map[$content_type])) {
-						$ext = '.' . $mime_map[$content_type];
-					}
-				}
-
-				// Get a safe filename from URL path; fallback to MIME ext if missing.
-				$parts = wp_parse_url($image_url);
-				$path  = isset($parts['path']) ? $parts['path'] : '';
-				$filename = basename($path);
-
-				if (empty(pathinfo($filename, PATHINFO_EXTENSION)) && $ext) {
-					$filename .= $ext;
-				}
-
-
-				// Ensure target folder exists.
-				$target_dir = wp_mkdir_p($upload_dir['path']) ? $upload_dir['path'] : $upload_dir['basedir'];
-
-				// If a file with same name exists in current month dir, reuse existing attachment if found.
-				$file_path = trailingslashit($target_dir) . $filename;
-				if (file_exists($file_path)) {
-					$existing_attachment_id = attachment_url_to_postid(trailingslashit($upload_dir['url']) . $filename);
-					if ($existing_attachment_id) {
-						return $existing_attachment_id;
-					}
-				}
-
-				// Save file bytes.
-				$saved = file_put_contents($file_path, $image_data); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_write_file_put_contents
-				if (! $saved) {
-					return new WP_Error('file_save_failed', 'Failed to save the image file.');
-				}
-
-				$wp_filetype = wp_check_filetype($filename, null);
-				if (empty($wp_filetype['type'])) {
-					return new WP_Error('invalid_file_type', 'Invalid file type.');
-				}
-
-				$attachment = array(
-					'post_mime_type' => $wp_filetype['type'],
-					'post_title'     => sanitize_file_name($filename),
-					'post_content'   => '',
-					'post_status'    => 'inherit',
-				);
-
-				$attach_id = wp_insert_attachment($attachment, $file_path);
-				if (is_wp_error($attach_id)) {
-					return new WP_Error('attachment_insert_failed', 'Failed to insert attachment.');
-				}
-
-				require_once ABSPATH . 'wp-admin/includes/image.php';
-				$attach_data = wp_generate_attachment_metadata($attach_id, $file_path);
-				wp_update_attachment_metadata($attach_id, $attach_data);
-
-				return $attach_id;
-			} catch (Exception $e) {
-				return new WP_Error('exception', $e->getMessage());
-			}
-		}
 
 		/**
 		 * Fetch products for grid/table. Supports POST with product_ids (array) or GET with page/perPage.

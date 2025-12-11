@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwhizmanage_pro=self.webpackChunkwhizmanage_pro||[]).push([[648],{6648:(a,e,h)=>{h.r(e),h.d(e,{default:()=>p});var p=h(7411).l}}]);
