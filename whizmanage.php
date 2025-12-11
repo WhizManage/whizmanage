@@ -6,7 +6,6 @@
  * Description:       Easily manage your WooCommerce store with advanced bulk editing, product organization, and smart tools.
  * Version:           1.3.3
  * Author:            WhizManage
- * Author URI:        https://whizmanage.com/
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Text Domain:       whizmanage

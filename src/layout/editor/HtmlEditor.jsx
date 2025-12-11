@@ -187,11 +187,11 @@ function ensureVideoSourceIntegrity(doc) {
         v.insertBefore(s, v.firstChild);
       }
     });
-  } catch {}
+  } catch { }
 }
 
 const HtmlEditor = ({ initialContent = "", onSave, height = 400, row }) => {
-   
+
   const { theme } = useTheme();
 
   /** NOTE:
@@ -634,7 +634,7 @@ const HtmlEditor = ({ initialContent = "", onSave, height = 400, row }) => {
       confirmText: __("Insert", "whizmanage"),
       cancelText: __("Cancel", "whizmanage"),
       type: "warning",
-      inputPlaceholder: "https://example.com",
+      inputPlaceholder: "https://yoursite.com",
     });
 
     if (!url) return;
@@ -648,7 +648,7 @@ const HtmlEditor = ({ initialContent = "", onSave, height = 400, row }) => {
       confirmText: __("Insert", "whizmanage"),
       cancelText: __("Cancel", "whizmanage"),
       type: "warning",
-      inputPlaceholder: "https://example.com/image.png",
+      inputPlaceholder: "https://yoursite.com/image.png",
     });
 
     if (!url) return;

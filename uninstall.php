@@ -16,7 +16,8 @@ $whizmanage_tables = array(
     $wpdb->prefix . 'wm_history',
 );
 
-foreach ( $whizmanage_tables as $table_name ) {
-    // Static query with a trusted table name (built from $wpdb->prefix).
-    $wpdb->query( "DROP TABLE IF EXISTS `{$table_name}`" );
+foreach ( $whizmanage_tables as $whizmanage_table_name ) {
+    $whizmanage_table_name = esc_sql( $whizmanage_table_name );
+
+    $wpdb->query( "DROP TABLE IF EXISTS `{$whizmanage_table_name}`" );
 }
