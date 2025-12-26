@@ -13,7 +13,8 @@ if (! defined('ABSPATH')) {
 // Include dependencies dynamically (no hardcoded paths)
 require_once WHIZMANAGE_DIR . 'includes/products/get-product.php';
 require_once WHIZMANAGE_DIR . 'includes/coupons/get-coupons.php';
-require_once WHIZMANAGE_DIR . 'includes/products/taxonomies.php';
+require_once WHIZMANAGE_PRO_DIR . 'includes/customers/get-customers.php';
+require_once WHIZMANAGE_PRO_DIR . 'includes/products/taxonomies.php';
 require_once WHIZMANAGE_DIR . 'includes/products/general-products-functions.php';
 require_once WHIZMANAGE_DIR . 'includes/products/custom_fields.php';
 
@@ -32,7 +33,8 @@ if (! class_exists('Whizmanage')) {
          */
         public function create_admin_menu()
         {
-            add_menu_page(
+            // Main menu
+            $hook = add_menu_page(
                 __('WhizManage', 'whizmanage'),
                 __('WhizManage', 'whizmanage'),
                 'manage_woocommerce',
@@ -45,12 +47,11 @@ if (! class_exists('Whizmanage')) {
             );
             add_submenu_page(
                 'whizmanage',
-                __('Product', 'whizmanage'),
-                __('Product', 'whizmanage'),
+                __('Products', 'whizmanage'),
+                __('Products', 'whizmanage'),
                 'manage_woocommerce',
                 'whizmanage',
-                array($this, 'whizmanage_products_page'),
-
+                array($this, 'whizmanage_products_page')
             );
 
             add_submenu_page(
