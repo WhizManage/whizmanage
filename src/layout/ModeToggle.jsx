@@ -1,5 +1,5 @@
-import { Computer, Moon, Sun, SunMoon } from "lucide-react";
-
+// src/layout/ModeToggle.jsx
+import { Computer, Moon, Sun } from "lucide-react";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import {
   DropdownMenuPortal,
@@ -7,8 +7,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "@components/ui/dropdown-menu";
+ import { __ } from "@wordpress/i18n";
 import { useTheme } from "./ThemeProvider";
-import { __ } from '@wordpress/i18n';
 
 export function ModeToggle() {
   const { setTheme } = useTheme();

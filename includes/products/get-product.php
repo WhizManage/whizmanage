@@ -1,38 +1,216 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly.
-}
+
 if (!class_exists('Whizmanage_get_product')) {
     class Whizmanage_get_product
     {
-        public function get_products($product_ids = array(), $offset = 0, $limit = 1500)
+        public function get_products($product_ids = array(), $offset = 0, $limit = 1500, $filters = [])
         {
-  
+            $search = isset($filters['search']) ? trim((string) $filters['search']) : null;
+            $status = !empty($filters['status']) ? (array) $filters['status'] : array('publish', 'draft', 'pending', 'future', 'private');
+            $type = !empty($filters['type']) ? (array) $filters['type'] : [];
+            $downloadable = isset($filters['downloadable']) ? $filters['downloadable'] : null;
+            $product_cat = !empty($filters['product_cat']) ? (array) $filters['product_cat'] : [];
+            $product_tag = !empty($filters['product_tag']) ? (array) $filters['product_tag'] : [];
+            $tax_filters = !empty($filters['tax_filters']) && is_array($filters['tax_filters']) ? $filters['tax_filters'] : [];
+
+            // Query basis
             $args = array(
                 'post_type' => 'product',
                 'posts_per_page' => $limit,
-                'post_status' => array('publish', 'draft', 'pending', 'future', 'private'),
-                'offset' => $offset, 
+                'post_status' => $status,
+                'offset' => $offset,
+                'orderby' => array('menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC'),
+                'no_found_rows' => false, // To allow found_posts when needed
             );
 
-         
             if (!empty($product_ids)) {
                 $args['post__in'] = $product_ids;
             }
 
+            // ===== Search: text (title/content), SKU, and also direct LIKE on title =====
+            $title_like_filter = null;
+            if ($search !== null && $search !== '') {
+                global $wpdb;
+
+                $like = '%' . $wpdb->esc_like($search) . '%';
+
+                // 1. Search by product name (post_title)
+                $title_match_ids = $wpdb->get_col(
+                    $wpdb->prepare("
+            SELECT ID 
+            FROM {$wpdb->posts}
+            WHERE post_type = 'product'
+              AND post_title LIKE %s
+        ", $like)
+                );
+
+                // 2. Search by SKU in postmeta table
+                $sku_match_ids = $wpdb->get_col(
+                    $wpdb->prepare("
+            SELECT post_id 
+            FROM {$wpdb->postmeta}
+            WHERE meta_key = '_sku'
+              AND meta_value LIKE %s
+        ", $like)
+                );
+
+                // 3. Search also in variations, and add only parents (if you still want this)
+                $variation_ids = $wpdb->get_col(
+                    $wpdb->prepare("
+            SELECT ID 
+            FROM {$wpdb->posts}
+            WHERE post_type = 'product_variation'
+              AND post_title LIKE %s
+        ", $like)
+                );
+
+                $parent_ids = array();
+                if (!empty($variation_ids)) {
+                    $parent_ids = array_unique(array_filter(array_map(function ($vid) {
+                        return (int) get_post_field('post_parent', $vid);
+                    }, $variation_ids)));
+                }
+
+                // 4. Merge all IDs related to search
+                $search_post_in = array();
+
+                // 4.1 Check if search is a number (Product ID)
+                if (is_numeric($search)) {
+                    $product_id = (int) $search;
+                    $product_exists = $wpdb->get_var(
+                        $wpdb->prepare("
+                            SELECT ID 
+                            FROM {$wpdb->posts}
+                            WHERE ID = %d
+                              AND post_type = 'product'
+                        ", $product_id)
+                    );
+                    if ($product_exists) {
+                        $search_post_in[] = $product_id;
+                    }
+                }
+
+                if (!empty($title_match_ids)) {
+                    $search_post_in = array_merge($search_post_in, $title_match_ids);
+                }
+                if (!empty($sku_match_ids)) {
+                    $search_post_in = array_merge($search_post_in, $sku_match_ids);
+                }
+                if (!empty($parent_ids)) {
+                    $search_post_in = array_merge($search_post_in, $parent_ids);
+                }
+
+                // If post__in already exists (e.g. from filtering by IDs) - merge
+                if (!empty($search_post_in)) {
+                    $search_post_in = array_values(array_unique(array_map('intval', $search_post_in)));
+
+                    if (isset($args['post__in']) && !empty($args['post__in'])) {
+                        $args['post__in'] = array_values(array_unique(array_map('intval', array_merge(
+                            (array) $args['post__in'],
+                            $search_post_in
+                        ))));
+                    } else {
+                        $args['post__in'] = $search_post_in;
+                    }
+                } else {
+                    // If no matches found at all – ensure nothing is returned
+                    $args['post__in'] = array(0);
+                }
+
+                // Not using $args['s'] at all
+                // And not old posts_where filter – can delete entire add_filter / remove_filter section
+            }
+
+
+
+            // ===== meta_query for additional filters =====
+            $meta_query = isset($args['meta_query']) ? $args['meta_query'] : array('relation' => 'AND');
+
+            if ($downloadable === 'yes' || $downloadable === 'no') {
+                $meta_query[] = array(
+                    'key' => '_downloadable',
+                    'value' => $downloadable === 'yes' ? 'yes' : 'no',
+                    'compare' => '=',
+                );
+            }
+            if (count($meta_query) > 1) {
+                $args['meta_query'] = $meta_query;
+            }
+
+            // ===== tax_query (categories / tags / type / additional taxonomies) =====
+            $tax_query = array('relation' => 'AND');
+
+            if (!empty($product_cat)) {
+                $tax_query[] = array(
+                    'taxonomy' => 'product_cat',
+                    'field' => 'term_id',
+                    'terms' => array_map('intval', $product_cat),
+                );
+            }
+            if (!empty($product_tag)) {
+                $tax_query[] = array(
+                    'taxonomy' => 'product_tag',
+                    'field' => 'term_id',
+                    'terms' => array_map('intval', $product_tag),
+                );
+            }
+            if (!empty($type)) {
+                $tax_query[] = array(
+                    'taxonomy' => 'product_type',
+                    'field' => 'slug',
+                    'terms' => array_map('sanitize_title', $type),
+                );
+            }
+            if (!empty($tax_filters)) {
+                foreach ($tax_filters as $taxonomy => $term_ids) {
+                    $taxonomy = ltrim(urldecode($taxonomy), '_');
+                    if (!taxonomy_exists($taxonomy))
+                        continue;
+                    $tax_query[] = array(
+                        'taxonomy' => $taxonomy,
+                        'field' => 'term_id',
+                        'terms' => array_map('intval', (array) $term_ids),
+                    );
+                }
+            }
+            if (count($tax_query) > 1) {
+                $args['tax_query'] = $tax_query;
+            }
+
+            // ===== Run query =====
             $products_query = new WP_Query($args);
+
+            // Clear filter if defined
+            if ($title_like_filter) {
+                remove_filter('posts_where', $title_like_filter, 10);
+            }
 
             if ($products_query->have_posts()) {
                 $products = array();
 
                 while ($products_query->have_posts()) {
                     $products_query->the_post();
-                    global $product;
+                    // תמיד נטען את המוצר לפי ה־post ID
+                    $product = wc_get_product(get_the_ID());
+                    if (!$product) {
+                        continue;
+                    }
+
+                    // לדלג על ווריאציות – אנחנו רוצים רק את המוצר האב בחיפוש
+                    if ($product->is_type('variation')) {
+                        // אם בעתיד תרצה במקום לדלג לטעון את האבא, אפשר:
+                        // $parent_id = $product->get_parent_id();
+                        // if ($parent_id) {
+                        //     $product = wc_get_product($parent_id);
+                        // } else {
+                        //     continue;
+                        // }
+                        continue;
+                    }
 
                     try {
                         $product_data = (array) $product->get_data();
                     } catch (Exception $e) {
-                        
                         continue;
                     }
 
@@ -50,7 +228,7 @@ if (!class_exists('Whizmanage_get_product')) {
                         }
                         $product_data['categories'] = $product_categories;
                     } catch (Exception $e) {
-                     
+
                         $product_data['categories'] = [];
                     }
 
@@ -83,7 +261,7 @@ if (!class_exists('Whizmanage_get_product')) {
                         }
                         $product_data['images'] = $product_images;
                     } catch (Exception $e) {
-                      
+
                         $product_data['images'] = [];
                     }
 
@@ -93,21 +271,21 @@ if (!class_exists('Whizmanage_get_product')) {
 
                         foreach ($attributes as $attribute) {
                             try {
+
                                 $attribute_data = $attribute->get_data();
                                 $options = array();
 
                                 if ($attribute_data['id'] == 0) {
-                                   
+
                                     foreach ($attribute_data['options'] as $option) {
                                         $options[] = $option;
                                     }
 
                                     $name = $attribute_data['name'];
                                     $slug = isset($attribute_data['slug']) ? $attribute_data['slug'] : sanitize_title($name);
-                                    $label = wc_attribute_label($slug); 
-
+                                    $label = wc_attribute_label($slug);
                                 } else {
-                               
+
                                     foreach ($attribute_data['options'] as $option_id) {
                                         $term = get_term($option_id);
                                         if (!is_wp_error($term) && $term && isset($term->name)) {
@@ -115,14 +293,14 @@ if (!class_exists('Whizmanage_get_product')) {
                                         }
                                     }
 
-                                    $slug = $attribute_data['name']; 
-                                    $label = wc_attribute_label($slug); 
+                                    $slug = $attribute_data['name'];
+                                    $label = wc_attribute_label($slug);
                                     $name = $label;
                                 }
 
                                 $product_attributes[] = array(
                                     'id' => $attribute_data['id'],
-                                    'name' => $name, 
+                                    'name' => $name,
                                     'slug' => $slug,
                                     'position' => isset($attribute_data['position']) ? $attribute_data['position'] : 0,
                                     'visible' => isset($attribute_data['visible']) ? $attribute_data['visible'] : false,
@@ -130,14 +308,14 @@ if (!class_exists('Whizmanage_get_product')) {
                                     'options' => $options,
                                 );
                             } catch (Exception $e) {
-                               
+
                                 continue;
                             }
                         }
 
                         $product_data['attributes'] = $product_attributes;
                     } catch (Exception $e) {
-                      
+
                         $product_data['attributes'] = [];
                     }
 
@@ -155,7 +333,7 @@ if (!class_exists('Whizmanage_get_product')) {
                         }
                         $product_data['tags'] = $product_tags;
                     } catch (Exception $e) {
-                     
+
                         $product_data['tags'] = [];
                     }
 
@@ -165,11 +343,12 @@ if (!class_exists('Whizmanage_get_product')) {
                         'height' => $product_data['height'],
                     );
 
+  
                     if (method_exists($product, 'get_meta_data')) {
                         $meta_data = [];
                         $product_meta_data = $product->get_meta_data();
 
-                        // Yoast
+                        // מפתחות Yoast שהם טקסט טהור (להשאיר כמחרוזת אחת)
                         $yoast_text_keys = [
                             '_yoast_wpseo_title',
                             '_yoast_wpseo_metadesc',
@@ -186,102 +365,144 @@ if (!class_exists('Whizmanage_get_product')) {
                             '_yoast_wpseo_primary_product_cat',
                             '_yoast_wpseo_primary_product_brand',
                             '_yoast_wpseo_linkdex',
+                            // שים לב: בכוונה לא הכנסתי פה את _yoast_wpseo_opengraph-image
                         ];
+
+                        // מפתח Yoast יחיד שהוא תמונה (מדיה)
                         $yoast_og_image_key = '_yoast_wpseo_opengraph-image';
 
-                   
+                        // מפתחות שבהם הגיוני לפצל לפי פסיקים (למשל גלריה/רשימות) — עדכן לפי הפרויקט שלך
                         $comma_list_keys = [
                             '_product_image_gallery',
                             'gallery',
                             'wm_gallery',
+                            // הוסף כאן רק מפתחות שאתה יודע בוודאות שהם רשימות
                         ];
 
-                   
-                        $allowed_underscore_keys = array_merge(
-                            [$yoast_og_image_key],
-                            $yoast_text_keys,
-                            ['_thumbnail_id'],
-                            $comma_list_keys
-                        );
-
-                        $to_media_obj = function ($maybeIdOrUrl) {
-                            if ($maybeIdOrUrl === '' || $maybeIdOrUrl === null) {
-                                return ['id' => null, 'url' => ''];
-                            }
-                            if (is_numeric($maybeIdOrUrl) && wp_attachment_is_image((int)$maybeIdOrUrl)) {
-                                return [
-                                    'id'  => (int)$maybeIdOrUrl,
-                                    'url' => wp_get_attachment_url((int)$maybeIdOrUrl) ?: '',
-                                ];
-                            }
-                            if (is_string($maybeIdOrUrl) && filter_var($maybeIdOrUrl, FILTER_VALIDATE_URL)) {
-                                $attachment_id = attachment_url_to_postid($maybeIdOrUrl);
-                                if ($attachment_id && wp_attachment_is_image($attachment_id)) {
-                                    return ['id' => (int)$attachment_id, 'url' => $maybeIdOrUrl];
-                                }
-                                return ['id' => null, 'url' => $maybeIdOrUrl];
-                            }
-                            return ['id' => null, 'url' => (string)$maybeIdOrUrl];
-                        };
-
                         foreach ($product_meta_data as $meta) {
-                            $key = $meta->key;
-                            $val = $meta->value;
-
-                            if (strpos($key, '_') === 0 && !in_array($key, $allowed_underscore_keys, true)) {
+                            // דילוג על מפתחות פרטיים לא-יוסט
+                            if (strpos($meta->key, '_') === 0 && (!defined('WPSEO_VERSION') || (!in_array($meta->key, $yoast_text_keys, true) && $meta->key !== $yoast_og_image_key))) {
                                 continue;
                             }
 
-                            $processed_value = $val;
+                            $processed_value = $meta->value;
 
-                            // --- Yoast textual ---
-                            if (in_array($key, $yoast_text_keys, true)) {
-                                if (in_array($key, ['_yoast_wpseo_primary_product_cat', '_yoast_wpseo_primary_product_brand'], true) && is_numeric($processed_value)) {
-                                    $term = get_term((int)$processed_value);
-                                    $processed_value = ($term && !is_wp_error($term)) ? $term->name : (string)$processed_value;
+                            // טיפול ביוסט – טקסטים
+                            if (in_array($meta->key, $yoast_text_keys, true)) {
+                                // קטגוריה/מותג פריימרי – אם הגיע כמספר, להמיר לשם הטרם
+                                if (in_array($meta->key, ['_yoast_wpseo_primary_product_cat', '_yoast_wpseo_primary_product_brand'], true) && is_numeric($processed_value)) {
+                                    $term = get_term((int) $processed_value);
+                                    if ($term && !is_wp_error($term)) {
+                                        $processed_value = $term->name;
+                                    } else {
+                                        $processed_value = (string) $processed_value; // fallback
+                                    }
                                 } else {
+                                    // וידוא מחרוזת – אם בטעות נשמר מערך, לשטח למחרוזת אחת
                                     if (is_array($processed_value)) {
                                         $processed_value = trim(implode(' ', array_map(function ($v) {
-                                            if (is_string($v)) return $v;
-                                            if (is_array($v) && array_key_exists('url', $v)) return (string)$v['url'];
-                                            return is_scalar($v) ? (string)$v : '';
+                                            if (is_string($v))
+                                                return $v;
+                                            if (is_array($v) && array_key_exists('url', $v))
+                                                return (string) $v['url'];
+                                            return is_scalar($v) ? (string) $v : '';
                                         }, $processed_value)));
                                     } else {
-                                        $processed_value = is_scalar($processed_value) ? trim((string)$processed_value) : '';
+                                        $processed_value = is_scalar($processed_value) ? trim((string) $processed_value) : '';
                                     }
                                 }
 
-                            } elseif ($key === $yoast_og_image_key) {
-                                $processed_value = [$to_media_obj($processed_value)];
-
-                            } elseif (in_array($key, $comma_list_keys, true) && is_string($processed_value) && strpos($processed_value, ',') !== false) {
-                                $items = array_map('trim', explode(',', $processed_value));
-                                $processed_value = array_map($to_media_obj, $items);
-
-                            } elseif ($key === '_thumbnail_id') {
-                                $processed_value = [$to_media_obj($processed_value)];
-
-                            } elseif (is_string($processed_value)) {
-                                if (is_numeric($processed_value) && wp_attachment_is_image((int)$processed_value)) {
-                                    $processed_value = [$to_media_obj($processed_value)];
-                                } elseif (filter_var($processed_value, FILTER_VALIDATE_URL)) {
+                                // טיפול בתמונת OpenGraph של יוסט – כמדיה יחידה
+                            } elseif ($meta->key === $yoast_og_image_key) {
+                                if (is_numeric($processed_value) && wp_attachment_is_image((int) $processed_value)) {
+                                    $processed_value = [
+                                        'id' => (int) $processed_value,
+                                        'url' => wp_get_attachment_url((int) $processed_value) ?: '',
+                                    ];
+                                } elseif (is_string($processed_value) && filter_var($processed_value, FILTER_VALIDATE_URL)) {
                                     $attachment_id = attachment_url_to_postid($processed_value);
                                     if ($attachment_id && wp_attachment_is_image($attachment_id)) {
-                                        $processed_value = [$to_media_obj($processed_value)];
+                                        $processed_value = [
+                                            'id' => (int) $attachment_id,
+                                            'url' => $processed_value,
+                                        ];
+                                    } else {
+                                        // עדיין להשאיר כאובייקט מדיה אחיד
+                                        $processed_value = [
+                                            'id' => null,
+                                            'url' => $processed_value,
+                                        ];
+                                    }
+                                } else {
+                                    // אם זה לא מזהה/URL, שמור כמחרוזת כדי לא לשבור סכימה
+                                    $processed_value = is_scalar($processed_value) ? (string) $processed_value : '';
+                                }
+
+                                // כל שאר המפתחות (לא יוסט) – לוגיקת ברירת מחדל
+                            } else {
+                                if (is_string($processed_value)) {
+                                    // פיצול לפי פסיקים מותר רק למפתחות המוגדרים כרשימה
+                                    if (in_array($meta->key, $comma_list_keys, true) && strpos($processed_value, ',') !== false) {
+                                        $items = array_map('trim', explode(',', $processed_value));
+                                        $processed_value = array_map(function ($item) {
+                                            if ($item === '') {
+                                                return ['id' => null, 'url' => ''];
+                                            }
+                                            if (is_numeric($item) && wp_attachment_is_image((int) $item)) {
+                                                return [
+                                                    'id' => (int) $item,
+                                                    'url' => wp_get_attachment_url((int) $item) ?: '',
+                                                ];
+                                            }
+                                            if (filter_var($item, FILTER_VALIDATE_URL)) {
+                                                $attachment_id = attachment_url_to_postid($item);
+                                                if ($attachment_id && wp_attachment_is_image($attachment_id)) {
+                                                    return [
+                                                        'id' => (int) $attachment_id,
+                                                        'url' => $item,
+                                                    ];
+                                                }
+                                                return [
+                                                    'id' => null,
+                                                    'url' => $item,
+                                                ];
+                                            }
+                                            // עבור רשימות טקסטואליות – שמור כערך plain בתוך שדה url לשמירה על סכימת ה-UI שלך
+                                            return ['id' => null, 'url' => $item];
+                                        }, $items);
+
+                                        // מזהה יחיד של תמונה
+                                    } elseif (is_numeric($processed_value) && wp_attachment_is_image((int) $processed_value)) {
+                                        $processed_value = [
+                                            'id' => (int) $processed_value,
+                                            'url' => wp_get_attachment_url((int) $processed_value) ?: '',
+                                        ];
+
+                                        // URL יחיד – ננסה למצוא מזהה תמונה
+                                    } elseif (filter_var($processed_value, FILTER_VALIDATE_URL)) {
+                                        $attachment_id = attachment_url_to_postid($processed_value);
+                                        if ($attachment_id && wp_attachment_is_image($attachment_id)) {
+                                            $processed_value = [
+                                                'id' => (int) $attachment_id,
+                                                'url' => $processed_value,
+                                            ];
+                                        } else {
+                                            // השאר כ-string רגיל, אל תהפוך למדיה ללא סיבה
+                                            $processed_value = $processed_value;
+                                        }
                                     }
                                 }
                             }
 
                             $meta_data[] = [
-                                'id'    => $meta->id,
-                                'key'   => $key,
-                                'value' => $processed_value,
+                                "id" => $meta->id,
+                                "key" => $meta->key,
+                                "value" => $processed_value,
                             ];
                         }
                     }
 
-
-                    $product_data['meta_data'] = $meta_data; 
+                    $product_data['meta_data'] = $meta_data;
                     // Add backordered, permalink, variations, price_html, type, and _links
                     $product_data['shipping_class'] = urldecode($product->get_shipping_class());
                     $product_data['shipping_required'] = $product->needs_shipping();
@@ -302,7 +523,7 @@ if (!class_exists('Whizmanage_get_product')) {
                     $product_data['variations'] = $product->get_children();
                     $product_data['price_html'] = $product->get_price_html();
                     $product_data['type'] = $product->get_type();
-        
+
                     if ($product_data['low_stock_amount'] == "") {
                         $product_data['low_stock_amount'] = null;
                     }
@@ -328,14 +549,14 @@ if (!class_exists('Whizmanage_get_product')) {
                     $taxonomies = get_object_taxonomies('product', 'names');
 
                     $default_taxonomies = array(
-                        'product_cat',        
-                        'product_tag',        
+                        'product_cat',
+                        'product_tag',
                         'product_shipping_class',
                         'product_type'
                     );
 
                     foreach ($taxonomies as $taxonomy) {
-            
+
                         if (in_array($taxonomy, $default_taxonomies)) {
                             continue;
                         }
@@ -372,12 +593,12 @@ if (!class_exists('Whizmanage_get_product')) {
 
 
                 // Convert products array to JSON
-                $jsonListProduct = $products;
+                $jsonListProduct = wp_json_encode($products);
 
                 // Output JSON
 
             } else {
-                $jsonListProduct = [];
+                $jsonListProduct = wp_json_encode([]);
             }
 
             // Restore original post data
@@ -402,9 +623,9 @@ if (!class_exists('Whizmanage_get_product')) {
 
                     foreach ($attributes as $raw_key => $raw_value) {
                         $value      = urldecode($raw_value);
-                        $attr_key   = $raw_key;  
+                        $attr_key   = $raw_key;
                         $is_global  = false;
-                        $clean_name = $raw_key;  
+                        $clean_name = $raw_key;
 
                         if (strpos($raw_key, 'attribute_') === 0) {
                             $clean_name = substr($raw_key, 10);
@@ -426,16 +647,16 @@ if (!class_exists('Whizmanage_get_product')) {
                         }
 
                         if ($is_global) {
-                            $attribute_id     = wc_attribute_taxonomy_id_by_name($clean_name); 
+                            $attribute_id     = wc_attribute_taxonomy_id_by_name($clean_name);
                             $attribute_object = $attribute_id ? wc_get_attribute($attribute_id) : null;
                             $attribute_label  = $attribute_object ? $attribute_object->name : wc_attribute_label($attr_key);
-                            $slug             = $attr_key; 
+                            $slug             = $attr_key;
 
                             $base_data = array(
                                 'id'     => (int) $attribute_id,
                                 'name'   => $attribute_label,
                                 'slug'   => urldecode($slug),   // pa_color
-                                'option' => $value,  
+                                'option' => $value,
                             );
 
                             $variation_name .= $attribute_label . ': ' . $value . ' ';
@@ -445,7 +666,7 @@ if (!class_exists('Whizmanage_get_product')) {
 
                             $base_data = array(
                                 'id'     => 0,
-                                'name'   => urldecode($pretty_label), 
+                                'name'   => urldecode($pretty_label),
                                 'option' => $value,
                             );
 
@@ -494,7 +715,6 @@ if (!class_exists('Whizmanage_get_product')) {
                             }
                         }
                     } catch (Exception $e) {
-                     
                     }
 
                     // Get additional variation attributes
@@ -601,7 +821,6 @@ if (!class_exists('Whizmanage_get_product')) {
             return array(); // Return empty array if product is not variable
         }
 
-
         public function check_attributes_variation($attributes)
         {
             $count_product = 0;
@@ -627,18 +846,17 @@ if (!class_exists('Whizmanage_get_product')) {
             $args = array(
                 'post_type' => 'product',
                 'post_status' => array('publish', 'draft', 'pending', 'future', 'private'),
-                'posts_per_page' => -1, 
-                'fields' => 'ids', 
+                'posts_per_page' => -1, // טוען את כל המוצרים ללא הגבלה
+                'fields' => 'ids', // שומר רק את המזהים כדי לחסוך זיכרון
             );
 
             $query = new WP_Query($args);
 
-            return $query->found_posts; 
+            return $query->found_posts; // מחזיר את מספר המוצרים
         }
 
         public function get_products_for_coupons($product_ids = array(), $offset = 0, $limit = 1500)
         {
-
             $args = array(
                 'post_type' => 'product',
                 'posts_per_page' => $limit,
@@ -661,23 +879,29 @@ if (!class_exists('Whizmanage_get_product')) {
                     try {
                         $product_id = $product->get_id();
                         $product_name = $product->get_name();
-
                         $variations = $this->get_variations_for_coupons($product_id);
-
                         $thumbnail_id = $product->get_image_id();
                         $image_url = wp_get_attachment_url($thumbnail_id);
-
                         $final_price = $product->get_price();
+                        $regular_price = $product->get_regular_price();
+                        $sale_price = $product->get_sale_price();
+
+                        // ✅ מה שאתה צריך בשביל ה־"In stock"
+                        $stock_status = $product->get_stock_status();
+                        $stock_quantity = $product->get_stock_quantity(); // אופציונלי
 
                         $products[] = array(
                             'id' => $product_id,
                             'name' => $product_name,
                             'price' => $final_price,
+                            'regular_price' => $regular_price,
+                            'sale_price' => $sale_price,
                             'image' => $image_url,
                             'subRows' => $variations,
+                            'stock_status' => $stock_status,   // ✅ מזה נוצרת הכתובת "In stock" בצד React
+                            'stock_qty' => $stock_quantity, // אם תרצה להציג כמות
                         );
                     } catch (Exception $e) {
-                   
                         continue;
                     }
                 }
@@ -688,41 +912,52 @@ if (!class_exists('Whizmanage_get_product')) {
             return wp_json_encode($products);
         }
 
+
         public function get_variations_for_coupons($product_id)
         {
             $product = wc_get_product($product_id);
 
             if ($product->is_type('variable')) {
+                // קבלת מזהי כל הווריאציות
                 $variation_ids = $product->get_children();
                 $variations_array = array();
 
                 foreach ($variation_ids as $variation_id) {
                     $variation = new WC_Product_Variation($variation_id);
 
+                    // בניית שם הווריאציה
                     $attributes = $variation->get_attributes();
                     $variation_name = $product->get_name() . ' - ';
+                    $stock_status = $variation->get_stock_status();
 
                     foreach ($attributes as $attribute_name => $attribute_value) {
                         $variation_name .= wc_attribute_taxonomy_slug($attribute_name) . ': ' . $attribute_value . ' ';
                     }
 
+                    // תמונה ראשית של הווריאציה
                     $thumbnail_id = $variation->get_image_id();
                     $image_url = $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : wp_get_attachment_url($product->get_image_id());
 
+                    // מחיר סופי של הווריאציה
                     $final_price = $variation->get_price();
+                    $regular_price = $variation->get_regular_price();
+                    $sale_price = $variation->get_sale_price();
 
                     $variations_array[] = array(
                         'id' => $variation_id,
                         'name' => urldecode($variation_name),
                         'price' => $final_price,
+                        'regular_price' => $regular_price,
+                        'sale_price' => $sale_price,
                         'image' => $image_url,
+                        'stock_status' => $stock_status, // ✅ גם לכל ווריאציה
                     );
                 }
 
                 return $variations_array;
             }
 
-            return array(); 
+            return array(); // אם לא מדובר במוצר עם ווריאציות
         }
     }
 }

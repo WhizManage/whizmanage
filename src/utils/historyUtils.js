@@ -27,6 +27,18 @@ const IMAGE_ARRAY_KEY_HINTS = [
   "product_images",
 ];
 
+// רמזים לשמות מפתח של רשימות עם name (קטגוריות, תגיות, טקסונומיות)
+const TERM_LIST_KEY_HINTS = [
+  "categories",
+  "tags",
+  "product_cat",
+  "product_tag",
+  "product_categories",
+  "excluded_product_categories",
+  "brands",
+  "attributes",
+];
+
 // שדות שבהם "" / null / "0" / 0 נחשבים אותו דבר
 const EMPTY_EQ_ZERO_KEYS = new Set([
   "usage_limit",
@@ -59,7 +71,9 @@ function sanitizeArrayByPath(path, arr) {
       const imageEmpty =
         img == null ||
         (Array.isArray(img) && img.length === 0) ||
-        (typeof img === "object" && !Array.isArray(img) && Object.keys(img).length === 0);
+        (typeof img === "object" &&
+          !Array.isArray(img) &&
+          Object.keys(img).length === 0);
       if (imageEmpty) delete x.image;
 
       return x;
@@ -85,7 +99,9 @@ function normalizeForCompareByPath(path, val) {
     const isEmpty =
       val == null ||
       (Array.isArray(val) && val.length === 0) ||
-      (typeof val === "object" && !Array.isArray(val) && Object.keys(val).length === 0);
+      (typeof val === "object" &&
+        !Array.isArray(val) &&
+        Object.keys(val).length === 0);
     return isEmpty ? undefined : val;
   }
 
@@ -161,9 +177,54 @@ export function formatLabel(key = "") {
   return spaced.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-export function formatScalar(val) {
+// מיפוי ערכים מיוחדים לתרגום
+const SPECIAL_VALUES_MAP = {
+  // boolean
+  true: "Yes",
+  "true": "Yes",
+  false: "No",
+  "false": "No",
+  // stock status
+  "instock": "In Stock",
+  "outofstock": "Out of Stock",
+  "onbackorder": "On Backorder",
+  // WooCommerce special values - "unlimited" / "not set"
+  "-1": "Unlimited",
+  // backorders
+  "no": "Do not allow",
+  "notify": "Allow, but notify customer",
+  "yes": "Allow",
+  // tax status
+  "taxable": "Taxable",
+  "shipping": "Shipping only",
+  "none": "None",
+  // catalog visibility
+  "visible": "Shop and search results",
+  "catalog": "Shop only",
+  "search": "Search results only",
+  "hidden": "Hidden",
+  // product status
+  "publish": "Published",
+  "draft": "Draft",
+  "pending": "Pending review",
+  "private": "Private",
+  "trash": "Trash",
+};
+
+export function formatScalar(val, translateFn) {
   if (val === null || val === undefined) return "";
-  if (typeof val === "string" || typeof val === "number" || typeof val === "boolean") {
+
+  // בדיקה אם הערך נמצא במיפוי המיוחד (גם כמספר וגם כמחרוזת)
+  const mappedValue = SPECIAL_VALUES_MAP[val] ?? SPECIAL_VALUES_MAP[String(val)];
+  if (mappedValue !== undefined) {
+    // אם יש פונקציית תרגום, נשתמש בה
+    return translateFn ? translateFn(mappedValue, "whizmanage") : mappedValue;
+  }
+
+  if (
+    typeof val === "string" ||
+    typeof val === "number"
+  ) {
     return String(val);
   }
   try {
@@ -223,7 +284,25 @@ function extractImageUrl(v) {
   if (!v) return null;
   if (typeof v === "string") return v;
   if (typeof v === "object") {
-    return v.src || v.url || v.source_url || v.guid || null;
+    // WooCommerce image objects can have different URL properties
+    // Priority: src > url > source_url > guid > source
+    const url = v.src || v.url || v.source_url || v.guid || v.source;
+    if (url) return url;
+
+    // Fallback: if name looks like a URL or image path, try to construct URL
+    if (v.name && typeof v.name === "string") {
+      // If name is already a full URL, use it
+      if (/^https?:\/\//i.test(v.name)) return v.name;
+      // If name looks like a relative path with image extension
+      if (/\.(png|jpe?g|gif|webp|bmp|svg|avif)(\?.*)?$/i.test(v.name)) {
+        // Try to construct URL from name if we have id (WordPress media)
+        if (v.id && window.siteUrl) {
+          // This is a fallback - might not be correct path
+          return null; // Don't guess the path
+        }
+      }
+    }
+    return null;
   }
   return null;
 }
@@ -249,6 +328,48 @@ function keyHintsImageList(key = "") {
   return IMAGE_ARRAY_KEY_HINTS.some((h) => k.includes(h));
 }
 
+// בדיקה אם מפתח מרמז על רשימת terms (קטגוריות, תגיות, וכו')
+function keyHintsTermList(key = "") {
+  const k = String(key || "").toLowerCase();
+  return TERM_LIST_KEY_HINTS.some((h) => k.includes(h));
+}
+
+// בדיקה אם מערך מכיל אובייקטים עם name או מערך של IDs
+function isTermList(val) {
+  if (!Array.isArray(val)) return false;
+  if (val.length === 0) return false;
+  // בדיקה שלפחות פריט אחד הוא אובייקט עם name או ID
+  return val.some((item) => {
+    if (item && typeof item === "object" && "name" in item) return true;
+    if (item && typeof item === "object" && "id" in item) return true;
+    if (typeof item === "number" || typeof item === "string") return true;
+    return false;
+  });
+}
+
+// שליפת שמות מרשימת terms
+// תומך גם באובייקטים עם name וגם במערכי IDs בלבד
+export function extractTermNames(val) {
+  if (!Array.isArray(val)) return [];
+  return val
+    .map((item) => {
+      // אובייקט עם name
+      if (item && typeof item === "object" && item.name) {
+        return item.name;
+      }
+      // ID בלבד (מספר או מחרוזת)
+      if (typeof item === "number" || typeof item === "string") {
+        return String(item);
+      }
+      // אובייקט עם id בלבד
+      if (item && typeof item === "object" && item.id) {
+        return String(item.id);
+      }
+      return null;
+    })
+    .filter(Boolean);
+}
+
 // --------------------
 // שלב 1: איתור שינויים
 // --------------------
@@ -256,7 +377,10 @@ export function getChangedFields(oldData, newData) {
   if (!oldData || !newData) return [];
 
   function compareNestedObject(oldObj = {}, newObj = {}, basePath = "") {
-    const keys = new Set([...Object.keys(oldObj || {}), ...Object.keys(newObj || {})]);
+    const keys = new Set([
+      ...Object.keys(oldObj || {}),
+      ...Object.keys(newObj || {}),
+    ]);
     const oldPart = {};
     const newPart = {};
 
@@ -266,8 +390,14 @@ export function getChangedFields(oldData, newData) {
       const ovRaw = oldObj?.[key];
       const nvRaw = newObj?.[key];
 
-      const ov = normalizeForCompareByPath(path, normalizeForCompareByKey(key, ovRaw));
-      const nv = normalizeForCompareByPath(path, normalizeForCompareByKey(key, nvRaw));
+      const ov = normalizeForCompareByPath(
+        path,
+        normalizeForCompareByKey(key, ovRaw)
+      );
+      const nv = normalizeForCompareByPath(
+        path,
+        normalizeForCompareByKey(key, nvRaw)
+      );
 
       // מערכים – לפני השוואה נעביר דרך sanitizeArrayByPath
       if (Array.isArray(ov) || Array.isArray(nv)) {
@@ -284,7 +414,11 @@ export function getChangedFields(oldData, newData) {
       const ovIsObj = ov && typeof ov === "object" && !Array.isArray(ov);
       const nvIsObj = nv && typeof nv === "object" && !Array.isArray(nv);
       if (ovIsObj || nvIsObj) {
-        const nested = compareNestedObject(ovIsObj ? ov : {}, nvIsObj ? nv : {}, path);
+        const nested = compareNestedObject(
+          ovIsObj ? ov : {},
+          nvIsObj ? nv : {},
+          path
+        );
         if (nested) {
           const nestedOld = {};
           const nestedNew = {};
@@ -322,7 +456,9 @@ export function getChangedFields(oldData, newData) {
 
   if (Array.isArray(oldData) && Array.isArray(newData)) {
     const results = [];
-    const map = new Map((newData || []).filter(i => i?.id != null).map(i => [i.id, i]));
+    const map = new Map(
+      (newData || []).filter((i) => i?.id != null).map((i) => [i.id, i])
+    );
     for (const oldItem of oldData || []) {
       if (oldItem?.id == null) continue;
       const changes = compareObjects(oldItem, map.get(oldItem.id) || {});
@@ -339,14 +475,20 @@ export function getChangedFields(oldData, newData) {
 // שלב 2: עיבוד להצגה
 // --------------------
 export function diffMetaData(oldArr = [], newArr = []) {
+
+  if (!Array.isArray(oldArr)) oldArr = [];
+  if (!Array.isArray(newArr)) newArr = [];
+
   const toMap = (arr) => {
     const map = new Map();
-    (arr || []).forEach((m) => {
+
+    arr.forEach((m) => {
       if (!m) return;
       const k = (m.key ?? m.id ?? "").toString();
       if (!k) return;
       map.set(k, m);
     });
+
     return map;
   };
 
@@ -374,14 +516,20 @@ export function diffMetaData(oldArr = [], newArr = []) {
     // גלריה במטא
     const oldListRaw = extractImageList(oldVal);
     const newListRaw = extractImageList(newVal);
+    // Only treat as image list if at least one value is actually an array
+    const oldIsArrayLike = Array.isArray(oldVal) || (oldVal && typeof oldVal === "object" && Array.isArray(oldVal.images));
+    const newIsArrayLike = Array.isArray(newVal) || (newVal && typeof newVal === "object" && Array.isArray(newVal.images));
+    const hasArrayValue = oldIsArrayLike || newIsArrayLike;
     const looksLikeImageList =
-      keyHintsImageList(k) || (oldListRaw.length + newListRaw.length > 1);
+      (keyHintsImageList(k) && hasArrayValue) || oldListRaw.length + newListRaw.length > 1;
 
     // תמונה בודדת
     const oldUrlRaw = extractImageUrl(oldVal);
     const newUrlRaw = extractImageUrl(newVal);
     const looksLikeImage =
-      keyHintsImage(k) || isLikelyImageUrl(oldUrlRaw || "") || isLikelyImageUrl(newUrlRaw || "");
+      keyHintsImage(k) ||
+      isLikelyImageUrl(oldUrlRaw || "") ||
+      isLikelyImageUrl(newUrlRaw || "");
 
     if (!deepEqual(oldVal, newVal)) {
       if (looksLikeImageList) {
@@ -399,8 +547,12 @@ export function diffMetaData(oldArr = [], newArr = []) {
           newList,
         });
       } else {
-        const oldUrl = looksLikeImage ? normalizeImageUrl(oldUrlRaw) : undefined;
-        const newUrl = looksLikeImage ? normalizeImageUrl(newUrlRaw) : undefined;
+        const oldUrl = looksLikeImage
+          ? normalizeImageUrl(oldUrlRaw)
+          : undefined;
+        const newUrl = looksLikeImage
+          ? normalizeImageUrl(newUrlRaw)
+          : undefined;
         changes.push({
           key: k,
           label: formatLabel(k),
@@ -438,15 +590,42 @@ export function preprocessChange(change) {
       continue;
     }
 
-    // גלריה בשדה רגיל
+    // גלריה בשדה רגיל - בדיקה ראשונה! (לפני term-list כי תמונות יכולות להיראות כמו terms)
     const oldListRaw = extractImageList(oldVal);
     const newListRaw = extractImageList(newVal);
-    const looksLikeImageList =
-      keyHintsImageList(key) || (oldListRaw.length + newListRaw.length > 1);
+
+    // Check if this is an image list by key hint OR by having extracted URLs
+    // BUT only if at least one of the values is actually an array (not boolean/string/number)
+    const isImageListByKey = keyHintsImageList(key);
+    const hasExtractedUrls = oldListRaw.length + newListRaw.length > 0;
+    const oldIsArrayLike = Array.isArray(oldVal) || (oldVal && typeof oldVal === "object" && Array.isArray(oldVal.images));
+    const newIsArrayLike = Array.isArray(newVal) || (newVal && typeof newVal === "object" && Array.isArray(newVal.images));
+    const hasArrayValue = oldIsArrayLike || newIsArrayLike;
+    const looksLikeImageList = (isImageListByKey && hasArrayValue) || hasExtractedUrls;
 
     if (looksLikeImageList) {
       const oldList = oldListRaw.map(normalizeImageUrl).filter(Boolean);
       const newList = newListRaw.map(normalizeImageUrl).filter(Boolean);
+
+      // If we have a key hint but couldn't extract URLs, still mark as image-list
+      // The UI will show the raw data or fallback display
+      if (isImageListByKey && oldList.length === 0 && newList.length === 0) {
+        // Store the raw array data for display
+        rows.push({
+          key,
+          label: formatLabel(key),
+          type: "image-list",
+          old: oldVal,
+          new: newVal,
+          oldList: [],
+          newList: [],
+          // Pass raw data for potential fallback rendering
+          rawOld: oldVal,
+          rawNew: newVal,
+        });
+        continue;
+      }
+
       rows.push({
         key,
         label: formatLabel(key),
@@ -459,11 +638,32 @@ export function preprocessChange(change) {
       continue;
     }
 
+    // רשימת terms (קטגוריות, תגיות, טקסונומיות)
+    const looksLikeTermList =
+      keyHintsTermList(key) || isTermList(oldVal) || isTermList(newVal);
+
+    if (looksLikeTermList) {
+      const oldTerms = extractTermNames(oldVal);
+      const newTerms = extractTermNames(newVal);
+      rows.push({
+        key,
+        label: formatLabel(key),
+        type: "term-list",
+        old: oldVal,
+        new: newVal,
+        oldTerms,
+        newTerms,
+      });
+      continue;
+    }
+
     // תמונה בודדת
     const oldUrlRaw = extractImageUrl(oldVal);
     const newUrlRaw = extractImageUrl(newVal);
     const looksLikeImage =
-      keyHintsImage(key) || isLikelyImageUrl(oldUrlRaw || "") || isLikelyImageUrl(newUrlRaw || "");
+      keyHintsImage(key) ||
+      isLikelyImageUrl(oldUrlRaw || "") ||
+      isLikelyImageUrl(newUrlRaw || "");
 
     let type = "text";
     if (HTML_FIELDS.has(key)) type = "html";

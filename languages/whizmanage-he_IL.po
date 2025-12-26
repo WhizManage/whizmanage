@@ -1,84 +1,5023 @@
-# Copyright (C) 2025 WhizManage
-# This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WhizManage 1.3.2\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/whizmanage\n"
-"POT-Creation-Date: 2025-10-29T11:24:33+01:00\n"
-"PO-Revision-Date: 2025-10-30 09:43+0200\n"
-"Last-Translator: WhizManage Team\n"
+"Project-Id-Version: Whizmanage 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/whizmanage-pro\n"
+"Last-Translator: \n"
 "Language-Team: Hebrew\n"
-"Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Domain: whizmanage\n"
+"POT-Creation-Date: 2025-12-18T10:56:16+01:00\n"
+"PO-Revision-Date: 2025-12-18 12:01+0200\n"
+"Language: he_IL\n"
 "X-Generator: Poedit 3.8\n"
+"X-Domain: whizmanage\n"
 
 #. Plugin Name of the plugin
-#. Author of the plugin
-#: whizmanage.php includes/class-whizmanage.php:38
-#: includes/class-whizmanage.php:39 includes/class-whizmanage.php:46
-#: includes/class-whizmanage.php:47
-msgid "WhizManage"
-msgstr "WhizManage"
+#: whizmanage-pro.php
+msgid "Whizmanage Pro"
+msgstr "Whizmanage Pro"
 
-#. Plugin URI of the plugin
+#. Description of the plugin
+#: whizmanage-pro.php
+msgid "Easily manage a WooCommerce store"
+msgstr "ניהול חנות WooCommerce בקלות"
+
+#. Author of the plugin
+#: whizmanage-pro.php
+msgid "Whizmanage"
+msgstr "Whizmanage"
+
 #. Author URI of the plugin
-#: whizmanage.php
+#: whizmanage-pro.php
 msgid "https://whizmanage.com/"
 msgstr "https://whizmanage.com/"
 
-#. Description of the plugin
-#: whizmanage.php
-msgid "Easily manage your WooCommerce store with advanced bulk editing, product organization, and smart tools."
-msgstr "נהל בקלות את חנות ה-WooCommerce שלך עם עריכה מרוכזת מתקדמת, ארגון מוצרים חכם וכלים חכמים."
+#: includes/class-whizmanage.php:36
+#: includes/class-whizmanage.php:37
+msgid "WhizManage"
+msgstr "WhizManage"
 
-#: includes/class-whizmanage.php:49 includes/class-whizmanage.php:50
-msgid "Product"
+#: includes/class-whizmanage.php:50
+#: includes/class-whizmanage.php:51
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:801
+#: src/components/table/entities/coupons/coupons.columns.js:551
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:369
+#: src/components/table/import/ExportProductsIds.jsx:440
+msgid "Products"
 msgstr "מוצרים"
 
-#: includes/class-whizmanage.php:59 includes/class-whizmanage.php:60
+#: includes/class-whizmanage.php:61
+#: includes/class-whizmanage.php:62
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:635
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:893
 msgid "Coupons"
 msgstr "קופונים"
 
-#: includes/rest-functions-main.php:405
+#: includes/class-whizmanage.php:71
+#: includes/class-whizmanage.php:72
+#: src/components/table/entities/customers/customers.columns.js:76
+msgid "Orders"
+msgstr "הזמנות"
+
+#: includes/class-whizmanage.php:81
+#: includes/class-whizmanage.php:82
+msgid "Customers"
+msgstr "לקוחות"
+
+#: includes/class-whizmanage.php:91
+#: includes/class-whizmanage.php:92
+#: src/components/tour/WhatsNewTour.jsx:115
+msgid "Discount Rules"
+msgstr "חוקי הנחות"
+
+#: includes/coupons/rest-functions-coupons.php:112
 msgid "You do not have permissions to access this."
-msgstr "אין לך הרשאות לגשת לכך."
+msgstr ""
 
-#: whizmanage.php:63 whizmanage.php:81
-msgid "WhizManage requires WooCommerce to be installed and active."
-msgstr "התוסף WhizManage דורש ש-WooCommerce יהיה מותקן ומופעל."
+#: includes/discount-rules/class-discount-manager.php:287
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:837
+msgid "Discount"
+msgstr "הנחה"
 
-#: whizmanage.php:64
-msgid "Go back"
-msgstr "חזרה"
+#: includes/discount-rules/class-discount-manager.php:781
+#, php-format
+msgid "Discount: %s"
+msgstr "הנחה: %s"
 
-#: whizmanage.php:149
-msgid "Products Editor"
-msgstr "עורך מוצרים"
+#: includes/discount-rules/class-discount-manager.php:924
+msgid "🎁 Free Gift"
+msgstr "🎁 מתנה חינם"
 
-#: whizmanage.php:159
-msgid "Go Pro"
-msgstr "שדרג לגרסת Pro"
+#: includes/discount-rules/class-discount-manager.php:925
+#, php-format
+msgid "🎉 %s%% Off"
+msgstr "🎉 %s%% הנחה"
 
-#: src/ErrorBoundary.jsx:68
-msgid "Something went wrong!"
-msgstr "משהו השתבש!"
+#: includes/discount-rules/class-discount-manager.php:1126
+#, php-format
+msgid "🎁 Great! Get \"%s\" absolutely FREE with your purchase!"
+msgstr "🎁 מעולה! קבל \"%s\" בחינם לגמרי עם הרכישה שלך!"
+
+#: includes/discount-rules/class-discount-manager.php:1128
+#, php-format
+msgid "🎁 Amazing! Get \"%s\" as a FREE gift!"
+msgstr "🎁 מדהים! קבל \"%s\" כמתנה חינם!"
+
+#: includes/discount-rules/class-discount-manager.php:1130
+#, php-format
+msgid "🎁 Get \"%s\" FREE!"
+msgstr "🎁 קבל \"%s\" בחינם!"
+
+#: includes/discount-rules/class-discount-manager.php:1133
+#, php-format
+msgid "🎉 Special offer: Get \"%s\" with %s%% discount!"
+msgstr "🎉 הצעה מיוחדת: קבל \"%s\" עם %s%% הנחה!"
+
+#: includes/discount-rules/class-discount-manager.php:1135
+#, php-format
+msgid "🎉 Add \"%s\" to your cart with %s%% off!"
+msgstr "🎉 הוסף \"%s\" לעגלה עם %s%% הנחה!"
+
+#: includes/discount-rules/class-discount-manager.php:1137
+#, php-format
+msgid "🎉 Get \"%s\" with %s%% discount!"
+msgstr "🎉 קבל \"%s\" עם %s%% הנחה!"
+
+#: includes/discount-rules/class-discount-manager.php:1185
+msgid "Could not add the offer item to the cart."
+msgstr "לא ניתן להוסיף את פריט ההצעה לעגלה."
+
+#: includes/discount-rules/init.php:210
+msgid "Special Offer!"
+msgstr "הצעה מיוחדת!"
+
+#: includes/discount-rules/init.php:211
+msgid "We have a special offer for you!"
+msgstr "יש לנו הצעה מיוחדת בשבילך!"
+
+#: includes/discount-rules/init.php:214
+#: includes/discount-rules/init.php:450
+msgid "Add to Cart"
+msgstr "הוסף לעגלה"
+
+#: includes/discount-rules/init.php:216
+msgid "No Thanks"
+msgstr "לא תודה"
+
+#: includes/discount-rules/init.php:235
+msgid "Apply discounts as a single coupon (don’t change item prices)"
+msgstr "החל הנחות כקופון אחד (ללא שינוי מחירי פריטים)"
+
+#: includes/discount-rules/init.php:308
+#: includes/discount-rules/init.php:327
+msgid "Security check failed. Please refresh the page and try again."
+msgstr "בדיקת האבטחה נכשלה. רענן את הדף ונסה שוב."
+
+#: includes/discount-rules/init.php:447
+msgid "Gift Available!"
+msgstr "מתנה זמינה!"
+
+#: includes/discount-rules/init.php:468
+msgid "Special Deal!"
+msgstr "מבצע מיוחד!"
+
+#: includes/discount-rules/init.php:469
+#, php-format
+msgid "%s at %s%% OFF"
+msgstr "%s עם %s%% הנחה"
+
+#: includes/discount-rules/init.php:476
+msgid "Add Offer"
+msgstr "הוסף הצעה"
+
+#: includes/discount-rules/shortcode.php:507
+#, php-format
+msgid "Special Offer: Get %s%% off this item!"
+msgstr "הצעה מיוחדת: קבל %s%% הנחה על פריט זה!"
+
+#: includes/discount-rules/shortcode.php:509
+msgid "Special Offer: Discount on this item!"
+msgstr "הצעה מיוחדת: הנחה על פריט זה!"
+
+#: includes/discount-rules/shortcode.php:528
+#, php-format
+msgid "Buy %d+ items, get %s%% off!"
+msgstr "קנה %d פריטים ומעלה, קבל %s%% הנחה!"
+
+#: includes/discount-rules/shortcode.php:531
+#, php-format
+msgid "Buy %d+ items, get %s discount!"
+msgstr "קנה %d פריטים ומעלה, קבל הנחה של %s!"
+
+#: includes/discount-rules/shortcode.php:534
+msgid "Quantity Discount Available! Buy more to save more."
+msgstr "הנחת כמות זמינה! קנה יותר וחסוך יותר."
+
+#: includes/discount-rules/shortcode.php:544
+#, php-format
+msgid "Buy %d Get %d FREE!"
+msgstr "קנה %d קבל %d בחינם!"
+
+#: includes/discount-rules/shortcode.php:546
+#, php-format
+msgid "Buy %d Get %d at %s%% off!"
+msgstr "קנה %d קבל %d עם %s%% הנחה!"
+
+#: includes/discount-rules/shortcode.php:557
+#, php-format
+msgid "Bundle Deal: Buy %d get %d FREE!"
+msgstr "דיל חבילה: קנה %d קבל %d בחינם!"
+
+#: includes/discount-rules/shortcode.php:560
+#, php-format
+msgid "Bundle Deal: Buy %d get %d at %s%% off!"
+msgstr "דיל חבילה: קנה %d קבל %d עם %s%% הנחה!"
+
+#: includes/discount-rules/shortcode.php:565
+msgid "Free Shipping eligible with this product!"
+msgstr "מוצר זה זכאי למשלוח חינם!"
+
+#: includes/discount-rules/shortcode.php:569
+msgid "Spend Bundle: Special offer available!"
+msgstr "הצעת הוצאה כוללת זמינה!"
+
+#: includes/discount-rules/shortcode.php:573
+msgid "Special discount applicable to this product!"
+msgstr "הנחה מיוחדת חלה על מוצר זה!"
+
+#: includes/discount-rules/shortcode.php:608
+msgid "Discount applied in cart"
+msgstr "ההנחה חלה בעגלה"
+
+#: includes/products/rest-functions-product.php:312
+msgid "Local rebalance failed to create a gap"
+msgstr "איזון מקומי נכשל ביצירת מרווח"
+
+#: includes/products/rest-functions-product.php:345
+msgid "Reordered"
+msgstr "סודר מחדש"
+
+#: includes/rest-functions-main.php:269
+msgid "Failed to insert row into whizmanage table."
+msgstr "הכנסת השורה לטבלת whizmanage נכשלה."
+
+#: includes/rest-functions-main.php:277
+msgid "Failed to update whizmanage row."
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/editor/components/EditingArea.jsx:97
+msgid "copied"
+msgstr ""
+
+#: src/components/editor/components/EditingArea.jsx:97
+msgid "copy"
+msgstr ""
+
+#: src/components/editor/components/TableDialog.jsx:54
+#: src/components/editor/components/TableEditorDialog.jsx:469
+msgid "Header"
+msgstr ""
+
+#: src/components/editor/components/TableDialog.jsx:97
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:470
+msgid "Price"
+msgstr "מחיר"
+
+#: src/components/editor/components/TableDialog.jsx:134
+#: src/components/editor/components/TableDialog.jsx:304
+#: src/components/editor/components/TableDialog.jsx:305
+#: src/components/editor/components/Toolbar/InsertTools.jsx:59
+msgid "Insert Table"
+msgstr "הוספת טבלה"
+
+#: src/components/editor/components/TableDialog.jsx:143
+msgid "Generate Variations Table"
+msgstr "יצירת טבלת וריאציות"
+
+#: src/components/editor/components/TableDialog.jsx:149
+msgid "Rows"
+msgstr "שורות"
+
+#: src/components/editor/components/TableDialog.jsx:163
+#: src/components/table/core/TopPanel.jsx:165
+msgid "Columns"
+msgstr "עמודות"
+
+#: src/components/editor/components/TableDialog.jsx:177
+#: src/components/editor/components/TableEditorDialog.jsx:241
+#: src/components/editor/components/VideoDialog.jsx:390
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:137
+msgid "Width"
+msgstr "רוחב"
+
+#: src/components/editor/components/TableDialog.jsx:201
+#, fuzzy
+msgid "Add border"
+msgstr "הוסף הצעה"
+
+#: src/components/editor/components/TableDialog.jsx:211
+msgid "Add header row"
+msgstr "הוסף שורת כותרת"
+
+#: src/components/editor/components/TableDialog.jsx:216
+#: src/components/editor/components/TableEditorDialog.jsx:384
+msgid "Border color"
+msgstr "צבע מסגרת"
+
+#: src/components/editor/components/TableDialog.jsx:237
+#: src/components/editor/components/TableEditorDialog.jsx:437
+#: src/components/editor/components/VideoDialog.jsx:475
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
+#: src/components/editor/components/TableDialog.jsx:247
+msgid "H"
+msgstr ""
+
+#: src/components/editor/components/TableDialog.jsx:290
+msgid "Preview shows up to 5 rows/columns"
+msgstr ""
+
+#: src/components/editor/components/TableDialog.jsx:300
+#: src/components/editor/components/TableDialog.jsx:302
+#: src/components/editor/components/TableEditorDialog.jsx:514
+#: src/components/editor/components/Toolbar/UploadImages.jsx:91
+#: src/components/editor/components/VideoDialog.jsx:282
+#: src/components/editor/components/VideoDialog.jsx:624
+#: src/components/editor/HtmlEditor.jsx:716
+#: src/components/forms/core/fields/DownloadableInput.jsx:427
+#: src/components/forms/core/fields/MultiSelectInput.jsx:347
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1288
+#: src/components/media/MediaPicker.jsx:271
+#: src/components/table/components/MultiSelectEdit.jsx:656
+#: src/components/table/components/MultiSelectEditItem.jsx:237
+#: src/components/table/components/MultiSelectEditItem.jsx:377
+#: src/components/table/components/MultiSelectEditItem.jsx:497
+#: src/components/table/entities/coupons/coupons.toolbar.js:30
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:282
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:275
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:225
+#: src/components/table/entities/orders/components/OrderItemsModal.jsx:151
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:272
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1188
+#: src/components/table/entities/orders/components/RefundModal.jsx:912
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:189
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:189
+#: src/components/table/entities/products/components/DownloadableCell.jsx:541
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:144
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:274
+#: src/components/table/entities/products/components/TypeEdit.jsx:49
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:333
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:439
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:78
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:185
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:145
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:306
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:609
+#: src/components/table/filters/DateFilterTabs.jsx:317
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:252
+#: src/components/table/toolbar/actions/genericActions.js:46
+#: src/components/table/toolbar/actions/genericActions.js:162
+#: src/components/table/toolbar/actions/genericActions.js:383
+#: src/components/ui/custom/CustomConfirm.jsx:122
+#: src/layout/menu/LicenseMange.jsx:82
+#: src/layout/menu/LicenseMange.jsx:254
+msgid "Cancel"
+msgstr "ביטול"
+
+#: src/components/editor/components/TableEditorDialog.jsx:225
+msgid "Edit Table"
+msgstr "ערוך טבלה"
+
+#: src/components/editor/components/TableEditorDialog.jsx:233
+msgid "General"
+msgstr "כללי"
+
+#: src/components/editor/components/TableEditorDialog.jsx:276
+msgid "Header row"
+msgstr "שורת כותרת"
+
+#: src/components/editor/components/TableEditorDialog.jsx:282
+msgid "Appearance"
+msgstr "מראה"
+
+#: src/components/editor/components/TableEditorDialog.jsx:292
+msgid "Zebra rows"
+msgstr "שורות זברה"
+
+#: src/components/editor/components/TableEditorDialog.jsx:302
+msgid "Alternate row color"
+msgstr ""
+
+#: src/components/editor/components/TableEditorDialog.jsx:330
+#, fuzzy
+msgid "Borders"
+msgstr "הזמנות"
+
+#: src/components/editor/components/TableEditorDialog.jsx:338
+msgid "Border width"
+msgstr "רוחב מסגרת"
+
+#: src/components/editor/components/TableEditorDialog.jsx:363
+msgid "Border style"
+msgstr "סגנון מסגרת"
+
+#: src/components/editor/components/TableEditorDialog.jsx:371
+msgid "Solid"
+msgstr "מלא"
+
+#: src/components/editor/components/TableEditorDialog.jsx:372
+msgid "Dashed"
+msgstr "מקווקו"
+
+#: src/components/editor/components/TableEditorDialog.jsx:373
+msgid "Dotted"
+msgstr "נקודתי"
+
+#: src/components/editor/components/TableEditorDialog.jsx:374
+msgid "Double"
+msgstr "כפול"
+
+#: src/components/editor/components/TableEditorDialog.jsx:375
+msgid "None"
+msgstr "ללא"
+
+#: src/components/editor/components/TableEditorDialog.jsx:411
+msgid "Cell padding"
+msgstr "ריווח בתא"
+
+#: src/components/editor/components/TableEditorDialog.jsx:500
+msgid "Cell"
+msgstr ""
+
+#: src/components/editor/components/TableEditorDialog.jsx:523
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:714
+#: src/components/table/filters/DateFilterTabs.jsx:325
+msgid "Apply"
+msgstr "החל"
+
+#: src/components/editor/components/TableSelector.jsx:405
+msgid "Cannot delete the last row"
+msgstr ""
+
+#: src/components/editor/components/TableSelector.jsx:422
+msgid "Cannot delete the last column"
+msgstr ""
+
+#: src/components/editor/components/TableSelector.jsx:705
+msgid "Table settings"
+msgstr "הגדרות טבלה"
+
+#: src/components/editor/components/TableSelector.jsx:714
+msgid "Full width"
+msgstr ""
+
+#: src/components/editor/components/TableSelector.jsx:723
+msgid "Delete table"
+msgstr ""
+
+#: src/components/editor/components/TableSelector.jsx:741
+msgid "Row operations"
+msgstr ""
+
+#: src/components/editor/components/TableSelector.jsx:743
+msgid "Row"
+msgstr "שורה"
+
+#: src/components/editor/components/TableSelector.jsx:756
+msgid "Insert above"
+msgstr "הכנס מעל"
+
+#: src/components/editor/components/TableSelector.jsx:764
+msgid "Insert below"
+msgstr "הכנס מתחת"
+
+#: src/components/editor/components/TableSelector.jsx:773
+msgid "Delete row"
+msgstr "מחק שורה"
+
+#: src/components/editor/components/TableSelector.jsx:789
+msgid "Column operations"
+msgstr ""
+
+#: src/components/editor/components/TableSelector.jsx:791
+msgid "Column"
+msgstr "עמודה"
+
+#: src/components/editor/components/TableSelector.jsx:804
+msgid "Insert left"
+msgstr "הכנס משמאל"
+
+#: src/components/editor/components/TableSelector.jsx:812
+msgid "Insert right"
+msgstr "הכנס מימין"
+
+#: src/components/editor/components/TableSelector.jsx:821
+msgid "Delete column"
+msgstr "מחק עמודה"
+
+#: src/components/editor/components/Toolbar/AlignmentTools.jsx:19
+#: src/components/editor/components/Toolbar/AlignmentTools.jsx:30
+msgid "Align Left"
+msgstr "יישור לשמאל"
+
+#: src/components/editor/components/Toolbar/AlignmentTools.jsx:38
+#: src/components/editor/components/Toolbar/AlignmentTools.jsx:49
+msgid "Align Center"
+msgstr "יישור למרכז"
+
+#: src/components/editor/components/Toolbar/AlignmentTools.jsx:57
+#: src/components/editor/components/Toolbar/AlignmentTools.jsx:68
+msgid "Align Right"
+msgstr "יישור לימין"
+
+#: src/components/editor/components/Toolbar/AlignmentTools.jsx:76
+#: src/components/editor/components/Toolbar/AlignmentTools.jsx:87
+msgid "Justify"
+msgstr "יישור דו-צדדי"
+
+#: src/components/editor/components/Toolbar/CodeTools.jsx:158
+#: src/components/editor/components/Toolbar/CodeTools.jsx:165
+msgid "Inline code"
+msgstr "קוד בשורה"
+
+#: src/components/editor/components/Toolbar/ColorTools.jsx:348
+msgid "Reset Text Color"
+msgstr "איפוס צבע טקסט"
+
+#: src/components/editor/components/Toolbar/ColorTools.jsx:348
+#: src/components/editor/components/Toolbar/ColorTools.jsx:353
+msgid "Text Color"
+msgstr "צבע טקסט"
+
+#: src/components/editor/components/Toolbar/ColorTools.jsx:392
+msgid "Reset Background Color"
+msgstr "איפוס צבע רקע"
+
+#: src/components/editor/components/Toolbar/ColorTools.jsx:392
+#: src/components/editor/components/Toolbar/ColorTools.jsx:398
+msgid "Background Color"
+msgstr "צבע רקע"
+
+#: src/components/editor/components/Toolbar/FontTools.jsx:70
+#: src/components/editor/components/Toolbar/FontTools.jsx:82
+msgid "Font"
+msgstr "גופן"
+
+#: src/components/editor/components/Toolbar/FontTools.jsx:122
+msgid "Decrease Font Size"
+msgstr "הקטן גודל גופן"
+
+#: src/components/editor/components/Toolbar/FontTools.jsx:141
+msgid "Increase Font Size"
+msgstr "הגדל גודל גופן"
+
+#: src/components/editor/components/Toolbar/HistoryTools.jsx:12
+msgid "Undo"
+msgstr ""
+
+#: src/components/editor/components/Toolbar/HistoryTools.jsx:27
+msgid "Redo"
+msgstr ""
+
+#: src/components/editor/components/Toolbar/index.jsx:178
+msgid "More"
+msgstr "עוד"
+
+#: src/components/editor/components/Toolbar/InsertTools.jsx:18
+#: src/components/editor/HtmlEditor.jsx:713
+msgid "Insert Link"
+msgstr "הוספת קישור"
+
+#: src/components/editor/components/Toolbar/InsertTools.jsx:32
+msgid "Insert Image"
+msgstr "הוספת תמונה"
+
+#: src/components/editor/components/Toolbar/InsertTools.jsx:45
+#: src/components/editor/components/VideoDialog.jsx:333
+#: src/components/editor/components/VideoDialog.jsx:632
+msgid "Insert Video"
+msgstr "הוסף סרטון"
+
+#: src/components/editor/components/Toolbar/InsertTools.jsx:73
+msgid "Insert Horizontal Line"
+msgstr "הוספת קו אופקי"
+
+#: src/components/editor/components/Toolbar/ListTools.jsx:19
+#: src/components/editor/components/Toolbar/ListTools.jsx:27
+msgid "Bulleted List"
+msgstr "רשימת תבליטים"
+
+#: src/components/editor/components/Toolbar/ListTools.jsx:35
+#: src/components/editor/components/Toolbar/ListTools.jsx:43
+msgid "Numbered List"
+msgstr "רשימה ממוספרת"
+
+#: src/components/editor/components/Toolbar/TextFormatting.jsx:18
+#: src/components/editor/components/Toolbar/TextFormatting.jsx:26
+msgid "Bold"
+msgstr "מודגש"
+
+#: src/components/editor/components/Toolbar/TextFormatting.jsx:33
+#: src/components/editor/components/Toolbar/TextFormatting.jsx:41
+msgid "Italic"
+msgstr "נטוי"
+
+#: src/components/editor/components/Toolbar/TextFormatting.jsx:48
+#: src/components/editor/components/Toolbar/TextFormatting.jsx:56
+msgid "Underline"
+msgstr "קו תחתון"
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:56
+msgid "Link copied"
+msgstr ""
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:59
+msgid "Failed to copy link"
+msgstr ""
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:88
+#: src/components/editor/components/Toolbar/UploadImages.jsx:220
+msgid "Delete Image"
+msgstr "מחיקת תמונה"
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:89
+msgid "Are you sure you want to delete this image?"
+msgstr "האם אתה בטוח שברצונך למחוק תמונה זו?"
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:90
+#: src/components/editor/components/VideoDialog.jsx:281
+#: src/components/editor/components/VideoDialog.jsx:587
+#: src/components/media/MediaPicker.jsx:270
+#: src/components/table/components/MultiSelectEditItem.jsx:236
+#: src/components/table/components/MultiSelectEditItem.jsx:440
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:223
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:77
+msgid "Delete"
+msgstr "מחק"
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:97
+msgid "The image has been deleted successfully"
+msgstr "התמונה נמחקה בהצלחה"
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:101
+#, fuzzy
+msgid "Failed to delete image"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:155
+#: src/components/forms/core/fields/ImageInput.jsx:44
+#: src/components/table/entities/products/components/variation/components/VariationImageEdit.jsx:109
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:201
+msgid "Select Image"
+msgstr "בחר תמונה"
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:170
+msgid "Search image..."
+msgstr "חפש תמונה..."
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:207
+#: src/components/editor/components/VideoDialog.jsx:578
+#: src/components/media/MediaPicker.jsx:539
+msgid "Copy link"
+msgstr ""
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:257
+msgid "No images found"
+msgstr ""
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:261
+msgid "No images match your search. Try different keywords or upload new images."
+msgstr ""
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:265
+msgid "No images in your media library yet. Upload your first image to get started."
+msgstr ""
+
+#: src/components/editor/components/Toolbar/UploadImages.jsx:278
+#: src/components/table/core/TopPanel.jsx:209
+#: src/components/table/core/TopPanel.jsx:213
+msgid "Clear search"
+msgstr "נקה חיפוש"
+
+#: src/components/editor/components/Toolbar/ViewTools.jsx:19
+msgid "Print"
+msgstr "הדפסה"
+
+#: src/components/editor/components/Toolbar/ViewTools.jsx:33
+msgid "Show Editor"
+msgstr "הצג עורך טקסט"
+
+#: src/components/editor/components/Toolbar/ViewTools.jsx:33
+msgid "Show HTML"
+msgstr "הצגת HTML"
+
+#: src/components/editor/components/Toolbar/ViewTools.jsx:49
+msgid "Exit Full Screen"
+msgstr "צא ממסך מלא"
+
+#: src/components/editor/components/Toolbar/ViewTools.jsx:49
+msgid "Full Screen"
+msgstr "מסך מלא"
+
+#: src/components/editor/components/VideoDialog.jsx:181
+msgid "Your browser does not support the video tag."
+msgstr "הדפדפן שלך לא תומך בתגית הוידאו."
+
+#: src/components/editor/components/VideoDialog.jsx:251
+msgid "Please select a valid video"
+msgstr ""
+
+#: src/components/editor/components/VideoDialog.jsx:279
+msgid "Delete Video"
+msgstr "מחק סרטון"
+
+#: src/components/editor/components/VideoDialog.jsx:280
+msgid "Are you sure you want to delete this video?"
+msgstr "האם אתה בטוח שברצונך למחוק את הסרטון?"
+
+#: src/components/editor/components/VideoDialog.jsx:288
+msgid "Video deleted successfully"
+msgstr ""
+
+#: src/components/editor/components/VideoDialog.jsx:290
+#, fuzzy
+msgid "Failed to delete video"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/editor/components/VideoDialog.jsx:298
+#: src/components/media/MediaPicker.jsx:288
+msgid "Link copied to clipboard"
+msgstr "הקישור הועתק ללוח"
+
+#: src/components/editor/components/VideoDialog.jsx:345
+msgid "Embed URL"
+msgstr ""
+
+#: src/components/editor/components/VideoDialog.jsx:352
+msgid "Media Library"
+msgstr ""
+
+#: src/components/editor/components/VideoDialog.jsx:366
+msgid "Video URL"
+msgstr "כתובת סרטון"
+
+#: src/components/editor/components/VideoDialog.jsx:377
+msgid "Supported: YouTube, Vimeo, direct video files (.mp4, .webm, .ogg)"
+msgstr ""
+
+#: src/components/editor/components/VideoDialog.jsx:407
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:154
+msgid "Height"
+msgstr "גובה"
+
+#: src/components/editor/components/VideoDialog.jsx:435
+msgid "Maintain aspect ratio (16:9)"
+msgstr "שמור יחס גובה-רוחב (16:9)"
+
+#: src/components/editor/components/VideoDialog.jsx:451
+msgid "Show controls"
+msgstr "הצג בקרים"
+
+#: src/components/editor/components/VideoDialog.jsx:467
+msgid "Autoplay"
+msgstr "נגינה אוטומטית"
+
+#: src/components/editor/components/VideoDialog.jsx:487
+msgid "Enter a video URL to see preview"
+msgstr "הכנס כתובת סרטון לתצוגה מקדימה"
+
+#: src/components/editor/components/VideoDialog.jsx:507
+msgid "Search videos..."
+msgstr ""
+
+#: src/components/editor/components/VideoDialog.jsx:535
+msgid "No videos found"
+msgstr ""
+
+#: src/components/editor/components/VideoDialog.jsx:537
+msgid "Upload videos using the area above"
+msgstr ""
+
+#: src/components/editor/HtmlEditor.jsx:714
+msgid "Please enter the link URL:"
+msgstr "אנא הזן/י את כתובת הקישור:"
+
+#: src/components/editor/HtmlEditor.jsx:715
+msgid "Insert"
+msgstr ""
+
+#: src/components/editor/RichEditorModal.jsx:84
+#: src/components/editor/RichEditorModal.jsx:114
+#: src/components/table/components/MultiSelectEditItem.jsx:424
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:188
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:195
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:124
+msgid "Edit"
+msgstr "ערוך"
+
+#: src/components/editor/RichEditorModal.jsx:128
+#: src/components/media/MediaPagination.jsx:89
+#: src/layout/menu/History.jsx:677
+msgid "Close"
+msgstr "סגור"
+
+#: src/components/editor/RichEditorModal.jsx:131
+#: src/components/forms/core/fields/DownloadableInput.jsx:435
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1295
+#: src/components/forms/GenericItemModal.jsx:281
+#: src/components/media/MediaPagination.jsx:99
+#: src/components/table/components/MultiSelectEditItem.jsx:364
+#: src/components/table/components/MultiSelectEditItem.jsx:373
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:412
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:296
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:289
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:232
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:400
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:405
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1201
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:199
+#: src/components/table/entities/products/components/DownloadableCell.jsx:555
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:151
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:287
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:209
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:212
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:257
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:346
+msgid "Save"
+msgstr "שמור"
+
+#: src/components/forms/AddItemDropdown.jsx:65
+msgid "Pro feature - Free users can create only 1 discount rule"
+msgstr ""
+
+#: src/components/forms/AddItemDropdown.jsx:92
+msgid "Using form"
+msgstr "באמצעות טופס"
+
+#: src/components/forms/AddItemDropdown.jsx:94
+msgid "Complete form with all fields"
+msgstr "מילוי טופס מלא עם כל השדות"
+
+#: src/components/forms/AddItemDropdown.jsx:123
+msgid "Quick add to table"
+msgstr "הוספה מהירה לטבלה"
+
+#: src/components/forms/AddItemDropdown.jsx:125
+msgid "Add empty row directly in table"
+msgstr "הוסף שורה ריקה ישירות לטבלה"
+
+#: src/components/forms/core/fields/AddressInput.jsx:119
+msgid "Same as billing address"
+msgstr "זהה לכתובת לחיוב"
+
+#: src/components/forms/core/fields/AddressInput.jsx:131
+#: src/components/forms/core/fields/AddressInput.jsx:135
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:248
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:243
+msgid "First Name"
+msgstr "שם פרטי"
+
+#: src/components/forms/core/fields/AddressInput.jsx:148
+#: src/components/forms/core/fields/AddressInput.jsx:152
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:261
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:259
+msgid "Last Name"
+msgstr "שם משפחה"
+
+#: src/components/forms/core/fields/AddressInput.jsx:166
+#: src/components/forms/core/fields/AddressInput.jsx:171
+#: src/components/table/entities/customers/customers.columns.js:14
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:366
+msgid "Email"
+msgstr "אימייל"
+
+#: src/components/forms/core/fields/AddressInput.jsx:186
+#: src/components/forms/core/fields/AddressInput.jsx:190
+#: src/components/table/entities/customers/customers.columns.js:101
+#: src/components/table/entities/customers/customers.columns.js:104
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:382
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:385
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:244
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:265
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:837
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:875
+msgid "Phone"
+msgstr "טלפון"
+
+#: src/components/forms/core/fields/AddressInput.jsx:204
+msgid "Company (optional)"
+msgstr "חברה (אופציונלי)"
+
+#: src/components/forms/core/fields/AddressInput.jsx:208
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:277
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:278
+msgid "Company"
+msgstr "חברה"
+
+#: src/components/forms/core/fields/AddressInput.jsx:221
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:292
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:296
+msgid "Address Line 1"
+msgstr "כתובת מס 1"
+
+#: src/components/forms/core/fields/AddressInput.jsx:225
+msgid "Street address"
+msgstr "כתובת רחוב"
+
+#: src/components/forms/core/fields/AddressInput.jsx:238
+msgid "Address Line 2 (optional)"
+msgstr "כתובת מס 2 (אופציונלי)"
+
+#: src/components/forms/core/fields/AddressInput.jsx:242
+msgid "Apartment, suite, etc."
+msgstr "דירה, סוויטה וכו׳"
+
+#: src/components/forms/core/fields/AddressInput.jsx:255
+#: src/components/forms/core/fields/AddressInput.jsx:259
+#: src/components/table/entities/customers/customers.columns.js:111
+#: src/components/table/entities/customers/customers.columns.js:114
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:322
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:332
+msgid "City"
+msgstr "עיר"
+
+#: src/components/forms/core/fields/AddressInput.jsx:272
+msgid "State/Province"
+msgstr "מדינה/מחוז"
+
+#: src/components/forms/core/fields/AddressInput.jsx:276
+msgid "State"
+msgstr "מחוז"
+
+#: src/components/forms/core/fields/AddressInput.jsx:289
+msgid "Postal Code"
+msgstr "מיקוד"
+
+#: src/components/forms/core/fields/AddressInput.jsx:293
+msgid "ZIP/Postal code"
+msgstr "מיקוד"
+
+#: src/components/forms/core/fields/AddressInput.jsx:306
+#: src/components/table/entities/customers/customers.columns.js:121
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:350
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:366
+msgid "Country"
+msgstr "מדינה"
+
+#: src/components/forms/core/fields/CouponCodeInput.jsx:116
+msgid "Generate a random coupon code automatically"
+msgstr ""
+
+#: src/components/forms/core/fields/CustomerSelectInput.jsx:288
+msgid "Search customer"
+msgstr "חפש/י לקוח"
+
+#: src/components/forms/core/fields/CustomerSelectInput.jsx:308
+msgid "No customers found"
+msgstr "לא נמצאו לקוחות"
+
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:256
+#: src/components/table/core/EditableCell.jsx:837
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:275
+msgid "Enabled"
+msgstr "מופעל"
+
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:257
+#: src/components/table/core/EditableCell.jsx:837
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:275
+msgid "Disabled"
+msgstr "מושבת"
+
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:284
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:266
+msgid "Unsupported field type"
+msgstr "סוג שדה לא נתמך"
+
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:296
+msgid "No custom fields configured"
+msgstr ""
+
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:299
+msgid "Custom fields can be added using ACF or JetEngine plugins"
+msgstr ""
+
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:319
+msgid "Custom Product Fields"
+msgstr "שדות מוצר מותאמים אישית"
+
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:322
+#, fuzzy
+msgid "fields available"
+msgstr "מתנה זמינה!"
+
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:376
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:310
+msgid "Default"
+msgstr "ברירת מחדל"
+
+#: src/components/forms/core/fields/CustomFieldsKeyValueInput.jsx:94
+#: src/components/media/MediaPicker.jsx:433
+msgid "Clear all"
+msgstr "נקה הכל"
+
+#: src/components/forms/core/fields/CustomFieldsKeyValueInput.jsx:101
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:293
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:930
+msgid "Key"
+msgstr "מפתח"
+
+#: src/components/forms/core/fields/CustomFieldsKeyValueInput.jsx:103
+msgid "e.g. customer_note"
+msgstr "לדוגמה: הערת לקוח"
+
+#: src/components/forms/core/fields/CustomFieldsKeyValueInput.jsx:117
+#: src/components/forms/core/fields/CustomFieldsKeyValueInput.jsx:119
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:575
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:862
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1326
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:296
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:933
+msgid "Value"
+msgstr "ערך"
+
+#: src/components/forms/core/fields/CustomFieldsKeyValueInput.jsx:139
+#: src/components/forms/core/fields/EmailsInput.jsx:123
+#: src/components/forms/core/fields/MultiSelectInput.jsx:344
+#: src/components/table/components/MultiSelectEdit.jsx:642
+#: src/components/table/components/MultiSelectEdit.jsx:652
+#: src/components/table/components/MultiSelectEditItem.jsx:486
+#: src/components/table/components/MultiSelectEditItem.jsx:493
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:330
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:182
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:326
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:481
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:142
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:303
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:249
+msgid "Add"
+msgstr "הוסף"
+
+#: src/components/forms/core/fields/CustomFieldsKeyValueInput.jsx:173
+msgid "No custom fields added yet"
+msgstr "לא נוספו עדיין שדות מותאמים אישית"
+
+#: src/components/forms/core/fields/DateRangeInput.jsx:143
+msgid "(optional)"
+msgstr "(אופציונלי)"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:98
+#: src/components/table/entities/discount-rules/discount-rules.api.js:173
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:24
+#: src/components/table/entities/products/components/DownloadableCell.jsx:144
+msgid "Name is required"
+msgstr "שם הוא שדה חובה"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:103
+#: src/components/table/entities/products/components/DownloadableCell.jsx:148
+msgid "File URL is required"
+msgstr ""
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:109
+#: src/components/table/entities/products/components/DownloadableCell.jsx:154
+msgid "URL must start with http:// or https://"
+msgstr ""
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:233
+#: src/components/forms/core/fields/DownloadableInput.jsx:249
+#: src/components/table/entities/products/components/DownloadableCell.jsx:287
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:166
+#: src/components/table/entities/products/products.columns.js:1414
+msgid "Downloadable"
+msgstr "ניתן להורדה"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:233
+#: src/components/forms/core/fields/DownloadableInput.jsx:249
+#: src/components/table/entities/products/components/DownloadableCell.jsx:288
+msgid "Not downloadable"
+msgstr "לא להורדה"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:261
+#: src/components/forms/core/fields/DownloadableInput.jsx:278
+#: src/components/table/entities/products/components/DownloadableCell.jsx:325
+#: src/components/table/entities/products/components/DownloadableCell.jsx:350
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:231
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:247
+msgid "Downloadable files"
+msgstr "קבצים להורדה"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:286
+#: src/components/table/entities/products/components/DownloadableCell.jsx:367
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:256
+msgid "Download Expiry (days)"
+msgstr "תוקף ההורדה (ימים)"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:298
+#: src/components/forms/core/fields/DownloadableInput.jsx:314
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:312
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:352
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:392
+#: src/components/table/entities/products/components/DownloadableCell.jsx:375
+#: src/components/table/entities/products/components/DownloadableCell.jsx:393
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:264
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:278
+msgid "Unlimited"
+msgstr "ללא הגבלה"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:304
+#: src/components/table/entities/products/components/DownloadableCell.jsx:385
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:270
+msgid "Download Limit"
+msgstr "מגבלת הורדות"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:330
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:18
+#: src/components/table/entities/products/components/DownloadableCell.jsx:426
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:292
+#: src/components/table/entities/products/products.columns.js:505
+msgid "Name"
+msgstr "שם"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:359
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:304
+msgid "File URL:"
+msgstr "כתובת URL של הקובץ:"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:393
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:321
+msgid "Choose file"
+msgstr "בחר קובץ"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:395
+#: src/components/table/entities/products/components/DownloadableCell.jsx:476
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:323
+msgid "Delete file"
+msgstr "מחק קובץ"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:418
+#: src/components/table/entities/products/components/DownloadableCell.jsx:531
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:340
+#, fuzzy
+msgid "Add file"
+msgstr "הוסף הצעה"
+
+#: src/components/forms/core/fields/DownloadableInput.jsx:462
+#: src/components/table/entities/products/components/DownloadableCell.jsx:574
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:363
+msgid "Select File"
+msgstr "בחר קובץ"
+
+#: src/components/forms/core/fields/EmailsInput.jsx:95
+msgid "No email restrictions"
+msgstr "ללא הגבלות על כתובות אימייל"
+
+#: src/components/forms/core/fields/ImageInput.jsx:44
+msgid "Select Images"
+msgstr "בחר תמונות"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:106
+#: src/components/forms/core/fields/InventoryInput.jsx:110
+#: src/components/table/entities/products/products.columns.js:577
+msgid "SKU"
+msgstr "מק״ט (מספר קטלוגי)"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:117
+msgid "Stock management"
+msgstr "ניהול מלאי"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:129
+msgid "Track stock quantity for this product"
+msgstr "עקוב אחר כמות המלאי של מוצר זה"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:149
+msgid "Inventory tracking"
+msgstr "מעקב מלאי"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:153
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:263
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:471
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:550
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:146
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:728
+msgid "Quantity"
+msgstr "כמות"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:171
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:163
+msgid "Allow backorders?"
+msgstr "אפשר הזמנות חוזרות?"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:187
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:177
+msgid "Do not allow"
+msgstr "אל תאפשר"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:197
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:179
+msgid "Allow, but notify customer"
+msgstr "אפשר, אך הודע ללקוח"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:207
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:181
+msgid "Allow"
+msgstr "אפשר"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:215
+msgid "Set status"
+msgstr "הגדר סטטוס"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:217
+msgid "Stock status"
+msgstr "מצב מלאי"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:226
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:199
+msgid "In stock"
+msgstr "במלאי"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:229
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:212
+msgid "Out of stock"
+msgstr "לא במלאי"
+
+#: src/components/forms/core/fields/InventoryInput.jsx:232
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:225
+msgid "On backorder"
+msgstr "בהזמנה חוזרת"
+
+#: src/components/forms/core/fields/MultiSelectInput.jsx:378
+#: src/components/table/components/MultiSelectEdit.jsx:733
+#: src/components/table/core/DisplayColumns.jsx:292
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:303
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:358
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:371
+#: src/components/table/import/ExportProductsIds.jsx:425
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:288
+#: src/components/table/toolbar/actions/bulk-edit/SelectedRows.jsx:89
+msgid "No results found."
+msgstr "לא נמצאו תוצאות."
+
+#: src/components/forms/core/fields/OrderLineItemsInput.jsx:94
+msgid "No products found. Please add products first."
+msgstr ""
+
+#: src/components/forms/core/fields/ProductIdsInput.jsx:250
+msgid "No excluded products"
+msgstr "אין מוצרים להחרגה"
+
+#: src/components/forms/core/fields/ProductIdsInput.jsx:250
+#, fuzzy
+msgid "No products"
+msgstr "מוצרים"
+
+#: src/components/forms/core/fields/ProductIdsInput.jsx:263
+msgid "Select excluded products"
+msgstr "בחר מוצרים להחרגה"
+
+#: src/components/forms/core/fields/ProductIdsInput.jsx:264
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:238
+#, fuzzy
+msgid "Select products"
+msgstr "מוצרים"
+
+#: src/components/forms/core/fields/ProductIdsInput.jsx:277
+msgid "Find products by name or SKU"
+msgstr "חפש מוצרים לפי שם או מק\"ט"
+
+#: src/components/forms/core/fields/ProductIdsInput.jsx:284
+msgid "No products found."
+msgstr "לא נמצאו מוצרים."
+
+#: src/components/forms/core/fields/ProductIdsInput.jsx:291
+#: src/components/table/entities/coupons/coupons.columns.js:648
+msgid "Excluded products"
+msgstr "מוצרים להחרגה"
+
+#: src/components/forms/core/fields/ProductIdsInput.jsx:292
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:359
+msgid "Available products"
+msgstr "מוצרים זמינים"
+
+#: src/components/forms/core/fields/ProductTypeInput.jsx:63
+msgid "This is a Pro feature"
+msgstr ""
+
+#: src/components/forms/core/fields/ProductTypeInput.jsx:126
+msgid "Product saved successfully. You can now add variations."
+msgstr "המוצר נשמר בהצלחה. כעת ניתן להוסיף וריאציות."
+
+#: src/components/forms/core/fields/ProductTypeInput.jsx:139
+msgid "Failed to save product. Please try again."
+msgstr ""
+
+#: src/components/forms/core/fields/ProductTypeInput.jsx:181
+#: src/components/table/entities/products/components/TypeEdit.jsx:95
+#: src/components/table/entities/products/components/TypeEdit.jsx:97
+msgid "Select product type"
+msgstr ""
+
+#: src/components/forms/core/fields/ProductTypeInput.jsx:185
+#, fuzzy
+msgid "Product Type"
+msgstr "מוצרים"
+
+#: src/components/forms/core/fields/ProductTypeInput.jsx:205
+#: src/components/table/core/TopPanel.jsx:242
+#: src/components/table/entities/customers/components/CustomerOrdersPopover.jsx:49
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:174
+#: src/components/table/entities/orders/orders.columns.js:516
+#: src/components/table/entities/products/components/TypeDisplay.jsx:40
+#: src/components/table/entities/products/components/TypeWithSettingsCell.jsx:34
+#: src/components/table/toolbar/Toolbar.jsx:69
+msgid "Pro feature"
+msgstr "תכונת Pro"
+
+#: src/components/forms/core/fields/ProductTypeInput.jsx:268
+msgid "Note: Selecting 'Variable product' will save the product so you can add variations."
+msgstr "הערה: בחירה ב„מוצר משתנה” תשמור את המוצר כך שתוכל להוסיף וריאציות."
+
+#: src/components/forms/core/fields/ProductTypeInput.jsx:278
+msgid "Please fill in the product name first to enable product type selection"
+msgstr "אנא הזן/י תחילה את שם המוצר כדי לאפשר בחירת סוג מוצר"
+
+#: src/components/forms/core/fields/SelectInput.jsx:67
+msgid "Select an option"
+msgstr "בחר אפשרות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:69
+msgid "Product price adjustment"
+msgstr "התאמת מחיר מוצר"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:70
+msgid "Apply a percentage or fixed discount directly to product prices. The discount is calculated per product unit."
+msgstr "החלת הנחה באחוזים או בסכום קבוע ישירות על מחירי המוצרים. ההנחה מחושבת לכל יחידת מוצר."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:75
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:91
+msgid "Set the discount value and method (percentage or fixed amount)"
+msgstr "הגדרת ערך ההנחה ושיטת החישוב (אחוזים או סכום קבוע)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:79
+msgid "Optionally apply as a coupon to show separately in cart"
+msgstr "ניתן להחיל כהטבת קופון כדי להציג אותה בנפרד בסל הקניות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:85
+msgid "Cart total adjustment"
+msgstr "התאמת סך סל הקניות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:86
+msgid "Apply a percentage or fixed discount to the entire cart total. The discount affects the final cart amount."
+msgstr "החלת הנחה באחוזים או בסכום קבוע על סך כל סל הקניות. ההנחה משפיעה על הסכום הסופי לתשלום."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:95
+msgid "Optionally apply as a coupon to show separately in cart totals"
+msgstr "ניתן להחיל כהטבת קופון כדי להציג אותה בנפרד בסיכומי הסל"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:104
+msgid "Bulk quantity discount"
+msgstr "הנחת כמות מדורגת"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:105
+msgid "Offer progressive discounts based on quantity purchased. Create tiers with different discount rates for different quantity ranges."
+msgstr "הצעת הנחות מדורגות לפי הכמות הנרכשת. ניתן ליצור מדרגות עם שיעורי הנחה שונים לטווחי כמות שונים."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:110
+msgid "Add tiers with min/max quantities"
+msgstr "הוספת מדרגות עם כמות מינימלית/מקסימלית"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:111
+msgid "Set discount type and value for each tier"
+msgstr "הגדרת סוג ההנחה וערכה לכל מדרגה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:112
+msgid "Optionally add labels to display in cart"
+msgstr "ניתן להוסיף תוויות להצגה בסל הקניות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:118
+msgid "Buy X Get Y (BOGO)"
+msgstr "קנה X קבל Y (BOGO)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:119
+msgid "Classic Buy X Get Y offer - when customer buys X quantity, they get Y quantity at a discount. Perfect for 'Buy 2 Get 1 Free' promotions."
+msgstr "הצעת \"קנה X קבל Y\" קלאסית – כאשר הלקוח רוכש כמות X, הוא מקבל כמות Y בהנחה. מתאים במיוחד למבצעי \"קנה 2 וקבל 1 חינם\"."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:124
+msgid "Set how many items to buy (X)"
+msgstr "הגדרת מספר הפריטים שיש לרכוש (X)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:125
+msgid "Set how many items to get (Y)"
+msgstr "הגדרת מספר הפריטים המתקבלים (Y)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:126
+msgid "Set the discount percentage on Y items"
+msgstr "הגדרת אחוז ההנחה על פריטי Y"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:127
+msgid "Enable recursive to repeat the offer multiple times"
+msgstr "הפעלת חישוב חוזר (recursive) כדי לחזור על ההטבה מספר פעמים"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:133
+msgid "Buy X Get Y (Different products)"
+msgstr "קנה X קבל Y (מוצרים שונים)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:134
+msgid "Buy specific products (X) and get discount on different products (Y). Great for cross-selling campaigns."
+msgstr "קניית מוצרים מסוימים (X) וקבלת הנחה על מוצרים אחרים (Y). מתאים במיוחד לקמפייני Cross-sell."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:139
+msgid "Select which products must be bought (Buy side - X)"
+msgstr "בחירת המוצרים שחובה לרכוש (צד הקנייה – X)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:140
+msgid "Select which products get the discount (Get side - Y)"
+msgstr "בחירת המוצרים שמקבלים את ההנחה (צד הקבלה – Y)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:141
+msgid "Set quantities and discount percentage"
+msgstr "הגדרת כמויות ואחוז ההנחה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:142
+msgid "Enable recursive to repeat the offer"
+msgstr "הפעלת חישוב חוזר כדי לחזור על ההטבה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:148
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:38
+msgid "Shipping discount"
+msgstr "הנחת משלוח"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:149
+msgid "Reduce or eliminate shipping costs. Apply percentage or fixed discount to shipping methods."
+msgstr "הפחתה או ביטול של עלויות משלוח. ניתן להחיל הנחה באחוזים או בסכום קבוע על שיטות המשלוח."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:154
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:169
+msgid "Set the discount value and method"
+msgstr "הגדרת ערך ההנחה ושיטת החישוב"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:155
+msgid "Optionally add a label to show in cart"
+msgstr "ניתן להוסיף תווית להצגה בסל הקניות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:156
+msgid "The discount applies to eligible shipping methods"
+msgstr "ההנחה חלה על שיטות המשלוח הזכאיות בלבד"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:162
+msgid "Spend X Get discount"
+msgstr "הנחה לפי סכום קנייה (Spend X)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:163
+msgid "Reward customers for spending more. For every X spent, they get a discount. Example: Spend $100, get $10 off."
+msgstr "תגמול לקוחות על הוצאה גבוהה יותר. עבור כל סכום X שנרכש, הלקוח מקבל הנחה. לדוגמה: קנייה ב-$100 מזכה ב-$10 הנחה."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:168
+msgid "Set the spending threshold (X)"
+msgstr "הגדרת סף ההוצאה (X)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:170
+msgid "Enable recursive to apply multiple times (spend $200 = $20 off)"
+msgstr "הפעלת חישוב חוזר כך שההטבה תחול מספר פעמים (לדוגמה: קנייה ב-$200 = $20 הנחה)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:174
+msgid "Optionally apply as a coupon"
+msgstr "ניתן להחיל כהטבת קופון"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:479
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:318
+msgid "No products selected"
+msgstr "לא נבחרו מוצרים"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:532
+msgid "Apply as coupon"
+msgstr "החל כקופון"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:540
+msgid "Coupon label (optional)"
+msgstr "תווית קופון (אופציונלי)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:555
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:740
+#, fuzzy
+msgid "Discount details"
+msgstr "חוקי הנחות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:556
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:741
+msgid "Configure discount parameters"
+msgstr "הגדרת פרמטרי ההנחה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:564
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1058
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1078
+msgid "Not configured"
+msgstr "לא הוגדר"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:595
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:947
+#, fuzzy
+msgid "Discount method"
+msgstr "הנחה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:607
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:894
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:960
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1384
+msgid "Percentage"
+msgstr "אחוזי הנחה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:608
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:895
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:959
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1386
+msgid "Fixed amount"
+msgstr "סכום קבוע"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:661
+msgid "Buy quantity (BOGO)"
+msgstr "כמות קנייה (BOGO)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:676
+msgid "Get quantity"
+msgstr "כמות קבלה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:690
+#, fuzzy
+msgid "Discount (%)"
+msgstr "הנחה: %s"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:721
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:848
+msgid "Repeat the offer (recursive)"
+msgstr "חזור על ההצעה (רקורסיבי)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:746
+msgid "Buy quantity (X)"
+msgstr "כמות קנייה (X)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:764
+msgid "Get quantity (Y)"
+msgstr "כמות קבלה (Y)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:781
+#, fuzzy
+msgid "Discount on Y (%)"
+msgstr "הנחה: %s"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:802
+msgid "Choose which products must be bought (X) and which are discounted (Y)"
+msgstr "בחר/י אילו מוצרים חייבים להיקנות (X) ועל אילו חלה ההנחה (Y)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:810
+msgid "Buy side (X) — the trigger products"
+msgstr "צד הקנייה (X) — מוצרים מפעילים"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:813
+#, fuzzy
+msgid "Buy products"
+msgstr "מוצרים"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:814
+msgid "Select buy products"
+msgstr "בחר/י מוצרים לקנייה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:824
+msgid "Get side (Y) — discounted products"
+msgstr "צד הקבלה (Y) — מוצרים מוזלים"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:827
+#, fuzzy
+msgid "Get products"
+msgstr "מוצרים"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:828
+msgid "Select get products"
+msgstr "בחר/י מוצרים לקבלה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:882
+msgid "Method"
+msgstr "שיטה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:905
+msgid "Label (optional)"
+msgstr "תווית (אופציונלי)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:909
+msgid "Shown in totals optionally"
+msgstr "ניתן להצגה בסיכומים"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:927
+msgid "Spend (X)"
+msgstr "הוצאה (X)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:967
+msgid "Value (%)"
+msgstr "ערך (%)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:968
+msgid "Value (amount)"
+msgstr "ערך (סכום)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1008
+msgid "Repeat per bundle (recursive)"
+msgstr "חזור לכל חבילה (רקורסיבי)"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1017
+msgid "Select a type to configure discount details"
+msgstr "בחר/י סוג כדי להגדיר פרטי הנחה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1066
+msgid "tiers"
+msgstr "מדרגות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1073
+msgid "shipping"
+msgstr "משלוח"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1075
+msgid "Spend"
+msgstr "הוצאה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1182
+msgid "Select discount type"
+msgstr "בחר סוג הנחה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1186
+#, fuzzy
+msgid "Discount Type"
+msgstr "הנחה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1205
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:155
+msgid "Open discount settings"
+msgstr "פתח הגדרות הנחה"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1206
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1264
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:146
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:200
+#, fuzzy
+msgid "Discount settings"
+msgstr "חוקי הנחות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1295
+#: src/components/table/core/Pagination.jsx:53
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:409
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:293
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:286
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:232
+#: src/components/table/entities/orders/components/OrderItemsModal.jsx:181
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1201
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:196
+#: src/components/table/entities/products/components/DownloadableCell.jsx:552
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:151
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:284
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:447
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:206
+#: src/components/table/import/ImportSettings.jsx:413
+#: src/layout/menu/LicenseMange.jsx:263
+msgid "Saving..."
+msgstr "שומר..."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1323
+msgid "Min qty"
+msgstr "כמות מינימלית"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1324
+msgid "Max qty"
+msgstr "כמות מקסימלית"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1325
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:42
+#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:247
+#: src/components/table/entities/products/products.columns.js:946
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:519
+msgid "Type"
+msgstr "סוג"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1327
+msgid "Label"
+msgstr "תווית"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1328
+msgid "Actions"
+msgstr "פעולות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1351
+msgid "∞"
+msgstr "∞"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1407
+msgid "Optional"
+msgstr "רשות"
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1426
+msgid "No tiers yet. Click 'Add tier' to create one."
+msgstr "לא הוגדרו עדיין מדרגות. לחץ/י על \"הוסף מדרגה\" כדי ליצור אחת."
+
+#: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1435
+#, fuzzy
+msgid "Add tier"
+msgstr "הוסף הצעה"
+
+#: src/components/forms/GenericItemModal.jsx:98
+msgid "Item updated successfully"
+msgstr ""
+
+#: src/components/forms/GenericItemModal.jsx:123
+#: src/components/table/core/DataTable.jsx:787
+msgid "Item created successfully"
+msgstr "הפריט נוצר בהצלחה"
+
+#: src/components/forms/GenericItemModal.jsx:237
+msgid "Please fix the errors in the form"
+msgstr "נא לתקן את השגיאות בטופס"
+
+#: src/components/forms/GenericItemModal.jsx:248
+msgid "Reset form"
+msgstr "אפס טופס"
+
+#: src/components/forms/GenericItemModal.jsx:281
+msgid "Update"
+msgstr ""
+
+#: src/components/media/ImageName.jsx:30
+msgid "The image has been successfully edited"
+msgstr "התמונה נערכה בהצלחה"
+
+#: src/components/media/ImageName.jsx:33
+#, fuzzy
+msgid "Failed to edit image name"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/media/MediaDisplay.jsx:113
+msgid "Click to select image"
+msgstr "לחץ/י לבחירת תמונה"
+
+#: src/components/media/MediaDisplay.jsx:148
+msgid "Click to add images"
+msgstr "לחץ/י להוספת תמונות"
+
+#: src/components/media/MediaDisplay.jsx:199
+#, fuzzy
+msgid "Add more"
+msgstr "הוסף לעגלה"
+
+#: src/components/media/MediaPagination.jsx:38
+msgid "Showing"
+msgstr "מציג"
+
+#: src/components/media/MediaPagination.jsx:40
+#: src/components/media/MediaPagination.jsx:62
+#: src/components/table/core/Pagination.jsx:199
+#: src/components/table/core/Pagination.jsx:237
+msgid "of"
+msgstr "מתוך"
+
+#: src/components/media/MediaPagination.jsx:42
+msgid "media items"
+msgstr "פריטי מדיה"
+
+#: src/components/media/MediaPagination.jsx:52
+#: src/components/table/core/Pagination.jsx:184
+#: src/components/table/core/Pagination.jsx:190
+msgid "Go to previous page"
+msgstr "חזור לעמוד הקודם"
+
+#: src/components/media/MediaPagination.jsx:62
+msgid "page"
+msgstr "עמוד"
+
+#: src/components/media/MediaPagination.jsx:70
+#: src/components/table/core/Pagination.jsx:203
+#: src/components/table/core/Pagination.jsx:209
+msgid "Go to next page"
+msgstr "עבור לעמוד הבא"
+
+#: src/components/media/MediaPicker.jsx:229
+msgid "Maximum selection reached"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:268
+msgid "Delete Media"
+msgstr "מחק מדיה"
+
+#: src/components/media/MediaPicker.jsx:269
+msgid "Are you sure you want to delete this item?"
+msgstr "האם אתה בטוח שברצונך למחוק פריט זה?"
+
+#: src/components/media/MediaPicker.jsx:277
+msgid "Media deleted successfully"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:280
+msgid "Failed to delete media"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:335
+msgid "Select Media"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:356
+#: src/components/media/MediaPicker.jsx:386
+#: src/components/table/core/Pagination.jsx:249
+msgid "All"
+msgstr "הכל"
+
+#: src/components/media/MediaPicker.jsx:364
+msgid "Images"
+msgstr "גלרית מוצרים"
+
+#: src/components/media/MediaPicker.jsx:374
+msgid "Files"
+msgstr "קבצים"
+
+#: src/components/media/MediaPicker.jsx:386
+msgid "Show All"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:395
+#: src/components/table/components/MultiSelectEdit.jsx:704
+#: src/components/table/core/DisplayColumns.jsx:315
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:364
+#: src/components/table/import/CustomFieldsSelector.jsx:194
+msgid "Selected"
+msgstr "נבחרו"
+
+#: src/components/media/MediaPicker.jsx:404
+msgid "Unselected"
+msgstr "לא נבחר"
+
+#: src/components/media/MediaPicker.jsx:411
+msgid "Search..."
+msgstr "חפש..."
+
+#: src/components/media/MediaPicker.jsx:425
+msgid "Selected Videos"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:425
+msgid "Selected Items"
+msgstr "פריטים שנבחרו"
+
+#: src/components/media/MediaPicker.jsx:521
+msgid "Deselect"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:521
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:290
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:347
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:133
+msgid "Select"
+msgstr "בחר"
+
+#: src/components/media/MediaPicker.jsx:562
+msgid "MAIN"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:591
+msgid "No selected items"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:593
+msgid "All items are selected"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:595
+msgid "No items found"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:597
+msgid "No videos in library"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:598
+msgid "No media in library"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:602
+msgid "Select items from the library first"
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:604
+msgid "Try different keywords or upload new files."
+msgstr ""
+
+#: src/components/media/MediaPicker.jsx:605
+msgid "Upload your first files to get started."
+msgstr "העלה את הקבצים הראשונים שלך כדי להתחיל."
+
+#: src/components/media/MediaPicker.jsx:621
+#: src/components/table/core/TableActionsMenu.jsx:79
+msgid "Reset filters"
+msgstr "אפס פילטרים"
+
+#: src/components/media/MediaUploader.jsx:96
+msgid "The file has been uploaded successfully"
+msgstr ""
+
+#: src/components/media/MediaUploader.jsx:99
+msgid "Error uploading media: "
+msgstr "שגיאה בהעלאת המדיה: "
+
+#: src/components/media/MediaUploader.jsx:119
+msgid "Uploading..."
+msgstr "מעלה..."
+
+#: src/components/media/MediaUploader.jsx:154
+msgid "Drag and drop some files here, or click to select files"
+msgstr "גרור ושחרר קבצים כאן, או לחץ כדי לבחור קבצים"
+
+#: src/components/media/MediaUploader.jsx:158
+msgid "Drop the files here..."
+msgstr "שחרר את הקבצים כאן..."
+
+#: src/components/media/MediaUploader.jsx:161
+msgid "Unsupported file type..."
+msgstr "סוג קובץ לא נתמך..."
+
+#: src/components/media/MediaUploader.jsx:164
+msgid "The file is too large."
+msgstr "הקובץ גדול מדי."
+
+#: src/components/table/components/MultiSelectEdit.jsx:83
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:314
+msgid "Item"
+msgstr ""
+
+#: src/components/table/components/MultiSelectEdit.jsx:675
+#, fuzzy
+msgid "Add new"
+msgstr "הוסף הצעה"
+
+#: src/components/table/components/MultiSelectEditItem.jsx:150
+#, fuzzy
+msgid "Failed to update item"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/table/components/MultiSelectEditItem.jsx:220
+msgid "Subcategory"
+msgstr ""
+
+#: src/components/table/components/MultiSelectEditItem.jsx:220
+msgid "was added successfully"
+msgstr ""
+
+#: src/components/table/components/MultiSelectEditItem.jsx:224
+msgid "Failed to add subcategory"
+msgstr ""
+
+#: src/components/table/components/MultiSelectEditItem.jsx:234
+msgid "Delete Item"
+msgstr ""
+
+#: src/components/table/components/MultiSelectEditItem.jsx:235
+msgid "Are you sure you want to permanently delete this"
+msgstr "האם אתה בטוח שברצונך למחוק לצמיתות את"
+
+#: src/components/table/components/MultiSelectEditItem.jsx:249
+msgid "The"
+msgstr "ה"
+
+#: src/components/table/components/MultiSelectEditItem.jsx:249
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:87
+msgid "has been permanently deleted"
+msgstr "נמחקה לצמיתות"
+
+#: src/components/table/components/MultiSelectEditItem.jsx:408
+msgid "Add subcategory"
+msgstr "הוסף תת קטגוריה"
+
+#: src/components/table/components/MultiSelectEditItem.jsx:471
+msgid "Subcategory name"
+msgstr "שם תת-קטגוריה"
+
+#: src/components/table/components/StatusEdit.jsx:66
+msgid "Select status"
+msgstr "בחר סטטוס"
+
+#: src/components/table/containers/EntityDataTableContainer.jsx:437
+msgid "Trash"
+msgstr "אשפה"
+
+#: src/components/table/core/ColumnHeader.jsx:65
+#: src/components/table/core/ColumnHeader.jsx:70
+msgid "Pin to right"
+msgstr "הצמד לימין"
+
+#: src/components/table/core/ColumnHeader.jsx:66
+#: src/components/table/core/ColumnHeader.jsx:69
+msgid "Pin to left"
+msgstr "הצמד לשמאל"
+
+#: src/components/table/core/ColumnHeader.jsx:157
+#: src/components/table/core/ColumnHeader.jsx:278
+msgid "Sort ascending"
+msgstr "מיון עולה"
+
+#: src/components/table/core/ColumnHeader.jsx:158
+#: src/components/table/core/ColumnHeader.jsx:293
+msgid "Sort descending"
+msgstr "מיון יורד"
+
+#: src/components/table/core/ColumnHeader.jsx:159
+#: src/components/table/core/ColumnHeader.jsx:306
+msgid "Clear sort"
+msgstr "ביטול מיון"
+
+#: src/components/table/core/ColumnHeader.jsx:201
+#: src/components/table/core/ColumnHeader.jsx:359
+msgid "Unpin"
+msgstr "בטל הצמדה"
+
+#: src/components/table/core/ColumnHeader.jsx:377
+msgid "Hide column"
+msgstr "הסתר עמודה"
+
+#: src/components/table/core/ColumnHeader.jsx:388
+msgid "Type to filter"
+msgstr "הקלד לסינון..."
+
+#: src/components/table/core/DataTable.jsx:507
+msgid "Collapse subRows"
+msgstr ""
+
+#: src/components/table/core/DataTable.jsx:507
+msgid "Expand subRows"
+msgstr ""
+
+#: src/components/table/core/DataTable.jsx:790
+#, fuzzy
+msgid "Failed to create item"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/table/core/DataTable.jsx:1018
+#, fuzzy
+msgid "Save order failed"
+msgstr "סודר מחדש"
+
+#: src/components/table/core/DataTable.jsx:1019
+msgid "Could not persist new order"
+msgstr ""
+
+#: src/components/table/core/DataTable.jsx:1161
+msgid "Data table"
+msgstr ""
+
+#: src/components/table/core/DataTable.jsx:1262
+msgid "Try changing the filters"
+msgstr "נסה לשנות את הסינונים"
+
+#: src/components/table/core/DataTable.jsx:1272
+msgid "Reset Filters"
+msgstr "איפוס סינונים"
+
+#: src/components/table/core/DataTable.jsx:1278
+msgid "Add sample data"
+msgstr ""
+
+#: src/components/table/core/DisplayColumns.jsx:251
+msgid "Are you sure you want to reset all table settings to default?"
+msgstr "האם אתה בטוח שברצונך לאפס את כל הגדרות הטבלה לברירת המחדל?"
+
+#: src/components/table/core/DisplayColumns.jsx:259
+msgid "Table settings reset to default"
+msgstr ""
+
+#: src/components/table/core/DisplayColumns.jsx:261
+msgid "Failed to reset table settings"
+msgstr ""
+
+#: src/components/table/core/DisplayColumns.jsx:272
+msgid "Display columns"
+msgstr "הצגת עמודות"
+
+#: src/components/table/core/DisplayColumns.jsx:275
+msgid "visible"
+msgstr "גלוי"
+
+#: src/components/table/core/DisplayColumns.jsx:285
+msgid "Reset Table Settings"
+msgstr "איפוס הגדרות הטבלה"
+
+#: src/components/table/core/DisplayColumns.jsx:288
+msgid "Find column to show/hide"
+msgstr "מצא עמודה להציג/להסתיר"
+
+#: src/components/table/core/DisplayColumns.jsx:294
+msgid "All columns"
+msgstr "כל העמודות"
+
+#: src/components/table/core/DisplayColumns.jsx:312
+msgid "Hide All Columns"
+msgstr "הסתר את כל העמודות"
+
+#: src/components/table/core/DisplayColumns.jsx:312
+msgid "Show All Columns"
+msgstr "הצג את כל העמודות"
+
+#: src/components/table/core/DisplayColumns.jsx:329
+msgid "Visible columns"
+msgstr "עמודות מוצגות"
+
+#: src/components/table/core/DisplayColumns.jsx:345
+msgid "Hidden columns"
+msgstr "עמודות מוסתרות"
+
+#: src/components/table/core/EditableCell.jsx:98
+msgid "Field required"
+msgstr "שדה חובה"
+
+#: src/components/table/core/EditableCell.jsx:137
+msgid "Invalid format"
+msgstr "פורמט לא תקין"
+
+#: src/components/table/core/EditableCell.jsx:150
+msgid "Invalid value"
+msgstr "ערך לא תקין"
+
+#: src/components/table/core/EditableCell.jsx:249
+msgid "Error saving changes"
+msgstr "שגיאה בשמירת הנתונים"
+
+#: src/components/table/core/EditableCell.jsx:488
+#: src/components/table/core/EditableCell.jsx:491
+#: src/components/table/entities/products/components/SelectEdit.jsx:64
+msgid "Select value"
+msgstr "בחר ערך"
+
+#: src/components/table/core/EditableCell.jsx:586
+msgid "Choose date"
+msgstr "בחר תאריך"
+
+#: src/components/table/core/EditableCell.jsx:876
+msgid "Click enter or F2 to edit"
+msgstr "לחץ Enter או F2 כדי לערוך"
+
+#: src/components/table/core/MemoizedComponents.jsx:147
+msgid "Deselect all rows"
+msgstr "בטל בחירת כל השורות"
+
+#: src/components/table/core/MemoizedComponents.jsx:149
+msgid "Select all rows (including collapsed)"
+msgstr ""
+
+#: src/components/table/core/MemoizedComponents.jsx:150
+msgid "Select all visible rows"
+msgstr ""
+
+#: src/components/table/core/Pagination.jsx:59
+msgid "All changes saved"
+msgstr "כל השינויים נשמרו"
+
+#: src/components/table/core/Pagination.jsx:65
+msgid "Error saving"
+msgstr ""
+
+#: src/components/table/core/Pagination.jsx:71
+msgid "Offline - Will sync when online"
+msgstr ""
+
+#: src/components/table/core/Pagination.jsx:172
+#: src/components/table/core/Pagination.jsx:178
+msgid "Go to first page"
+msgstr "עבור לדף הראשון"
+
+#: src/components/table/core/Pagination.jsx:197
+msgid "Page"
+msgstr "דף"
+
+#: src/components/table/core/Pagination.jsx:215
+#: src/components/table/core/Pagination.jsx:221
+msgid "Go to last page"
+msgstr "עבור לדף האחרון"
+
+#: src/components/table/core/Pagination.jsx:233
+#: src/components/table/core/Pagination.jsx:238
+#: src/components/table/entities/orders/orders.columns.js:522
+#: src/components/table/entities/orders/orders.columns.js:555
+msgid "items"
+msgstr "פריטים"
+
+#: src/components/table/core/Pagination.jsx:246
+msgid "Select rows per page"
+msgstr "בחר מספר שורות לדף"
+
+#: src/components/table/core/RowActionsMenu.jsx:75
+msgid "Row actions"
+msgstr "פעולות שורה"
+
+#: src/components/table/core/RowActionsMenu.jsx:79
+msgid "Row actions menu"
+msgstr "תפריט פעולות לשורה"
+
+#: src/components/table/core/TableActionsMenu.jsx:30
+msgid "Table exported successfully"
+msgstr "הטבלה יוצאה בהצלחה"
+
+#: src/components/table/core/TableActionsMenu.jsx:37
+msgid "All filters reset"
+msgstr "כל הפילטרים אופסו"
+
+#: src/components/table/core/TableActionsMenu.jsx:61
+msgid "Table actions"
+msgstr "פעולות טבלה"
+
+#: src/components/table/core/TableActionsMenu.jsx:65
+msgid "Table actions menu"
+msgstr "תפריט פעולות טבלה"
+
+#: src/components/table/core/TableActionsMenu.jsx:86
+msgid "Manage columns"
+msgstr "ניהול עמודות"
+
+#: src/components/table/core/TableLoadingOverlay.jsx:17
+msgid "Loading data..."
+msgstr "טוען נתונים..."
+
+#: src/components/table/core/TopPanel.jsx:138
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:245
+msgid "Filters"
+msgstr "סינון"
+
+#: src/components/table/core/TopPanel.jsx:204
+msgid "Search"
+msgstr "חיפוש"
+
+#: src/components/table/core/TopPanel.jsx:206
+msgid "Search in table"
+msgstr "חיפוש בטבלה"
+
+#: src/components/table/core/TopPanel.jsx:227
+msgid "Add 1000 products"
+msgstr "הוסף 1000 מוצרים"
+
+#: src/components/table/core/TopPanel.jsx:243
+msgid "Import Settings"
+msgstr "הגדרות ייבוא"
+
+#: src/components/table/core/TopPanel.jsx:308
+msgid "Upgrade to Pro for unlimited discount rules"
+msgstr "שדרג/י לגרסת Pro כדי לקבל חוקי הנחות ללא הגבלה"
+
+#: src/components/table/core/UndoRedoButtons.jsx:65
+msgid "Undo (Ctrl+Z)"
+msgstr ""
+
+#: src/components/table/core/UndoRedoButtons.jsx:79
+msgid "Redo (Ctrl+Shift+Z / Ctrl+Y)"
+msgstr ""
+
+#: src/components/table/entities/coupons/components/CopyableText.jsx:82
+msgid "Generate"
+msgstr "יצירה אוטומטית"
+
+#: src/components/table/entities/coupons/components/CopyableText.jsx:106
+msgid "Copied!"
+msgstr ""
+
+#: src/components/table/entities/coupons/components/CopyableText.jsx:106
+msgid "Copy code"
+msgstr ""
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:164
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:203
+msgid "Manage all limits"
+msgstr "ניהול כל ההגבלות"
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:183
+msgid "Click to edit limit"
+msgstr "לחץ/י כדי לערוך הגבלה"
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:226
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:235
+msgid "Usage & Limits"
+msgstr "שימוש והגבלות"
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:238
+msgid "Control and monitor the application of this coupon with respect to overall usage, specific user limitations, and the number of items it can be applied to. Proper management ensures optimal benefit from promotional strategies."
+msgstr "שלוט ונטר את השימוש בקופון זה ביחס לשימוש הכללי, הגבלות על משתמשים ספציפיים, וכמות הפריטים עליהם ניתן להחיל את הקופון. ניהול נכון מבטיח ניצול מיטבי של אסטרטגיות קידום מכירות."
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:260
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:268
+msgid "Usage"
+msgstr "שימוש"
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:262
+msgid "The number of times this coupon has already been used."
+msgstr ""
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:290
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:299
+msgid "Usage limit per coupon"
+msgstr "הגבלת שימוש לכל קופון"
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:293
+msgid "How many times this coupon can be used before it is void."
+msgstr "מספר הפעמים שניתן להשתמש בקופון לפני שהוא מבוטל."
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:327
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:339
+msgid "Usage limit per user"
+msgstr "הגבלת שימוש לכל משתמש"
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:330
+msgid "How many times this coupon can be used by an individual user."
+msgstr ""
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:367
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:379
+msgid "Limit usage to X items"
+msgstr "הגבלת שימוש ל-X פריטים"
+
+#: src/components/table/entities/coupons/components/UsageLimitCell.jsx:370
+msgid "The maximum number of individual items this coupon can apply to."
+msgstr ""
+
+#: src/components/table/entities/coupons/coupons.columns.js:203
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:135
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:263
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:199
+#: src/components/table/entities/orders/components/RefundModal.jsx:645
+msgid "Amount"
+msgstr "סכום"
+
+#: src/components/table/entities/coupons/coupons.columns.js:400
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:100
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:196
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:630
+#: src/components/table/entities/orders/orders.columns.js:426
+msgid "Date"
+msgstr "תאריך"
+
+#: src/components/table/entities/coupons/coupons.columns.js:451
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:127
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:175
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:106
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:644
+#: src/components/table/entities/orders/orders.columns.js:337
+#: src/components/table/entities/products/products.columns.js:917
+#: src/components/table/import/ExportProductsIds.jsx:390
+msgid "Status"
+msgstr "מצב"
+
+#: src/components/table/entities/coupons/coupons.columns.js:462
+#: src/components/table/entities/products/products.columns.js:930
+#: src/components/table/import/ExportProductsIds.jsx:62
+#: src/components/table/import/ExportProductsIds.jsx:70
+msgid "Published"
+msgstr "מפורסם"
+
+#: src/components/table/entities/coupons/coupons.columns.js:463
+#: src/components/table/entities/products/products.columns.js:931
+#: src/components/table/import/ExportProductsIds.jsx:63
+#: src/components/table/import/ExportProductsIds.jsx:71
+msgid "Draft"
+msgstr "טיוטה"
+
+#: src/components/table/entities/coupons/coupons.columns.js:464
+#: src/components/table/entities/products/products.columns.js:932
+#: src/components/table/import/ExportProductsIds.jsx:64
+#: src/components/table/import/ExportProductsIds.jsx:72
+msgid "Pending"
+msgstr "בהשהיה"
+
+#: src/components/table/entities/coupons/coupons.columns.js:486
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:311
+msgid "Product category"
+msgstr ""
+
+#: src/components/table/entities/coupons/CouponsPage.jsx:79
+msgid "Coupons are currently disabled"
+msgstr "קופונים מושבתים כרגע."
+
+#: src/components/table/entities/coupons/CouponsPage.jsx:82
+msgid "Enable them to allow customers to apply coupon codes from the cart and checkout pages."
+msgstr "הפעל אותם כדי לאפשר ללקוחות להזין קודי קופון מדפי הסל והרכישה."
+
+#: src/components/table/entities/coupons/CouponsPage.jsx:98
+#, fuzzy
+msgid "Enable Coupons"
+msgstr "קופונים"
+
+#: src/components/table/entities/customers/components/CustomerOrdersPopover.jsx:50
+msgid "Upgrade to Pro to view customer orders"
+msgstr "שדרג/י לגרסת Pro כדי לצפות בהזמנות לקוחות"
+
+#: src/components/table/entities/customers/components/CustomerOrdersPopover.jsx:121
+#, fuzzy
+msgid "Customer Orders"
+msgstr "לקוחות"
+
+#: src/components/table/entities/customers/components/CustomerOrdersPopover.jsx:124
+#: src/layout/menu/History.jsx:202
+#, fuzzy
+msgid "orders"
+msgstr "הזמנות"
+
+#: src/components/table/entities/customers/customers.columns.js:68
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:130
+#, fuzzy
+msgid "Customer"
+msgstr "לקוחות"
+
+#: src/components/table/entities/customers/customers.columns.js:131
+#: src/components/table/entities/customers/customers.columns.js:134
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:336
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:349
+msgid "Postcode"
+msgstr "מיקוד"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:31
+msgid "any"
+msgstr "אחד מהתנאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:31
+msgid "all"
+msgstr "כל התנאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:34
+msgid "rules"
+msgstr "חוקי הנחות"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:35
+msgid "No conditions"
+msgstr "אין תנאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:117
+msgid "Conditions saved successfully"
+msgstr "התנאים נשמרו בהצלחה"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:129
+msgid "Failed to save conditions"
+msgstr "שמירת התנאים נכשלה"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:131
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:146
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:375
+msgid "Unknown error"
+msgstr "שגיאה לא ידועה"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:174
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:242
+msgid "Edit conditions"
+msgstr "עריכת תנאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:175
+msgid "Upgrade to Pro to use conditions"
+msgstr "שדרג/י לגרסת Pro כדי להשתמש בתנאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:175
+msgid "Configure cart and product conditions"
+msgstr "הגדרת תנאי עגלה ומוצרים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:267
+msgid "Please fill in all required fields"
+msgstr ""
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:75
+msgid "Match ALL"
+msgstr "התאם את כל התנאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:76
+msgid "Match ANY"
+msgstr "התאם אחד מהתנאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:131
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:144
+msgid "Condition Type"
+msgstr "סוג תנאי"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:132
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:175
+msgid "Compare"
+msgstr "השוואה"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:133
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:216
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:665
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:693
+msgid "Values"
+msgstr "ערכים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:135
+#: src/components/table/entities/orders/components/RefundModal.jsx:642
+msgid "Qty"
+msgstr "כמות"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:158
+msgid "Subtotal (cart)"
+msgstr "סכום ביניים (עגלה)"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:161
+msgid "Category subtotal"
+msgstr "סכום ביניים לפי קטגוריה"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:164
+#, fuzzy
+msgid "Products subtotal"
+msgstr "מוצרים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:167
+msgid "Line Item Count"
+msgstr "מספר שורות בעגלה"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:223
+msgid "Select categories"
+msgstr "בחר קטגוריות"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:254
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:511
+msgid "Not required"
+msgstr "לא נדרש"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:282
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:708
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1162
+msgid "Remove"
+msgstr "הסרה"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:327
+msgid "Customer must match ANY of the conditions below"
+msgstr "הלקוח חייב לעמוד באחד מהתנאים הבאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:328
+msgid "Customer must match ALL conditions below"
+msgstr "הלקוח חייב לעמוד בכל התנאים הבאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:338
+msgid "No conditions yet"
+msgstr "עדיין לא הוגדרו תנאים"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:341
+msgid "Rule will apply to all orders without restrictions"
+msgstr "הכלל יחול על כל ההזמנות ללא הגבלות"
+
+#: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:370
+msgid "Add Condition"
+msgstr "הוסף תנאי"
+
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:26
+msgid "No filters"
+msgstr "אין מסננים"
+
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:41
+msgid "filters"
+msgstr "מסננים"
+
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:135
+msgid "Filters saved successfully"
+msgstr "המסננים נשמרו בהצלחה"
+
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:144
+msgid "Failed to save filters"
+msgstr "שמירת המסננים נכשלה"
+
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:185
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:244
+msgid "Edit filters"
+msgstr "עריכת פילטרים"
+
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:186
+msgid "Configure product filters for this rule"
+msgstr "הגדרת מסנני מוצרים לכלל זה"
+
+#: src/components/table/entities/discount-rules/components/FiltersCell.jsx:260
+msgid "Please select values for all filters"
+msgstr "נא לבחור ערכים לכל הפילטרים"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:117
+msgid "Select attributes"
+msgstr "בחר תכונות"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:263
+msgid "Find attribute or term"
+msgstr "חפש תכונה או ערך"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:269
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:220
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:180
+msgid "No attributes found."
+msgstr "לא נמצאו תכונות."
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:275
+msgid "Loading"
+msgstr "טוען"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:339
+msgid "Choose field"
+msgstr "בחר שדה"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:374
+msgid "Only on-sale items"
+msgstr "רק פריטים במבצע"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:375
+msgid "Exclude on-sale items"
+msgstr "אל תכלול פריטים במבצע"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:378
+msgid "Include"
+msgstr "כלול"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:379
+msgid "Exclude"
+msgstr "אל תכלול"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:387
+msgid "Choose mode"
+msgstr "בחר מצב"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:534
+msgid "categories"
+msgstr "קטגוריות"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:548
+msgid "Select tags"
+msgstr "בחר תגיות"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:562
+#: src/layout/menu/History.jsx:201
+#, fuzzy
+msgid "products"
+msgstr "מוצרים"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:582
+msgid "e.g. ABC-1, XYZ-2"
+msgstr "לדוגמה: ABC-1, XYZ-2"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:596
+msgid "roles"
+msgstr "תפקידים"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:653
+msgid "No filters yet"
+msgstr "עדיין לא הוגדרו מסננים"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:656
+msgid "Rule applies to all products by default"
+msgstr "הכלל חל כברירת מחדל על כל המוצרים"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:663
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:671
+#: src/layout/menu/History.jsx:636
+msgid "Field"
+msgstr "שדה"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:664
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:683
+msgid "Mode"
+msgstr "מצב"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:727
+#, fuzzy
+msgid "Add filter"
+msgstr "הוסף הצעה"
+
+#: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:760
+msgid "All filter types have been added"
+msgstr "כל סוגי המסננים כבר נוספו"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:54
+msgid "Configure method/value & coupon"
+msgstr "הגדרת שיטה/ערך וקופון"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:56
+msgid "Configure quantity tiers"
+msgstr "הגדרת מדרגות כמות"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:58
+msgid "Configure BOGO quantities & products"
+msgstr "הגדרת כמויות ומוצרים ל-BOGO"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:60
+msgid "Configure X/Y quantities & products"
+msgstr "הגדרת כמויות X/Y ומוצרים"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:62
+msgid "Configure shipping discount"
+msgstr "הגדרת הנחת משלוח"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:64
+msgid "Configure spend bundle"
+msgstr "הגדרת חבילת הוצאה"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:66
+msgid "Configure discount settings"
+msgstr "הגדרת פרטי ההנחה"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:106
+msgid "Discount settings saved successfully"
+msgstr "הגדרות ההנחה נשמרו בהצלחה"
+
+#: src/components/table/entities/discount-rules/components/TypeWithDiscountSettingsCell.jsx:114
+msgid "Failed to save discount settings"
+msgstr "שמירת הגדרות ההנחה נכשלה"
+
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:121
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:118
+msgid "Column has been exported successfully"
+msgstr "העמודה יוצאה בהצלחה"
+
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:122
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:119
+msgid "Column has been unexported successfully"
+msgstr "הייצוא של העמודה בוטל בהצלחה"
+
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:155
+msgid "Remove this field from the table and keep it only in the billing details"
+msgstr "הסר שדה זה מהטבלה והשאר אותו רק בפרטי החשבון"
+
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:159
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:155
+msgid "Display this field as a separate column in the table"
+msgstr "הצג שדה זה כעמודה נפרדת בטבלה"
+
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:197
+#: src/components/table/entities/orders/orders.columns.js:567
+msgid "Billing"
+msgstr "חיוב"
+
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:239
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:851
+msgid "Billing Information"
+msgstr "פרטי חיוב"
+
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:306
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:313
+msgid "Address Line 2"
+msgstr "כתובת מס 2"
+
+#: src/components/table/entities/orders/components/OrderItemsModal.jsx:184
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:615
+msgid "Save Changes"
+msgstr "שמור שינויים"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:215
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:234
+msgid "Coupon not found or invalid"
+msgstr "הקופון לא נמצא או לא תקף"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:239
+msgid "Error applying coupon"
+msgstr ""
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:336
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:137
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:705
+#, fuzzy
+msgid "Order Items"
+msgstr "הזמנות"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:341
+#, fuzzy
+msgid "Add Products"
+msgstr "מוצרים"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:349
+msgid "Search for products"
+msgstr "חפש מוצרים"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:356
+#, fuzzy
+msgid "Search products"
+msgstr "מוצרים"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:364
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:233
+msgid "Loading products..."
+msgstr "טוען מוצרים..."
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:366
+msgid "Type to search products"
+msgstr ""
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:367
+msgid "No products found"
+msgstr "לא נמצאו מוצרים"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:422
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:528
+msgid "In Stock"
+msgstr "במלאי"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:426
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:532
+msgid "Out of Stock"
+msgstr "אזל מהמלאי"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:455
+msgid "No items in this order"
+msgstr "אין פריטים בהזמנה זו"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:459
+msgid "Click the search button above to add products to this order"
+msgstr "לחץ על כפתור החיפוש למעלה כדי להוסיף מוצרים להזמנה הזו"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:469
+#: src/components/table/entities/orders/components/RefundModal.jsx:640
+#: src/components/table/entities/products/components/variation/components/GenerateRowItem.jsx:131
+#, fuzzy
+msgid "Product"
+msgstr "מוצרים"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:472
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:608
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:115
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:152
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:664
+#: src/components/table/entities/orders/orders.columns.js:360
+msgid "Total"
+msgstr "סך הכל"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:639
+#, fuzzy
+msgid "coupons applied"
+msgstr "ההנחה חלה בעגלה"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:662
+msgid "Remove coupon"
+msgstr ""
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:684
+msgid "Enter coupon code"
+msgstr "הזן קוד קופון"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:714
+msgid "Applying..."
+msgstr ""
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:748
+msgid "Recalculating discount..."
+msgstr ""
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:762
+msgid "Dismiss"
+msgstr "התעלם"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:771
+#, fuzzy
+msgid "No coupons applied to this order"
+msgstr "הנחה מיוחדת חלה על מוצר זה!"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:788
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:187
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:760
+msgid "Refunds"
+msgstr "החזרים"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:791
+msgid "Process full or partial refund"
+msgstr "עיבוד החזר מלא או חלקי"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:801
+#: src/components/table/entities/orders/components/RefundModal.jsx:483
+msgid "Process Refund"
+msgstr "בצע החזר"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:811
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:976
+msgid "Subtotal"
+msgstr "סכום ביניים"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:824
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:187
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:996
+#: src/components/table/entities/orders/orders.columns.js:786
+msgid "Shipping"
+msgstr "משלוח"
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:846
+msgid "Order Total"
+msgstr "סך הכל להזמנה"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:103
+msgid "Failed to save note"
+msgstr "שמירת ההערה נכשלה"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:110
+msgid "Are you sure you want to delete this note?"
+msgstr "האם אתה בטוח שברצונך למחוק את ההערה הזו?"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:121
+#, fuzzy
+msgid "Failed to delete note"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:125
+msgid "An error occurred while deleting the note"
+msgstr "אירעה שגיאה בעת מחיקת ההערה"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:130
+#, fuzzy
+msgid "To Customer"
+msgstr "לקוחות"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:130
+msgid "Internal Note"
+msgstr "הודעה פנימית"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:171
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:201
+#, fuzzy
+msgid "Order Notes"
+msgstr "הזמנות"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:239
+msgid "No notes yet"
+msgstr "אין הערות עדיין"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:240
+msgid "Start a conversation..."
+msgstr "התחל שיחה..."
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:251
+msgid "Write a note to the customer..."
+msgstr "כתוב הערה ללקוח..."
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:251
+msgid "Write an internal note..."
+msgstr "כתוב הערה פנימית..."
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:257
+msgid "Send"
+msgstr "שלח"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:284
+msgid "Add Private Note"
+msgstr "הוסף הערה פרטית"
+
+#: src/components/table/entities/orders/components/OrderNotesChat.jsx:292
+#, fuzzy
+msgid "Add Customer Note"
+msgstr "לקוחות"
+
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:151
+msgid "Remove this field from the table and keep it only in the shipping details"
+msgstr "הסר שדה זה מהטבלה והשאר אותו רק בפרטי המשלוח"
+
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:235
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:813
+msgid "Shipping Information"
+msgstr "פרטי משלוח"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:85
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:78
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:190
+msgid "Traffic Source"
+msgstr "מקור תנועה"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:207
+msgid "Device"
+msgstr "מכשיר"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:217
+msgid "Views"
+msgstr "צפיות"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:227
+msgid "From"
+msgstr "מ-"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:237
+msgid "Via"
+msgstr "באמצעות"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:257
+msgid "UTM Parameters"
+msgstr "פרמטרי UTM"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:267
+#: src/ErrorBoundary.jsx:107
+msgid "Copy"
+msgstr "העתק"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:279
+#: src/components/ui/custom/PDFPreview.jsx:75
+msgid "Open"
+msgstr "פתח"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:289
+#: src/components/table/entities/orders/orders.columns.js:397
+msgid "Source"
+msgstr "מקור"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:299
+msgid "Medium"
+msgstr "מדיום"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:309
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:354
+msgid "Campaign"
+msgstr "קמפיין"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:319
+#: src/components/table/entities/products/components/RichTextDisplay.jsx:25
+msgid "Content"
+msgstr "תוכן"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:329
+msgid "Term"
+msgstr "מונח"
+
+#: src/components/table/entities/orders/components/OrderSourceBadge.jsx:344
+msgid "Source Details"
+msgstr "פרטי מקור"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:85
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:450
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:524
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:605
+#: src/components/table/entities/orders/orders.columns.js:311
+msgid "Order Summary"
+msgstr "סיכום הזמנה"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:92
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:618
+#, fuzzy
+msgid "Order ID"
+msgstr "הזמנות"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:125
+#: src/components/table/entities/orders/components/RefundModal.jsx:528
+msgid "Payment Method"
+msgstr "אמצעי תשלום"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:130
+msgid "UNKNOWN"
+msgstr "לא ידוע"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:143
+msgid "item"
+msgstr "פריט"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:149
+#: src/components/table/entities/orders/components/RefundModal.jsx:641
+msgid "Unit Price"
+msgstr "מחיר ליחידה"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:193
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:778
+msgid "Reason"
+msgstr ""
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:210
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:779
+msgid "Refund"
+msgstr ""
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:231
+msgid "Shipping Address"
+msgstr "כתובת למשלוח"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:252
+msgid "Billing Address"
+msgstr "כתובת לחיוב"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:287
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:917
+msgid "Additional Information"
+msgstr "מידע נוסף"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:313
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1012
+msgid "Total Amount"
+msgstr "סכום כולל"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:679
+#: src/components/table/entities/orders/orders.columns.js:406
+msgid "Payment method"
+msgstr "שיטת תשלום"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:741
+msgid "each"
+msgstr "ליחידה"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:957
+msgid "No fields selected or no values found for this order."
+msgstr "לא נבחרו שדות או שלא נמצאו ערכים להזמנה זו."
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:964
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1035
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1077
+#, fuzzy
+msgid "Customize Fields"
+msgstr "לקוחות"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1044
+msgid "Print Order"
+msgstr "הדפס הזמנה"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1087
+msgid "Select All"
+msgstr "בחר הכל"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1094
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:378
+msgid "Clear"
+msgstr "נקה"
+
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1105
+msgid "Search fields..."
+msgstr "חפש שדות"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:34
+#: src/components/table/entities/orders/orders.columns.js:44
+msgid "Credit Card"
+msgstr "כרטיס אשראי"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:35
+#: src/components/table/entities/orders/orders.columns.js:45
+msgid "PayPal"
+msgstr "פייפאל"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:36
+#: src/components/table/entities/orders/orders.columns.js:46
+msgid "Bank Transfer"
+msgstr "העברה בנקאית"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:37
+#: src/components/table/entities/orders/orders.columns.js:47
+msgid "Cash on Delivery (COD)"
+msgstr "תשלום במעמד המסירה (COD)"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:38
+#: src/components/table/entities/orders/orders.columns.js:48
+msgid "Bit (Israeli Payment App)"
+msgstr "ביט (אפליקציית תשלום ישראלית)"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:39
+#: src/components/table/entities/orders/orders.columns.js:49
+msgid "Apple Pay"
+msgstr "Apple Pay"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:40
+#: src/components/table/entities/orders/orders.columns.js:50
+msgid "Google Pay"
+msgstr "Google Pay"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:41
+#: src/components/table/entities/orders/orders.columns.js:51
+msgid "Manual Payment"
+msgstr "תשלום ידני"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:42
+#: src/components/table/entities/orders/orders.columns.js:52
+msgid "Check"
+msgstr "צ'ק"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:43
+#: src/components/table/entities/orders/orders.columns.js:53
+msgid "Standing Order / Direct Debit"
+msgstr "הוראת קבע / חיוב ישיר"
+
+#: src/components/table/entities/orders/components/PaymentMethodCell.jsx:98
+msgid "Choose Payment Method"
+msgstr "בחר אמצעי תשלום"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:280
+msgid "Please ensure refund amount is greater than 0"
+msgstr ""
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:289
+msgid "Please select at least one item or amount to refund"
+msgstr "אנא בחר לפחות פריט אחד או סכום להחזר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:403
+msgid "Refund processed successfully!"
+msgstr ""
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:404
+msgid " (Automatically refunded to payment method)"
+msgstr " (הוחזר באופן אוטומטי לאמצעי התשלום)"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:405
+msgid " (Manual refund - please process payment manually)"
+msgstr " (החזר ידני - עליך לעבד את ההחזר באופן ידני)"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:410
+#: src/components/table/entities/orders/components/RefundModal.jsx:414
+msgid "Failed to process refund"
+msgstr "נכשל בעיבוד ההחזר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:486
+#: src/components/table/entities/orders/orders.columns.js:284
+#, fuzzy
+msgid "Order"
+msgstr "הזמנות"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:537
+msgid "(Supports automatic refunds)"
+msgstr "(תומך בהחזרים אוטומטיים)"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:542
+msgid "(Manual refund only)"
+msgstr "(החזר ידני בלבד)"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:554
+msgid "Refund Summary"
+msgstr "תקציר החזר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:560
+msgid "Order Total:"
+msgstr "סכום הזמנה:"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:568
+msgid "Already Refunded:"
+msgstr "כבר הוחזר:"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:576
+msgid "Available to Refund:"
+msgstr "סכום זמין להחזר:"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:591
+msgid "Partial Refund"
+msgstr "החזר חלקי"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:592
+msgid "Refund selected items with custom amounts"
+msgstr "החזר פריטים נבחרים עם סכומים מותאמים אישית"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:596
+msgid "Full Refund"
+msgstr "החזר מלא"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:599
+msgid "Not available - order fully refunded"
+msgstr "לא זמין - ההזמנה הוחזרה במלואה"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:600
+msgid "Refund remaining order amount"
+msgstr "החזר את סכום ההזמנה שנותר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:643
+msgid "Ref"
+msgstr ""
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:644
+msgid "Refund Qty"
+msgstr "כמות להחזר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:704
+msgid "Total:"
+msgstr "סה\"כ:"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:710
+msgid "Refunded:"
+msgstr "הוחזר:"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:748
+msgid "Fully Refunded"
+msgstr "הוחזר במלואו"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:802
+msgid "N/A"
+msgstr ""
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:812
+msgid "Max:"
+msgstr "מקסימום:"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:815
+msgid "Will refund:"
+msgstr "יוחזר:"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:834
+msgid "Total Refund Amount"
+msgstr "סכום החזר כולל"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:845
+msgid "Full refund will include only the remaining refundable amount"
+msgstr "החזר מלא יכלול רק את הסכום שנשאר להחזר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:858
+msgid "Refund Reason"
+msgstr "סיבת החזר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:870
+msgid "Select refund reason"
+msgstr "בחר סיבה להחזר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:885
+msgid "Refund Note"
+msgstr "הערת החזר"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:887
+msgid "(Optional)"
+msgstr "(רשות)"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:891
+msgid "Add a note about this refund"
+msgstr "הוסף הערה לגבי ההחזר הזה"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:924
+#: src/components/table/entities/orders/components/RefundModal.jsx:945
+#: src/layout/menu/LicenseMange.jsx:275
+msgid "Processing..."
+msgstr "מעבד..."
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:929
+msgid "Manual Refund"
+msgstr "החזר ידני"
+
+#: src/components/table/entities/orders/components/RefundModal.jsx:950
+msgid "Auto Refund"
+msgstr "החזר אוטומטי"
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:59
+#: src/components/table/entities/orders/orders.actions.js:73
+msgid "Email sent successfully"
+msgstr "האימייל נשלח בהצלחה"
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:65
+msgid "Failed to send email"
+msgstr ""
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:108
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:196
+msgid "Send Email"
+msgstr ""
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:120
+msgid "Email template"
+msgstr ""
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:123
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:135
+msgid "Choose template"
+msgstr "בחר תבנית"
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:135
+msgid "Loading templates..."
+msgstr "טוען תבניות..."
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:152
+msgid "No email templates available for this order"
+msgstr ""
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:160
+msgid "Override email"
+msgstr ""
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:162
+msgid "optional"
+msgstr ""
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:167
+msgid "Enter email address to override"
+msgstr ""
+
+#: src/components/table/entities/orders/EmailTemplateModal.jsx:174
+msgid "Leave empty to send to the customer's original email"
+msgstr ""
+
+#: src/components/table/entities/orders/orders.columns.js:469
+#: src/components/table/entities/orders/orders.columns.js:548
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:522
+msgid "Items"
+msgstr "פריטים"
+
+#: src/components/table/entities/orders/orders.columns.js:982
+#: src/layout/sidebar/AppSidebar.jsx:166
+msgid "Version"
+msgstr "גירסה"
+
+#: src/components/table/entities/products/components/AttributesDisplay.jsx:55
+msgid "No attributes"
+msgstr "אין תכונות"
+
+#: src/components/table/entities/products/components/DateRangeDisplay.jsx:9
+msgid "No schedule"
+msgstr "אין תזמון"
+
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:53
+msgid "Failed to save dimensions"
+msgstr ""
+
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:107
+#: src/components/table/entities/products/products.columns.js:1476
+msgid "Dimensions"
+msgstr "מידות"
+
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:109
+msgid "Set the product dimensions"
+msgstr ""
+
+#: src/components/table/entities/products/components/DimensionsEdit.jsx:119
+msgid "Length"
+msgstr "אורך"
+
+#: src/components/table/entities/products/components/DownloadableCell.jsx:353
+msgid "Manage download files and settings"
+msgstr "ניהול קבצי הורדה והגדרות"
+
+#: src/components/table/entities/products/components/DownloadableCell.jsx:417
+msgid "File"
+msgstr ""
+
+#: src/components/table/entities/products/components/DownloadableCell.jsx:433
+msgid "File name"
+msgstr ""
+
+#: src/components/table/entities/products/components/DownloadableCell.jsx:445
+msgid "URL"
+msgstr "קישור"
+
+#: src/components/table/entities/products/components/DownloadableCell.jsx:463
+msgid "Choose from media"
+msgstr "בחר/י מתוך המדיה"
+
+#: src/components/table/entities/products/components/external/ManageExternal.jsx:28
+msgid "Manage external product"
+msgstr ""
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:41
+msgid "Changes saved! You can now close the window and continue editing."
+msgstr ""
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:63
+msgid "External product settings saved"
+msgstr ""
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:66
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:110
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:470
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:268
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:225
+msgid "Unknown error occurred"
+msgstr "אירעה שגיאה לא ידועה"
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:91
+#: src/components/table/entities/products/products.columns.js:959
+msgid "External/Affiliate product"
+msgstr "מוצר חיצוני/שותפים"
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:94
+msgid "An external or affiliate product links to a product on another website. Customers are redirected to the external site to complete their purchase."
+msgstr "מוצר חיצוני או שותפים מקשר למוצר באתר אחר. הלקוחות מופנים לאתר החיצוני להשלמת הרכישה."
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:105
+#, fuzzy
+msgid "Product URL"
+msgstr "מוצרים"
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:114
+msgid "Enter the external URL to the product."
+msgstr "הזן את כתובת ה-URL החיצונית למוצר."
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:120
+msgid "Button text"
+msgstr ""
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:123
+#, fuzzy
+msgid "Buy product"
+msgstr "מוצרים"
+
+#: src/components/table/entities/products/components/external/ManageExternalModal.jsx:129
+msgid "This text will be shown on the button linking to the external product."
+msgstr "טקסט זה יוצג על הכפתור המקשר למוצר החיצוני."
+
+#: src/components/table/entities/products/components/FeaturedCell.jsx:18
+msgid "Remove from featured"
+msgstr ""
+
+#: src/components/table/entities/products/components/FeaturedCell.jsx:18
+#, fuzzy
+msgid "Add to featured"
+msgstr "הוסף לעגלה"
+
+#: src/components/table/entities/products/components/grouped/ManageGrouped.jsx:28
+msgid "Manage grouped product"
+msgstr "ניהול מוצר מקובץ"
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:110
+msgid "Failed to load products"
+msgstr ""
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:135
+msgid "Changes saved! You can now close the grouped product window and continue editing the new product form."
+msgstr "השינויים נשמרו! כעת ניתן לסגור את חלון המוצר המקובץ ולהמשיך לערוך את טופס המוצר החדש."
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:149
+msgid "The product group has been updated successfully"
+msgstr ""
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:205
+#, fuzzy
+msgid "Manage"
+msgstr "WhizManage"
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:216
+#: src/components/table/entities/products/products.columns.js:958
+msgid "Grouped product"
+msgstr "מוצר מקובץ"
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:219
+msgid "A grouped product allows you to combine multiple related products that can be purchased together. Customers can select individual items from the group or buy the entire set."
+msgstr "מוצר מקובץ מאפשר לשלב מספר מוצרים קשורים שניתן לרכוש יחד. לקוחות יכולים לבחור פריטים בודדים מהקבוצה או לרכוש את כל הסט."
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:260
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:698
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:780
+#: src/layout/menu/LicenseMange.jsx:263
+msgid "Save changes"
+msgstr "שמור שינויים"
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:297
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:354
+msgid "Find"
+msgstr "מצא"
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:476
+msgid "Delete from group"
+msgstr ""
+
+#: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:509
+msgid "No product grouped"
+msgstr "אין מוצר מקובץ"
+
+#: src/components/table/entities/products/components/InventoryEdit.jsx:237
+#: src/components/table/entities/products/products.columns.js:821
+msgid "Inventory"
+msgstr "ניהול מלאי"
+
+#: src/components/table/entities/products/components/InventoryEdit.jsx:241
+msgid "Set stock status"
+msgstr "הגדרת סטטוס מלאי"
+
+#: src/components/table/entities/products/components/InventoryEdit.jsx:242
+msgid "Manage product stock"
+msgstr "ניהול מלאי מוצר"
+
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:106
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:199
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:207
+msgid "Upsells"
+msgstr "המלצות לשדרוג"
+
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:106
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:233
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:242
+msgid "Cross-sells"
+msgstr "המלצות לחציית מכירה"
+
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:107
+msgid "No linked products"
+msgstr "אין מוצרים מקושרים"
+
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:114
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:171
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:180
+#: src/components/table/entities/products/products.columns.js:1557
+#, fuzzy
+msgid "Linked Products"
+msgstr "מוצרים"
+
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:183
+msgid "Linked products are related items that appear on the product page as additional or complementary suggestions. This enhances the shopping experience by offering customers more options."
+msgstr "מוצרים מקושרים הם פריטים קשורים המופיעים בעמוד המוצר כהצעות נוספות או משלימות. זה משפר את חוויית הקנייה בכך שהוא מציע ללקוחות עוד אפשרויות."
+
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:209
+msgid "Upsells are products which you recommend instead of the currently viewed product, for example, products that are more profitable or better quality or more expensive."
+msgstr "מוצרים לשדרוג הם מוצרים שאתם ממליצים במקום המוצר הנוכחי שנצפה, לדוגמה, מוצרים רווחיים יותר, איכותיים יותר או יקרים יותר."
+
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:218
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:254
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:384
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:397
+#: src/components/table/import/ExportProductsIds.jsx:312
+#: src/components/table/import/ExportProductsIds.jsx:386
+#: src/components/table/import/ExportProductsIds.jsx:437
+#: src/components/table/toolbar/actions/bulk-edit/AddImages.jsx:87
+msgid "selected"
+msgstr "נבחרו"
+
+#: src/components/table/entities/products/components/LinkedProductsCell.jsx:245
+msgid "Cross-sells are products which you promote in the cart, based on the current product."
+msgstr "מוצרים מוצלבים הם מוצרים שאתם מקדמים בעגלת הקניות, בהתבסס על המוצר הנוכחי."
+
+#: src/components/table/entities/products/components/SelectEdit.jsx:66
+msgid "Select option"
+msgstr ""
+
+#: src/components/table/entities/products/components/SoldIndividuallyCell.jsx:51
+#: src/components/table/entities/products/products.columns.js:1457
+msgid "Sold Individually"
+msgstr "נמכר בנפרד"
+
+#: src/components/table/entities/products/components/SoldIndividuallyCell.jsx:52
+msgid "Multiple Purchases Allowed"
+msgstr ""
+
+#: src/components/table/entities/products/components/TypeDisplay.jsx:18
+msgid "Variant"
+msgstr ""
+
+#: src/components/table/entities/products/components/TypeDisplay.jsx:41
+#: src/components/table/entities/products/components/TypeWithSettingsCell.jsx:35
+msgid "Variable products require Pro license"
+msgstr ""
+
+#: src/components/table/entities/products/components/TypeEdit.jsx:43
+msgid "Delete Product Variations"
+msgstr ""
+
+#: src/components/table/entities/products/components/TypeEdit.jsx:44
+msgid "Please confirm that you understand deleting the product variations is irreversible and cannot be undone. This action will permanently remove all variations associated with this product from the system."
+msgstr ""
+
+#: src/components/table/entities/products/components/TypeEdit.jsx:48
+msgid "Delete Variations"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/AddVariations.jsx:56
+msgid "Manage variations"
+msgstr "ניהול ווריאציות"
+
+#: src/components/table/entities/products/components/variation/AddVariations.jsx:56
+msgid "Manage attributes"
+msgstr "ניהול מאפיינים"
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:107
+msgid "Term added successfully"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:218
+msgid "Error: Attribute not found in WordPress. Please create it first."
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:279
+msgid "Options imported successfully"
+msgstr "האופציות יובאו בהצלחה"
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:284
+msgid "Warning: Server returned empty attributes. Check if the attribute slug is in English."
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:296
+msgid "Error saving options"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:310
+msgid "new term"
+msgstr "מונח חדש"
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:350
+msgid "Find term"
+msgstr "מצא מונח"
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:367
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:380
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:348
+#: src/components/table/import/CustomFieldsSelector.jsx:178
+msgid "Select all"
+msgstr "בחר הכל"
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:390
+msgid "No terms found."
+msgstr "לא נמצאו מונחים."
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:420
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:228
+msgid "Already added"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:428
+#, fuzzy
+msgid "No terms available"
+msgstr "מתנה זמינה!"
+
+#: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:447
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:490
+msgid "Import"
+msgstr "ייבוא"
+
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:82
+msgid "The term has been successfully updated to"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:88
+#, fuzzy
+msgid "Failed to update term"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:143
+#, fuzzy
+msgid "Failed to delete term"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:234
+msgid "Deleting..."
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:242
+msgid "Edit term"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:257
+msgid "Delete term"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/GenerateRowItem.jsx:131
+msgid "Global"
+msgstr "גלובלי"
+
+#: src/components/table/entities/products/components/variation/components/GenerateRowItem.jsx:172
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:427
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:386
+#: src/components/table/entities/products/components/variation/components/VariationNameEdit.jsx:92
+#: src/components/table/entities/products/components/variation/components/VariationNameEdit.jsx:112
+#: src/components/table/entities/products/components/VariationNameDisplay.jsx:47
+#: src/components/table/entities/products/components/VariationNameEdit.jsx:246
+#: src/components/table/entities/products/components/VariationNameEdit.jsx:267
+msgid "Any"
+msgstr "כל ה"
+
+#: src/components/table/entities/products/components/variation/components/GenerateRowItem.jsx:196
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:72
+msgid "Delete attribute"
+msgstr "מחק תכונה"
+
+#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:246
+msgid "Attribute"
+msgstr "תכונה"
+
+#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:248
+msgid "For variations"
+msgstr "לווריאציות"
+
+#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:249
+msgid "Options"
+msgstr "אפשרויות"
+
+#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:288
+msgid "Add attribute"
+msgstr "הוסף תכונה"
+
+#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:293
+msgid "Attribute Type"
+msgstr "סוג תכונה"
+
+#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:322
+msgid "Combine & Generate"
+msgstr "שלב וייצר"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:253
+msgid "Attributes have been saved successfully."
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:461
+msgid "Variations have been saved successfully."
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:482
+msgid "Step 1: "
+msgstr "שלב 1: "
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:485
+msgid "Select Product Attributes"
+msgstr "בחר מאפייני מוצר"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:492
+msgid "Begin by adding attributes to your product. Attributes define the different aspects of your product that may vary, such as color, size, or material. You have two options when creating an attribute:"
+msgstr "התחל בהוספת מאפיינים למוצר שלך. מאפיינים מגדירים את ההיבטים השונים של המוצר שלך שעשויים להשתנות, כגון צבע, גודל או חומר. יש לך שתי אפשרויות בעת יצירת מאפיין:"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:499
+msgid "Product Attribute:"
+msgstr "תכונת מוצר:"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:501
+msgid "Select this option to add attributes that are unique to this specific product, such as \"Storage Capacity\" for electronics or \"Frame Material\" for glasses."
+msgstr "בחר באפשרות זו כדי להוסיף תכונות שהן ייחודיות למוצר זה בלבד, כמו \"נפח אחסון\" למוצרי אלקטרוניקה או \"הרכב המסגרת\" למשקפיים."
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:508
+msgid "Global Attribute:"
+msgstr "תכונה גלובלית:"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:510
+msgid "Select this for attributes like \"Size\" or \"Color\" that are common across multiple products. Creating a global attribute once allows you to reuse it, avoiding repetitive setup for each product."
+msgstr "בחר באפשרות זו לתכונות כמו \"גודל\" או \"צבע\" שנפוצות במספר מוצרים. יצירת תכונה גלובלית פעם אחת מאפשרת לך להשתמש בה שוב ולהמנע מהגדרה חוזרת עבור כל מוצר."
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:523
+msgid "Step 2: "
+msgstr "שלב 2: "
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:526
+msgid "Define Attribute Options"
+msgstr "הגדרת אפשרויות התכונה"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:533
+msgid "After selecting an attribute for your product, you now need to define the available options. For instance, if the attribute is 'Color', you will need to specify the available colors."
+msgstr "לאחר שבחרת תכונה עבור המוצר שלך, עליך כעת להגדיר את האפשרויות הזמינות. לדוגמה, אם התכונה היא 'צבע', יהיה עליך לציין את הצבעים הזמינים."
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:539
+msgid "The default option is 'Any', which will display all available options for the attribute to the customers in the store. This is suitable when you do not wish to specify different settings for each variation, such as different prices, stock levels, or images. If the attribute is global, options can be imported from existing terms instead of creating them individually."
+msgstr "האפשרות המוגדרת כברירת מחדל היא 'כל האפשרויות', שבה כל האפשרויות הזמינות לתכונה יוצגו ללקוחות בחנות. זה מתאים כאשר אינך מעוניין לציין הגדרות שונות לכל וריאציה, כמו מחירים שונים, רמות מלאי, או תמונות שונות. אם מדובר בתכונה גלובלית, ניתן לייבא את האפשרויות ממונחים קיימים במקום ליצור אותם באופן עצמאי."
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:552
+msgid "Step 3: "
+msgstr "שלב 3: "
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:555
+msgid "Combine and Generate Variations"
+msgstr "שילוב ויצירת ווריאציות"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:562
+msgid "At this stage, by clicking 'Generate', you will create combinations of the selected attributes and options for your product, resulting in new variations. For example, selecting 'Color' with options 'Blue' and 'Green', and 'Size' with options 'Small' and 'Large', will generate four product variations: Small Blue, Large Blue, Small Green, and Large Green."
+msgstr "בשלב זה, על ידי לחיצה על 'צור', תיצור עבורך שילובים של התכונות והאפשרויות שנבחרו למוצר שלך, ותציג בטבלה התחתונה ווריאציות חדשות. לדוגמה, בחירה בתכונה 'צבע' עם האפשרויות 'כחול' ו'ירוק', ובתכונה 'מידה' עם האפשרויות 'קטן' ו'גדול', תיצור ארבע ווריאציות של המוצר: כחול קטן, כחול גדול, ירוק קטן, וירוק גדול."
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:617
+msgid "Manage Attributes of"
+msgstr "ניהול תכונות של"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:618
+msgid "Manage Variations of"
+msgstr "ניהול ווריאציות של"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:631
+msgid "Variations"
+msgstr "ווריאציות"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:634
+msgid "Variations are different versions of a product, each with unique attributes such as size, color, or material. By using variations, you can offer multiple options for a single product, allowing customers to choose exactly what they prefer. This feature simplifies inventory management and enhances the shopping experience by grouping similar items under one product listing. For a guided tour of how to use variations, please visit this link:"
+msgstr "ווריאציות הן גרסאות שונות של מוצר, כל אחת עם תכונות ייחודיות כמו גודל, צבע או חומר. באמצעות שימוש בווריאציות, ניתן להציע מספר אופציות למוצר בודד, מה שמאפשר ללקוחות לבחור בדיוק את מה שהם מעדיפים. תכונה זו מפשטת את ניהול המלאי ומשפרת את חוויית הקניות על ידי קיבוץ פריטים דומים תחת רישום מוצר אחד. לסיור מודרך בנושא שימוש בווריאציות, אנא בקר בקישור הבא:"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:643
+msgid "Take a tour"
+msgstr "צא לסיור"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:653
+msgid "View variations documentation"
+msgstr "צפה בתיעוד עבור ווריאציות"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:668
+#, fuzzy
+msgid "Product attributes"
+msgstr "מוצרים"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:669
+msgid "Existing product attributes"
+msgstr "תכונות קיימות במוצר"
+
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:682
+msgid "Existing product variations"
+msgstr "ווריאציות קיימות במוצר"
+
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:60
+msgid "The attribute has been successfully updated to"
+msgstr "התכונה עודכנה בהצלחה ל"
+
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:66
+#, fuzzy
+msgid "Failed to update attribute"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:73
+msgid "Are you sure you want to permanently delete this attribute?"
+msgstr "האם אתה בטוח שברצונך למחוק לצמיתות את התכונה הזו?"
+
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:87
+msgid "The attribute"
+msgstr "התכונה"
+
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:94
+msgid "Failed to delete attribute"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:164
+msgid "Failed to add attribute to product"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:140
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:100
+msgid "Failed to add attribute"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:150
+msgid "Global Attribute"
+msgstr "תכונה גלובלית"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:159
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:119
+msgid "new attribute"
+msgstr "תכונה חדשה"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:202
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:162
+msgid "Find attribute"
+msgstr "מצא תכונה"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:205
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:165
+msgid "Add new attribute"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:224
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:184
+msgid "Existing attributes"
+msgstr "מאפיינים קיימים"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:252
+msgid "No attributes yet"
+msgstr "אין תכונות עדיין"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:255
+msgid "Create your first global attribute to get started"
+msgstr "צור את התכונה הגלובלית הראשונה שלך כדי להתחיל"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:265
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:224
+msgid "Create Attribute"
+msgstr "צור תכונה"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:266
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:217
+msgid "Option added successfully"
+msgstr "האפשרות נוספה בהצלחה"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:274
+msgid "Select options"
+msgstr "בחר אפשרויות"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:300
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:283
+msgid "new option"
+msgstr "אפשרות חדשה"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:341
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:320
+msgid "Find option"
+msgstr "מצא אפשרות"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:344
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:323
+msgid "Add new option"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:353
+msgid "Import from terms"
+msgstr "ייבוא מתוך מונחים"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:391
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:359
+#: src/components/table/import/CustomFieldsSelector.jsx:189
+#: src/components/table/import/ExportProductsIds.jsx:434
+msgid "Clear selection"
+msgstr "ניקוי בחירה"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:405
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:467
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:416
+msgid "No options yet"
+msgstr "אין אפשרויות עדיין"
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:459
+msgid "Import from terms..."
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:470
+msgid "Create options or import from terms"
+msgstr "צור אפשרויות או יבא מונחים"
+
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:59
+msgid "Option name cannot be empty"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:117
+msgid "The options has been successfully updated to"
+msgstr "האפשרויות עודכנו בהצלחה ל"
+
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:123
+#, fuzzy
+msgid "Failed to update option"
+msgstr "עדכון השורה בטבלת whizmanage נכשל."
+
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:183
+msgid "The option"
+msgstr "האפשרות"
+
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:183
+msgid "has been successfully deleted"
+msgstr "נמחק בהצלחה"
+
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:189
+msgid "Failed to delete option"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:283
+msgid "Edit option"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:297
+msgid "Delete option"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:110
+msgid "Product Attribute"
+msgstr "תכונת מוצר"
+
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:211
+msgid "No product attributes yet"
+msgstr "אין תכונות מוצר עדיין"
+
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:214
+msgid "Create your first product attribute to get started"
+msgstr "צור את תכונת המוצר הראשונה שלך כדי להתחיל"
+
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:267
+msgid "Add options"
+msgstr "הוסף אפשרויות"
+
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:393
+msgid "Options exist"
+msgstr "אפשרויות קיימות"
+
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:419
+msgid "Create your first option to get started"
+msgstr "צור את האפשרות הראשונה שלך כדי להתחיל"
+
+#: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:429
+msgid "Create Option"
+msgstr "צור אפשרות"
+
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:166
+msgid "Undownloadable"
+msgstr "לא להורדה"
+
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:79
+msgid "Manage stock"
+msgstr "נהל מלאי"
+
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:108
+msgid "Stock quantity"
+msgstr "כמות במלאי"
+
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:113
+msgid "Enter quantity"
+msgstr "הכנס כמות"
+
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:137
+msgid "Low stock threshold"
+msgstr "ערך סף של מלאי מועט"
+
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:142
+msgid "Enter low stock amount"
+msgstr "הכנס סף למלאי נמוך"
+
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:469
+msgid "No SKU"
+msgstr "אין מק״ט"
+
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:499
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:539
+msgid "No price"
+msgstr "ללא מחיר"
+
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:566
+msgid "Delete variation"
+msgstr "מחק וריאציה"
+
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:593
+msgid "Search variation..."
+msgstr "חפש ווריאציה..."
+
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:702
+msgid "No variations found"
+msgstr "לא נמצאו ווריאציות"
+
+#: src/components/table/entities/products/components/VariationNameDisplay.jsx:35
+#: src/components/table/entities/products/components/VariationNameDisplay.jsx:57
+msgid "Unnamed variation"
+msgstr ""
+
+#: src/components/table/entities/products/components/VariationNameDisplay.jsx:67
+msgid "Unnamed product"
+msgstr ""
+
+#: src/components/table/entities/products/components/VariationNameEdit.jsx:139
+#, fuzzy
+msgid "Product name"
+msgstr "מוצרים"
+
+#: src/components/table/entities/products/components/VariationNameEdit.jsx:299
+msgid "No options available"
+msgstr "אין אפשרויות זמינות"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:105
+msgid "Focus keyphrase is set"
+msgstr "מילת מפתח מוגדרת"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:105
+msgid "You've set a focus keyphrase - great start!"
+msgstr "הגדרת מילת מפתח - התחלה מצוינת!"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:107
+msgid "No focus keyphrase set"
+msgstr "לא הוגדרה מילת מפתח"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:107
+msgid "Set a focus keyphrase to optimize your content for search engines"
+msgstr "הגדר מילת מפתח כדי לבצע אופטימיזציה של התוכן שלך למנועי חיפוש"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:118
+msgid "Keyphrase length is optimal"
+msgstr "אורך מילת המפתח תקין"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:118
+msgid "Your keyphrase has 1-4 words - perfect length!"
+msgstr "למילת המפתח שלך יש 1–4 מילים - אורך מצוין!"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:120
+msgid "Keyphrase is too long"
+msgstr "מילת המפתח ארוכה מדי"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:120
+msgid "Try to shorten your keyphrase to 1-4 words for better focus"
+msgstr "נסה לקצר את מילת המפתח ל-1–4 מילים למיקוד טוב יותר"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:130
+msgid "Keyphrase appears in SEO title"
+msgstr "מילת המפתח מופיעה בכותרת"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:130
+msgid "Great! Your keyphrase is in the title"
+msgstr "מצוין! מילת המפתח שלך בכותרת"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:132
+msgid "Add keyphrase to SEO title"
+msgstr "הוסף מילת מפתח לכותרת"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:132
+msgid "Include your focus keyphrase in the SEO title for better rankings"
+msgstr "כלול את מילת המפתח בכותרת ה-SEO כדי לשפר דירוגים"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:141
+msgid "Keyphrase appears in URL"
+msgstr "מילת המפתח מופיעה בכתובת ה-URL"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:141
+msgid "Good! Your URL contains the keyphrase"
+msgstr "מעולה! כתובת ה-URL שלך כוללת את מילת המפתח"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:143
+msgid "Add keyphrase to URL"
+msgstr "הוסף מילת מפתח לכתובת ה-URL"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:143
+msgid "Include your keyphrase in the URL slug for better SEO"
+msgstr "כלול את מילת המפתח בכתובת ה-URL לשיפור SEO"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:149
+msgid "Keyphrase in meta description"
+msgstr "מילת המפתח בתיאור המטא"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:149
+msgid "Perfect! Your description contains the keyphrase"
+msgstr "מעולה! התיאור שלך כולל את מילת המפתח"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:151
+msgid "Add keyphrase to description"
+msgstr "הוסף מילת מפתח לתיאור"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:151
+msgid "Include your keyphrase in the meta description"
+msgstr "כלול את מילת המפתח בתיאור המטא"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:158
+msgid "SEO title length is perfect"
+msgstr "אורך הכותרת מושלם"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:161
+msgid "SEO title is too short"
+msgstr "הכותרת קצרה מדי"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:164
+msgid "SEO title is too long"
+msgstr "הכותרת ארוכה מדי"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:166
+msgid "No SEO title set"
+msgstr "לא הוגדרה כותרת SEO"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:166
+msgid "Add an SEO title between 50-60 characters"
+msgstr "הוסף כותרת SEO בין 50 ל-60 תווים"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:173
+msgid "Meta description length is ideal"
+msgstr "אורך תיאור המטא אידיאלי"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:176
+msgid "Meta description is too short"
+msgstr "תיאור המטא קצר מדי"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:179
+msgid "Meta description is too long"
+msgstr "תיאור המטא ארוך מדי"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:181
+msgid "No meta description"
+msgstr "לא הוגדר תיאור מטא"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:181
+msgid "Add a meta description between 120-160 characters"
+msgstr "הוסף תיאור מטא באורך 120 עד 160 תווים"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:187
+msgid "URL slug is set"
+msgstr "מזהה כתובת (slug) מוגדר"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:187
+msgid "Good! You have a custom URL"
+msgstr "מעולה! יש לך מזהה כתובת מותאם אישית"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:189
+msgid "No URL slug"
+msgstr "לא הוגדר מזהה כתובת"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:189
+msgid "Set a URL slug for better SEO"
+msgstr ""
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:197
+msgid "Social media optimized"
+msgstr "הוגדר אופטימיזציה לרשתות חברתיות"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:197
+msgid "Great! Your content is ready for social sharing"
+msgstr ""
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:200
+msgid "Incomplete social settings"
+msgstr "הגדרות הרשתות החברתיות אינן מלאות"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:200
+msgid "Complete both social title and description"
+msgstr ""
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:202
+msgid "No social media settings"
+msgstr "לא הוגדרו הגדרות לרשתות חברתיות"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:202
+msgid "Add social title and description for better sharing"
+msgstr "הוסף כותרת ותיאור לשיתוף טוב יותר"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:262
+msgid "Enter your description here"
+msgstr "הכנס את התיאור שלך כאן"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:307
+msgid "Click to change image"
+msgstr ""
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:307
+msgid "Click to choose image"
+msgstr ""
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:465
+msgid "Yoast SEO"
+msgstr "יואסט SEO"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:466
+msgid "Optimize your content for search engines"
+msgstr "אופטימיזציה של התוכן שלך למנועי חיפוש"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:517
+msgid "Basic SEO Settings"
+msgstr "הגדרות SEO בסיסיות"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:524
+msgid "SEO Analysis"
+msgstr "ניתוח SEO"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:561
+msgid "Search Result Preview"
+msgstr "תצוגה מקדימה של תוצאות חיפוש"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:565
+#, fuzzy
+msgid "https://mysite.com"
+msgstr "https://whizmanage.com/"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:565
+#, fuzzy
+msgid "product-slug"
+msgstr "מוצרים"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:572
+msgid "Please provide a meta description by editing the snippet below. If you don't, Google will try to find a relevant part of your post to show in the search results."
+msgstr "אנא ספק תיאור מטא על ידי עריכת הקטע למטה. אם לא תעשה זאת, גוגל תנסה למצוא חלק רלוונטי מהפוסט שלך כדי להציג בתוצאות החיפוש."
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:584
+msgid "Advanced Settings"
+msgstr "הגדרות מתקדמות"
+
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:593
+msgid "Social Media Settings"
+msgstr "הגדרות רשתות חברתיות"
+
+#: src/components/table/entities/products/products.columns.js:177
+#: src/components/table/entities/products/products.columns.js:1346
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:501
+msgid "Select Gallery Images"
+msgstr "בחר תמונות לגלריה"
+
+#: src/components/table/entities/products/products.columns.js:933
+#: src/components/table/import/ExportProductsIds.jsx:65
+#: src/components/table/import/ExportProductsIds.jsx:73
+msgid "Private"
+msgstr "פרטי"
+
+#: src/components/table/filters/ColumnFilter.jsx:302
+msgid "Enable"
+msgstr "הפעל"
+
+#: src/components/table/filters/ColumnFilter.jsx:331
+msgid "No options found"
+msgstr ""
+
+#: src/components/table/filters/ColumnFilter.jsx:345
+msgid "No Value"
+msgstr "אין ערך"
+
+#: src/components/table/filters/DateFilterTabs.jsx:270
+msgid "Start Date"
+msgstr "תאריך התחלה"
+
+#: src/components/table/filters/DateFilterTabs.jsx:273
+msgid "Select start date"
+msgstr ""
+
+#: src/components/table/filters/DateFilterTabs.jsx:286
+msgid "End Date"
+msgstr "תאריך סיום"
+
+#: src/components/table/filters/DateFilterTabs.jsx:289
+msgid "Select end date"
+msgstr ""
+
+#: src/components/table/import/CustomFieldsSelector.jsx:145
+msgid "Select custom fields"
+msgstr "בחירת שדות מותאמים אישית"
+
+#: src/components/table/import/CustomFieldsSelector.jsx:146
+msgid "Custom fields selected"
+msgstr "שדות מותאמים אישית שנבחרו"
+
+#: src/components/table/import/CustomFieldsSelector.jsx:159
+msgid "Find custom fields"
+msgstr "חפש שדות מותאמים אישית"
+
+#: src/components/table/import/CustomFieldsSelector.jsx:199
+msgid "Loading..."
+msgstr "טוען..."
+
+#: src/components/table/import/CustomFieldsSelector.jsx:199
+msgid "No custom fields found."
+msgstr ""
+
+#: src/components/table/import/CustomFieldsSelector.jsx:202
+#: src/components/table/import/ImportSettings.jsx:393
+#, fuzzy
+msgid "Custom Fields"
+msgstr "לקוחות"
+
+#: src/components/table/import/ExportProductsIds.jsx:207
+#, fuzzy
+msgid "Select Products"
+msgstr "מוצרים"
+
+#: src/components/table/import/ExportProductsIds.jsx:208
+msgid "products selected"
+msgstr "מוצרים נבחרו"
+
+#: src/components/table/import/ExportProductsIds.jsx:220
+#, fuzzy
+msgid "Find Products"
+msgstr "מוצרים"
+
+#: src/components/table/import/ExportProductsIds.jsx:282
+msgid "Filter by Category"
+msgstr "סינון לפי קטגוריה"
+
+#: src/components/table/import/ExportProductsIds.jsx:295
+msgid "Search categories..."
+msgstr "חיפוש קטגוריות..."
+
+#: src/components/table/import/ExportProductsIds.jsx:309
+#: src/components/table/import/ExportProductsIds.jsx:383
+msgid "Clear filters"
+msgstr "ניקוי סינונים"
+
+#: src/components/table/import/ExportProductsIds.jsx:315
+msgid "No categories found."
+msgstr ""
+
+#: src/components/table/import/ExportProductsIds.jsx:360
+msgid "Filter by Status"
+msgstr "סינון לפי סטטוס"
+
+#: src/components/table/import/ExportProductsIds.jsx:389
+msgid "No statuses found."
+msgstr ""
+
+#: src/components/table/import/ImportSettings.jsx:75
+msgid "Please enter a Google Sheets URL"
+msgstr ""
+
+#: src/components/table/import/ImportSettings.jsx:97
+msgid "Error saving sheet URL"
+msgstr ""
+
+#: src/components/table/import/ImportSettings.jsx:115
+#: src/components/table/import/ImportSettings.jsx:133
+msgid "Error saving product list"
+msgstr ""
+
+#: src/components/table/import/ImportSettings.jsx:142
+msgid "All settings saved successfully"
+msgstr ""
+
+#: src/components/table/import/ImportSettings.jsx:147
+msgid "Error saving settings"
+msgstr ""
+
+#: src/components/table/import/ImportSettings.jsx:169
+msgid "This feature allows you to integrate your website with a Google Sheets file."
+msgstr "תכונה זו מאפשרת לשלב את האתר שלך עם קובץ Google Sheets."
+
+#: src/components/table/import/ImportSettings.jsx:174
+msgid "Instructions"
+msgstr "הוראות"
+
+#: src/components/table/import/ImportSettings.jsx:177
+msgid "Open the attached sample file and click 'Make a copy' to save it in your Google account. You must also transfer the attached script."
+msgstr "פתח את קובץ הדוגמה המצורף ולחץ על 'צור עותק' כדי לשמור אותו בחשבון ה-Google שלך. עליך גם להעביר את הסקריפט המצורף."
+
+#: src/components/table/import/ImportSettings.jsx:183
+msgid "Name the file using the same name as your website's URL."
+msgstr "תן לקובץ שם זהה לכתובת ה-URL של האתר שלך."
+
+#: src/components/table/import/ImportSettings.jsx:186
+msgid "Set the file's sharing permissions to 'View only' for everyone, then copy the link and paste it here in the provided box."
+msgstr "הגדר את הרשאות השיתוף של הקובץ ל'צפייה בלבד' עבור כולם, לאחר מכן העתק את הקישור והדבק אותו כאן בתיבה המיועדת לכך."
+
+#: src/components/table/import/ImportSettings.jsx:192
+msgid "In the top menu, a new tab named 'WhizManage' will appear. Click 'Update File'."
+msgstr "בתפריט העליון יופיע לשונית חדשה בשם 'WhizManage'. לחץ על 'עדכון הקובץ'."
+
+#: src/components/table/import/ImportSettings.jsx:197
+msgid "The first time you do this, you will be prompted to authorize your account for the attached script."
+msgstr "בפעם הראשונה שתעשה זאת, תתבקש לאשר את החשבון שלך עבור הסקריפט המצורף."
+
+#: src/components/table/import/ImportSettings.jsx:203
+msgid "After updating the file, you can edit or add products to your site via the file by clicking the 'Update Site' button."
+msgstr "לאחר עדכון הקובץ, תוכל לערוך או להוסיף מוצרים לאתר שלך דרך הקובץ, על ידי לחיצה על כפתור 'עדכון האתר'."
+
+#: src/components/table/import/ImportSettings.jsx:259
+#: src/components/table/import/ImportSettings.jsx:269
+#, fuzzy
+msgid "Import Products"
+msgstr "מוצרים"
+
+#: src/components/table/import/ImportSettings.jsx:291
+msgid "Connect and import products from Google Sheets"
+msgstr "חיבור וייבוא מוצרים מגוגל שיטס"
+
+#: src/components/table/import/ImportSettings.jsx:301
+msgid "View example spreadsheet"
+msgstr "קובץ שיטס לדוגמא"
+
+#: src/components/table/import/ImportSettings.jsx:313
+msgid "Google Sheets URL"
+msgstr "כתובת Google Sheets"
+
+#: src/components/table/import/ImportSettings.jsx:333
+msgid "Remove Link"
+msgstr ""
+
+#: src/components/table/import/ImportSettings.jsx:365
+msgid "Make sure the sheet is set to 'Anyone with the link can view'"
+msgstr ""
+
+#: src/components/table/import/ImportSettings.jsx:377
+msgid "Select Products to Export"
+msgstr "בחירת מוצרים לייצוא"
+
+#: src/components/table/import/ImportSettings.jsx:380
+msgid "Choose which products should be exported to Google Sheets"
+msgstr "בחר אילו מוצרים ייוצאו ל-Google Sheets"
+
+#: src/components/table/import/ImportSettings.jsx:396
+msgid "Select which custom fields to include in the export"
+msgstr "בחר אילו שדות מותאמים לכלול בייצוא"
+
+#: src/components/table/import/ImportSettings.jsx:413
+msgid "Save Settings"
+msgstr "שמירת הגדרות"
+
+#: src/components/table/toolbar/actions/bulk-edit/AddImages.jsx:75
+msgid "No images selected yet"
+msgstr "לא נבחרו תמונות עדיין"
+
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:313
+msgid "Tag"
+msgstr ""
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:75
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:89
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:104
+msgid "Set for all"
+msgstr "הגדר עבור כולם"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:216
+msgid "No image selected"
+msgstr "לא נבחרה תמונה"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:238
+msgid "Edit Gallery"
+msgstr "ערוך גלריה"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:255
+msgid "No images selected"
+msgstr ""
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:277
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:746
+#, fuzzy
+msgid "Custom fields"
+msgstr "לקוחות"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:318
+msgid "Only fields with non-empty values will be applied to all selected products."
+msgstr "רק שדות עם ערכים שאינם ריקים יחולו על כל המוצרים שנבחרו."
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:174
+msgid "No changes to save"
+msgstr ""
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:366
+msgid "The updates have been saved successfully."
+msgstr "העדכון עבר בהצלחה"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:473
+msgid "Bulk Edit"
+msgstr "עריכה בכמות גדולה"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:493
+msgid "Add images"
+msgstr "הוסף תמונות"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:511
+msgid "Add labels"
+msgstr "הוסף תוויות"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:562
+msgid "Additional Taxonomies"
+msgstr "מונחי טקסונומיה נוספים"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:614
+msgid "Edit fields"
+msgstr "ערוך שדות"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:622
+msgid "Field to Edit"
+msgstr "שדה לעריכה"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:625
+msgid "Change Amount"
+msgstr "שנה כמות"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:628
+msgid "Change Type"
+msgstr "שנה סוג"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:631
+msgid "Value Type"
+msgstr "סוג ערך"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:634
+msgid "Reference Base"
+msgstr "בסיס הפניה"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:40
+msgid "No Change"
+msgstr "אין שינוי"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:97
+msgid "Increase"
+msgstr "הוסף"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:105
+msgid "Decrease"
+msgstr "הפחת"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:114
+#: src/layout/menu/History.jsx:642
+msgid "New Value"
+msgstr "ערך חדש"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:153
+msgid "Currency"
+msgstr ""
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:184
+msgid "Sale price"
+msgstr "מחיר מבצע"
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:192
+msgid "Regular price"
+msgstr "מחיר רגיל"
+
+#: src/components/table/toolbar/actions/bulk-edit/SelectedRows.jsx:71
+msgid "Change rows"
+msgstr "שנה שורות"
+
+#: src/components/table/toolbar/actions/bulk-edit/SelectedRows.jsx:127
+msgid "Selected rows"
+msgstr "שורות נבחרות"
+
+#: src/components/table/toolbar/actions/genericActions.js:34
+#: src/components/table/toolbar/actions/genericActions.js:45
+#: src/components/table/toolbar/GenericToolbar.jsx:130
+msgid "Move to Trash"
+msgstr "העבר לאשפה"
+
+#: src/components/table/toolbar/actions/genericActions.js:45
+#: src/components/table/toolbar/GenericToolbar.jsx:121
+#: src/components/table/toolbar/GenericToolbar.jsx:140
+msgid "Delete Permanently"
+msgstr "מחק לצמיתות"
+
+#: src/components/table/toolbar/actions/genericActions.js:161
+#: src/components/table/toolbar/GenericToolbar.jsx:56
+msgid "Duplicate"
+msgstr "שכפל"
+
+#: src/components/table/toolbar/actions/genericActions.js:382
+#: src/components/table/toolbar/GenericToolbar.jsx:115
+#: src/layout/menu/History.jsx:595
+msgid "Restore"
+msgstr "שחזר"
+
+#: src/components/table/toolbar/GenericToolbar.jsx:69
+msgid "Bulk edit"
+msgstr "עריכה בכמות גדולה"
+
+#: src/components/table/toolbar/GenericToolbar.jsx:82
+#, fuzzy
+msgid "Edit in WooCommerce"
+msgstr "ניהול חנות WooCommerce בקלות"
+
+#: src/components/table/toolbar/GenericToolbar.jsx:101
+msgid "View in WooCommerce"
+msgstr "הצג ב-ווקומרס"
+
+#: src/components/table/toolbar/Toolbar.jsx:142
+msgid "row selected"
+msgstr "שורה נבחרה"
+
+#: src/components/table/toolbar/Toolbar.jsx:142
+msgid "rows selected"
+msgstr "שורות נבחרו"
+
+#: src/components/tour/WhatsNewTour.jsx:65
+msgid "Inline Table Editing"
+msgstr "עריכה ישירה בטבלה"
+
+#: src/components/tour/WhatsNewTour.jsx:66
+msgid "Double-click any cell to edit values directly in the table. Changes are saved automatically - no need to open forms!"
+msgstr "לחץ פעמיים על כל תא כדי לערוך ערכים ישירות בטבלה. השינויים נשמרים אוטומטית - אין צורך לפתוח טפסים!"
+
+#: src/components/tour/WhatsNewTour.jsx:75
+msgid "Fresh New Design"
+msgstr "עיצוב חדש ומרענן"
+
+#: src/components/tour/WhatsNewTour.jsx:76
+msgid "We've completely redesigned the interface with a modern look, improved dark mode, and better accessibility."
+msgstr "עיצבנו מחדש את הממשק עם מראה מודרני, מצב כהה משופר ונגישות טובה יותר."
+
+#: src/components/tour/WhatsNewTour.jsx:85
+#, fuzzy
+msgid "Quick Add Products"
+msgstr "מוצרים"
+
+#: src/components/tour/WhatsNewTour.jsx:86
+msgid "Click the dropdown arrow and select 'Quick add to table' to instantly create a new row and start typing!"
+msgstr "לחץ על החץ הנפתח ובחר 'הוספה מהירה לטבלה' כדי ליצור שורה חדשה מיד ולהתחיל להקליד!"
+
+#: src/components/tour/WhatsNewTour.jsx:95
+msgid "Drag & Drop Reordering"
+msgstr "גרירה ושחרור לסידור מחדש"
+
+#: src/components/tour/WhatsNewTour.jsx:96
+msgid "Drag rows to rearrange your products. The new order is automatically saved and reflects in your store."
+msgstr "גרור שורות לסידור מחדש של המוצרים שלך. הסדר החדש נשמר אוטומטית ומשתקף בחנות שלך."
+
+#: src/components/tour/WhatsNewTour.jsx:105
+msgid "Coupons Management"
+msgstr "ניהול קופונים"
+
+#: src/components/tour/WhatsNewTour.jsx:106
+msgid "Create and manage discount coupons with advanced settings, usage limits, and product restrictions."
+msgstr "צור ונהל קופוני הנחה עם הגדרות מתקדמות, הגבלות שימוש והגבלות מוצרים."
+
+#: src/components/tour/WhatsNewTour.jsx:116
+msgid "Create powerful discount rules with conditions and filters. Set up bulk discounts, category sales, and more."
+msgstr "צור חוקי הנחות חזקים עם תנאים ומסננים. הגדר הנחות כמותיות, מבצעי קטגוריות ועוד."
+
+#: src/components/tour/WhatsNewTour.jsx:125
+msgid "Orders Interface"
+msgstr "ממשק הזמנות"
+
+#: src/components/tour/WhatsNewTour.jsx:126
+msgid "View and manage orders with our new streamlined interface. Edit order details, process refunds, and add notes."
+msgstr "צפה ונהל הזמנות עם הממשק החדש והמעודכן שלנו. ערוך פרטי הזמנה, בצע החזרים כספיים והוסף הערות."
+
+#: src/components/tour/WhatsNewTour.jsx:135
+msgid "Customer Management"
+msgstr "ניהול לקוחות"
+
+#: src/components/tour/WhatsNewTour.jsx:136
+msgid "Access detailed customer information, order history, and lifetime value all in one place."
+msgstr "גש למידע מפורט על לקוחות, היסטוריית הזמנות וערך לקוח לכל אורך החיים במקום אחד."
+
+#: src/components/tour/WhatsNewTour.jsx:205
+msgid "Skip tour"
+msgstr "דלג על הסיור"
+
+#: src/components/tour/WhatsNewTour.jsx:210
+msgid "Back"
+msgstr "הקודם"
+
+#: src/components/tour/WhatsNewTour.jsx:213
+msgid "Finish"
+msgstr "סיום"
+
+#: src/components/tour/WhatsNewTour.jsx:213
+msgid "Next"
+msgstr "הבא"
+
+#: src/components/ui/custom/CustomConfirm.jsx:131
+msgid "Confirm"
+msgstr ""
+
+#: src/components/ui/custom/PDFPreview.jsx:64
+msgid "Click to preview"
+msgstr ""
+
+#: src/components/ui/custom/PDFPreview.jsx:91
+msgid "PDF Preview"
+msgstr ""
+
+#: src/components/ui/custom/PDFPreview.jsx:116
+msgid "Open in New Tab"
+msgstr ""
+
+#: src/components/ui/custom/PDFPreview.jsx:180
+msgid "Open PDF"
+msgstr ""
 
 #: src/ErrorBoundary.jsx:77
-msgid "Back to wordpress"
-msgstr "חזרה לוורדפרס"
+msgid "Something went wrong"
+msgstr "אופס! משהו השתבש"
 
-#: src/ErrorBoundary.jsx:88
+#: src/ErrorBoundary.jsx:80
+msgid "An unexpected error occurred"
+msgstr "אירעה שגיאה בלתי צפויה"
+
+#: src/ErrorBoundary.jsx:102
+msgid "Copied"
+msgstr "הועתק"
+
+#: src/ErrorBoundary.jsx:123
+msgid "Reloading..."
+msgstr ""
+
+#: src/ErrorBoundary.jsx:123
 msgid "Try again"
 msgstr "נסה שוב"
 
-#: src/pages/products/_components/header/add/product/AddProduct.jsx:218
-msgid "Add product"
-msgstr "הוסף מוצר"
+#: src/ErrorBoundary.jsx:134
+#: src/layout/menu/MenuOrder.jsx:183
+#: src/layout/sidebar/NavUser.jsx:204
+#: src/layout/_components/LicensePopup.jsx:308
+msgid "Back to wordpress"
+msgstr "חזרה לוורדפרס"
 
-#: src/pages/products/_components/table/DataTable.jsx:134
-msgid "You have unsaved changes. Are you sure you want to leave?"
-msgstr "יש לך שינויים שלא נשמרו. האם לצאת בכל זאת?"
+#: src/ErrorBoundary.jsx:163
+msgid "If this problem persists, please"
+msgstr "אם הבעיה נמשכת, אנא"
+
+#: src/ErrorBoundary.jsx:170
+msgid "contact support"
+msgstr "צור קשר עם התמיכה"
+
+#: src/layout/menu/History.jsx:163
+msgid "Added"
+msgstr ""
+
+#: src/layout/menu/History.jsx:170
+msgid "Updated"
+msgstr ""
+
+#: src/layout/menu/History.jsx:177
+msgid "Deleted"
+msgstr ""
+
+#: src/layout/menu/History.jsx:184
+msgid "Duplicated"
+msgstr ""
+
+#: src/layout/menu/History.jsx:191
+msgid "Performed"
+msgstr ""
+
+#: src/layout/menu/History.jsx:203
+#, fuzzy
+msgid "coupons"
+msgstr "קופונים"
+
+#: src/layout/menu/History.jsx:204
+#, fuzzy
+msgid "customers"
+msgstr "לקוחות"
+
+#: src/layout/menu/History.jsx:484
+msgid "Activity History"
+msgstr "היסטוריית פעילות"
+
+#: src/layout/menu/History.jsx:487
+msgid "View and restore your recent changes"
+msgstr "צפה ושחזר את השינויים האחרונים שלך"
+
+#: src/layout/menu/History.jsx:503
+msgid "Loading history..."
+msgstr "טוען היסטוריה..."
+
+#: src/layout/menu/History.jsx:581
+msgid "Pro only"
+msgstr ""
+
+#: src/layout/menu/History.jsx:639
+msgid "Old Value"
+msgstr "ערך ישן"
+
+#: src/layout/menu/History.jsx:659
+msgid "No history yet"
+msgstr ""
+
+#: src/layout/menu/History.jsx:662
+msgid "Your recent changes will appear here so you can track and restore them"
+msgstr ""
+
+#: src/layout/menu/LicenseMange.jsx:49
+msgid "This license is identical to the current license. Please change the license number."
+msgstr "רישיון זה זהה לרישון הנוכחי אנא שנה מספר רישיון"
+
+#: src/layout/menu/LicenseMange.jsx:65
+msgid "License activated successfully."
+msgstr "הרישיון הופעל בהצלחה."
+
+#: src/layout/menu/LicenseMange.jsx:72
+#: src/layout/menu/LicenseMange.jsx:102
+#: src/layout/_components/LicensePopup.jsx:183
+msgid "Failed to activate the license. Please try again."
+msgstr ".הפעלת הרישיון נכשלה, נסה שוב"
+
+#: src/layout/menu/LicenseMange.jsx:79
+msgid "Deactivate License"
+msgstr ""
+
+#: src/layout/menu/LicenseMange.jsx:80
+msgid "Are you sure you want to deactivate the license?"
+msgstr "האם אתה בטוח שברצונך לכבות את הרישיון?"
+
+#: src/layout/menu/LicenseMange.jsx:81
+#: src/layout/menu/LicenseMange.jsx:275
+msgid "Deactivate"
+msgstr "כבה רישיון"
+
+#: src/layout/menu/LicenseMange.jsx:98
+msgid "License deactivate successfully."
+msgstr "הרישיון כובה בהצלחה!"
+
+#: src/layout/menu/LicenseMange.jsx:132
+msgid "Manage License"
+msgstr "ניהול רשיון"
+
+#: src/layout/menu/LicenseMange.jsx:135
+msgid "View and manage your license details. Click edit to make changes."
+msgstr "צפה ונהל את פרטי הרישיון שלך. לחץ על ערוך כדי לבצע שינויים."
+
+#: src/layout/menu/LicenseMange.jsx:153
+msgid "License Active"
+msgstr ""
+
+#: src/layout/menu/LicenseMange.jsx:156
+msgid "Your license is valid and active"
+msgstr ""
+
+#: src/layout/menu/LicenseMange.jsx:172
+msgid "License Key"
+msgstr "מפתח רישיון"
+
+#: src/layout/menu/LicenseMange.jsx:207
+msgid "Expiry Date"
+msgstr "תאריך תפוגה"
+
+#: src/layout/menu/LicenseMange.jsx:224
+msgid "Token"
+msgstr "מזהה יחודי"
+
+#: src/layout/menu/LicenseMange.jsx:283
+msgid "Change license"
+msgstr "החלף רישיון"
+
+#: src/layout/menu/MenuOrder.jsx:123
+#: src/layout/sidebar/NavUser.jsx:152
+msgid "Help"
+msgstr "עזרה"
+
+#: src/layout/menu/MenuOrder.jsx:140
+#: src/layout/sidebar/NavUser.jsx:166
+msgid "Store display"
+msgstr "תצוגת חנות"
+
+#: src/layout/menu/MenuOrder.jsx:151
+#: src/layout/sidebar/NavUser.jsx:175
+msgid "History"
+msgstr "היסטוריה"
+
+#: src/layout/menu/MenuOrder.jsx:161
+#: src/layout/sidebar/NavUser.jsx:182
+msgid "License"
+msgstr "רשיון"
+
+#: src/layout/menu/MenuOrder.jsx:169
+#: src/layout/sidebar/NavUser.jsx:190
+msgid "What's New"
+msgstr "מה חדש"
+
+#: src/layout/menu/MenuOrder.jsx:193
+#: src/layout/sidebar/NavUser.jsx:214
+msgid "Log out"
+msgstr "התנתקות"
+
+#: src/layout/ModeToggle.jsx:21
+msgid "Theme"
+msgstr "ערכות נושא"
+
+#: src/layout/ModeToggle.jsx:30
+msgid "Light"
+msgstr "בהיר"
+
+#: src/layout/ModeToggle.jsx:37
+msgid "Dark"
+msgstr "כהה"
+
+#: src/layout/ModeToggle.jsx:44
+msgid "System"
+msgstr "ברירת מחדל"
+
+#: src/layout/Navbar.jsx:39
+msgid "There is a new version available (version number "
+msgstr "קיימת גרסה חדשה זמינה (מספר גרסה"
+
+#: src/layout/Navbar.jsx:44
+msgid "Update now"
+msgstr "עדכן עכשיו"
+
+#: src/layout/Navbar.jsx:63
+msgid "Unlock all features with Pro"
+msgstr "שדרג/י לגרסת Pro כדי לפתוח את כל התכונות"
+
+#: src/layout/Navbar.jsx:67
+msgid "Upgrade now"
+msgstr "שדרג/י עכשיו"
+
+#: src/layout/_components/LicensePopup.jsx:94
+#: src/layout/_components/LicensePopup.jsx:128
+msgid "The license was not found."
+msgstr "לא נמצא רישיון"
+
+#: src/layout/_components/LicensePopup.jsx:116
+msgid "The license has expired"
+msgstr "פג תוקף הרישיון"
+
+#: src/layout/_components/LicensePopup.jsx:235
+#, fuzzy
+msgid "Welcome to WhizManage!"
+msgstr "WhizManage"
+
+#: src/layout/_components/LicensePopup.jsx:240
+msgid "Thank you for choosing the #1 product for managing your WooCommerce store! We are excited to help you manage your store with ease and efficiency."
+msgstr "תודה שבחרת במוצר מספר 1 לניהול חנות הווקומרס שלך! אנו נרגשים לסייע לך לנהל את החנות שלך בקלות וביעילות."
+
+#: src/layout/_components/LicensePopup.jsx:246
+msgid " Please enter the license key you received after purchase. You can always find it in your"
+msgstr "אנא הזן את מפתח הרישיון שקיבלת לאחר הרכישה. תוכל תמיד למצוא אותו ב-"
+
+#: src/layout/_components/LicensePopup.jsx:255
+msgid "personal area here"
+msgstr "האזור האישי שלך כאן"
+
+#: src/layout/_components/LicensePopup.jsx:261
+msgid "Enter your license key"
+msgstr "הכנס את מפתח הרישיון שלך"
+
+#: src/layout/_components/LicensePopup.jsx:272
+msgid "Activate License"
+msgstr "הפעל רישיון"
+
+#~ msgid "WhizManage requires WooCommerce to be installed and active."
+#~ msgstr "WhizManage מחייב ש־WooCommerce יהיה מותקן ופעיל."
+
+#~ msgid "Go back"
+#~ msgstr "חזור"

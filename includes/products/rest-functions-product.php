@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * REST endpoints for WhizManage product-related operations.
  *
@@ -11,7 +12,7 @@
  */
 
 if (! defined('ABSPATH')) {
-	exit; // Security: block direct access
+    exit; // Security: block direct access
 }
 
 require_once WHIZMANAGE_DIR . 'includes/products/get-product.php';
@@ -19,607 +20,899 @@ require_once WHIZMANAGE_DIR . 'includes/products/taxonomies.php';
 
 if (! class_exists('Whizmanage_rest_functions_product')) {
 
-	class Whizmanage_rest_functions_product
-	{
-
-		public function __construct()
-		{
-			add_action('rest_api_init', array($this, 'whizmanage_register_rest_route'));
-		}
-
-		/**
-		 * Registers all REST routes for this controller.
-		 *
-		 * Keep endpoints/namespaces as-is to avoid breaking clients.
-		 */
-		public function whizmanage_register_rest_route()
-		{
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/get_product/',
-				array(
-					'methods'             => 'GET,POST',
-					'callback'            => array($this, 'whizmanage_get_product'),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/get_product_for_coupons/',
-				array(
-					'methods'             => 'GET',
-					'callback'            => array($this, 'whizmanage_get_product_for_coupons'),
-					// Intentionally public (as in your original code)
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/import_variations/',
-				array(
-					'methods'             => 'POST',
-					'callback'            => array($this, 'handle_add_variations'),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/trash-products/',
-				array(
-					'methods'             => 'POST',
-					'callback'            => array($this, 'trash_products'),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-	
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/upload-images',
-				array(
-					'methods'             => 'POST',
-					'callback'            => array($this, 'handle_image_upload'),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/taxonomy/(?P<taxonomy>.+)/term',
-				array(
-					'methods'             => 'POST',
-					'callback'            => array($this, 'add_term_to_taxonomy'),
-					'args'                => array(
-						'taxonomy'    => array(
-							'required'           => true,
-							'validate_callback'  => function ($param) {
-								// url-decode and strip prefixed underscores
-								$cleaned_param = ltrim(urldecode($param), '_');
-								return taxonomy_exists($cleaned_param);
-							},
-						),
-						'name'        => array(
-							'required'           => true,
-							'type'               => 'string',
-							'sanitize_callback'  => 'sanitize_text_field',
-						),
-						'slug'        => array(
-							'required'           => false,
-							'type'               => 'string',
-							'sanitize_callback'  => 'sanitize_title',
-						),
-						'parent'      => array(
-							'required'           => false,
-							'type'               => 'integer',
-						),
-						'description' => array(
-							'required'           => false,
-							'type'               => 'string',
-							'sanitize_callback'  => 'sanitize_textarea_field',
-						),
-					),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/taxonomy/(?P<taxonomy>.+)/term/(?P<term_id>\d+)',
-				array(
-					'methods'             => 'DELETE',
-					'callback'            => array($this, 'delete_term_from_taxonomy'),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/taxonomy/(?P<taxonomy>.+)/term/(?P<term_id>\d+)',
-				array(
-					'methods'             => 'PUT',
-					'callback'            => array($this, 'update_term_in_taxonomy'),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/taxonomy/(?P<taxonomy>.+)/terms',
-				array(
-					'methods'             => 'GET',
-					'callback'            => array($this, 'get_terms_by_taxonomy'),
-					'args'                => array(
-						'taxonomy' => array(
-							'required'          => true,
-							'validate_callback' => function ($param) {
-								$decoded_param = urldecode($param);
-								$cleaned_param = ltrim($decoded_param, '_');
-								return taxonomy_exists($cleaned_param);
-							},
-						),
-					),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-			register_rest_route(
-				'whizmanage/v1',
-				'/media-by-url',
-				array(
-					'methods'             => 'POST',
-					'callback'            => array($this, 'get_media_by_urls'),
-					'permission_callback' => array($this, 'custom_plugin_check_permissions'),
-				)
-			);
-
-		}
-
-		/**
-		 * Resolve media attachment IDs by a list of URLs.
-		 * Returns: [{ id, title, src } | { id:null, message }]
-		 */
-		public function get_media_by_urls($request)
-		{
-			$urls = $request->get_param('urls');
-
-			if (empty($urls) || ! is_array($urls)) {
-				return new WP_REST_Response(
-					array('message' => 'Invalid URLs parameter'),
-					400
-				);
-			}
-
-			$results = array();
-
-			foreach ($urls as $url) {
-				$decoded_url    = urldecode($url);
-				$attachment_id  = attachment_url_to_postid($decoded_url);
-
-				if (! $attachment_id) {
-					$results[] = array(
-						'url'     => $decoded_url,
-						'message' => 'Media not found',
-						'id'      => null,
-					);
-					continue;
-				}
-
-				$attachment = get_post($attachment_id);
-				if (! $attachment) {
-					$results[] = array(
-						'url'     => $decoded_url,
-						'message' => 'Media not found',
-						'id'      => null,
-					);
-					continue;
-				}
-
-				$results[] = array(
-					'id'    => $attachment->ID,
-					'title' => $attachment->post_title,
-					'src'   => wp_get_attachment_url($attachment->ID),
-				);
-			}
-
-			// Small standardization: ensure REST response wrapper.
-			return rest_ensure_response($results);
-		}
-
-		/**
-		 * List terms for a taxonomy (with simple shaping).
-		 */
-		public function get_terms_by_taxonomy($request)
-		{
-			$taxonomy = $this->clean_taxonomy_name($request->get_param('taxonomy'));
-
-
-
-			if (! taxonomy_exists($taxonomy)) {
-				return new WP_Error('invalid_taxonomy', 'הטקסונומיה לא קיימת', array('status' => 404));
-			}
-
-			$terms = get_terms(
-				array(
-					'taxonomy'   => $taxonomy,
-					'hide_empty' => false,
-				)
-			);
-
-			$response = array_map(
-				function ($term) {
-					return array(
-						'id'          => $term->term_id,
-						'name'        => $term->name,
-						'slug'        => urldecode($term->slug),
-						'parent'      => $term->parent,
-						'description' => $term->description,
-						'count'       => $term->count,
-					);
-				},
-				$terms
-			);
-
-			return rest_ensure_response($response);
-		}
-
-		/**
-		 * Create a new term under a taxonomy.
-		 */
-		public function add_term_to_taxonomy($request)
-		{
-			$taxonomy    = $this->clean_taxonomy_name($request->get_param('taxonomy'));
-			$name        = $request->get_param('name');
-			$slug        = $request->get_param('slug');
-			$parent      = $request->get_param('parent') ?? 0;
-			$description = $request->get_param('description');
-
-			$result = wp_insert_term(
-				$name,
-				$taxonomy,
-				array(
-					'slug'        => $slug,
-					'parent'      => $parent,
-					'description' => $description,
-				)
-			);
-
-			if (is_wp_error($result)) {
-				return new WP_Error('term_creation_failed', $result->get_error_message(), array('status' => 400));
-			}
-
-			return rest_ensure_response(
-				array(
-					'id'          => $result['term_id'],
-					'name'        => $name,
-					'slug'        => $slug,
-					'parent'      => $parent,
-					'description' => $description,
-					'taxonomy'    => $taxonomy,
-				)
-			);
-		}
-
-		/**
-		 * Update an existing term.
-		 */
-		public function update_term_in_taxonomy($request)
-		{
-			$taxonomy    = $this->clean_taxonomy_name($request->get_param('taxonomy'));
-			$term_id     = $request->get_param('term_id');
-			$name        = $request->get_param('name');
-			$slug        = $request->get_param('slug');
-			$parent      = $request->get_param('parent');
-			$description = $request->get_param('description');
-
-			$existing_term = get_term($term_id, $taxonomy);
-
-			if (is_wp_error($existing_term) || ! $existing_term) {
-				return new WP_Error('term_not_found', 'המונח לא נמצא.', array('status' => 404));
-			}
-
-			$args               = array();
-			$args['name']       = $name ?: $existing_term->name;
-			$args['slug']       = $slug ?: str_replace(' ', '-', $args['name']);
-			$args['parent']     = (null !== $parent) ? $parent : $existing_term->parent;
-			$args['description'] = $description ?: $existing_term->description;
-
-			$result = wp_update_term($term_id, $taxonomy, $args);
-
-			if (is_wp_error($result)) {
-				return new WP_Error('term_update_failed', $result->get_error_message(), array('status' => 400));
-			}
-
-			return rest_ensure_response(
-				array(
-					'id'          => $term_id,
-					'name'        => $args['name'],
-					'slug'        => $args['slug'],
-					'parent'      => $args['parent'],
-					'description' => $args['description'],
-					'taxonomy'    => $taxonomy,
-				)
-			);
-		}
-
-		/**
-		 * Delete a term from a taxonomy.
-		 */
-		public function delete_term_from_taxonomy($request)
-		{
-			$taxonomy = $this->clean_taxonomy_name($request->get_param('taxonomy'));
-			$term_id  = $request->get_param('term_id');
-
-			$result = wp_delete_term($term_id, $taxonomy);
-
-			if (is_wp_error($result)) {
-				return new WP_Error('term_deletion_failed', $result->get_error_message(), array('status' => 400));
-			}
-
-			if (! $result) {
-				return new WP_Error('term_not_found', 'המונח לא נמצא או לא ניתן למחוק אותו.', array('status' => 404));
-			}
-
-			return rest_ensure_response(
-				array(
-					'status'  => 'success',
-					'message' => 'המונח נמחק בהצלחה.',
-				)
-			);
-		}
-
-		/**
-		 * Best-effort cleanup for taxonomy param (decode + strip underscore).
-		 * If cleaned value doesn't exist, return original string.
-		 */
-		private function clean_taxonomy_name($taxonomy)
-		{
-			$decoded_taxonomy = urldecode($taxonomy);
-			$cleaned_taxonomy = ltrim($decoded_taxonomy, '_');
-
-			if (! taxonomy_exists($cleaned_taxonomy)) {
-				return $taxonomy;
-			}
-			return $cleaned_taxonomy;
-		}
-
-		/**
-		 * Trash or permanently delete products in bulk.
-		 */
-		public function trash_products($request)
-		{
-			$product_ids        = $request->get_param('product_ids');
-			$delete_permanently = $request->get_param('delete_permanently');
-
-			$processed_ids = array(
-				'trashed' => array(),
-				'deleted' => array(),
-			);
-
-			if (empty($product_ids) || ! is_array($product_ids)) {
-				return rest_ensure_response(
-					array('message' => 'Error processing products.')
-				);
-			}
-
-			foreach ($product_ids as $product_id) {
-				$product = wc_get_product($product_id);
-
-				if ($product) {
-					if ($delete_permanently) {
-						wp_delete_post($product_id, true);
-						$processed_ids['deleted'][] = $product_id;
-					} else {
-						wp_trash_post($product_id);
-						$processed_ids['trashed'][] = $product_id;
-					}
-				}
-			}
-
-			return rest_ensure_response(
-				array(
-					'message'       => 'Products processed successfully.',
-					'processed_ids' => $processed_ids,
-				)
-			);
-		}
-
-		/**
-		 * Create/update variations for a variable product.
-		 * Minimal validation retained to keep behavior stable.
-		 */
-		public function handle_add_variations($request)
-		{
-			$variations_data = $request->get_param('variations_data');
-
-			if (! is_array($variations_data)) {
-				return new WP_Error('invalid_data', 'Invalid data provided', array('status' => 400));
-			}
-
-			$new_variation_ids = array();
-			$errors            = array();
-
-			foreach ($variations_data as $variation_data) {
-				try {
-					$variation_id = isset($variation_data['id']) ? $variation_data['id'] : 0;
-
-					// Load existing variation or create a new one under a variable product.
-					if ($variation_id) {
-						$variation = wc_get_product($variation_id);
-
-						if (! $variation || ! $variation->is_type('variation')) {
-							throw new Exception('Variation ID ' . $variation_id . ' is not valid.');
-						}
-					} else {
-						$product_id = $variation_data['parent_id'];
-						$product    = wc_get_product($product_id);
-
-						if (! $product || ! $product->is_type('variable')) {
-							throw new Exception('Product ID ' . $product_id . ' is not a valid variable product.');
-						}
-
-						$variation = new WC_Product_Variation();
-						$variation->set_parent_id($product_id);
-					}
-
-					// Map attributes (sanitize slug + option).
-					if (! empty($variation_data['attributes']) && is_array($variation_data['attributes'])) {
-						$attributes = array();
-
-						foreach ($variation_data['attributes'] as $attribute) {
-							if (! empty($attribute['name']) && ! empty($attribute['option'])) {
-								$attribute_slug = sanitize_title(urldecode($attribute['slug']));
-								$option         = sanitize_title(urldecode($attribute['option']));
-
-								if (! empty($attribute_slug) && ! empty($option)) {
-									$attributes[$attribute_slug] = $option;
-								}
-							}
-						}
-						$variation->set_attributes($attributes);
-					}
-
-					// Basic fields (kept as-is to avoid broader type coercion changes).
-					$variation->set_regular_price($variation_data['regular_price']);
-					$variation->set_sale_price($variation_data['sale_price']);
-					$variation->set_stock_quantity($variation_data['stock_quantity']);
-					$variation->set_manage_stock($variation_data['manage_stock']);
-					$variation->set_stock_status($variation_data['stock_status']);
-					$variation->set_date_on_sale_from($variation_data['date_on_sale_from_gmt']);
-					$variation->set_date_on_sale_to($variation_data['date_on_sale_to_gmt']);
-					$variation->set_length($variation_data['dimensions']['length']);
-					$variation->set_width($variation_data['dimensions']['width']);
-					$variation->set_height($variation_data['dimensions']['height']);
-					$variation->set_downloadable($variation_data['downloadable']);
-					$variation->set_virtual($variation_data['virtual']);
-					$variation->set_weight($variation_data['weight']);
-					$variation->set_tax_status($variation_data['tax_status']);
-					$variation->set_tax_class($variation_data['tax_class']);
-					$variation->set_description($variation_data['description']);
-					$variation->set_menu_order($variation_data['menu_order']);
-
-					// SKU: set only if not used elsewhere (preserve your existing logic).
-					$sku = $variation_data['sku'];
-					if (! empty($sku)) {
-						$existing_product_id = wc_get_product_id_by_sku($sku);
-						if (! $existing_product_id || $existing_product_id === $variation->get_id()) {
-							$variation->set_sku($sku);
-						} else {
-						}
-					}
-
-				    // --- ✅ התיקון לתמונות: תמיכה ב-ID קיים ---
+    class Whizmanage_rest_functions_product
+    {
+
+        public function __construct()
+        {
+            add_action('rest_api_init', array($this, 'whizmanage_register_rest_route'));
+        }
+
+        /**
+         * Registers all REST routes for this controller.
+         *
+         * Keep endpoints/namespaces as-is to avoid breaking clients.
+         */
+        public function whizmanage_register_rest_route()
+        {
+
+            register_rest_route(
+                'whizmanage/v1',
+                '/get_product/',
+                array(
+                    'methods'             => 'GET,POST',
+                    'callback'            => array($this, 'whizmanage_get_product'),
+                    'permission_callback' => array($this, 'custom_plugin_check_permissions'),
+                )
+            );
+
+            register_rest_route(
+                'whizmanage/v1',
+                '/get_product_for_coupons/',
+                array(
+                    'methods'             => 'GET',
+                    'callback'            => array($this, 'whizmanage_get_product_for_coupons'),
+                    // Intentionally public (as in your original code)
+                    'permission_callback' => array($this, 'custom_plugin_check_permissions'),
+                )
+            );
+
+            register_rest_route(
+                'whizmanage/v1',
+                '/import_variations/',
+                array(
+                    'methods'             => 'POST',
+                    'callback'            => array($this, 'handle_add_variations'),
+                    'permission_callback' => array($this, 'custom_plugin_check_permissions'),
+                )
+            );
+
+
+            register_rest_route(
+                'whizmanage/v1',
+                '/taxonomy/(?P<taxonomy>.+)/term',
+                array(
+                    'methods'             => 'POST',
+                    'callback'            => array($this, 'add_term_to_taxonomy'),
+                    'args'                => array(
+                        'taxonomy'    => array(
+                            'required'           => true,
+                            'validate_callback'  => function ($param) {
+                                // url-decode and strip prefixed underscores
+                                $cleaned_param = ltrim(urldecode($param), '_');
+                                return taxonomy_exists($cleaned_param);
+                            },
+                        ),
+                        'name'        => array(
+                            'required'           => true,
+                            'type'               => 'string',
+                            'sanitize_callback'  => 'sanitize_text_field',
+                        ),
+                        'slug'        => array(
+                            'required'           => false,
+                            'type'               => 'string',
+                            'sanitize_callback'  => 'sanitize_title',
+                        ),
+                        'parent'      => array(
+                            'required'           => false,
+                            'type'               => 'integer',
+                        ),
+                        'description' => array(
+                            'required'           => false,
+                            'type'               => 'string',
+                            'sanitize_callback'  => 'sanitize_textarea_field',
+                        ),
+                    ),
+                    'permission_callback' => array($this, 'custom_plugin_check_permissions'),
+                )
+            );
+
+            register_rest_route(
+                'whizmanage/v1',
+                '/taxonomy/(?P<taxonomy>.+)/term/(?P<term_id>\d+)',
+                array(
+                    'methods'             => 'DELETE',
+                    'callback'            => array($this, 'delete_term_from_taxonomy'),
+                    'permission_callback' => array($this, 'custom_plugin_check_permissions'),
+                )
+            );
+
+            register_rest_route(
+                'whizmanage/v1',
+                '/taxonomy/(?P<taxonomy>.+)/term/(?P<term_id>\d+)',
+                array(
+                    'methods'             => 'PUT',
+                    'callback'            => array($this, 'update_term_in_taxonomy'),
+                    'permission_callback' => array($this, 'custom_plugin_check_permissions'),
+                )
+            );
+
+            register_rest_route(
+                'whizmanage/v1',
+                '/taxonomy/(?P<taxonomy>.+)/terms',
+                array(
+                    'methods'             => 'GET',
+                    'callback'            => array($this, 'get_terms_by_taxonomy'),
+                    'args'                => array(
+                        'taxonomy' => array(
+                            'required'          => true,
+                            'validate_callback' => function ($param) {
+                                $decoded_param = urldecode($param);
+                                $cleaned_param = ltrim($decoded_param, '_');
+                                return taxonomy_exists($cleaned_param);
+                            },
+                        ),
+                    ),
+                    'permission_callback' => array($this, 'custom_plugin_check_permissions'),
+                )
+            );
+
+            register_rest_route(
+                'whizmanage/v1',
+                '/products/simple-reorder',
+                array(
+                    'methods'             => 'POST',
+                    'callback'            => array($this, 'handle_simple_product_reorder'),
+                    'permission_callback' => function () {
+                        // Narrower capability for product re-ordering
+                        return current_user_can('edit_products');
+                    },
+                )
+            );
+        }
+
+
+
+
+        private function calculate_gapped_order($prev_product_id, $next_product_id)
+        {
+            global $wpdb;
+            // Gap basis (can be increased if fewer re-balances are desired)
+            $GAP = 1000;
+            $prev_order = null;
+            $next_order = null;
+            if ($prev_product_id) {
+                $prev_order = (int) $wpdb->get_var($wpdb->prepare(
+                    "SELECT menu_order FROM {$wpdb->posts} WHERE ID=%d",
+                    $prev_product_id
+                ));
+            }
+            if ($next_product_id) {
+                $next_order = (int) $wpdb->get_var($wpdb->prepare(
+                    "SELECT menu_order FROM {$wpdb->posts} WHERE ID=%d",
+                    $next_product_id
+                ));
+            }
+            // No neighbors -> large initial value to leave gaps for future
+            if ($prev_order === null && $next_order === null)
+                return $GAP;
+            // Insert at beginning
+            if ($prev_order === null) {
+                // Allocate before first: if gap exists – take average, otherwise shift small window
+                return ($next_order > $GAP) ? ($next_order - $GAP) : max(0, $next_order - 1);
+            }
+            // Insert at end
+            if ($next_order === null) {
+                return $prev_order + $GAP;
+            }
+            // Insert in middle
+            $mid = intdiv($prev_order + $next_order, 2);
+            if ($mid === $prev_order || $mid === $next_order) {
+                // No gap ("stuck") – mark as no space
+                return null;
+            }
+            return $mid;
+        }
+        private function rebalance_local_window($center_id, $window = 150)
+        {
+            global $wpdb;
+
+            $center_id = (int) $center_id;
+            $window    = max(1, (int) $window);
+            $gap       = 1000;
+
+            // Center query – uses $wpdb with prepare and is completely safe.
+            $center_order = (int) $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT menu_order FROM {$wpdb->posts} WHERE ID = %d",
+                    $center_id
+                )
+            );
+
+            if (0 === $center_order) {
+                // If center value not found – nothing to balance
+                return 0;
+            }
+
+            // Window around center order (still direct DB usage, but justified for performance)
+            $rows = $wpdb->get_results(
+                $wpdb->prepare(
+                    "
+                SELECT ID
+                FROM {$wpdb->posts}
+                WHERE post_type = %s
+                  AND menu_order BETWEEN %d - 500000 AND %d + 500000
+                ORDER BY menu_order ASC, ID ASC
+                LIMIT %d
+            ",
+                    'product',
+                    $center_order,
+                    $center_order,
+                    $window
+                )
+            );
+
+            if (empty($rows)) {
+                return 0;
+            }
+
+            // Renumber in fixed jumps (GAP) – O(window)
+            $i = 1;
+
+            foreach ($rows as $row) {
+                $post_id    = (int) $row->ID;
+                $menu_order = $i * $gap;
+
+                // Here we switched to wp_update_post instead of $wpdb->update
+                wp_update_post(
+                    array(
+                       // Always load product by post ID
+                        'ID'         => $post_id,
+                        'menu_order' => $menu_order,
+                    )
+                );
+
+                clean_post_cache($post_id);
+
+                if (function_exists('wc_delete_product_transients')) {
+                    wc_delete_product_transients($post_id);
+                }
+
+                $i++;
+            }
+
+            return count($rows);
+        }
+
+        public function handle_simple_product_reorder($request)
+        {
+            $product_id = absint($request->get_param('product_id'));
+            $prev_product_id = $request->get_param('prev_product_id') ? absint($request->get_param('prev_product_id')) : null;
+            $next_product_id = $request->get_param('next_product_id') ? absint($request->get_param('next_product_id')) : null;
+            if (!$product_id) {
+                return new WP_REST_Response(['success' => false, 'message' => 'Invalid product_id'], 400);
+            }
+            return new WP_REST_Response(
+                $this->reorder_single_product($product_id, $prev_product_id, $next_product_id),
+                200
+            );
+        }
+        public function reorder_single_product($product_id, $prev_product_id = null, $next_product_id = null)
+        {
+            // Strict typing
+            $product_id      = (int) $product_id;
+            $prev_product_id = $prev_product_id ? (int) $prev_product_id : null;
+            $next_product_id = $next_product_id ? (int) $next_product_id : null;
+
+            // 1. Calculate new order with gap
+            $new_order = $this->calculate_gapped_order($prev_product_id, $next_product_id);
+
+            if (null === $new_order) {
+                // No gap – local rebalance then retry
+                $anchor_id = $prev_product_id ? $prev_product_id : $next_product_id;
+                $anchor_id = $anchor_id ? (int) $anchor_id : 0;
+
+                if ($anchor_id) {
+                    $this->rebalance_local_window($anchor_id, 200);
+                    $new_order = $this->calculate_gapped_order($prev_product_id, $next_product_id);
+                }
+
+                if (null === $new_order) {
+                    return array(
+                        'success' => false,
+                        'message' => __('Local rebalance failed to create a gap', 'whizmanage'),
+                    );
+                }
+            }
+
+            $new_order = (int) $new_order;
+
+            // 2. Update post via official WordPress API
+            $result = wp_update_post(
+                array(
+                    'ID'         => $product_id,
+                    'menu_order' => $new_order,
+                ),
+                true // Return WP_Error in case of failure
+            );
+
+            if (is_wp_error($result)) {
+                return array(
+                    'success' => false,
+                    'message' => $result->get_error_message(),
+                );
+            }
+
+            // 3. Clear WooCommerce cache and transients
+            clean_post_cache($product_id);
+
+            if (function_exists('wc_delete_product_transients')) {
+                wc_delete_product_transients($product_id);
+            }
+
+            return array(
+                'success'   => true,
+                'new_order' => $new_order,
+                'message'   => __('Reordered', 'whizmanage'),
+            );
+        }
+
+        /**
+         * List terms for a taxonomy (with simple shaping).
+         */
+        public function get_terms_by_taxonomy($request)
+        {
+            $taxonomy = $this->clean_taxonomy_name($request->get_param('taxonomy'));
+
+
+
+            if (! taxonomy_exists($taxonomy)) {
+                return new WP_Error('invalid_taxonomy', 'Taxonomy does not exist', array('status' => 404));
+            }
+
+            $terms = get_terms(
+                array(
+                    'taxonomy'   => $taxonomy,
+                    'hide_empty' => false,
+                )
+            );
+
+            $response = array_map(
+                function ($term) {
+                    return array(
+                        'id'          => $term->term_id,
+                        'name'        => $term->name,
+                        'slug'        => urldecode($term->slug),
+                        'parent'      => $term->parent,
+                        'description' => $term->description,
+                        'count'       => $term->count,
+                    );
+                },
+                $terms
+            );
+
+            return rest_ensure_response($response);
+        }
+
+        /**
+         * Create a new term under a taxonomy.
+         */
+        public function add_term_to_taxonomy($request)
+        {
+            $taxonomy    = $this->clean_taxonomy_name($request->get_param('taxonomy'));
+            $name        = $request->get_param('name');
+            $slug        = $request->get_param('slug');
+            $parent      = $request->get_param('parent') ?? 0;
+            $description = $request->get_param('description');
+
+            $result = wp_insert_term(
+                $name,
+                $taxonomy,
+                array(
+                    'slug'        => $slug,
+                    'parent'      => $parent,
+                    'description' => $description,
+                )
+            );
+
+            if (is_wp_error($result)) {
+                return new WP_Error('term_creation_failed', $result->get_error_message(), array('status' => 400));
+            }
+
+            return rest_ensure_response(
+                array(
+                    'id'          => $result['term_id'],
+                    'name'        => $name,
+                    'slug'        => $slug,
+                    'parent'      => $parent,
+                    'description' => $description,
+                    'taxonomy'    => $taxonomy,
+                )
+            );
+        }
+        /**
+         * Update an existing term.
+         */
+        public function update_term_in_taxonomy($request)
+        {
+            $taxonomy    = $this->clean_taxonomy_name($request->get_param('taxonomy'));
+            $term_id     = $request->get_param('term_id');
+            $name        = $request->get_param('name');
+            $slug        = $request->get_param('slug');
+            $parent      = $request->get_param('parent');
+            $description = $request->get_param('description');
+
+            $existing_term = get_term($term_id, $taxonomy);
+
+            if (is_wp_error($existing_term) || ! $existing_term) {
+                return new WP_Error('term_not_found', 'Term not found.', array('status' => 404));
+            }
+
+            $args               = array();
+            $args['name']       = $name ?: $existing_term->name;
+            $args['slug']       = $slug ?: str_replace(' ', '-', $args['name']);
+            $args['parent']     = (null !== $parent) ? $parent : $existing_term->parent;
+            $args['description'] = $description ?: $existing_term->description;
+
+            $result = wp_update_term($term_id, $taxonomy, $args);
+
+            if (is_wp_error($result)) {
+                return new WP_Error('term_update_failed', $result->get_error_message(), array('status' => 400));
+            }
+
+            return rest_ensure_response(
+                array(
+                    'id'          => $term_id,
+                    'name'        => $args['name'],
+                    'slug'        => $args['slug'],
+                    'parent'      => $args['parent'],
+                    'description' => $args['description'],
+                    'taxonomy'    => $taxonomy,
+                )
+            );
+        }
+
+
+        /**
+         * Delete a term from a taxonomy.
+         */
+        public function delete_term_from_taxonomy($request)
+        {
+            $taxonomy = $this->clean_taxonomy_name($request->get_param('taxonomy'));
+            $term_id  = $request->get_param('term_id');
+
+            $result = wp_delete_term($term_id, $taxonomy);
+
+            if (is_wp_error($result)) {
+                return new WP_Error('term_deletion_failed', $result->get_error_message(), array('status' => 400));
+            }
+
+            if (! $result) {
+                return new WP_Error('term_not_found', 'Term not found or cannot be deleted.', array('status' => 404));
+            }
+
+            return rest_ensure_response(
+                array(
+                    'status'  => 'success',
+                    'message' => 'Term deleted successfully.',
+                )
+            );
+        }
+
+        /**
+         * Best-effort cleanup for taxonomy param (decode + strip underscore).
+         * If cleaned value doesn't exist, return original string.
+         */
+        private function clean_taxonomy_name($taxonomy)
+        {
+            $decoded_taxonomy = urldecode($taxonomy);
+            $cleaned_taxonomy = ltrim($decoded_taxonomy, '_');
+
+            if (! taxonomy_exists($cleaned_taxonomy)) {
+                return $taxonomy;
+            }
+            return $cleaned_taxonomy;
+        }
+
+
+
+        public function handle_add_variations($request)
+        {
+            $variations_data = $request->get_param('variations_data');
+
+            if (!is_array($variations_data)) {
+                return new WP_Error('invalid_data', 'Invalid data provided', array('status' => 400));
+            }
+
+            $processed_variation_ids = []; // Changed name to make clear it is processed, not just new
+            $errors = [];
+
+            foreach ($variations_data as $variation_data) {
+                try {
+                    $variation_id = isset($variation_data['id']) ? $variation_data['id'] : 0;
+                    $variation = null;
+
+                    // 1. Attempt to load existing variation for update
+                    if ($variation_id) {
+                        $variation = wc_get_product($variation_id);
+                        if (!$variation || !$variation->is_type('variation')) {
+                            // If ID sent but not found, throw error or continue to creation (depending on your logic)
+                            throw new Exception('Variation ID ' . $variation_id . ' not found.');
+                        }
+                    }
+                    // 2. Create new variation if no ID
+                    else {
+                        if (empty($variation_data['parent_id'])) {
+                            throw new Exception('Parent ID is required for creating new variations.');
+                        }
+
+                        $product_id = $variation_data['parent_id'];
+                        $product = wc_get_product($product_id);
+
+                        if (!$product || !$product->is_type('variable')) {
+                            throw new Exception('Product ID ' . $product_id . ' is not a valid variable product.');
+                        }
+
+                        $variation = new WC_Product_Variation();
+                        $variation->set_parent_id($product_id);
+                    }
+
+                    // --- Handle Attributes ---
+                    if (!empty($variation_data['attributes']) && is_array($variation_data['attributes'])) {
+                        $attributes = [];
+                        foreach ($variation_data['attributes'] as $attribute) {
+                            if (!empty($attribute['name']) && !empty($attribute['option'])) {
+                                $attribute_slug = sanitize_title(urldecode($attribute['slug']));
+                                $option = sanitize_title(urldecode($attribute['option']));
+                                if (!empty($attribute_slug) && !empty($option)) {
+                                    $attributes[$attribute_slug] = $option;
+                                }
+                            }
+                        }
+                        $variation->set_attributes($attributes);
+                    }
+
+                    // --- Handle Setters (only if values exist in sent data) ---
+                    // Use of isset prevents overwriting existing values with null in case of partial update
+                    if (isset($variation_data['regular_price']))
+                        $variation->set_regular_price($variation_data['regular_price']);
+                    if (isset($variation_data['sale_price']))
+                        $variation->set_sale_price($variation_data['sale_price']);
+                    if (isset($variation_data['stock_quantity']))
+                        $variation->set_stock_quantity($variation_data['stock_quantity']);
+                    if (isset($variation_data['manage_stock']))
+                        $variation->set_manage_stock($variation_data['manage_stock']);
+                    if (isset($variation_data['stock_status']))
+                        $variation->set_stock_status($variation_data['stock_status']);
+
+                    // Dimensions and weight
+                    if (isset($variation_data['weight']))
+                        $variation->set_weight($variation_data['weight']);
+                    if (isset($variation_data['dimensions']['length']))
+                        $variation->set_length($variation_data['dimensions']['length']);
+                    if (isset($variation_data['dimensions']['width']))
+                        $variation->set_width($variation_data['dimensions']['width']);
+                    if (isset($variation_data['dimensions']['height']))
+                        $variation->set_height($variation_data['dimensions']['height']);
+
+                    // SKU
+                    if (!empty($variation_data['sku'])) {
+                        $sku = $variation_data['sku'];
+                        $existing_id = wc_get_product_id_by_sku($sku);
+                        if (!$existing_id || $existing_id === $variation->get_id()) {
+                            $variation->set_sku($sku);
+                        }
+                    }
+
+                    // --- ✅ Image fix: support existing ID ---
                     if (!empty($variation_data['image']['id'])) {
-                        // אם נשלח ID של תמונה (מה שקורה בדרך כלל בעריכה)
+                        // If image ID is sent (usually happens in edit)
                         $variation->set_image_id($variation_data['image']['id']);
-                    } 
+                    }
+
+                    // Save
+                    $variation->save();
+                    $processed_variation_ids[] = $variation->get_id();
+                } catch (Exception $e) {
+                    $errors[] = $e->getMessage();
+                }
+            }
+
+            return rest_ensure_response([
+                'new_variation_ids' => $processed_variation_ids, // Name kept for compatibility with your JS
+                'errors' => $errors,
+            ]);
+        }
 
 
-					// Meta data passthrough.
-					if (! empty($variation_data['meta_data'])) {
-						foreach ($variation_data['meta_data'] as $meta) {
-							if (! empty($meta['key']) && isset($meta['value'])) {
-								$variation->update_meta_data($meta['key'], $meta['value']);
-							}
-						}
-					}
+        private function build_args_for_products_query(array $filters, int $offset = 0, int $limit = 10, string $fields = 'ids', bool $no_found_rows = false): array
+        {
+            $search = isset($filters['search']) ? trim((string) $filters['search']) : null;
+            $status = !empty($filters['status']) ? (array) $filters['status'] : array('publish', 'draft', 'pending', 'future', 'private');
+            $type = !empty($filters['type']) ? (array) $filters['type'] : [];
+            $downloadable = isset($filters['downloadable']) ? $filters['downloadable'] : null;
+            $product_cat = !empty($filters['product_cat']) ? (array) $filters['product_cat'] : [];
+            $product_tag = !empty($filters['product_tag']) ? (array) $filters['product_tag'] : [];
+            $tax_filters = !empty($filters['tax_filters']) && is_array($filters['tax_filters']) ? $filters['tax_filters'] : [];
 
-					$variation->save();
-					$new_variation_ids[] = $variation->get_id();
-				} catch (Exception $e) {
-					$errors[] = $e->getMessage();
-				}
-			}
+            $args = array(
+                'post_type' => 'product',
+                'post_status' => $status,
+                'posts_per_page' => $limit,
+                'offset' => $offset,
+                'fields' => $fields,       // 'ids' for count / 'all' if desired
+                'no_found_rows' => $no_found_rows,
+                // Basic SQL order only; your special sort happens inside after fetching
+                'orderby' => array('menu_order' => 'ASC', 'date' => 'DESC', 'ID' => 'ASC'),
+            );
 
-			return rest_ensure_response(
-				array(
-					'new_variation_ids' => $new_variation_ids,
-					'errors'            => $errors,
-				)
-			);
-		}
+            // search + SKU
+            if ($search) {
+                $args['s'] = $search;
+                $args['meta_query'] = array(
+                    'relation' => 'OR',
+                    array(
+                        'key' => '_sku',
+                        'value' => $search,
+                        'compare' => 'LIKE',
+                    ),
+                );
+            }
+
+            $meta_query = isset($args['meta_query']) ? $args['meta_query'] : array('relation' => 'AND');
+
+            if ($downloadable === 'yes' || $downloadable === 'no') {
+                $meta_query[] = array(
+                    'key' => '_downloadable',
+                    'value' => $downloadable === 'yes' ? 'yes' : 'no',
+                    'compare' => '=',
+                );
+            }
+            if (count($meta_query) > 1) {
+                $args['meta_query'] = $meta_query;
+            }
+
+            $tax_query = array('relation' => 'AND');
+
+            if (!empty($product_cat)) {
+                $tax_query[] = array(
+                    'taxonomy' => 'product_cat',
+                    'field' => 'term_id',
+                    'terms' => array_map('intval', $product_cat),
+                );
+            }
+            if (!empty($product_tag)) {
+                $tax_query[] = array(
+                    'taxonomy' => 'product_tag',
+                    'field' => 'term_id',
+                    'terms' => array_map('intval', $product_tag),
+                );
+            }
+            if (!empty($type)) {
+                $tax_query[] = array(
+                    'taxonomy' => 'product_type',
+                    'field' => 'slug',
+                    'terms' => array_map('sanitize_title', $type),
+                );
+            }
+            if (!empty($tax_filters)) {
+                foreach ($tax_filters as $taxonomy => $term_ids) {
+                    $taxonomy = ltrim(urldecode($taxonomy), '_');
+                    if (!taxonomy_exists($taxonomy))
+                        continue;
+                    $tax_query[] = array(
+                        'taxonomy' => $taxonomy,
+                        'field' => 'term_id',
+                        'terms' => array_map('intval', (array) $term_ids),
+                    );
+                }
+            }
+            if (count($tax_query) > 1) {
+                $args['tax_query'] = $tax_query;
+            }
+
+            return $args;
+        }
+        // In class Whizmanage_rest_functions_product – replace this entire function
+        public function whizmanage_get_product(WP_REST_Request $request)
+        {
+            $method = $request->get_method();
+            $getter = new Whizmanage_get_product();
+
+            // --- POST: By specific IDs ---
+            if ($method === 'POST') {
+                $product_ids = $request->get_param('product_ids');
+                if (!is_array($product_ids)) {
+                    return new WP_REST_Response(['error' => 'Invalid input. Please provide an array of product IDs.'], 400);
+                }
+
+                // Clear WooCommerce product cache - important after duplication
+                foreach ($product_ids as $pid) {
+                    $pid = intval($pid);
+                    // Clear WooCommerce object cache
+                    wc_delete_product_transients($pid);
+                    // Clear internal WordPress cache
+                    wp_cache_delete($pid, 'posts');
+                    wp_cache_delete($pid, 'post_meta');
+                    // Clear children cache (important for variations!)
+                    delete_transient('wc_product_children_' . $pid);
+                    wp_cache_delete('wc_product_children_' . $pid, 'product_variations');
+                }
+
+                $json = $getter->get_products($product_ids, 0, count($product_ids), []);
+                $rows = json_decode($json, true);
+                if (!is_array($rows))
+                    $rows = [];
+
+                return new WP_REST_Response([
+                    'ok' => true,
+                    'page' => 1,
+                    'per_page' => count($rows),
+                    'total' => count($rows),
+                    'total_pages' => 1,
+                    'rows' => $rows,
+                    'applied' => ['ids' => array_map('intval', $product_ids)],
+                ], 200);
+            }
+
+            // --- GET with filters + pagination ---
+            $page = max(1, intval($request->get_param('page') ?: 1));
+            $per_page = $request->get_param('per_page') ?: $request->get_param('perPage');
+            $per_page = max(1, min(2000, $per_page ? intval($per_page) : 1000));
+            $offset = ($page - 1) * $per_page;
+
+            // Helper to convert values to IDs
+            $to_int_array = function ($val) {
+                if (is_array($val)) {
+                    return array_values(array_filter(array_map('intval', $val), 'is_int'));
+                }
+                if (is_string($val)) {
+                    $parts = array_map('trim', explode(',', $val));
+                    return array_values(array_filter(array_map('intval', $parts), 'is_int'));
+                }
+                return [];
+            };
+
+            // Build tax_filters from tax_filters and any tax__{taxonomy} param
+            $tax_filters = [];
+            $raw_tax_filters = $request->get_param('tax_filters');
+            if (is_array($raw_tax_filters)) {
+                foreach ($raw_tax_filters as $tx => $ids) {
+                    $tx_clean = ltrim(urldecode($tx), '_');
+                    $tax_filters[$tx_clean] = $to_int_array($ids);
+                }
+            }
+            foreach ($_GET as $key => $val) {
+                if (strpos($key, 'tax__') === 0) {
+                    $tx = ltrim(urldecode(substr($key, 5)), '_');
+                    $tax_filters[$tx] = $to_int_array($val);
+                }
+            }
+
+            // Filters as sent (return them as is)
+            $filters_applied = [
+                'search' => $request->get_param('search') ?: null,
+                'status' => $request->get_param('status') ? (array) $request->get_param('status') : [],
+                'type' => $request->get_param('type') ? (array) $request->get_param('type') : [],
+                'downloadable' => $request->get_param('downloadable') ?: null,
+                'product_cat' => $to_int_array($request->get_param('product_cat')),
+                'product_tag' => $to_int_array($request->get_param('product_tag')),
+                'tax_filters' => $tax_filters,
+            ];
+
+            // For actual query – internal status defaults
+            $filters_for_query = $filters_applied;
+            if (empty($filters_for_query['status'])) {
+                $filters_for_query['status'] = ['publish', 'draft', 'pending', 'future', 'private'];
+            }
+
+            // ===== Prep for count: same WHERE as data =====
+            // Mark to use LIKE on title
+            $title_like_filter = null;
+            $force_title_like_flag = false;
+            if (!empty($filters_for_query['search'])) {
+                $force_title_like_flag = true;
+            }
+
+            // Build args for count
+            $count_args = $this->build_args_for_products_query($filters_for_query, 0, 1, 'ids', false);
+            if ($force_title_like_flag) {
+                $count_args['whizmanage_force_title_like'] = true;
+                add_filter('posts_where', $title_like_filter = function ($where, \WP_Query $q) use ($filters_for_query) {
+                    if (!$q->get('whizmanage_force_title_like'))
+                        return $where;
+                    global $wpdb;
+                    $search = (string) $filters_for_query['search'];
+                    $like = '%' . $wpdb->esc_like($search) . '%';
+                    $where .= $wpdb->prepare(" OR ({$wpdb->posts}.post_title LIKE %s)", $like);
+                    return $where;
+                }, 10, 2);
+            }
+
+            // If search affects variations – add parents for count too
+            if (!empty($filters_for_query['search'])) {
+                $variation_ids = get_posts(array(
+                    'post_type' => 'product_variation',
+                    'post_status' => $filters_for_query['status'],
+                    'posts_per_page' => -1,
+                    'fields' => 'ids',
+                    's' => $filters_for_query['search'],
+                ));
+                if (!empty($variation_ids)) {
+                    $parent_ids = array_unique(array_filter(array_map(function ($vid) {
+                        return (int) get_post_field('post_parent', $vid);
+                    }, $variation_ids)));
+                    if (!empty($parent_ids)) {
+                        $count_args['post__in'] = isset($count_args['post__in'])
+                            ? array_values(array_unique(array_merge((array) $count_args['post__in'], $parent_ids)))
+                            : $parent_ids;
+                    }
+                }
+            }
+
+            // Count
+            $q = new WP_Query($count_args);
+            $total = intval($q->found_posts);
+
+            if ($title_like_filter) {
+                remove_filter('posts_where', $title_like_filter, 10);
+            }
+
+            // ===== Fetch actual data (same filters, with new implementation inside get_products) =====
+            $json_rows = $getter->get_products([], $offset, $per_page, $filters_for_query);
+            $rows = json_decode($json_rows, true);
+            if (!is_array($rows))
+                $rows = [];
+
+            $payload = [
+                'ok' => true,
+                'page' => $page,
+                'per_page' => $per_page,
+                'total' => $total,
+                'total_pages' => $per_page ? (int) ceil($total / $per_page) : 1,
+                'rows' => $rows,
+                'applied' => $filters_applied,
+            ];
+
+            return new WP_REST_Response($payload, 200);
+        }
+
+        public function whizmanage_get_product_for_coupons(WP_REST_Request $request)
+        {
+            $get_all_product = new Whizmanage_get_product();
+            // Page and per_page parameters
+            $page = $request->get_param('page') ? intval($request->get_param('page')) : 1;
+            $per_page = $request->get_param('perPage') ? intval($request->get_param('perPage')) : 1000;
+
+            // Calculate offset
+            $offset = ($page - 1) * $per_page;
+
+            // Get all products with offset and limit
+            $res = $get_all_product->get_products_for_coupons(array(), $offset, $per_page);
+
+            // Return the result
+            return new WP_REST_Response($res, 200);
+        }
 
 
-		/**
-		 * Fetch products for grid/table. Supports POST with product_ids (array) or GET with page/perPage.
-		 */
-		public function whizmanage_get_product(WP_REST_Request $request)
-		{
-			$method          = $request->get_method();
-			$get_all_product = new Whizmanage_get_product();
+        public function custom_plugin_check_permissions()
+        {
+            // Implement custom permission checks here
+            // return current_user_can('manage_options');
+            // if (!is_ssl()) {
+            //     return new WP_Error('rest_forbidden', esc_html__('Only accessible over HTTPS', 'whizmanage'), array('status' => 403));
+            // }
+            // Check if the current user is an administrator or shop manager
+            if (current_user_can('manage_options') || current_user_can('manage_woocommerce')) {
+                return true;
+            }
 
-			if ('POST' === $method) {
-				$product_ids = $request->get_param('product_ids');
+            // If the user does not meet the conditions, return an error
+            return new WP_Error(
+                'rest_forbidden',
+                esc_html__('You do not have permissions to access this.', 'whizmanage'),
+                array('status' => 403)
+            );
+        }
 
-				if (! is_array($product_ids)) {
-					return new WP_REST_Response(
-						array('error' => 'Invalid input. Please provide an array of product IDs.'),
-						400
-					);
-				}
-				$list_producs	= $get_all_product->get_products($product_ids);
-				$res = wp_json_encode($list_producs);
-			} else {
-				$page     = $request->get_param('page') ? intval($request->get_param('page')) : 1;
-				$per_page = $request->get_param('perPage') ? intval($request->get_param('perPage')) : 1000;
-				$offset   = ($page - 1) * $per_page;
-
-				$list_producs = $get_all_product->get_products(array(), $offset, $per_page);
-				$res = wp_json_encode($list_producs);
-			}
-
-			return new WP_REST_Response($res, 200);
-		}
-
-		/**
-		 * Lightweight product list for coupons UI (public per your original endpoint).
-		 */
-		public function whizmanage_get_product_for_coupons(WP_REST_Request $request)
-		{
-			$get_all_product = new Whizmanage_get_product();
-
-			$page     = $request->get_param('page') ? intval($request->get_param('page')) : 1;
-			$per_page = $request->get_param('perPage') ? intval($request->get_param('perPage')) : 1000;
-			$offset   = ($page - 1) * $per_page;
-
-			$res = $get_all_product->get_products_for_coupons(array(), $offset, $per_page);
-
-			return new WP_REST_Response($res, 200);
-		}
-
-		/**
-		 * Permission callback used by most endpoints (admins & shop managers).
-		 */
-		public function custom_plugin_check_permissions()
-		{
-			// Align with WooCommerce roles: Admins and Shop Managers allowed.
-			if (current_user_can('manage_options') || current_user_can('manage_woocommerce')) {
-				return true;
-			}
-
-			return new WP_Error(
-				'rest_forbidden',
-				esc_html__('You do not have permissions to access this.', 'whizmanage'),
-				array('status' => 403)
-			);
-		}
-
-		/**
-		 * Local fallback for SSL detection (kept for backward compatibility in this class).
-		 * Note: WordPress has `is_ssl()` globally — not used here to avoid naming conflict.
-		 */
-		public function is_ssl()
-		{
-			if (isset($_SERVER['HTTPS']) && ('on' === $_SERVER['HTTPS'] || '1' === $_SERVER['HTTPS'])) {
-				return true;
-			} elseif (isset($_SERVER['SERVER_PORT']) && ('443' === $_SERVER['SERVER_PORT'])) {
-				return true;
-			}
-			return false;
-		}
-	}
+        function is_ssl()
+        {
+            if (isset($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'] || '1' == $_SERVER['HTTPS'])) {
+                return true;
+            } elseif (isset($_SERVER['SERVER_PORT']) && ('443' == $_SERVER['SERVER_PORT'])) {
+                return true;
+            }
+            return false;
+        }
+    }
 }

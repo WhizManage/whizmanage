@@ -4,7 +4,7 @@
  * Plugin Name:       WhizManage
  * Plugin URI:        https://whizmanage.com/
  * Description:       Easily manage your WooCommerce store with advanced bulk editing, product organization, and smart tools.
- * Version:           1.3.3
+ * Version:           2.0.3
  * Author:            WhizManage
  * Requires at least: 6.4
  * Requires PHP:      7.4
@@ -96,12 +96,18 @@ function whizmanage_plugins_loaded_bootstrap()
 	require_once WHIZMANAGE_DIR . 'includes/products/general-products-functions.php';
 	require_once WHIZMANAGE_DIR . 'includes/coupons/rest-functions-coupons.php';
 	require_once WHIZMANAGE_DIR . 'includes/products/taxonomies.php';
+	require_once WHIZMANAGE_DIR . 'includes/customers/rest-functions-customers.php';
+	require_once WHIZMANAGE_DIR . 'includes/orders/rest-functions-orders.php';
+    // Discount rules: register routes, manager and helpers
+    require_once WHIZMANAGE_DIR . 'includes/discount-rules/init.php';
 
 	// Bootstrap classes.
 	new Whizmanage();
 	new Whizmanage_rest_functions_main();
 	new Whizmanage_rest_functions_product();
 	new Whizmanage_rest_functions_coupons();
+	    new Whizmanage_rest_functions_orders();
+    new Whizmanage_rest_functions_customers();
 	new Whizmanage_custom_taxonomy_exporter();
 	new Whizmanage_general_coupons_functions();
 	new Whizmanage_general_products_functions();

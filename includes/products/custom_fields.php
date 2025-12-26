@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
@@ -66,7 +66,7 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
                     foreach ($jet_meta_fields as $post_type => $fields) {
                         if ($post_type === 'product') {
                             foreach ($fields as $field) {
-                                // שליפת המידע על השדות
+                                // Extract fields information
                                 $fieldName = esc_html($field['title']);
                                 $fieldKey = esc_html($field['name']);
                                 $fieldType = esc_html($field['type']);
@@ -197,7 +197,7 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
             // Encode as JSON and send to React
             // $jsonAssociativeArray = wp_json_encode($field_data_array);
             wp_add_inline_script(
-                'whizmanage-script', // ה-handle שלך מה-enqueue
+                'whizmanage-script', // Your handle from enqueue
                 'window.WhizManageCustomFields = ' . wp_json_encode($field_data_array) . ';',
                 'before'
             );
@@ -208,11 +208,14 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
         public function get_all_product_meta_keys()
         {
             global $wpdb;
+
+            $meta_keys_objects = []; // ✅ initialize
+
             $meta_keys = $wpdb->get_col(
                 "SELECT DISTINCT(meta_key)
-				FROM {$wpdb->postmeta} pm
-				INNER JOIN {$wpdb->posts} p ON pm.post_id = p.ID
-				WHERE p.post_type = 'product'"
+         FROM {$wpdb->postmeta} pm
+         INNER JOIN {$wpdb->posts} p ON pm.post_id = p.ID
+         WHERE p.post_type = 'product'"
             );
 
             foreach ($meta_keys as $key) {

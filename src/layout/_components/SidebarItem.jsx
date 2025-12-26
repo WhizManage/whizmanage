@@ -1,5 +1,8 @@
+// src/layout/_components/SidebarItem.jsx
+
 import { cn } from "@/lib/utils";
-import { __ } from '@wordpress/i18n';
+import { Chip } from "@heroui/react";
+ import { __ } from "@wordpress/i18n";
 
 const SidebarItem = ({
   icon,
@@ -8,6 +11,7 @@ const SidebarItem = ({
   disabled,
   isActive,
   link,
+  badge,
 }) => {
   const active =
     "bg-gradient-to-l rtl:bg-gradient-to-r from-pink-500/20 to-fuchsia-600/15 dark:from-slate-950/80 dark:via-pink-500/10 dark:to-slate-950/80 border-0 shadow-sm dark:shadow-lg";
@@ -21,7 +25,7 @@ const SidebarItem = ({
         disabled && "cursor-default",
         !disabled &&
           "cursor-pointer hover:bg-gradient-to-l rtl:hover:bg-gradient-to-r hover:from-pink-500/20 hover:to-fuchsia-600/15 hover:dark:from-pink-500/15 dark:hover:to-slate-950 hover:shadow-sm hover:dark:shadow-lg",
-        isActive && active,
+        isActive && !disabled && active,
         openSidebar
           ? "px-6 rounded-r-full rtl:rounded-r-none rtl:rounded-l-full"
           : "rounded-xl justify-center items-center py-2.5 px-1.5 ml-2 rtl:ml-0 rtl:mr-2"
@@ -29,17 +33,16 @@ const SidebarItem = ({
     >
       <span
         className={cn(
-          isActive &&
-            "text-fuchsia-600",
+          isActive && "text-fuchsia-600",
           disabled && "text-slate-300 dark:text-slate-700",
-          !disabled && !isActive && "text-slate-600 dark:text-slate-400"
+          !disabled && !isActive && "text-slate-600 dark:text-slate-300"
         )}
       >
         {icon}
       </span>
       <p
         className={cn(
-          "text-lg font-[500]",
+          "text-lg font-[500] flex items-center gap-2 relative",
           openSidebar ? "" : "sm:hidden",
           disabled && "text-slate-300 dark:text-slate-700",
           !disabled && !isActive && "text-slate-700/90 dark:text-slate-300/90",
@@ -49,6 +52,17 @@ const SidebarItem = ({
         )}
       >
         <span>{__(label, "whizmanage")}</span>
+        {badge && openSidebar && (
+          <Chip
+            variant="shadow"
+            classNames={{
+              base: "absolute top-2 -end-12 bg-gradient-to-br h-4 w-8 !py-1 !px-1.5 from-indigo-500 to-pink-500 border-0 shadow-pink-500/30",
+              content: "drop-shadow shadow-black text-white !m-0 !p-0 !text-xs font-semibold",
+            }}
+          >
+            {badge}
+          </Chip>
+        )}
       </p>
     </a>
   );

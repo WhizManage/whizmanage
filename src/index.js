@@ -1,13 +1,6 @@
-import App from "./App";
+// src/index.js
 import { render } from "@wordpress/element";
+import App from "./App";
 import "./global.css";
-// import "./style.css";
 
-import { ContextProvider } from "./context/ContextProvider";
-
-render(
-  <ContextProvider>
-    <App />
-  </ContextProvider>,
-  document.getElementById("whizmanage")
-);
+render(<App />, document.getElementById("whizmanage"));

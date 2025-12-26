@@ -1,9 +1,9 @@
-import Button from "@components/ui/button";
-import { cn, Link } from "@heroui/react";
-import { RefreshCcwDot, Undo2 } from "lucide-react";
-import React, { useState, useEffect } from "react";
-import { __ } from '@wordpress/i18n';
+// src/ErrorBoundary.jsx
 
+import Button from "@components/ui/button";
+import { Link } from "@heroui/react";
+import { AlertTriangle, ArrowLeft, Check, Copy, RefreshCw } from "lucide-react";
+import React from "react";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -11,11 +11,12 @@ class ErrorBoundary extends React.Component {
     this.state = {
       hasError: false,
       errorMessage: "",
-      theme: "light", // ערך ברירת מחדל
+      theme: "light",
+      isReloading: false,
+      isCopied: false,
     };
+
   }
-
-
 
   static getDerivedStateFromError(error) {
     return { hasError: true, errorMessage: error.message };
@@ -30,64 +31,146 @@ class ErrorBoundary extends React.Component {
     this.setState({ theme });
   }
 
+  handleReload = () => {
+    this.setState({ isReloading: true });
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
+  };
+
+  handleCopyError = () => {
+    if (this.state.errorMessage) {
+      navigator.clipboard.writeText(this.state.errorMessage);
+      this.setState({ isCopied: true });
+      setTimeout(() => {
+        this.setState({ isCopied: false });
+      }, 2000);
+    }
+  };
+
+  getSupportUrl = () => {
+    return window.user_local === "he_IL"
+      ? "https://docs.whizmanage.com/he"
+      : "https://docs.whizmanage.com/en";
+  };
+
   render() {
+    const { __ } = this.props;
     if (this.state.hasError) {
       return (
         <div className={this.state.theme}>
-          <div className="dark:bg-slate-800 h-screen flex items-center justify-center">
-            <div className="h-96 flex flex-col gap-2 justify-center items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                id="Layer_1"
-                data-name="Layer 1"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="rgb(162 28 175 / 0.7"
-                  d="M17.672,11c1.202,0,2.333-.468,3.183-1.318l1.413-1.413c.97-.931,.97-2.605,0-3.535l-1.415-1.415c-.838-.838-1.997-1.318-3.182-1.318h-5.171V.5c0-.276-.224-.5-.5-.5s-.5,.224-.5,.5v1.5H5.5c-1.93,0-3.5,1.57-3.5,3.5v2c0,1.93,1.57,3.5,3.5,3.5h6v2H6.329c-1.185,0-2.344,.48-3.182,1.318l-1.415,1.415c-.97,.93-.97,2.604,0,3.535l1.413,1.413c.85,.851,1.98,1.318,3.183,1.318h5.172v1.5c0,.276,.224,.5,.5,.5s.5-.224,.5-.5v-1.5h6c1.93,0,3.5-1.57,3.5-3.5v-2c0-1.93-1.57-3.5-3.5-3.5h-6v-2h5.172Zm3.328,5.5v2c0,1.379-1.121,2.5-2.5,2.5H6.328c-.936,0-1.814-.364-2.476-1.025l-1.413-1.413c-.582-.558-.582-1.563,0-2.121l1.415-1.415c.651-.651,1.554-1.025,2.475-1.025h12.171c1.379,0,2.5,1.121,2.5,2.5ZM3,7.5v-2c0-1.379,1.121-2.5,2.5-2.5h12.171c.921,0,1.823,.374,2.475,1.025l1.415,1.415c.582,.558,.582,1.563,0,2.121l-1.413,1.413c-.661,.661-1.54,1.025-2.476,1.025H5.5c-1.379,0-2.5-1.121-2.5-2.5Zm9-.293l-1.646,1.646c-.195,.195-.512,.195-.707,0s-.195-.512,0-.707l1.646-1.646-1.646-1.646c-.195-.195-.195-.512,0-.707s.512-.195,.707,0l1.646,1.646,1.646-1.646c.195-.195,.512-.195,.707,0s.195,.512,0,.707l-1.646,1.646,1.646,1.646c.195,.195,.195,.512,0,.707s-.512,.195-.707,0l-1.646-1.646Zm-.057,11.538l3.171-3.135c.197-.194,.514-.191,.707,.004,.194,.196,.192,.513-.004,.707l-3.171,3.135c-.726,.719-1.913,.721-2.642,.006l-1.355-1.33c-.196-.193-.199-.51-.006-.707,.193-.196,.51-.2,.707-.006l1.354,1.329c.34,.334,.896,.335,1.238-.003Z"
-                />
-              </svg>
-              <div className="p-4 pb-2 dark:hidden w-60">
-                <img
-                  src={
-                    window.siteUrl +
-                    "/wp-content/plugins/whizmanage/assets/images/logo/WHISEMANAGE.png"
-                  }
-                  alt="logo"
-                />
-              </div>
-              <div className="p-2 pt-4 pb-2 hidden dark:block w-60">
-                <img
-                  src={
-                    window.siteUrl +
-                    "/wp-content/plugins/whizmanage/assets/images/logo/WHISEMANAGE-dark.png"
-                  }
-                  alt="logo"
-                />
-              </div>
-             <h2 className="text-4xl dark:text-slate-300">{__("Something went wrong!", "whizmanage")}</h2>
-              <p className="dark:text-slate-300">{this.state.errorMessage}</p>
-              <div className="flex justify-center items-center gap-4">
-                <Link href={window.siteUrl + "/wp-admin"} className="w-full">
-                  <Button
-                    variant="outline"
-                    className="gap-4 w-full text-gray-600 dark:text-slate-300 dark:bg-slate-700"
-                  >
-                    <Undo2 className="text-fuchsia-600 w-4 h-4" />
-                    <span>{__("Back to wordpress", "whizmanage")}</span>
-                  </Button>
-                </Link>
-                <Button
-                  onClick={() =>
-                    // this.setState({ hasError: false, errorMessage: "" })
-                       window.location.reload()
-                  }
-                  className="flex items-center justify-center gap-4"
-                >
-                  <RefreshCcwDot />
-                  {__("Try again", "whizmanage")}
-                  
-                </Button>
+          <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center p-4">
+            <div className="w-full max-w-md">
+              {/* Card */}
+              <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div className="p-8">
+                  {/* Icon */}
+                  <div className="flex justify-center mb-6">
+                    <div className="w-16 h-16 bg-fuchsia-100 dark:bg-fuchsia-900/30 rounded-xl flex items-center justify-center">
+                      <AlertTriangle className="w-8 h-8 text-fuchsia-600 dark:text-fuchsia-400" />
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <div className="text-center mb-6">
+                    <h1 className="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-1">
+                      {__("Something went wrong", "whizmanage")}
+                    </h1>
+                    <p className="text-sm text-slate-500 dark:text-slate-300">
+                      {__("An unexpected error occurred", "whizmanage")}
+                    </p>
+                  </div>
+
+                  {/* Error message with copy button */}
+                  {this.state.errorMessage && (
+                    <div className="mb-6 p-2 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <p className="flex-1 text-xs text-slate-600 dark:text-slate-300 font-mono text-center break-all leading-5">
+                          {this.state.errorMessage}
+                        </p>
+                        <button
+                          onClick={this.handleCopyError}
+                          className={`shrink-0 flex items-center gap-1 px-2 py-1 rounded-md text-xs transition-colors ${
+                            this.state.isCopied
+                              ? "text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 dark:text-emerald-400"
+                              : "text-slate-400 hover:text-fuchsia-600 hover:bg-fuchsia-50 dark:hover:bg-fuchsia-900/20"
+                          }`}
+                        >
+                          {this.state.isCopied ? (
+                            <>
+                              <Check className="w-3 h-3" />
+                              <span>{__("Copied", "whizmanage")}</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3 h-3" />
+                              <span>{__("Copy", "whizmanage")}</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Actions */}
+                  <div className="flex flex-col gap-2">
+                    <Button
+                      onClick={this.handleReload}
+                      disabled={this.state.isReloading}
+                      className="w-full h-10 gap-2 bg-fuchsia-600 hover:bg-fuchsia-700 text-white rounded-lg"
+                    >
+                      <RefreshCw className={`w-4 h-4 ${this.state.isReloading ? "animate-spin" : ""}`} />
+                      {this.state.isReloading ? __("Reloading...", "whizmanage") : __("Try again", "whizmanage")}
+                    </Button>
+                    <Link
+                      href={window.siteUrl + "/wp-admin"}
+                      className="w-full"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full h-10 gap-2 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg"
+                      >
+                        <ArrowLeft className="w-4 h-4" />
+                        <span>{__("Back to wordpress", "whizmanage")}</span>
+                      </Button>
+                    </Link>
+                  </div>
+
+                  {/* Logo */}
+                  <div className="flex justify-center mt-8">
+                    <img
+                      src={
+                        window.siteUrl +
+                        "/wp-content/plugins/whizmanage-pro/assets/images/logo/WHISEMANAGE.png"
+                      }
+                      alt="WhizManage"
+                      className="h-16 dark:hidden"
+                    />
+                    <img
+                      src={
+                        window.siteUrl +
+                        "/wp-content/plugins/whizmanage-pro/assets/images/logo/WHISEMANAGE-dark.png"
+                      }
+                      alt="WhizManage"
+                      className="h-16 hidden dark:block"
+                    />
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="px-8 py-3 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-700">
+                  <p className="text-xs text-slate-400 dark:text-slate-500 text-center">
+                    {__("If this problem persists, please", "whizmanage")}{" "}
+                    <a
+                      href={this.getSupportUrl()}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-fuchsia-600 hover:text-fuchsia-700 hover:underline dark:text-fuchsia-400 dark:hover:text-fuchsia-300"
+                    >
+                      {__("contact support", "whizmanage")}
+                    </a>
+                  </p>
+                </div>
               </div>
             </div>
           </div>

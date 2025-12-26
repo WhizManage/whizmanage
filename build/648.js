@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunkwhizmanage_pro=self.webpackChunkwhizmanage_pro||[]).push([[648],{6648:(a,e,h)=>{h.r(e),h.d(e,{default:()=>p});var p=h(7411).l}}]);
+"use strict";(self.webpackChunkwhizmanage=self.webpackChunkwhizmanage||[]).push([[648],{76648:(a,e,h)=>{h.r(e),h.d(e,{default:()=>s});var s=h(7411).l}}]);

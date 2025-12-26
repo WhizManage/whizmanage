@@ -1,109 +1,189 @@
+// src/services/services.jsx
 import axios from "axios";
 
-export const getApi = (url) => {
+// =========================
+// GET
+// =========================
+export const getApi = async (url) => {
   try {
-    const response = axios.get(url, {
+    const response = await axios.get(url, {
       headers: {
         "X-WP-Nonce": window.rest,
       },
     });
     return response;
   } catch (error) {
-    return console.log("Error fetching products", error);
-  }
-};
+    console.groupCollapsed("[getApi] Request failed");
+    console.log("URL:", url);
 
-export const putApi = (url, data) => {
-  try {
-    if (!window.whizmanagePro) {
-      const response = axios.put(url, data, {
-        headers: {
-          "X-WP-Nonce": window.rest,
-        },
-      });
-      return response;
-    }else{
-      alert("License problem Please check if the license is active")
+    if (error.response) {
+      console.log("Status:", error.response.status);
+      console.log("Response data:", error.response.data);
+    } else {
+      console.log("Error (no response):", error.message);
     }
-  } catch (error) {
-    return console.log("Error fetching products", error);
+
+    console.groupEnd();
+    throw error;
   }
 };
 
-export const postApi = (url, data) => {
+// =========================
+// PUT
+// =========================
+export const putApi = async (url, data) => {
   try {
-    if (!window.whizmanagePro) {
-      const response = axios.post(url, data, {
-        headers: {
-          "X-WP-Nonce": window.rest,
-        },
-      });
-      return response;
-    }else{
-      alert("License problem Please check if the license is active")
+    if (window.whizmanagePro) {
+      alert( "License problem. Please check if the license is active.");
+      throw new Error("License problem");
     }
-  } catch (error) {
-    return console.log("Error fetching products", error);
-  }
-};
 
-export const deleteApi = (url) => {
-  try {
-    if (!window.whizmanagePro) {
-      const response = axios.delete(url, {
-        headers: {
-          "Content-Type": "application/json",
-          "X-WP-Nonce": window.rest,
-        },
-        params: {
-          force: true,
-        },
-      });
-      return response;
-    }else{
-      alert("License problem Please check if the license is active")
+    const response = await axios.put(url, data, {
+      headers: {
+        "X-WP-Nonce": window.rest,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.groupCollapsed("[putApi] Request failed");
+    console.log("URL:", url);
+    console.log("Payload:", data);
+
+    if (error.response) {
+      console.log("Status:", error.response.status);
+      console.log("Response data:", error.response.data);
+      console.log("Params:", error.response.data?.data?.params);
+      console.log("Details:", error.response.data?.data?.details);
+    } else {
+      console.log("Error (no response):", error.message);
     }
-  } catch (error) {
-    return console.log("Error fetching products", error);
+
+    console.groupEnd();
+    throw error;
   }
 };
 
-export const getApiOut = (url) => {
+// =========================
+// POST
+// =========================
+export const postApi = async (url, data) => {
   try {
-    const response = axios.get(url);
-    return response
+    if (window.whizmanagePro) {
+      alert( "License problem. Please check if the license is active.");
+      throw new Error("License problem");
+    }
+
+    const response = await axios.post(url, data, {
+      headers: {
+        "X-WP-Nonce": window.rest,
+      },
+    });
+
+    return response;
   } catch (error) {
-    return console.log("Error fetching products", error)
+    console.groupCollapsed("[postApi] Request failed");
+    console.log("URL:", url);
+    console.log("Payload:", data);
+
+    if (error.response) {
+      console.log("Status:", error.response.status);
+      console.log("Response data:", error.response.data);
+      console.log("Params:", error.response.data?.data?.params);
+      console.log("Details:", error.response.data?.data?.details);
+    } else {
+      console.log("Error (no response):", error.message);
+    }
+
+    console.groupEnd();
+    throw error;
   }
-}
+};
 
+// =========================
+// DELETE
+// =========================
+export const deleteApi = async (url) => {
+  try {
+    if (window.whizmanagePro) {
+      alert( "License problem. Please check if the license is active");
+      throw new Error("License problem");
+    }
 
+    const response = await axios.delete(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-WP-Nonce": window.rest,
+      },
+      params: {
+        force: true,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.groupCollapsed("[deleteApi] Request failed");
+    console.log("URL:", url);
+
+    if (error.response) {
+      console.log("Status:", error.response.status);
+      console.log("Response data:", error.response.data);
+    } else {
+      console.log("Error (no response):", error.message);
+    }
+
+    console.groupEnd();
+    throw error;
+  }
+};
+
+// =========================
+// GET (no nonce) – external
+// =========================
+export const getApiOut = async (url) => {
+  try {
+    const response = await axios.get(url);
+    return response;
+  } catch (error) {
+    console.groupCollapsed("[getApiOut] Request failed");
+    console.log("URL:", url);
+
+    if (error.response) {
+      console.log("Status:", error.response.status);
+      console.log("Response data:", error.response.data);
+    } else {
+      console.log("Error (no response):", error.message);
+    }
+
+    console.groupEnd();
+    throw error;
+  }
+};
+
+// =========================
+// License check
+// =========================
 export const getApiLice = async (url, onOpen) => {
   try {
-    return await axios.get(url
-    );
+    return await axios.get(url);
   } catch (error) {
     console.error("An error occurred:", error.code);
-    if (error.code != "ERR_NETWORK") {
+    if (error.code !== "ERR_NETWORK") {
       onOpen();
     }
     throw error;
   }
-}
+};
 
-
+// =========================
+// Batch helpers
+// =========================
 export const batchUpdateApi = async (endpoint, items, options = {}) => {
-  const {
-    batchSize = 100, 
-    operation = 'update', 
-    headers = {},
-  } = options;
+  const { batchSize = 100, operation = "update", headers = {} } = options;
 
   const baseUrl = `${window.siteUrl}/wp-json/wc/v3/`;
   const defaultHeaders = {
-    'Content-Type': 'application/json',
-    'X-WP-Nonce': window.rest,
-    ...headers
+    "Content-Type": "application/json",
+    "X-WP-Nonce": window.rest,
+    ...headers,
   };
 
   const batches = [];
@@ -117,17 +197,17 @@ export const batchUpdateApi = async (endpoint, items, options = {}) => {
   try {
     for (const batch of batches) {
       const payload = { [operation]: batch };
-      
-      const response = await axios.post(
-        baseUrl + endpoint,
-        payload,
-        { headers: defaultHeaders }
-      );
+
+      const response = await axios.post(baseUrl + endpoint, payload, {
+        headers: defaultHeaders,
+      });
 
       if (response.data[operation]) {
         results.push(...response.data[operation]);
-        
-        const batchErrors = response.data[operation].filter(item => item?.error);
+
+        const batchErrors = response.data[operation].filter(
+          (item) => item?.error
+        );
         if (batchErrors.length > 0) {
           errors.push(...batchErrors);
         }
@@ -139,54 +219,52 @@ export const batchUpdateApi = async (endpoint, items, options = {}) => {
       results,
       errors,
       totalProcessed: results.length,
-      totalErrors: errors.length
+      totalErrors: errors.length,
     };
-
   } catch (error) {
-    console.error('Batch update failed:', error);
+    console.error("Batch update failed:", error);
     return {
       success: false,
-      error: error?.response?.data?.message || error.message || 'Unknown error occurred',
+      error:
+        error?.response?.data?.message ||
+        error.message ||
+        "Unknown error occurred",
       results: [],
-      errors: []
+      errors: [],
     };
   }
 };
 
-
 export const batchUpdateProducts = async (products, options = {}) => {
   if (window.whizmanagePro) {
-    alert("License problem Please check if the license is active");
+    alert( "License problem Please check if the license is active");
     return {
       success: false,
       error: "License problem",
       results: [],
-      errors: []
+      errors: [],
     };
   }
 
-  return await batchUpdateApi('products/batch', products, {
+  return await batchUpdateApi("products/batch", products, {
     ...options,
-    operation: 'update'
+    operation: "update",
   });
 };
-
-
 
 export const batchUpdateCoupons = async (coupons, options = {}) => {
   if (window.whizmanagePro) {
-    alert("License problem Please check if the license is active");
+    alert( "License problem Please check if the license is active");
     return {
       success: false,
-      error: "License problem", 
+      error: "License problem",
       results: [],
-      errors: []
+      errors: [],
     };
   }
 
-  return await batchUpdateApi('coupons/batch', coupons, {
+  return await batchUpdateApi("coupons/batch", coupons, {
     ...options,
-    operation: 'update'
+    operation: "update",
   });
 };
-

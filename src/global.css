@@ -1,3 +1,4 @@
+/* src/global.css */
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@200;300;400;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
@@ -24,7 +25,11 @@
 .avatar-custom-gradient .nextui-avatar-fallback,
 .avatar-custom-gradient [data-slot="base"],
 .avatar-custom-gradient > span {
-  background: linear-gradient(to right, #ec4899, hsl(var(--primary))) !important;
+  background: linear-gradient(
+    to right,
+    #ec4899,
+    hsl(var(--primary))
+  ) !important;
 }
 
 .avatar-custom-gradient .nextui-avatar-img {
@@ -38,7 +43,7 @@
 }
 
 .rightpress-updates-update-nag,
-.update-nag ,
+.update-nag,
 .updated,
 .notice-info,
 .notice-warning {
@@ -62,6 +67,36 @@
     transparent
   );
   background-size: 1rem 1rem;
+}
+
+/* global.css או styles.css */
+
+/* תיקון z-index לסלקטים בטבלה */
+[data-radix-popper-content-wrapper] {
+  z-index: 10000 !important;
+}
+
+/* וודא שה-Portal מעל הטבלה */
+[data-radix-portal] {
+  position: fixed !important;
+  z-index: 10000 !important;
+}
+
+/* תיקון לתוכן הסלקט */
+[data-radix-select-content] {
+  z-index: 10001 !important;
+  position: fixed !important;
+}
+
+/* שורות הטבלה - וודא שהן לא מעל הסלקט */
+tbody tr {
+  position: relative;
+  z-index: 1;
+}
+
+tbody tr td {
+  position: relative;
+  z-index: 1;
 }
 /* .commas:not(:last-child)::after {
   content: ",   ";
@@ -123,9 +158,8 @@
 
 .custom-select:focus {
   outline: none !important;
-  box-shadow: none !important
+  box-shadow: none !important;
 }
-
 
 @layer base {
   :root {
@@ -158,6 +192,18 @@
     --ring: 291 64% 49%;
 
     --radius: 0.5rem;
+
+    --table-sticky-bg: rgb(248 250 252);
+
+    /* Sidebar - Light Mode (slate colors) */
+    --sidebar-background: 210 40% 98%; /* slate-50 */
+    --sidebar-foreground: 215.4 16.3% 46.9%; /* slate-500 */
+    --sidebar-primary: 292.5 84.1% 60.6%; /* fuchsia-500 for active items */
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96.1%; /* slate-100 */
+    --sidebar-accent-foreground: 215.3 25% 26.7%; /* slate-700 */
+    --sidebar-border: 214.3 31.8% 91.4%; /* slate-200 */
+    --sidebar-ring: 293 69% 49%; /* fuchsia-600 */
   }
 
   .dark {
@@ -188,15 +234,26 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --table-sticky-bg: rgb(30 41 59);
+
+    /* Sidebar - Dark Mode (slate colors) */
+    --sidebar-background: 217.2 32.6% 17.5%; /* slate-800 */
+    --sidebar-foreground: 214.3 31.8% 91.4%; /* slate-200 */
+    --sidebar-primary: 292.5 84.1% 60.6%; /* fuchsia-500 */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215.3 25% 26.7%; /* slate-700 */
+    --sidebar-accent-foreground: 210 40% 98%; /* slate-50 */
+    --sidebar-border: 215.3 25% 26.7%; /* slate-700 */
+    --sidebar-ring: 293 69% 49%; /* fuchsia-600 */
   }
 }
 
 .scrollbar-whiz {
   @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-fuchsia-600 
   scrollbar-thumb-rounded-full scrollbar-track-rounded-full
-  /* pr-[11px] hover:pr-0 rtl:pr-0 rtl:pl-[11px] rtl:hover:pl-0 */
+  /* pr-[11px] hover:pr-0 rtl:pr-0 rtl:pl-[11px] rtl:hover:pl-0 */;
 }
-
 
 .rdw-editor-main {
   /* height: 500px; */
@@ -280,38 +337,65 @@
   }
 }
 
+/* הוסף את השורות הבאות לקובץ ה-CSS הקיים שלך */
 
-
-
-/* אופטימיזציה לגרירה */
-.dragging-row {
-  transform: translateZ(0); /* מאלץ GPU acceleration */
-  backface-visibility: hidden;
-  perspective: 1000px;
-  will-change: transform;
+/* תיקון בסיסי לטבלה עם עמודות מוצמדות - z-index מתוקן */
+[data-table-container="true"] table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
 }
 
-/* מניעת layout thrashing בזמן גרירה */
-.table-dragging {
-  contain: layout style paint;
+/* וידוא שכותרות הטבלה נשארות sticky עם z-index נכון */
+[data-table-container="true"] thead th {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 40 !important; /* גבוה מאוד כי זה thead */
 }
 
-/* שיפור scroll performance */
-.table-container {
-  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
-  scroll-behavior: smooth;
+/* עמודות מוצמדות צריכות z-index גבוה יותר מעמודות רגילות */
+[data-table-container="true"] th[style*="position: sticky"],
+[data-table-container="true"] td[style*="position: sticky"] {
+  z-index: 10 !important; /* עמודות מוצמדות */
 }
 
-/* אופטימיזציה לאנימציות */
-.row-transition {
-  transition: transform 150ms cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 150ms ease-out,
-              box-shadow 150ms ease-out;
+/* עמודות רגילות עם z-index נמוך */
+[data-table-container="true"] th:not([style*="position: sticky"]),
+[data-table-container="true"] td:not([style*="position: sticky"]) {
+  z-index: 0 !important; /* עמודות רגילות */
 }
 
-/* מניעת flickering */
-.drag-overlay {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
+/* כותרות בעמודות מוצמדות צריכות z-index הכי גבוה */
+[data-table-container="true"] thead th[style*="position: sticky"] {
+  z-index: 50 !important; /* כותרות מוצמדות - הכי גבוה */
+}
+
+/* ⚡ תתי-שורות (ווריאציות) - CSS toggle לביצועים מהירים */
+tr.sub-row-hidden {
+  display: none !important;
+}
+
+tr.sub-row-visible {
+  display: table-row !important;
+}
+
+/* 🔒 שורות נעולות (Free users) */
+tr.locked-row > td {
+  position: relative;
+}
+
+tr.locked-row > td::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(156, 163, 175, 0.2);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  pointer-events: auto;
+  cursor: not-allowed;
+  z-index: 20;
+}
+
+/* אפשר קליק על צ'קבוקס בשורות נעולות */
+tr.locked-row > td:first-child::after {
+  pointer-events: none;
 }

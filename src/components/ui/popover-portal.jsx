@@ -1,26 +1,59 @@
-import * as React from "react"
-import * as PopoverPrimitive from "@radix-ui/react-popover"
+"use client";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import * as PopoverPrimitive from "@radix-ui/react-popover";
+import * as React from "react";
 
-const Popover = PopoverPrimitive.Root
+function getModalPortalContainer() {
+  if (typeof document === "undefined") return undefined;
+  // חיפוש ה-portal container האחרון (הקרוב ביותר למודל הפעיל)
+  // כשיש מספר מודלים מקוננים, נרצה את האחרון שנפתח
+  const portals = document.querySelectorAll("#radix-select-portal");
+  if (portals.length > 0) {
+    // קח את האחרון (הפנימי ביותר)
+    return portals[portals.length - 1];
+  }
+  return (
+    document.querySelector("[data-slot='modal-wrapper']") ||
+    document.body
+  );
+}
 
-const PopoverTrigger = PopoverPrimitive.Trigger
+const Popover = PopoverPrimitive.Root;
+const PopoverTrigger = PopoverPrimitive.Trigger;
 const ClosePopover = PopoverPrimitive.Close;
 
-const PopoverContent = React.forwardRef(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
-  <PopoverPrimitive.Portal>
-    <PopoverPrimitive.Content
-      ref={ref}
-      align={align}
-      sideOffset={sideOffset}
-      className={cn(
-        "z-50 w-fit rounded-md border dark:border-slate-600 bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-        className
-      )}
-      {...props} />
-  </PopoverPrimitive.Portal>
-))
-PopoverContent.displayName = PopoverPrimitive.Content.displayName
+const PopoverContent = React.forwardRef(
+  (
+    {
+      className,
+      align = "center",
+      sideOffset = 4,
+      portalContainer, // אופציונלי – אם תרצה להזרים עוגן ידני
+      ...props
+    },
+    ref
+  ) => {
+    const container = portalContainer ?? getModalPortalContainer();
 
-export { Popover, PopoverTrigger, PopoverContent, ClosePopover }
+    return (
+      <PopoverPrimitive.Portal container={container}>
+        <PopoverPrimitive.Content
+          ref={ref}
+          align={align}
+          sideOffset={sideOffset}
+          // ⛔ חשוב: לא במצב modal כדי לא להתנגש עם focus trap של HeroUI
+          modal={false}
+          className={cn(
+            "z-[2147483647] w-72 rounded-md border bg-popover p-0 text-popover-foreground dark:border-slate-600 shadow-md outline-none dark:bg-slate-800",
+            className
+          )}
+          {...props}
+        />
+      </PopoverPrimitive.Portal>
+    );
+  }
+);
+PopoverContent.displayName = PopoverPrimitive.Content.displayName;
+
+export { ClosePopover, Popover, PopoverContent, PopoverTrigger };

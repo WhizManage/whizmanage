@@ -1,11 +1,20 @@
-import { useEffect, Suspense } from "react";
+import { useEffect, Suspense, useState } from "react";
 import Navbar from "./Navbar";
 import { ThemeProvider } from "./ThemeProvider";
-import DesktopSidebar from "./_components/DesktopSidebar";
 import { RefreshCcw } from "lucide-react";
-import ProductsPage from "@/pages/products/page";
-import CouponsPage from "@/pages/coupons/page";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+// New Sidebar
+import { AppSidebar } from "./sidebar/AppSidebar";
+import { SidebarProvider, SidebarInset } from "@components/ui/sidebar";
+import { AutoStartTour } from "@/components/tour/WhatsNewTour";
+
+// --- טבלאות ---
+import ProductsTablePage from "@/components/table/entities/products/ProductsPage";
+import CouponsTablePage from "@/components/table/entities/coupons/CouponsPage";
+import OrdersTablePage from "@/components/table/entities/orders/OrdersPage";
+import DiscountRulesPage from "@/components/table/entities/discount-rules/DiscountRulesPage";
+import CustomersTablePage from "@/components/table/entities/customers/CustomersPage";
 
 // פתרון בעיית ריקורסיה בצד העיצוב במיוחד בטבלה של הווריאציות
 export function useSafeFocusPatch() {
@@ -31,63 +40,62 @@ export function useSafeFocusPatch() {
 
 export default function Layout() {
   useSafeFocusPatch();
-  useEffect(() => {
-  }, []);
 
 
+  window.hasLicence = false;
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5,
+        refetchOnWindowFocus: false,
+      },
+    },
+  }));
   return (
     <ThemeProvider defaultTheme="system" storageKey="whizmanage-ui-theme">
-      {window.location.href ===
-      window.siteUrl + "/wp-admin/admin.php?page=whizmanage-tests" ? (
-        <OpenAIAp />
-      ) : (
-        <div className="flex max-h-screen overflow-hidden">
-          <DesktopSidebar />
-          <div
-            className="
-            bg-gradient-to-r from-fuchsia-600/15 via-pink-500/10 to-pink-500/20
-             dark:from-slate-900 dark:via-pink-500/20 dark:to-slate-900
-			h-screen w-full flex-1 overflow-hidden
-			"
-          >
-            <Navbar />
-            <div
-              className="
-			sm:mt-0 mt-14 m-2 
-			h-[calc(100vh-64px)] overflow-y-hidden
-			shadow-sm dark:shadow-xl bg-white rounded-md dark:bg-secondary/80 dark:text-neutral-200
-			scrollbar-none
-			"
-            >
-              {/* {content} */}
-              <Suspense
-                fallback={
-                  <RefreshCcw className="text-white w-5 h-5 animate-spin" />
-                }
-              >
-                {window.location.href ===
-                  window.siteUrl + "/wp-admin/admin.php?page=whizmanage" ||
-                window.location.href ===
-                  window.siteUrl +
-                    "/wp-admin/admin.php?page=whizmanage-products" ? (
-                  <ProductsPage />
-                ) : window.location.href ===
-                  window.siteUrl +
-                    "/wp-admin/admin.php?page=whizmanage-coupons" ? (
-                  <CouponsPage />
-                )  : null}
-              </Suspense>
-              {console.log("free")}
-              {/* {console.log(window.listExport)} */}
-              {console.log(window.listProduct)}
-              {console.log(window.newVersion)}
-              {console.log(window.listOrders)}
-              {/* { console.log( window.sheetsUrl)} */}
-              {/* {console.log(window.listTaxonomies)} */}
+      <QueryClientProvider client={queryClient}>
+        <AutoStartTour />
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarInset>
+            <div className="flex flex-col h-screen w-full overflow-hidden bg-gradient-to-r from-fuchsia-600/15 via-pink-500/10 to-pink-500/20 dark:from-slate-900 dark:via-pink-500/20 dark:to-slate-900">
+              <Navbar />
+              <div className="flex-1 m-2 mt-0 ml-0 rtl:ml-2 rtl:mr-0 overflow-hidden rounded-lg bg-white dark:bg-slate-800 dark:text-neutral-200 shadow-sm dark:shadow-xl">
+                <Suspense
+                  fallback={
+                    <div className="flex items-center justify-center h-full">
+                      <RefreshCcw className="text-fuchsia-600 w-6 h-6 animate-spin" />
+                    </div>
+                  }
+                >
+                  {(() => {
+                    const currentUrl = window.location.href;
+                    const baseUrl = window.siteUrl + "/wp-admin/admin.php?page=";
+
+                    if (currentUrl === baseUrl + "whizmanage") {
+                      return <ProductsTablePage />;
+                    }
+                    if (currentUrl === baseUrl + "whizmanage-coupons") {
+                      return <CouponsTablePage />;
+                    }
+                    if (currentUrl === baseUrl + "whizmanage-orders") {
+                      return <OrdersTablePage />;
+                    }
+                    if (currentUrl === baseUrl + "whizmanage-customers") {
+                      return <CustomersTablePage />;
+                    }
+                    if (currentUrl === baseUrl + "whizmanage-discount-rules") {
+                      return <DiscountRulesPage />;
+                    }
+
+                    return null;
+                  })()}
+                </Suspense>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </SidebarInset>
+        </SidebarProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 }
