@@ -5,7 +5,11 @@ if (!defined('ABSPATH')) {
 if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
     class Whizmanage_Custom_Fields_Manager
     {
-        public function custom_fields_collector()
+        /**
+         * Get all registered fields from ACF, JetEngine, Yoast, etc.
+         * returns array
+         */
+        public static function get_registered_fields_data()
         {
             // Initialize an array to store field data from both ACF and JetEngine
             $field_data_array = array();
@@ -194,6 +198,13 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
                 }
             }
 
+            return $field_data_array;
+        }
+
+        public function custom_fields_collector()
+        {
+            $field_data_array = self::get_registered_fields_data();
+
             // Encode as JSON and send to React
             // $jsonAssociativeArray = wp_json_encode($field_data_array);
             wp_add_inline_script(
@@ -218,6 +229,10 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
          WHERE p.post_type = 'product'"
             );
 
+            // Fetch registered keys to allow them even if they start with "_"
+            $registered_fields = self::get_registered_fields_data();
+            $allowed_keys = array_column($registered_fields, 'key');
+
             foreach ($meta_keys as $key) {
                 if (!is_string($key)) {
                     continue;
@@ -225,7 +240,14 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
 
                 $key = trim($key);
 
-                if ($key === '' || $key === 'total_sales' || $key[0] === '_') {
+                // Allow if it's explicitly allowed OR (not empty AND not standard hidden)
+                // Logic: if key is in allowed_keys, we skip the underscore check.
+                if ($key === '' || $key === 'total_sales') {
+                    continue;
+                }
+                
+                // If it starts with _ AND it is NOT in the allowed list, skip it.
+                if ($key[0] === '_' && !in_array($key, $allowed_keys, true)) {
                     continue;
                 }
 

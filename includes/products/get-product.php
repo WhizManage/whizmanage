@@ -379,13 +379,31 @@ if (!class_exists('Whizmanage_get_product')) {
                             // הוסף כאן רק מפתחות שאתה יודע בוודאות שהם רשימות
                         ];
 
-                        foreach ($product_meta_data as $meta) {
-                            // דילוג על מפתחות פרטיים לא-יוסט
-                            if (strpos($meta->key, '_') === 0 && (!defined('WPSEO_VERSION') || (!in_array($meta->key, $yoast_text_keys, true) && $meta->key !== $yoast_og_image_key))) {
-                                continue;
-                            }
+            // Fetch registered keys to allow them even if they start with "_"
+            $allowed_keys = [];
+            $field_types = [];
+            if (class_exists('Whizmanage_Custom_Fields_Manager') && method_exists('Whizmanage_Custom_Fields_Manager', 'get_registered_fields_data')) {
+                $registered_fields = Whizmanage_Custom_Fields_Manager::get_registered_fields_data();
+                $allowed_keys = array_column($registered_fields, 'key');
+                foreach ($registered_fields as $field) {
+                    $field_types[$field['key']] = $field['type'] ?? '';
+                }
+            }
 
-                            $processed_value = $meta->value;
+            foreach ($product_meta_data as $meta) {
+                // דילוג על מפתחות פרטיים לא-יוסט
+                // אם מתחיל ב _ וגם לא יוסט וגם לא ברשימת המותרים
+                if (strpos($meta->key, '_') === 0) {
+                     $is_yoast = defined('WPSEO_VERSION') && (in_array($meta->key, $yoast_text_keys, true) || $meta->key === $yoast_og_image_key);
+                     $is_allowed = in_array($meta->key, $allowed_keys, true);
+
+                     if (!$is_yoast && !$is_allowed) {
+                         continue;
+                     }
+                }
+
+                $processed_value = $meta->value;
+                $current_field_type = $field_types[$meta->key] ?? '';
 
                             // טיפול ביוסט – טקסטים
                             if (in_array($meta->key, $yoast_text_keys, true)) {
@@ -472,11 +490,24 @@ if (!class_exists('Whizmanage_get_product')) {
                                         }, $items);
 
                                         // מזהה יחיד של תמונה
-                                    } elseif (is_numeric($processed_value) && wp_attachment_is_image((int) $processed_value)) {
-                                        $processed_value = [
-                                            'id' => (int) $processed_value,
-                                            'url' => wp_get_attachment_url((int) $processed_value) ?: '',
-                                        ];
+                                    } elseif (is_numeric($processed_value)) {
+                                        // Only convert to image if we DON'T know it's a non-image type
+                                        // OR if we explicitly know it's an image/gallery type
+                                        $should_check_image = true;
+                                        
+                                        // Types that should NEVER be treated as image IDs even if the number matches an attachment
+                                        $non_image_types = ['text', 'number', 'range', 'textarea', 'email', 'url', 'password', 'select', 'radio', 'true_false', 'checkbox'];
+
+                                        if (in_array($current_field_type, $non_image_types, true)) {
+                                            $should_check_image = false;
+                                        }
+
+                                        if ($should_check_image && wp_attachment_is_image((int) $processed_value)) {
+                                            $processed_value = [
+                                                'id' => (int) $processed_value,
+                                                'url' => wp_get_attachment_url((int) $processed_value) ?: '',
+                                            ];
+                                        }
 
                                         // URL יחיד – ננסה למצוא מזהה תמונה
                                     } elseif (filter_var($processed_value, FILTER_VALIDATE_URL)) {
@@ -652,14 +683,26 @@ if (!class_exists('Whizmanage_get_product')) {
                             $attribute_label  = $attribute_object ? $attribute_object->name : wc_attribute_label($attr_key);
                             $slug             = $attr_key;
 
+                            // Get the term name from slug for global attributes
+                            // Build the correct taxonomy name (must start with pa_)
+                            $taxonomy_name = strpos($attr_key, 'pa_') === 0 ? $attr_key : 'pa_' . $attr_key;
+
+                            // Try to get term by slug first, then by name if that fails
+                            $term = get_term_by('slug', $value, $taxonomy_name);
+                            if (!$term || is_wp_error($term)) {
+                                // Maybe $value is already the name, try by name
+                                $term = get_term_by('name', $value, $taxonomy_name);
+                            }
+                            $option_display = ($term && !is_wp_error($term)) ? $term->name : $value;
+
                             $base_data = array(
                                 'id'     => (int) $attribute_id,
                                 'name'   => $attribute_label,
                                 'slug'   => urldecode($slug),   // pa_color
-                                'option' => $value,
+                                'option' => $option_display,
                             );
 
-                            $variation_name .= $attribute_label . ': ' . $value . ' ';
+                            $variation_name .= $attribute_label . ': ' . $option_display . ' ';
                         } else {
                             $pretty_label = ucwords(str_replace(array('-', '_'), ' ', $clean_name));
                             $slug         = sanitize_title($clean_name);
