@@ -1,6 +1,5 @@
 // src/components/forms/core/fields/DownloadableInput.jsx
 
-import i18n from "@/i18n";
 import MediaPicker from "@components/media/MediaPicker";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";

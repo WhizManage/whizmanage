@@ -21,7 +21,7 @@ import {
   FileEdit,
 } from "lucide-react";
 import { IconBadge } from "@components/ui/custom/IconBadge";
-import { useState } from "react";
+import { useState, useEffect } from "react";
  import { __ } from "@wordpress/i18n";
 import { MdError } from "react-icons/md";
 import { toast } from "@/lib/utils";
@@ -38,6 +38,7 @@ const GenericItemModal = ({
   customTrigger = null,
   isOpen: externalIsOpen = null,
   onClose: externalOnClose = null,
+  initialData = null, // נתוני פריט קיים לעריכה
 }) => {
   if (isTableImport) {
     return null;
@@ -46,9 +47,18 @@ const GenericItemModal = ({
   const { isOpen: internalIsOpen, onOpen, onOpenChange } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [currentProductId, setCurrentProductId] = useState(null);
+  const [isEditMode, setIsEditMode] = useState(!!initialData?.id);
+  const [currentProductId, setCurrentProductId] = useState(initialData?.id || null);
   const [formKey, setFormKey] = useState(0); // מפתח לאיפוס מלא של הטופס
+
+  // עדכון מצב עריכה כאשר initialData משתנה
+  useEffect(() => {
+    if (initialData?.id) {
+      setIsEditMode(true);
+      setCurrentProductId(initialData.id);
+      setFormKey((prev) => prev + 1); // איפוס הטופס עם הנתונים החדשים
+    }
+  }, [initialData?.id]);
    
 
   const isOpen = externalIsOpen !== null ? externalIsOpen : internalIsOpen;
@@ -230,7 +240,7 @@ const GenericItemModal = ({
                 >
                   <FormProvider
                     key={formKey}
-                    initialRow={config?.defaults || {}}
+                    initialRow={initialData || config?.defaults || {}}
                     onSubmit={onSubmit}
                     onError={(errors) => {
                       console.warn("Form validation errors:", errors);

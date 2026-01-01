@@ -27,7 +27,7 @@ const DateRangeEdit = ({
   isForm = false,
 }) => {
    
-  const translate = tProp || t;
+  const translate = tProp || __;
 
   // שמות שדות התחלה/סיום – קודם מה-editOptions, אח"כ מה-props, ואז ברירת מחדל
   const startFieldName =
@@ -183,7 +183,7 @@ const DateRangeEdit = ({
             disabled={isLoading}
           >
             <CalendarClock className="h-4 w-4 opacity-50" />
-            <span className="text-sm">{translate("Set Sale Period")}</span>
+            <span className="text-sm">{translate("Set Sale Period","whizmanage")}</span>
           </Button>
         )}
 
@@ -192,7 +192,7 @@ const DateRangeEdit = ({
           <>
             <DateRangePicker
               ref={pickerRef}
-              aria-label={translate("Select sale period")}
+              aria-label={translate("Select sale period","whizmanage")}
               // value מבוקר – מתחיל כ-null, מתמלא אחרי שינוי ראשון
               value={localValue}
               onChange={handleDateChange}
@@ -220,7 +220,7 @@ const DateRangeEdit = ({
                 offset: 4,
               }}
             />
-            <CustomTooltip title={translate("Cancel Sale Period")}>
+            <CustomTooltip title={translate("Cancel Sale Period","whizmanage")}>
               <Button
                 onClick={handleClearDates}
                 variant="ghost"

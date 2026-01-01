@@ -36,6 +36,29 @@ import {
 } from "@components/ui/popover-portal";
 
 /**
+ * 🔧 Helper: ממיר slugs ל-names באמצעות מיפוי terms
+ * @param {Array} options - מערך של slugs/names
+ * @param {Array} termsMap - מערך של terms עם name ו-slug
+ * @returns {Array} מערך של names
+ */
+const convertSlugsToNames = (options, termsMap) => {
+  if (!Array.isArray(options) || !Array.isArray(termsMap)) return options;
+
+  return options.map((opt) => {
+    // אם זה כבר name - נחזיר אותו
+    const termByName = termsMap.find((t) => t.name === opt);
+    if (termByName) return opt;
+
+    // חפש לפי slug והחזר את ה-name
+    const termBySlug = termsMap.find((t) => t.slug === opt);
+    if (termBySlug) return termBySlug.name;
+
+    // fallback - החזר את הערך המקורי
+    return opt;
+  });
+};
+
+/**
  * ✅ SelectGlobalOptions - מתוקן עם העברת setAllAttributes ל-AddFromTerms
  */
 const SelectGlobalOptions = ({ attribute, index, product }) => {
@@ -237,7 +260,18 @@ const SelectGlobalOptions = ({ attribute, index, product }) => {
       // 4️⃣ עדכון product.attributes
       const responseAttributes = updateRes?.data?.update?.[0]?.attributes;
       if (responseAttributes) {
-        product.attributes = responseAttributes;
+        // ✅ המרת slugs ל-names עבור תכונות גלובליות
+        // WooCommerce מחזיר options כ-slugs, אנחנו צריכים להציג names
+        const normalizedAttributes = responseAttributes.map((attr) => {
+          if (attr.id !== 0 && attr.id === attribute.id && terms.length > 0) {
+            return {
+              ...attr,
+              options: convertSlugsToNames(attr.options, terms),
+            };
+          }
+          return attr;
+        });
+        product.attributes = normalizedAttributes;
       }
 
       // 5️⃣ עדכון local state
@@ -253,10 +287,19 @@ const SelectGlobalOptions = ({ attribute, index, product }) => {
 
       // 7️⃣ עדכון allAttributes
       if (typeof setAllAttributes === "function" && responseAttributes) {
+        const normalizedAttributes = responseAttributes.map((attr) => {
+          if (attr.id !== 0 && attr.id === attribute.id && terms.length > 0) {
+            return {
+              ...attr,
+              options: convertSlugsToNames(attr.options, terms),
+            };
+          }
+          return attr;
+        });
         setAllAttributes((prev) => {
-          const prevIds = new Set(responseAttributes.map((attr) => attr.id));
+          const prevIds = new Set(normalizedAttributes.map((attr) => attr.id));
           const filteredPrev = prev.filter((attr) => !prevIds.has(attr.id));
-          return [...responseAttributes, ...filteredPrev];
+          return [...normalizedAttributes, ...filteredPrev];
         });
       }
 
@@ -456,7 +499,7 @@ const SelectGlobalOptions = ({ attribute, index, product }) => {
                       onSelect={() => setAddMultiple(true)}
                     >
                       <Plus className="mr-2 h-4 w-4" />
-                      <span>{__("Import from terms...", "whizmanage")}</span>
+                      <span>{__("Import from terms", "whizmanage")}</span>
                     </CommandItem>
                   </>
                 ) : (

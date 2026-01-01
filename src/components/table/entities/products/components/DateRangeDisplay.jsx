@@ -1,12 +1,12 @@
 // src/components/table/products/components/DateRangeDisplay.jsx
 import { CalendarRange, CalendarOff } from "lucide-react";
 
-const DateRangeDisplay = ({ value, t }) => {
+const DateRangeDisplay = ({ value, __}) => {
   if (!value || (!value.start && !value.end)) {
     return (
       <div className="flex items-center gap-1 text-muted-foreground">
         <CalendarOff className="h-3.5 w-3.5" />
-        <span className="text-xs">{t?.("No schedule") || __("No schedule", "whizmanage")}</span>
+        <span className="text-xs">{__?.("No schedule","whizmanage") || __("No schedule", "whizmanage")}</span>
       </div>
     );
   }

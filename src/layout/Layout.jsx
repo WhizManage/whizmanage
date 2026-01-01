@@ -2,6 +2,7 @@ import { useEffect, Suspense, useState } from "react";
 import Navbar from "./Navbar";
 import { ThemeProvider } from "./ThemeProvider";
 import { RefreshCcw } from "lucide-react";
+import axios from "axios";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // New Sidebar
@@ -40,7 +41,10 @@ export function useSafeFocusPatch() {
 
 export default function Layout() {
   useSafeFocusPatch();
-
+  useEffect(() => {
+ 
+    fetchDataUser();
+  }, []);
 
   window.hasLicence = false;
   const [queryClient] = useState(() => new QueryClient({
@@ -51,9 +55,38 @@ export default function Layout() {
       },
     },
   }));
+
+  const fetchDataUser = async () => {
+    // const license = window.getWhizmanage.find((column) => column.name === "pro")
+
+    const dataUser = {
+      webUrl: window.siteUrl,
+      email: window.adminEmail,
+      name: window.store_name,
+      type: "free",
+      version: window.version,
+      // license: license.reservedData,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://whizmanage.com/wp-json/woocomanage/v1/whizmanage-data/",
+        dataUser,
+        {
+          headers: {
+            Authorization: "oje&^gjhjkj#JHK.@O056",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <ThemeProvider defaultTheme="system" storageKey="whizmanage-ui-theme">
       <QueryClientProvider client={queryClient}>
+       
         <AutoStartTour />
         <SidebarProvider>
           <AppSidebar />

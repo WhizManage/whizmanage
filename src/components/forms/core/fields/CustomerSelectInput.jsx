@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/hover-card";
 import { Info, User } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { useGenericForm } from "../FormProvider";
 import { getApi } from "/src/services/services";
 import Loader from "@/components/ui/custom/Loader";
@@ -37,7 +37,7 @@ export default function CustomerSelectInput({
   // אם אין לשילוח כתובת, להעתיק את החיוב לשילוח
   copyBillingToShippingIfEmpty = true,
 }) {
-   
+
   const { setValue, watch, getValues } = useGenericForm();
   const [customers, setCustomers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -269,9 +269,8 @@ export default function CustomerSelectInput({
         onValueChange={handleCustomerSelect}
       >
         <SelectTrigger
-          className={`h-10 dark:bg-slate-700 dark:hover:!bg-slate-600 ${
-            isRTL ? "flex-row-reverse text-right" : "text-left"
-          }`}
+          className={`h-10 dark:bg-slate-700 dark:hover:!bg-slate-600 ${isRTL ? "flex-row-reverse text-right" : "text-left"
+            }`}
         >
           <SelectValue placeholder={__(placeholder, "whizmanage")}>
             {currentValue ? selectedLabel : __(placeholder, "whizmanage")}
@@ -290,7 +289,7 @@ export default function CustomerSelectInput({
               dir={isRTL ? "rtl" : "ltr"}
             />
             <div className="mt-1 text-[11px] text-muted-foreground" dir={isRTL ? "rtl" : "ltr"}>
-              {__("Type {{min}}+ characters to search", { min: minChars })}
+              {`${__("Type", "whizmanage")} ${minChars}+ ${__("characters to search", "whizmanage")}`}
             </div>
           </div>
 

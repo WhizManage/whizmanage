@@ -5,7 +5,7 @@ import { chunkBatchPayloads } from "@/components/table/utils/networkUtils";
 import { postApi } from "@/services/services";
 import { confirm } from "@components/ui/custom/CustomConfirm";
 import axios from "axios";
-
+import { sprintf, __ } from "@wordpress/i18n"
 export const createGenericActions = (config) => {
   const {
     entityName,
@@ -13,7 +13,6 @@ export const createGenericActions = (config) => {
     setData,
     setRowSelection,
     setIsLoading,
-    __,
     isTrash = false,
     queryClient,
   } = config;
@@ -30,17 +29,17 @@ export const createGenericActions = (config) => {
     const isConfirmed = await confirm({
       title:
         actionType === "delete"
-          ? __("Delete {{entityName}}", { entityName: __(entityName, "whizmanage") })
+          ? sprintf(__("Delete %s", "whizmanage"), __(entityName, "whizmanage"))
           : __("Move to Trash", "whizmanage"),
       message:
         actionType === "delete"
-          ? __(
-            "Are you sure you want to permanently delete the selected {{entityName}}? This action cannot be undone.",
-            { entityName: __(entityName, "whizmanage") }
+          ? sprintf(
+            __("Are you sure you want to permanently delete the selected %s? This action cannot be undone.", "whizmanage"),
+            __(entityName, "whizmanage")
           )
-          : __("Are you sure you want to move the selected {{entityName}} to the trash?", {
-            entityName: __(entityName, "whizmanage"),
-          }),
+          : sprintf(__("Are you sure you want to move the selected %s to the trash?", "whizmanage"),
+            __(entityName, "whizmanage")
+          ),
       confirmText:
         actionType === "delete" ? __("Delete Permanently", "whizmanage") : __("Move to Trash", "whizmanage"),
       cancelText: __("Cancel", "whizmanage"),
@@ -130,11 +129,14 @@ export const createGenericActions = (config) => {
       }
 
       toast.success(
-        __(
-          actionType === "delete"
-            ? "{{entityName}} deleted successfully"
-            : "{{entityName}} moved to trash",
-          { entityName: __(entityName, "whizmanage") }
+        sprintf(
+          __(
+            actionType === "delete"
+              ? "%s deleted successfully"
+              : "%s moved to trash",
+            "whizmanage"
+          ),
+          __(entityName, "whizmanage")
         )
       );
 
@@ -144,7 +146,7 @@ export const createGenericActions = (config) => {
     } catch (error) {
       console.error(`Failed to delete ${entityName}:`, error);
       toast.error(
-        __("Failed to delete {{entityName}}", { entityName: __(entityName, "whizmanage") })
+        sprintf(__("Failed to delete %s", "whizmanage"), __(entityName, "whizmanage"))
       );
     } finally {
       setIsLoading(false);
@@ -153,10 +155,10 @@ export const createGenericActions = (config) => {
 
   const duplicateItems = async (selectedRows, customTransform = null) => {
     const isConfirmed = await confirm({
-      title: __("Duplicate {{entityName}}", { entityName: __(entityName, "whizmanage") }),
-      message: __(
-        "Are you sure you want to duplicate the selected {{entityName}}?",
-        { entityName: __(entityName, "whizmanage") }
+      title: sprintf(__("Duplicate %s", "whizmanage"), __(entityName, "whizmanage")),
+      message: sprintf(
+        __("Are you sure you want to duplicate the selected %s?", "whizmanage"),
+        __(entityName, "whizmanage")
       ),
       confirmText: __("Duplicate", "whizmanage"),
       cancelText: __("Cancel", "whizmanage"),
@@ -355,17 +357,17 @@ export const createGenericActions = (config) => {
       setRowSelection({});
 
       toast.success(
-        __("{{entityName}} duplicated successfully", {
-          entityName: __(entityName, "whizmanage"),
-        })
+        sprintf(__("%s duplicated successfully", "whizmanage"),
+          __(entityName, "whizmanage")
+        )
       );
     } catch (error) {
       console.error(`Failed to duplicate ${entityName}:`, error);
       toast.error(
         error?.response?.data?.message ||
-          __("Failed to duplicate {{entityName}}", {
-            entityName: __(entityName, "whizmanage"),
-          })
+        sprintf(__("Failed to duplicate %s", "whizmanage"),
+          __(entityName, "whizmanage")
+        )
       );
     } finally {
       setIsLoading(false);
@@ -374,10 +376,10 @@ export const createGenericActions = (config) => {
 
   const restoreItems = async (selectedRows) => {
     const isConfirmed = await confirm({
-      title: __("Restore {{entityName}}", { entityName: __(entityName, "whizmanage") }),
-      message: __(
-        "Are you sure you want to restore the selected {{entityName}}?",
-        { entityName: __(entityName, "whizmanage") }
+      title: sprintf(__("Restore %s", "whizmanage"), __(entityName, "whizmanage")),
+      message: sprintf(
+        __("Are you sure you want to restore the selected %s?", "whizmanage"),
+        __(entityName, "whizmanage")
       ),
       confirmText: __("Restore", "whizmanage"),
       cancelText: __("Cancel", "whizmanage"),
@@ -442,9 +444,9 @@ export const createGenericActions = (config) => {
       );
 
       toast.success(
-        __("{{entityName}} restored successfully", {
-          entityName: __(entityName, "whizmanage"),
-        })
+        sprintf(__("%s restored successfully", "whizmanage"),
+          __(entityName, "whizmanage")
+        )
       );
 
       if (typeof config.onActionSuccess === "function") {
@@ -453,9 +455,9 @@ export const createGenericActions = (config) => {
     } catch (error) {
       console.error(`Failed to restore ${entityName}:`, error);
       toast.error(
-        __("Failed to restore {{entityName}}", {
-          entityName: __(entityName, "whizmanage"),
-        })
+        sprintf(__("Failed to restore %s", "whizmanage"),
+          __(entityName, "whizmanage")
+        )
       );
     } finally {
       setIsLoading(false);
@@ -468,7 +470,7 @@ export const createGenericActions = (config) => {
       const json = JSON.stringify(dataToExport, null, 2);
       const blob = new Blob([json], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement( "a");
+      const a = document.createElement("a");
       a.href = url;
       a.download = `${entityName}-${new Date()
         .toISOString()
@@ -476,14 +478,14 @@ export const createGenericActions = (config) => {
       a.click();
       URL.revokeObjectURL(url);
       toast.success(
-        __("{{entityName}} exported successfully", {
-          entityName: __(entityName, "whizmanage"),
-        })
+        sprintf(__("%s exported successfully", "whizmanage"),
+          __(entityName, "whizmanage")
+        )
       );
     } catch (error) {
       console.error(`Failed to export ${entityName}:`, error);
       toast.error(
-        __("Failed to export {{entityName}}", { entityName: __(entityName, "whizmanage") })
+        sprintf(__("Failed to export %s", "whizmanage"), __(entityName, "whizmanage"))
       );
     }
   };

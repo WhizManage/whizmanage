@@ -120,7 +120,7 @@ const createCustomMetaColumns = (__, onUpdate) => {
 // ——————————————————————————————————————————————————————————————
 // Main factory — ordered to match DB columnOrder
 // ——————————————————————————————————————————————————————————————
-export const createOrdersColumns = (store, __ ,handleCellUpdate) => {
+export const createOrdersColumns = (store, __, handleCellUpdate) => {
   // ✅ עטיפה מעל handleCellUpdate שמטפלת בשורות חדשות
   const onUpdate = async (id, field, value, rowData, isFromHistory = false) => {
     const stringId = String(id);
@@ -221,7 +221,7 @@ export const createOrdersColumns = (store, __ ,handleCellUpdate) => {
           payload.transaction_id = String(updatedData.transaction_id);
         }
 
-  
+
 
         // endpoint ליצירת הזמנה חדשה
         const endpoint = `${window.siteUrl}/wp-json/wc/v3/orders`;
@@ -503,7 +503,7 @@ export const createOrdersColumns = (store, __ ,handleCellUpdate) => {
             ))}
             {items.length > 8 ? (
               <div className="text-muted-foreground">
-                {__("+{{n}} more", { n: items.length - 8 })}
+                {`+${items.length - 8} ${__("more", "whizmanage")}`}
               </div>
             ) : null}
           </div>
@@ -539,9 +539,8 @@ export const createOrdersColumns = (store, __ ,handleCellUpdate) => {
             triggerClassName="cursor-pointer"
           >
             <div
-              className={`w-full h-full px-3 py-2 flex items-center gap-2 ${
-                isNewRow && items.length === 0 ? "ring-2 ring-fuchsia-500" : ""
-              }`}
+              className={`w-full h-full px-3 py-2 flex items-center gap-2 ${isNewRow && items.length === 0 ? "ring-2 ring-fuchsia-500" : ""
+                }`}
             >
               <Package className="size-4 shrink-0" />
               <CustomTooltip
@@ -580,7 +579,7 @@ export const createOrdersColumns = (store, __ ,handleCellUpdate) => {
           b.email;
         const label = hasBilling
           ? `${b.first_name || ""} ${b.last_name || ""}`.trim() ||
-            `#${row?.id ?? ""}`
+          `#${row?.id ?? ""}`
           : __("No details", "whizmanage");
 
         return (
@@ -794,7 +793,7 @@ export const createOrdersColumns = (store, __ ,handleCellUpdate) => {
           s.first_name || s.last_name || s.address_1 || s.city || s.country;
         const label = hasShipping
           ? `${s.first_name || ""} ${s.last_name || ""}`.trim() ||
-            `#${row?.id ?? ""}`
+          `#${row?.id ?? ""}`
           : __("No details", "whizmanage");
 
         return (

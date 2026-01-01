@@ -371,8 +371,8 @@ class Whiz_Discount_Manager
         }
 
         global $wpdb;
-        $now = whiz_dr_now();
-        $table = whiz_dr_table();
+        $now = Whizmanage_Discount_Functions::get_current_time();
+        $table = Whizmanage_Discount_Functions::get_table_name();
         $rows = $wpdb->get_results($wpdb->prepare(
             "SELECT * FROM {$table}
          WHERE status = 'publish'
@@ -388,9 +388,9 @@ class Whiz_Discount_Manager
 
         foreach ($rows as $rule) {
             $type = $rule['type'] ?? '';
-            $actions = whiz_dr_json_decode($rule['actions']);
-            $cond = whiz_dr_json_decode($rule['conditions']);
-            $filters = whiz_dr_json_decode($rule['filters'] ?? []);
+            $actions = Whizmanage_Discount_Functions::json_decode($rule['actions']);
+            $cond = Whizmanage_Discount_Functions::json_decode($rule['conditions']);
+            $filters = Whizmanage_Discount_Functions::json_decode($rule['filters'] ?? []);
 
             // ⬅️ כלל ברזל: אם יש filters ולא קיים בעגלה אפילו פריט אחד שעובר אותם – דלג על החוק
             if (!self::cart_has_any_matching_filters($cart, (array) $filters)) {
@@ -466,14 +466,14 @@ class Whiz_Discount_Manager
                 $__affected_after = 0.0;
 
                 $include_products = array_map('intval', (array) ($cond['product_ids'] ?? []));
-                $include_cats = whiz_dr_expand_term_ids_with_children(array_map('intval', (array) ($cond['product_cat_ids'] ?? [])));
+                $include_cats = Whizmanage_Discount_Functions::expand_term_ids_with_children(array_map('intval', (array) ($cond['product_cat_ids'] ?? [])));
                 $include_tags = array_map('intval', (array) ($cond['product_tag_ids'] ?? []));
                 $exclude_tags = array_map('intval', (array) ($cond['exclude_product_tag_ids'] ?? []));
                 $include_skus = array_map('strtolower', array_map('strval', (array) ($cond['product_skus'] ?? [])));
                 $exclude_skus = array_map('strtolower', array_map('strval', (array) ($cond['exclude_product_skus'] ?? [])));
                 $attr_includes = is_array($cond['attribute_terms'] ?? null) ? $cond['attribute_terms'] : [];
                 $exclude_products = array_map('intval', (array) ($cond['exclude_product_ids'] ?? []));
-                $exclude_cats = whiz_dr_expand_term_ids_with_children(array_map('intval', (array) ($cond['exclude_product_cat_ids'] ?? [])));
+                $exclude_cats = Whizmanage_Discount_Functions::expand_term_ids_with_children(array_map('intval', (array) ($cond['exclude_product_cat_ids'] ?? [])));
                 $attr_excludes = is_array($cond['exclude_attribute_terms'] ?? null) ? $cond['exclude_attribute_terms'] : [];
                 $require_on_sale = !empty($cond['require_on_sale']);
                 $exclude_on_sale = !empty($cond['exclude_on_sale']);
@@ -509,7 +509,7 @@ class Whiz_Discount_Manager
                         if ($sku !== '' && in_array($sku, $exclude_skus, true))
                             continue;
                     }
-                    if (!empty($attr_excludes) && whiz_dr_item_matches_any_attribute_pair($item, $attr_excludes))
+                    if (!empty($attr_excludes) && Whizmanage_Discount_Functions::item_matches_any_attribute_pair($item, $attr_excludes))
                         continue;
 
                     // Targets (include*) – אם הוגדרו
@@ -528,7 +528,7 @@ class Whiz_Discount_Manager
                             $in_targets = (bool) array_intersect($include_tags, $p_tags);
                         }
                         if (!$in_targets && !empty($attr_includes)) {
-                            $in_targets = whiz_dr_item_matches_any_attribute_pair($item, $attr_includes);
+                            $in_targets = Whizmanage_Discount_Functions::item_matches_any_attribute_pair($item, $attr_includes);
                         }
                         if (!$in_targets && !empty($include_skus)) {
                             $sku = $productObj ? strtolower((string) $productObj->get_sku()) : '';
@@ -722,8 +722,8 @@ class Whiz_Discount_Manager
             return;
 
         global $wpdb;
-        $now = whiz_dr_now();
-        $table = whiz_dr_table();
+        $now = Whizmanage_Discount_Functions::get_current_time();
+        $table = Whizmanage_Discount_Functions::get_table_name();
 
         $rows = $wpdb->get_results($wpdb->prepare(
             "SELECT * FROM {$table}
@@ -742,9 +742,9 @@ class Whiz_Discount_Manager
                 if (!in_array($type, ['cart_adjustment', 'spend_bundle'], true))
                     continue;
 
-                $actions = whiz_dr_json_decode($rule['actions']);
-                $cond = whiz_dr_json_decode($rule['conditions']);
-                $filters = whiz_dr_json_decode($rule['filters'] ?? []);
+                $actions = Whizmanage_Discount_Functions::json_decode($rule['actions']);
+                $cond = Whizmanage_Discount_Functions::json_decode($rule['conditions']);
+                $filters = Whizmanage_Discount_Functions::json_decode($rule['filters'] ?? []);
 
                 // ⬅️ כלל ברזל: אם יש filters ולא קיים בעגלה אפילו פריט אחד שעובר אותם – דלג
                 if (!self::cart_has_any_matching_filters($cart, (array) $filters)) {
@@ -1312,7 +1312,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
             $items_count = 0;
 
             // כולל תתי־קטגוריות
-            $idsX = $scope === 'categories' ? whiz_dr_expand_term_ids_with_children($ids) : $ids;
+            $idsX = $scope === 'categories' ? Whizmanage_Discount_Functions::expand_term_ids_with_children($ids) : $ids;
 
             foreach ($cart->get_cart() as $ci) {
                 if (!empty($ci['whiz_dr_gift']))
@@ -1393,7 +1393,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
         $pid = (int) ($item['product_id'] ?? 0);
 
         $exclude_products = array_map('intval', (array) ($cond['exclude_product_ids'] ?? []));
-        $exclude_cats = whiz_dr_expand_term_ids_with_children(array_map('intval', (array) ($cond['exclude_product_cat_ids'] ?? [])));
+        $exclude_cats = Whizmanage_Discount_Functions::expand_term_ids_with_children(array_map('intval', (array) ($cond['exclude_product_cat_ids'] ?? [])));
         $exclude_roles = array_filter((array) ($cond['user_roles_exclude'] ?? []));
         $exclude_tags = array_map('intval', (array) ($cond['exclude_product_tag_ids'] ?? []));
         $include_tags = array_map('intval', (array) ($cond['product_tag_ids'] ?? []));
@@ -1441,7 +1441,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
         }
 
         // exclude by attributes
-        if (!empty($attr_excludes) && whiz_dr_item_matches_any_attribute_pair($item, $attr_excludes))
+        if (!empty($attr_excludes) && Whizmanage_Discount_Functions::item_matches_any_attribute_pair($item, $attr_excludes))
             return false;
 
         // NEW: exclude items that are on sale
@@ -1473,7 +1473,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
 
         // include explicit targets
         $include_products = array_map('intval', (array) ($cond['product_ids'] ?? []));
-        $include_cats = whiz_dr_expand_term_ids_with_children(array_map('intval', (array) ($cond['product_cat_ids'] ?? [])));
+        $include_cats = Whizmanage_Discount_Functions::expand_term_ids_with_children(array_map('intval', (array) ($cond['product_cat_ids'] ?? [])));
 
         if (!empty($include_products) || !empty($include_cats) || !empty($include_tags) || !empty($attr_includes) || !empty($include_skus)) {
             $ok = false;
@@ -1500,7 +1500,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
             }
 
             if (!$ok && !empty($attr_includes)) {
-                $ok = whiz_dr_item_matches_any_attribute_pair($item, $attr_includes);
+                $ok = Whizmanage_Discount_Functions::item_matches_any_attribute_pair($item, $attr_includes);
             }
 
             $positives[] = $ok;
@@ -1543,7 +1543,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
             switch ($field) {
                 case 'categories': {
                         $pCats = array_map('intval', (array) wc_get_product_term_ids($pid, 'product_cat'));
-                        $vals = whiz_dr_expand_term_ids_with_children($values);
+                        $vals = Whizmanage_Discount_Functions::expand_term_ids_with_children($values);
                         $has = (bool) array_intersect($vals, $pCats);
                         $passes = ($op === 'include') ? $has : !$has;
                         break;
@@ -1588,7 +1588,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
         $logic = ($cond['logic'] ?? 'all') === 'any' ? 'any' : 'all';
 
         $exclude_products = array_map('intval', (array) ($cond['exclude_product_ids'] ?? []));
-        $exclude_cats = whiz_dr_expand_term_ids_with_children(array_map('intval', (array) ($cond['exclude_product_cat_ids'] ?? [])));
+        $exclude_cats = Whizmanage_Discount_Functions::expand_term_ids_with_children(array_map('intval', (array) ($cond['exclude_product_cat_ids'] ?? [])));
         $exclude_roles = array_filter((array) ($cond['user_roles_exclude'] ?? []));
         $exclude_tags = array_map('intval', (array) ($cond['exclude_product_tag_ids'] ?? []));
         $include_tags = array_map('intval', (array) ($cond['product_tag_ids'] ?? []));
@@ -1635,7 +1635,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
                 }
             }
 
-            if (!empty($attr_excludes) && whiz_dr_item_matches_any_attribute_pair($item, $attr_excludes)) {
+            if (!empty($attr_excludes) && Whizmanage_Discount_Functions::item_matches_any_attribute_pair($item, $attr_excludes)) {
                 return false;
             }
 
@@ -1690,7 +1690,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
             $positives[] = $has;
         }
 
-        $include_cats = whiz_dr_expand_term_ids_with_children(array_map('intval', (array) ($cond['product_cat_ids'] ?? [])));
+        $include_cats = Whizmanage_Discount_Functions::expand_term_ids_with_children(array_map('intval', (array) ($cond['product_cat_ids'] ?? [])));
         if (!empty($include_cats)) {
             $has = false;
             foreach ($cart->get_cart() as $ci) {
@@ -1730,7 +1730,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
             foreach ($cart->get_cart() as $ci) {
                 if (!empty($ci['whiz_dr_gift']))
                     continue;
-                if (whiz_dr_item_matches_any_attribute_pair($ci, $attr_includes)) {
+                if (Whizmanage_Discount_Functions::item_matches_any_attribute_pair($ci, $attr_includes)) {
                     $has = true;
                     break;
                 }
@@ -2231,8 +2231,8 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
             return $rates;
 
         global $wpdb;
-        $now = whiz_dr_now();
-        $table = whiz_dr_table();
+        $now = Whizmanage_Discount_Functions::get_current_time();
+        $table = Whizmanage_Discount_Functions::get_table_name();
 
         $rows = $wpdb->get_results($wpdb->prepare(
             "SELECT * FROM {$table}
@@ -2254,8 +2254,8 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
         }
 
         foreach ($rows as $row) {
-            $cond = whiz_dr_json_decode($row['conditions'] ?? []);
-            $filters = whiz_dr_json_decode($row['filters'] ?? []);
+            $cond = Whizmanage_Discount_Functions::json_decode($row['conditions'] ?? []);
+            $filters = Whizmanage_Discount_Functions::json_decode($row['filters'] ?? []);
 
             // ⬅️ כלל ברזל: אם יש filters ולא קיים בעגלה אפילו פריט אחד שעובר אותם – דלג
             if (!self::cart_has_any_matching_filters(WC()->cart, (array) $filters)) {
@@ -2267,7 +2267,7 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
             if (!self::rules_pass($cond, WC()->cart))
                 continue;
 
-            $a = whiz_dr_json_decode($row['actions'] ?? []);
+            $a = Whizmanage_Discount_Functions::json_decode($row['actions'] ?? []);
             $allowed = array_map('strval', (array) ($a['shipping_methods'] ?? []));
             $how = in_array(($a['method'] ?? 'percentage'), ['percentage', 'fixed'], true) ? $a['method'] : 'percentage';
             $val = (float) ($a['value'] ?? 0);

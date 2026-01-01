@@ -13,14 +13,14 @@ class Whiz_Discount_API
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => [$this, 'get_offer'],
                 'permission_callback' => function () {
-                    return whiz_dr_is_admin_allowed();
+                    return Whizmanage_Discount_Functions::is_admin_allowed();
                 },
             ],
             [
                 'methods' => WP_REST_Server::CREATABLE,
                 'callback' => [$this, 'post_offer'],
                 'permission_callback' => function () {
-                    return whiz_dr_is_admin_allowed();
+                    return Whizmanage_Discount_Functions::is_admin_allowed();
                 },
             ],
         ]);
@@ -30,14 +30,14 @@ class Whiz_Discount_API
                 'methods' => WP_REST_Server::READABLE,
                 'callback' => [$this, 'list_rules'],
                 'permission_callback' => function () {
-                    return whiz_dr_is_admin_allowed();
+                    return Whizmanage_Discount_Functions::is_admin_allowed();
                 },
             ],
             [
                 'methods' => WP_REST_Server::CREATABLE,
                 'callback' => [$this, 'create_rule'],
                 'permission_callback' => function () {
-                    return whiz_dr_is_admin_allowed();
+                    return Whizmanage_Discount_Functions::is_admin_allowed();
                 },
             ],
         ]);
@@ -47,14 +47,14 @@ class Whiz_Discount_API
                 'methods' => WP_REST_Server::EDITABLE, // PUT/PATCH
                 'callback' => [$this, 'update_rule'],
                 'permission_callback' => function () {
-                    return whiz_dr_is_admin_allowed();
+                    return Whizmanage_Discount_Functions::is_admin_allowed();
                 },
             ],
             [
                 'methods' => WP_REST_Server::CREATABLE,
                 'callback' => [$this, 'update_rule'],
                 'permission_callback' => function () {
-                    return whiz_dr_is_admin_allowed();
+                    return Whizmanage_Discount_Functions::is_admin_allowed();
                 },
             ],
         ]);
@@ -64,7 +64,7 @@ class Whiz_Discount_API
                 'methods' => WP_REST_Server::CREATABLE,
                 'callback' => [$this, 'batch_rules'],
                 'permission_callback' => function () {
-                    return whiz_dr_is_admin_allowed();
+                    return Whizmanage_Discount_Functions::is_admin_allowed();
                 },
             ],
         ]);
@@ -91,15 +91,15 @@ class Whiz_Discount_API
         $order   = strtoupper(sanitize_text_field($req->get_param('order') ?? 'DESC')) === 'ASC' ? 'ASC' : 'DESC';
 
         // טווחי תאריכים
-        $start_from = $req->get_param('start_from') ? whiz_dr_parse_datetime($req->get_param('start_from')) : null;
-        $start_to   = $req->get_param('start_to')   ? whiz_dr_parse_datetime($req->get_param('start_to'))   : null;
-        $end_from   = $req->get_param('end_from')   ? whiz_dr_parse_datetime($req->get_param('end_from'))   : null;
-        $end_to     = $req->get_param('end_to')     ? whiz_dr_parse_datetime($req->get_param('end_to'))     : null;
+        $start_from = $req->get_param('start_from') ? Whizmanage_Discount_Functions::parse_datetime($req->get_param('start_from')) : null;
+        $start_to   = $req->get_param('start_to')   ? Whizmanage_Discount_Functions::parse_datetime($req->get_param('start_to'))   : null;
+        $end_from   = $req->get_param('end_from')   ? Whizmanage_Discount_Functions::parse_datetime($req->get_param('end_from'))   : null;
+        $end_to     = $req->get_param('end_to')     ? Whizmanage_Discount_Functions::parse_datetime($req->get_param('end_to'))     : null;
 
         $offset = ($page - 1) * $per_page;
 
-        // טבלה (ודא ש-whiz_dr_table() מחזיר $wpdb->prefix . '...שם_קבוע...')
-        $table = esc_sql(whiz_dr_table());
+        // טבלה (ודא ש-Whizmanage_Discount_Functions::get_table_name() מחזיר $wpdb->prefix . '...שם_קבוע...')
+        $table = esc_sql(Whizmanage_Discount_Functions::get_table_name());
 
         /**
          * WHERE בצורה "בטוחה": sql + args
@@ -181,7 +181,7 @@ class Whiz_Discount_API
 
         global $wpdb;
 
-        $table = whiz_dr_table(); // חייב להיות פנימי בלבד (למשל: $wpdb->prefix . 'whiz_dr_rules')
+        $table = Whizmanage_Discount_Functions::get_table_name(); // חייב להיות פנימי בלבד (למשל: $wpdb->prefix . 'whiz_dr_rules')
 
         // Whitelist לעמודות מיון
         $allowed_orderby = array('id', 'name', 'type', 'status', 'start_date', 'end_date', 'priority', 'updated_at', 'created_at');
@@ -230,16 +230,16 @@ class Whiz_Discount_API
             return new WP_Error('whiz_dr_validation', implode("\n", $errors), ['status' => 400]);
         }
 
-        $now = whiz_dr_now();
-        $result = $wpdb->insert(whiz_dr_table(), [
+        $now = Whizmanage_Discount_Functions::get_current_time();
+        $result = $wpdb->insert(Whizmanage_Discount_Functions::get_table_name(), [
             'name' => $payload['name'],
             'type' => $payload['type'],
             'status' => $payload['status'],              // ← במקום active
             'start_date' => $payload['start_date'],
             'end_date' => $payload['end_date'],
-            'conditions' => whiz_dr_json_encode($payload['conditions']),
-            'actions' => whiz_dr_json_encode($payload['actions']),
-            'filters' => whiz_dr_json_encode($payload['filters'] ?? []),
+            'conditions' => Whizmanage_Discount_Functions::json_encode($payload['conditions']),
+            'actions' => Whizmanage_Discount_Functions::json_encode($payload['actions']),
+            'filters' => Whizmanage_Discount_Functions::json_encode($payload['filters'] ?? []),
             'priority' => $payload['priority'],
             'message' => $payload['message'],
             'show_message' => $payload['show_message'] ?? true,
@@ -266,7 +266,7 @@ class Whiz_Discount_API
 
         $id = isset($req['id']) ? (int) $req['id'] : 0;
 
-        $table = esc_sql(whiz_dr_table()); // whiz_dr_table() צריך להחזיר $wpdb->prefix . '...'
+        $table = esc_sql(Whizmanage_Discount_Functions::get_table_name()); // Whizmanage_Discount_Functions::get_table_name() צריך להחזיר $wpdb->prefix . '...'
 
         $sql = "SELECT * FROM {$table} WHERE id = %d";
 
@@ -286,9 +286,9 @@ class Whiz_Discount_API
         unset($patch['id']);
 
         // פענוח JSON לשדות מורכבים
-        $existing['conditions'] = whiz_dr_json_decode($existing['conditions']);
-        $existing['actions'] = whiz_dr_json_decode($existing['actions']);
-        $existing['filters'] = whiz_dr_json_decode($existing['filters']);
+        $existing['conditions'] = Whizmanage_Discount_Functions::json_decode($existing['conditions']);
+        $existing['actions'] = Whizmanage_Discount_Functions::json_decode($existing['actions']);
+        $existing['filters'] = Whizmanage_Discount_Functions::json_decode($existing['filters']);
 
         // מיזוג+סניטיזציה
         $merged = array_merge($existing, $patch);
@@ -343,18 +343,18 @@ class Whiz_Discount_API
         $fields = [];
         foreach ($patch as $k => $v) {
             $fields[$k] = in_array($k, ['conditions', 'actions', 'filters'], true)
-                ? whiz_dr_json_encode($sanitized[$k])
+                ? Whizmanage_Discount_Functions::json_encode($sanitized[$k])
                 : $sanitized[$k];
         }
-        $fields['updated_at'] = whiz_dr_now();
+        $fields['updated_at'] = Whizmanage_Discount_Functions::get_current_time();
 
-        $wpdb->update(whiz_dr_table(), $fields, ['id' => $id]);
+        $wpdb->update(Whizmanage_Discount_Functions::get_table_name(), $fields, ['id' => $id]);
 
         // תשובה
         $resp = array_merge($existing, $fields);
-        $resp['conditions'] = whiz_dr_json_decode($resp['conditions']);
-        $resp['actions'] = whiz_dr_json_decode($resp['actions']);
-        $resp['filters'] = whiz_dr_json_decode($resp['filters']);
+        $resp['conditions'] = Whizmanage_Discount_Functions::json_decode($resp['conditions']);
+        $resp['actions'] = Whizmanage_Discount_Functions::json_decode($resp['actions']);
+        $resp['filters'] = Whizmanage_Discount_Functions::json_decode($resp['filters']);
 
         return rest_ensure_response($resp);
     }
@@ -482,7 +482,7 @@ class Whiz_Discount_API
     public function batch_rules(WP_REST_Request $req)
     {
         global $wpdb;
-        $table = whiz_dr_table();
+        $table = Whizmanage_Discount_Functions::get_table_name();
 
         $json = $req->get_json_params();
         $create = isset($json['create']) && is_array($json['create']) ? $json['create'] : [];
@@ -500,12 +500,12 @@ class Whiz_Discount_API
                 return new WP_Error('whiz_dr_validation', implode("\n", (array) $errors), ['status' => 400]);
             }
 
-            $now = whiz_dr_now();
+            $now = Whizmanage_Discount_Functions::get_current_time();
             $payload['created_at'] = $now;
             $payload['updated_at'] = $now;
 
             foreach (['conditions', 'actions', 'filters'] as $jk) {
-                $payload[$jk] = whiz_dr_json_encode($payload[$jk] ?? []);
+                $payload[$jk] = Whizmanage_Discount_Functions::json_encode($payload[$jk] ?? []);
             }
 
             $wpdb->insert($table, $payload);
@@ -540,9 +540,9 @@ class Whiz_Discount_API
             unset($patch['id']);
 
             // פענוח שדות JSON קיימים
-            $existing['conditions'] = whiz_dr_json_decode($existing['conditions']);
-            $existing['actions'] = whiz_dr_json_decode($existing['actions']);
-            $existing['filters'] = whiz_dr_json_decode($existing['filters']);
+            $existing['conditions'] = Whizmanage_Discount_Functions::json_decode($existing['conditions']);
+            $existing['actions'] = Whizmanage_Discount_Functions::json_decode($existing['actions']);
+            $existing['filters'] = Whizmanage_Discount_Functions::json_decode($existing['filters']);
 
             // מיזוג + סניטיזציה
             $merged = array_merge($existing, $patch);
@@ -594,7 +594,7 @@ class Whiz_Discount_API
                     continue;
                 } // ביטחון כפול
                 $fields[$k] = in_array($k, ['conditions', 'actions', 'filters'], true)
-                    ? whiz_dr_json_encode($sanitized[$k])
+                    ? Whizmanage_Discount_Functions::json_encode($sanitized[$k])
                     : $sanitized[$k];
             }
 
@@ -603,7 +603,7 @@ class Whiz_Discount_API
                 $fields['priority'] = (int) $fields['priority'];
             }
 
-            $fields['updated_at'] = whiz_dr_now();
+            $fields['updated_at'] = Whizmanage_Discount_Functions::get_current_time();
 
             $wpdb->update($table, $fields, ['id' => $id]);
 
@@ -612,9 +612,9 @@ class Whiz_Discount_API
             $resp['id'] = $existing['id']; // לשמר את ה-id המקורי
 
             // פענוח JSON חזרה לתגובה
-            $resp['conditions'] = whiz_dr_json_decode($resp['conditions']);
-            $resp['actions'] = whiz_dr_json_decode($resp['actions']);
-            $resp['filters'] = whiz_dr_json_decode($resp['filters']);
+            $resp['conditions'] = Whizmanage_Discount_Functions::json_decode($resp['conditions']);
+            $resp['actions'] = Whizmanage_Discount_Functions::json_decode($resp['actions']);
+            $resp['filters'] = Whizmanage_Discount_Functions::json_decode($resp['filters']);
 
             $out['update'][] = $resp;
         }

@@ -1,5 +1,4 @@
 // src/components/table/components/EditableCell.jsx
-import i18n from "@/i18n";
 import { cn } from "@/lib/utils";
 import { addToast, DatePicker, Switch } from "@heroui/react";
 import { parseDateTime } from "@internationalized/date";
@@ -18,8 +17,10 @@ import {
 } from "../../ui/select";
 import { Textarea } from "../../ui/textarea";
 import CustomTooltip from "@components/ui/nextUI/Tooltip.jsx";
+import EditableTooltip from "@components/ui/nextUI/EditableTooltip.jsx";
 import { useTableSaveStateStore } from "../store/saveStateStore.js";
 import ProBadge from "@components/ui/nextUI/ProBadge";
+import { Expand } from "lucide-react";
 
 export const EditableCell = memo(function EditableCell({
   getValue,
@@ -186,6 +187,13 @@ export const EditableCell = memo(function EditableCell({
   }, [initialValue, isEditable]);
 
   const finishEditing = useCallback(async () => {
+    console.log("🔄 finishEditing called:", {
+      columnId: column.id,
+      value,
+      initialValue,
+      isMounted: isMountedRef.current,
+    });
+
     if (!isMountedRef.current) return;
 
     setSaveState?.("saving");
@@ -209,7 +217,10 @@ export const EditableCell = memo(function EditableCell({
       hasChanged = currentValue !== initialValue;
     }
 
+    console.log("🔄 hasChanged:", hasChanged);
+
     if (!hasChanged) {
+      console.log("⏭️ No changes, skipping save");
       setIsEditing(false);
       setIsHovered(false);
       setSaveState?.("saved");
@@ -757,6 +768,21 @@ export const EditableCell = memo(function EditableCell({
       );
     }
 
+    // Text/email inputs with 50+ characters - show expand icon for EditableTooltip
+    const longTextThreshold = editOptions.longTextThreshold ?? 50;
+    if (
+      (editType === "text" || editType === "email") &&
+      displayValue &&
+      String(displayValue).length >= longTextThreshold
+    ) {
+      return {
+        displayValue,
+        isLongText: true,
+        prefix: displayFormat.prefix,
+        suffix: displayFormat.suffix,
+      };
+    }
+
     return (
       <span>
         {displayFormat.prefix && (
@@ -778,6 +804,27 @@ export const EditableCell = memo(function EditableCell({
     renderDisplay,
     productListVersion, // גורם לריענון כשרשימת המוצרים נטענת
   ]);
+
+  // Handle long text with EditableTooltip
+  const handleLongTextSave = useCallback(async (newValue) => {
+    console.log("📝 handleLongTextSave called:", {
+      rowId: resolveRowId(row),
+      columnId: column.id,
+      newValue,
+      hasDoUpdate: !!doUpdate,
+    });
+
+    setSaveState?.("saving");
+    try {
+      await doUpdate?.(resolveRowId(row), column.id, newValue, row.original);
+      console.log("✅ Save successful");
+      setSaveState?.("saved");
+      setLastSaveTime?.(new Date());
+    } catch (error) {
+      console.error("❌ Failed to update cell:", error);
+      setSaveState?.("error");
+    }
+  }, [doUpdate, resolveRowId, row, column.id, setSaveState, setLastSaveTime]);
 
   if (!isEditable) {
     return (
@@ -852,6 +899,9 @@ export const EditableCell = memo(function EditableCell({
     );
   }
 
+  // Check if formattedValue is a long text object
+  const isLongTextValue = formattedValue && typeof formattedValue === "object" && formattedValue.isLongText;
+
   return (
     <div
       ref={cellRef}
@@ -861,7 +911,7 @@ export const EditableCell = memo(function EditableCell({
         "hover:bg-slate-100/50 dark:hover:bg-slate-700/30",
         editType === "text" ? "cursor-text" : "cursor-pointer"
       )}
-      onClick={startEditing}
+      onClick={isLongTextValue ? undefined : startEditing}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onKeyDown={(e) => {
@@ -873,7 +923,7 @@ export const EditableCell = memo(function EditableCell({
       }}
       tabIndex={-1}
       role="gridcell"
-      aria-label={`${column.columnDef.header}: ${formattedValue}. ${__("Click enter or F2 to edit", "whizmanage")}`}
+      aria-label={`${column.columnDef.header}: ${isLongTextValue ? formattedValue.displayValue : formattedValue}. ${__("Click enter or F2 to edit", "whizmanage")}`}
       data-editable="true"
       data-tour="inline-edit"
     >
@@ -891,6 +941,39 @@ export const EditableCell = memo(function EditableCell({
             {isHovered && (
               <Calendar className="h-4 w-4 text-slate-400 ml-1 rtl:ml-0 rtl:mr-1 flex-shrink-0" />
             )}
+          </>
+        ) : isLongTextValue ? (
+          <>
+            <span
+              className="flex-1 truncate cursor-text"
+              onClick={startEditing}
+            >
+              {formattedValue.prefix && (
+                <span dangerouslySetInnerHTML={{ __html: formattedValue.prefix }} />
+              )}
+              {formattedValue.displayValue}
+              {formattedValue.suffix && formattedValue.suffix}
+            </span>
+            <EditableTooltip
+              value={value}
+              onSave={handleLongTextSave}
+              title={column.columnDef.header}
+              minChars={0}
+            >
+              <button
+                type="button"
+                onClick={(e) => e.stopPropagation()}
+                className={cn(
+                  "p-1 rounded transition-all flex-shrink-0",
+                  "text-slate-400 hover:text-fuchsia-500 hover:bg-slate-100 dark:hover:bg-slate-700",
+                  "ml-1 rtl:ml-0 rtl:mr-1",
+                  isHovered ? "opacity-100" : "opacity-0"
+                )}
+                title={__("Expand for full view", "whizmanage")}
+              >
+                <Expand className="h-3.5 w-3.5" />
+              </button>
+            </EditableTooltip>
           </>
         ) : (
           <span className="truncate">{formattedValue}</span>

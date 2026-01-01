@@ -883,7 +883,7 @@
         "שכפל מוצר נבחר"
       ],
       "View in WooCommerce": [
-        "הצג ב-ווקומרס"
+        "הצג בחנות"
       ],
       "Edit in WooCommerce": [
         "ערוך ב-ווקומרס"
@@ -1529,12 +1529,6 @@
       ],
       "Restore coupon": [
         "שחזר קופון"
-      ],
-      "Move to Trash": [
-        "העבר לאשפה"
-      ],
-      "Delete Permanently": [
-        "מחק לצמיתות"
       ],
       "Delete permanently product": [
         "מחק מוצר לצמיתות"
@@ -4725,9 +4719,6 @@
       "No customers found": [
         "לא נמצאו לקוחות"
       ],
-      "characters to search": [
-        "תווים כדי לחפש"
-      ],
       "No {{label}}": [
         "אין {{label}}"
       ],
@@ -5616,31 +5607,153 @@
       "Are you sure you want to reset all table settings to default?": [
         "האם אתה בטוח שברצונך לאפס את כל הגדרות הטבלה לברירת המחדל?"
       ],
-      "Create your first %s to get started": ["צור את ה%s הראשון שלך כדי להתחיל"],
-    "Select %s": ["בחר %s"],
-    "New %s": ["%s חדש"],
-    "Find %s": ["מצא %s"],
-    "Existing %s": ["%s קיימים"],
-    "No %s yet": ["אין עדיין %s"],
-    "Create %s": ["צור %s"],
-"No %s": ["אין %s"],
-"Manage external product": [
+      "Create your first %s to get started": [
+        "צור את ה%s הראשון שלך כדי להתחיל"
+      ],
+      "Select %s": [
+        "בחר %s"
+      ],
+      "New %s": [
+        "%s חדש"
+      ],
+      "Find %s": [
+        "מצא %s"
+      ],
+      "Existing %s": [
+        "%s קיימים"
+      ],
+      "No %s yet": [
+        "אין עדיין %s"
+      ],
+      "Create %s": [
+        "צור %s"
+      ],
+      "No %s": [
+        "אין %s"
+      ],
+      "Manage external product": [
         "נהל מוצר חיצוני"
       ],
-  "Add an SEO title between 50–60 characters.": ["הוסף כותרת SEO באורך 50–60 תווים."],
-
-  "Your SEO title is %d characters long, which is ideal.": ["כותרת ה-SEO שלך באורך %d תווים — זה אידיאלי."],
-  "Your SEO title is %d characters long. Aim for 50–60 characters.": ["כותרת ה-SEO שלך באורך %d תווים. מומלץ לכוון ל-50–60 תווים."],
-  "Your SEO title is %d characters long. Try to keep it under 60 characters.": ["כותרת ה-SEO שלך באורך %d תווים. נסה להשאיר אותה מתחת ל-60 תווים."],
-  "Set a URL slug for better SEO.": ["הגדר כתובת URL ידידותית למנועי חיפוש."],
-  "No matching results": ["לא נמצאו תוצאות תואמות."],
-  "Try adjusting your filters to see more results": ["נסה להתאים את המסננים שלך כדי לראות תוצאות נוספות."],
-  "All Actions": ["כל הפעולות"],
-  "Added": ["נוסף"],
-  "Updated": ["עודכן"],
-  "Deleted": ["נמחק"],
-  "Duplicated": ["שוכפל"],
-  "Config Changes": ["שינויים בהגדרות"]
+      "Add an SEO title between 50–60 characters.": [
+        "הוסף כותרת SEO באורך 50–60 תווים."
+      ],
+      "Your SEO title is %d characters long, which is ideal.": [
+        "כותרת ה-SEO שלך באורך %d תווים — זה אידיאלי."
+      ],
+      "Your SEO title is %d characters long. Aim for 50–60 characters.": [
+        "כותרת ה-SEO שלך באורך %d תווים. מומלץ לכוון ל-50–60 תווים."
+      ],
+      "Your SEO title is %d characters long. Try to keep it under 60 characters.": [
+        "כותרת ה-SEO שלך באורך %d תווים. נסה להשאיר אותה מתחת ל-60 תווים."
+      ],
+      "Set a URL slug for better SEO.": [
+        "הגדר כתובת URL ידידותית למנועי חיפוש."
+      ],
+      "No matching results": [
+        "לא נמצאו תוצאות תואמות."
+      ],
+      "Try adjusting your filters to see more results": [
+        "נסה להתאים את המסננים שלך כדי לראות תוצאות נוספות."
+      ],
+      "All Actions": [
+        "כל הפעולות"
+      ],
+      "Added": [
+        "נוסף"
+      ],
+      "Updated": [
+        "עודכן"
+      ],
+      "Deleted": [
+        "נמחק"
+      ],
+      "Duplicated": [
+        "שוכפל"
+      ],
+      "Config Changes": [
+        "שינויים בהגדרות"
+      ],
+      "Delete %s": [
+        "מחק %s"
+      ],
+      "Are you sure you want to move the selected %s to the trash?": [
+        "האם אתה בטוח שברצונך להעביר את ה%s שנבחרו לאשפה?"
+      ],
+      "Are you sure you want to permanently delete the selected %s? This action cannot be undone.": [
+        "האם אתה בטוח שברצונך למחוק לצמיתות את %s שנבחרו? פעולה זו לא ניתנת לביטול."
+      ],
+      "%s moved to trash": [
+        "%s הועברו לאשפה"
+      ],
+      "Failed to delete %s": [
+        "המחיקה של %s נכשלה"
+      ],
+      "%s deleted successfully": [
+        "%s נמחקו בהצלחה"
+      ],
+      "Duplicate %s": [
+        "שכפל %s"
+      ],
+      "Are you sure you want to duplicate the selected %s?": [
+        "האם אתה בטוח שברצונך לשכפל את ה%s שנבחרו?"
+      ],
+      "%s duplicated successfully": [
+        "%s שוכפלו בהצלחה"
+      ],
+      "Failed to duplicate %s": [
+        "שכפול %s נכשל"
+      ],
+      "Restore %s": [
+        "שחזר %s"
+      ],
+      "Are you sure you want to restore the selected %s?": [
+        "האם אתה בטוח שברצונך לשחזר את ה%s שנבחרו?"
+      ],
+      "%s restored successfully": [
+        "%s שוחזרו בהצלחה"
+      ],
+      "Failed to restore %s": [
+        "שחזור %s נכשל"
+      ],
+      "%s exported successfully": [
+        "%s יוצאו בהצלחה"
+      ],
+      "Failed to export %s": [
+        "ייצוא ה%s נכשל"
+      ],
+      "Move to Trash": [
+        "העבר לאשפה"
+      ],
+      "Delete Permanently": [
+        "מחק לצמיתות"
+      ],
+      "orders processed": [
+        "הזמנות עובדו"
+      ],
+      "orders failed": [
+        "הזמנות נכשלו"
+      ],
+      "more": [
+        "נוספים"
+      ],
+      "characters to search": [
+        "תווים כדי לחפש"
+      ],
+      "Edit in Wordpress":["ערוך בוורדפרס"],
+      "Edit in Form": ["ערוך בטופס"],
+      "Image Alt": ["טקסט אלטרנטיבי לתמונה"],
+      "Enter image alt text": ["הזן טקסט אלטרנטיבי לתמונה"],
+      "No images found": ["לא נמצאו תמונות"],
+      "No selected items": ["אין פריטים שנבחרו"],
+      "Select items from the library first": ["בחר פריטים מהספרייה תחילה"],
+      "No items found": ["לא נמצאו פריטים"],
+      "Try different keywords or upload new files.": ["נסה מילות מפתח שונות או העלה קבצים חדשים."],
+      "No media in library":["אין מדיה בספרייה"],
+      "Open Full Editor": ["פתח עורך מלא"],
+      "Add new option": ["הוסף אפשרות חדשה"],
+      "Set Sale Period": ["הגדר תקופת מבצע"],
+      "Select sale period": ["בחר תקופת מבצע"],
+      "Cancel Sale Period": ["בטל תקופת מבצע"]
     }
   }
 }

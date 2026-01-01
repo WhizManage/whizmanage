@@ -10,18 +10,18 @@ import { Mail, Download, Send } from "lucide-react";
 export const createOrderActions = (__) => {
   const sendOrderDetails = async (rows, overrideEmail = null) => {
     if (!rows?.length) return;
-    
+
     const results = { success: 0, failed: 0 };
-    
+
     for (const row of rows) {
       const orderId = row?.original?.id ?? row?.id;
       if (!orderId) continue;
-      
+
       try {
-        const payload = overrideEmail 
-          ? { email: overrideEmail, force_email_update: true } 
+        const payload = overrideEmail
+          ? { email: overrideEmail, force_email_update: true }
           : {};
-          
+
         await postApi(
           `${window.siteUrl}/wp-json/wm/v1/orders/${orderId}/send-order-details`,
           payload
@@ -32,32 +32,32 @@ export const createOrderActions = (__) => {
         results.failed++;
       }
     }
-    
+
     if (results.success > 0) {
       toast.success(__("Order details sent", "whizmanage"), {
-        description: __("{{count}} orders processed", { count: results.success }),
+        description: `${results.success} ${__("orders processed", "whizmanage")}`,
       });
     }
     if (results.failed > 0) {
       toast.error(__("Some orders failed", "whizmanage"), {
-        description: __("{{count}} orders failed", { count: results.failed }),
+        description: `${results.failed} ${__("orders failed", "whizmanage")}`,
       });
     }
   };
 
   const sendEmailWithTemplate = async (rows, templateId, overrideEmail = null) => {
     if (!rows?.length || !templateId) return;
-    
+
     const results = { success: 0, failed: 0 };
-    
+
     for (const row of rows) {
       const orderId = row?.original?.id ?? row?.id;
       if (!orderId) continue;
-      
+
       try {
         const payload = { email_id: templateId };
         if (overrideEmail) payload.override_email = overrideEmail;
-        
+
         await postApi(
           `${window.siteUrl}/wp-json/wm/v1/orders/${orderId}/send-email`,
           payload
@@ -68,28 +68,28 @@ export const createOrderActions = (__) => {
         results.failed++;
       }
     }
-    
+
     if (results.success > 0) {
       toast.success(__("Email sent successfully", "whizmanage"), {
-        description: __("{{count}} orders processed", { count: results.success }),
+        description: `${results.success} ${__("orders processed", "whizmanage")}`,
       });
     }
     if (results.failed > 0) {
       toast.error(__("Some emails failed", "whizmanage"), {
-        description: __("{{count}} orders failed", { count: results.failed }),
+        description: `${results.failed} ${__("orders failed", "whizmanage")}`,
       });
     }
   };
 
   const regenerateDownloads = async (rows) => {
     if (!rows?.length) return;
-    
+
     const results = { success: 0, failed: 0 };
-    
+
     for (const row of rows) {
       const orderId = row?.original?.id ?? row?.id;
       if (!orderId) continue;
-      
+
       try {
         await postApi(
           `${window.siteUrl}/wp-json/wm/v1/orders/${orderId}/regenerate-downloads`,
@@ -101,15 +101,15 @@ export const createOrderActions = (__) => {
         results.failed++;
       }
     }
-    
+
     if (results.success > 0) {
       toast.success(__("Downloads regenerated", "whizmanage"), {
-        description: __("{{count}} orders processed", { count: results.success }),
+        description: `${results.success} ${__("orders processed", "whizmanage")}`,
       });
     }
     if (results.failed > 0) {
       toast.error(__("Some orders failed", "whizmanage"), {
-        description: __("{{count}} orders failed", { count: results.failed }),
+        description: `${results.failed} ${__("orders failed", "whizmanage")}`,
       });
     }
   };

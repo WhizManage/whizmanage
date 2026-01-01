@@ -1,4 +1,5 @@
 // src/components/pages/table/products/products.columns.js
+import { __ } from "@wordpress/i18n";
 import StatusDisplay from "@/components/table/components/StatusDisplay";
 import StatusEdit from "@/components/table/components/StatusEdit";
 import MediaDisplay from "@components/media/MediaDisplay.jsx";
@@ -39,7 +40,6 @@ import {
   productsApi,
 } from "./products.api.js";
 import { PRODUCT_STATUS_KEYS } from "./products.constants.js";
- import { __ } from "@wordpress/i18n";
 
 // ---------------- META: helpers & sources ----------------
 
@@ -1311,6 +1311,75 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
                   { images: rowData.images },
                   /*saveToHistory=*/ false
                 );
+              }
+              throw error;
+            }
+          }}
+        />
+      ),
+    }),
+
+    columnHelper.accessor("image_alt", {
+      header: __("Image Alt", "whizmanage"),
+      size: 150,
+      minSize: 120,
+      maxSize: 250,
+      enableResizing: true,
+      meta: {
+        editable: true,
+        editType: "text",
+        editOptions: {
+          placeholder: __("Enter image alt text", "whizmanage"),
+        },
+      },
+      accessorFn: (row) => {
+        const data = row?.original || row;
+        // וריאציה: שדה image יחיד
+        if (data.parent_id && data.parent_id > 0) {
+          return data.image?.alt || "";
+        }
+        // מוצר אב: התמונה הראשונה במערך images
+        return data.images?.[0]?.alt || "";
+      },
+      cell: (props) => (
+        <EditableCell
+          {...props}
+          onUpdate={async (id, field, value, rowData, isFromHistory) => {
+            const isVariation = rowData?.parent_id && rowData.parent_id > 0;
+            const imageId = isVariation
+              ? rowData.image?.id
+              : rowData.images?.[0]?.id;
+
+            if (!imageId) {
+              throw new Error(__("No image to update alt text", "whizmanage"));
+            }
+
+            // Optimistic update
+            if (isVariation) {
+              const updatedImage = { ...rowData.image, alt: value };
+              store.updateItemWithHistory(id, { image: updatedImage }, false);
+            } else {
+              const updatedImages = [...(rowData.images || [])];
+              if (updatedImages[0]) {
+                updatedImages[0] = { ...updatedImages[0], alt: value };
+              }
+              store.updateItemWithHistory(id, { images: updatedImages }, false);
+            }
+
+            try {
+              // עדכון ה-alt text ישירות ב-WordPress media
+              await import("@/services/services").then(({ putApi }) =>
+                putApi(`${window.siteUrl}/wp-json/wp/v2/media/${imageId}/`, {
+                  alt_text: value,
+                })
+              );
+            } catch (error) {
+              console.error("❌ Failed to update image alt:", error);
+              // Rollback
+              if (isVariation) {
+                store.updateItemWithHistory(id, { image: rowData.image }, false);
+              } else {
+                store.updateItemWithHistory(id, { images: rowData.images }, false);
               }
               throw error;
             }

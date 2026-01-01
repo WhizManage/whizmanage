@@ -32,13 +32,43 @@ import VariationsTable from "./VariationsTable";
 import { postApi } from "/src/services/services";
 
 /**
- * 🔧 פונקציה לסנכרון variations עם attributes
+ * 🔧 Helper: ממיר slug של option ל-name באמצעות terms
+ * @param {string} optionValue - הערך של ה-option (יכול להיות slug או name)
+ * @param {Object} productAttr - ה-attribute מהמוצר
+ * @param {Object} product - אובייקט המוצר עם ה-terms
+ * @returns {string} ה-name של ה-option
  */
-const syncVariationsWithAttributes = (variations, attributes) => {
+const convertOptionSlugToName = (optionValue, productAttr, product) => {
+  if (!optionValue || !productAttr || productAttr.id === 0) return optionValue;
+
+  // מצא את ה-terms של ה-attribute
+  const taxonomyKey = "_" + productAttr.slug;
+  const terms = product?.[taxonomyKey] || [];
+
+  if (terms.length === 0) return optionValue;
+
+  // בדוק אם זה כבר name
+  const termByName = terms.find((t) => t.name === optionValue);
+  if (termByName) return optionValue;
+
+  // חפש לפי slug והחזר את ה-name
+  const termBySlug = terms.find((t) => t.slug === optionValue);
+  if (termBySlug?.name) return termBySlug.name;
+
+  return optionValue;
+};
+
+/**
+ * 🔧 פונקציה לסנכרון variations עם attributes
+ * @param {Array} variations - מערך הווריאציות
+ * @param {Array} attributes - מערך ה-attributes של המוצר
+ * @param {Object} product - אובייקט המוצר (עם ה-terms)
+ */
+const syncVariationsWithAttributes = (variations, attributes, product) => {
   return variations.map((variation) => {
     // ✅ יצירת עותק חדש במקום מוטציה
     const newVariation = { ...variation };
-    
+
     if (!newVariation.original) {
       newVariation.original = { ...variation };
     } else {
@@ -67,11 +97,18 @@ const syncVariationsWithAttributes = (variations, attributes) => {
           const expectedName =
             productAttr.id === 0 ? productAttr.name : productAttr.slug;
 
+          // ✅ המרת slug ל-name עבור תכונות גלובליות
+          const optionAsName = convertOptionSlugToName(
+            existingAttr.option,
+            productAttr,
+            product
+          );
+
           return {
             id: productAttr.id,
             name: expectedName,
             slug: productAttr.slug,
-            option: existingAttr.option || "",
+            option: optionAsName || "",
           };
         }
 
@@ -145,6 +182,13 @@ const ManageVariationsModal = ({
 
   useEffect(() => {
     if (isOpen && product && currentProductId !== product.id) {
+      // 🔍 DEBUG: בדיקה מה מגיע ב-product.attributes כשפותחים את המודל
+      console.log("=== ManageVariationsModal OPEN DEBUG ===");
+      console.log("Product ID:", product.id);
+      console.log("product.attributes:", product.attributes);
+      console.log("product.subRows (variations):", product.subRows);
+      console.log("=== END ManageVariationsModal OPEN DEBUG ===");
+
       // ✅ העברת אובייקט חדש במקום מוטציה ישירה
       initializeStore(
         {
@@ -153,7 +197,8 @@ const ManageVariationsModal = ({
             product.subRows && product.attributes
               ? syncVariationsWithAttributes(
                   product.subRows,
-                  product.attributes
+                  product.attributes,
+                  product
                 )
               : product.subRows,
         },
@@ -185,6 +230,86 @@ const ManageVariationsModal = ({
     const out = [];
     for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size));
     return out;
+  };
+
+  /**
+   * 🔧 Helper: ממיר names ל-slugs עבור שליחה ל-WooCommerce API
+   * עבור תכונות גלובליות, WooCommerce מצפה ל-slug ב-option, לא name
+   * @param {Array} attributes - מערך ה-attributes של הווריאציה
+   * @param {Array} productAttributes - מערך ה-attributes של המוצר (עם terms)
+   * @returns {Array} מערך attributes עם slugs במקום names ב-option
+   */
+  const convertOptionsToSlugs = (attributes, productAttributes) => {
+    if (!Array.isArray(attributes)) return attributes;
+
+    return attributes.map((attr) => {
+      // רק עבור תכונות גלובליות (יש להן pa_ ב-name או id !== 0)
+      const isGlobal = attr.name?.startsWith("pa_") || (attr.id && attr.id !== 0);
+
+      if (!isGlobal || !attr.option) return attr;
+
+      // מצא את ה-attribute המקורי במוצר עם ה-terms
+      const productAttr = productAttributes?.find((pa) =>
+        pa.slug === attr.name ||
+        pa.name === attr.name ||
+        (pa.id && pa.id === attr.id)
+      );
+
+      // אם אין terms, ננסה למצוא ב-product["_" + slug]
+      const taxonomyKey = "_" + (productAttr?.slug || attr.name);
+      const terms = product[taxonomyKey] || [];
+
+      // חפש את ה-term לפי name והחזר את ה-slug
+      if (terms.length > 0) {
+        const term = terms.find((t) => t.name === attr.option);
+        if (term?.slug) {
+          return { ...attr, option: term.slug };
+        }
+      }
+
+      // fallback - החזר כמו שזה (אולי זה כבר slug)
+      return attr;
+    });
+  };
+
+  /**
+   * 🔧 Helper: ממיר slugs ל-names עבור וריאציות שחזרו מה-API
+   * WooCommerce מחזיר את ה-option כ-slug, אנחנו צריכים להציג כ-name
+   * @param {Array} attributes - מערך ה-attributes של הווריאציה מה-API
+   * @param {Array} productAttributes - מערך ה-attributes של המוצר
+   * @returns {Array} מערך attributes עם names במקום slugs ב-option
+   */
+  const convertSlugsToNames = (attributes, productAttributes) => {
+    if (!Array.isArray(attributes)) return attributes;
+
+    return attributes.map((attr) => {
+      // רק עבור תכונות גלובליות
+      const isGlobal = attr.name?.startsWith("pa_") || (attr.id && attr.id !== 0);
+
+      if (!isGlobal || !attr.option) return attr;
+
+      // מצא את ה-attribute המקורי במוצר עם ה-terms
+      const productAttr = productAttributes?.find((pa) =>
+        pa.slug === attr.name ||
+        pa.name === attr.name ||
+        (pa.id && pa.id === attr.id)
+      );
+
+      // אם אין terms, ננסה למצוא ב-product["_" + slug]
+      const taxonomyKey = "_" + (productAttr?.slug || attr.name);
+      const terms = product[taxonomyKey] || [];
+
+      // חפש את ה-term לפי slug והחזר את ה-name
+      if (terms.length > 0) {
+        const term = terms.find((t) => t.slug === attr.option);
+        if (term?.name) {
+          return { ...attr, option: term.name };
+        }
+      }
+
+      // fallback - החזר כמו שזה
+      return attr;
+    });
   };
 
   const handleSave = async (onClose) => {
@@ -258,6 +383,10 @@ const ManageVariationsModal = ({
 
         const create = newData.map((variation) => {
           const { name, ...rest } = variation.original || variation;
+          // ✅ המרת option names ל-slugs עבור תכונות גלובליות לפני שליחה ל-WooCommerce
+          if (rest.attributes) {
+            rest.attributes = convertOptionsToSlugs(rest.attributes, product.attributes);
+          }
           return rest;
         });
 
@@ -293,7 +422,9 @@ const ManageVariationsModal = ({
           const newUpdate = { ...cleanOriginal };
 
           if (Array.isArray(newUpdate.attributes)) {
-            newUpdate.attributes = newUpdate.attributes
+            // ✅ המרת option names ל-slugs עבור תכונות גלובליות לפני שליחה ל-WooCommerce
+            const convertedAttrs = convertOptionsToSlugs(newUpdate.attributes, product.attributes);
+            newUpdate.attributes = convertedAttrs
               .map((attr) => {
                 if (!attr?.name) return null;
                 const cleanAttr = {
@@ -431,20 +562,40 @@ const ManageVariationsModal = ({
                 (sub) => sub.id === updatedVar.id
               );
               if (index !== -1) {
+                // ✅ המרת slugs ל-names עבור תכונות גלובליות
+                const normalizedAttributes = convertSlugsToNames(
+                  updatedVar.attributes,
+                  product.attributes
+                );
+                const normalizedVar = {
+                  ...updatedVar,
+                  attributes: normalizedAttributes,
+                };
                 newSubRows[index] = {
                   ...newSubRows[index],
-                  ...updatedVar,
-                  original: updatedVar,
+                  ...normalizedVar,
+                  original: normalizedVar,
                 };
               }
             });
           }
 
           if (allResponses.created.length > 0) {
-            const newVars = allResponses.created.map((createdVar) => ({
-              ...createdVar,
-              original: createdVar,
-            }));
+            // ✅ המרת slugs ל-names עבור תכונות גלובליות
+            const newVars = allResponses.created.map((createdVar) => {
+              const normalizedAttributes = convertSlugsToNames(
+                createdVar.attributes,
+                product.attributes
+              );
+              const normalizedVar = {
+                ...createdVar,
+                attributes: normalizedAttributes,
+              };
+              return {
+                ...normalizedVar,
+                original: normalizedVar,
+              };
+            });
             newSubRows = [...newSubRows, ...newVars];
           }
 

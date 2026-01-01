@@ -31,6 +31,7 @@ export const makeUnifiedActionsBuilder = ({
   entityName,
   allowTrash = true,
   allowDelete = true,
+  onEditInForm = null, // callback לפתיחת עריכה בטופס
 }) => {
   const {
     onRestoreSelected = null,
@@ -75,6 +76,19 @@ export const makeUnifiedActionsBuilder = ({
           onClick: () => onBulkEdit?.(),
         });
       }
+    }
+
+    // Edit in Form - רק למוצרים
+    if (onEditInForm && entityName === "products") {
+      base.push({
+        label: __("Edit in Form", "whizmanage"),
+        icon: "Edit",
+        showWhen: "single",
+        onClick: () => {
+          const entity = getEntity(rowsSnapshot[0]);
+          if (entity) onEditInForm(entity);
+        },
+      });
     }
 
     if (!["discount-rules", "customers"].includes(entityName)) {

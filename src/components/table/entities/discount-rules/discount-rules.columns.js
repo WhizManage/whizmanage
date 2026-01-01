@@ -4,7 +4,6 @@ import React from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import { EditableCell } from "@/components/table/core/EditableCell.jsx";
 import { Switch, cn } from "@heroui/react";
-import i18n from "@/i18n";
 import TypeWithDiscountSettingsCell from "./components/TypeWithDiscountSettingsCell.jsx";
 import ConditionsCell from "./components/ConditionsCell.jsx";
 import FiltersCell from "./components/FiltersCell";

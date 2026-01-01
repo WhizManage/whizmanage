@@ -119,10 +119,42 @@ const PRODUCT_FILTER_OPTIONS = {
   ],
 };
 
+// ✅ פונקציית עזר לסידור נתונים לפני עריכה (תמונות + שדות מותאמים)
+const transformProductForEdit = (product) => {
+  if (!product) return product;
+  const clone = { ...product };
+
+  // 1. Fix Images: Main image vs Gallery
+  // בווקומרס הכל מגיע ב-images. צריך להפריד לתמונה ראשית (image) וגלריה (images בלי הראשונה).
+  if (Array.isArray(clone.images) && clone.images.length > 0) {
+    if (!clone.image) {
+      clone.image = clone.images[0];
+    }
+    // אם התמונה הראשית היא הראשונה ברשימה (התנהגות ברירת מחדל), הסר אותה מהגלריה ל-UI
+    if (clone.image && clone.images[0]?.id === clone.image.id) {
+      clone.images = clone.images.slice(1);
+    }
+  }
+
+  // 2. Fix Custom Fields: Flatten meta_data to root
+  // הטופס מצפה ששדות מותאמים יהיו זמינים בשורש האובייקט (watch(fieldKey))
+  if (Array.isArray(clone.meta_data)) {
+    clone.meta_data.forEach((meta) => {
+      if (meta.key) {
+        clone[meta.key] = meta.value;
+      }
+    });
+  }
+
+  return clone;
+};
+
 // --- קונפיגורציית הטבלה ---
 const productsTableConfig = {
+  transformForEdit: transformProductForEdit, // 👈 Hook חדש
+
   columnOrder: [
-    "actions", "select", "expand", "name", "status", "image", "sale_price",
+    "actions", "select", "expand", "name", "status", "image", "image_alt", "sale_price",
     "regular_price", "description", "short_description", "type", "attributes",
     "tags", "categories", "sale_date_range", "downloadable", "shipping_class",
     "sold_individually", "inventory", "weight", "sku", "global_unique_id",
@@ -150,6 +182,7 @@ const productsTableConfig = {
     weight: 100,
     sale_date_range: 370,
     image: 80,
+    image_alt: 150,
     gallery: 110,
     slug: 120,
     yoast: 60,
@@ -169,6 +202,7 @@ const productsTableConfig = {
     name: true,
     status: true,
     image: true,
+    image_alt: false, // 👈 כבוי כברירת מחדל
     price: true,
     description: true,
     short_description: true,

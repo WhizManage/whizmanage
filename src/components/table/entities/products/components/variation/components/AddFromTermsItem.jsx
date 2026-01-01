@@ -7,7 +7,7 @@ import { Input } from "@components/ui/input";
 import CustomTooltip from "@components/ui/nextUI/Tooltip.jsx";
 import { Check, Pencil, Trash2, Loader2 } from "lucide-react";
 import { useState } from "react";
- import { __ } from "@wordpress/i18n";
+import { __, sprintf } from "@wordpress/i18n";
 import { useVariationsStore } from "../store/variationsStore";
 import { deleteApi, putApi } from "/src/services/services";
 
@@ -34,7 +34,7 @@ const AddFromTermsItem = ({
   const [newName, setNewName] = useState("");
   const [isSaving, setIsSaving] = useState(false); // 🆕 Loading state
   const [isDeleting, setIsDeleting] = useState(false); // 🆕 Loading state למחיקה
-   
+
 
   // Store - לעדכון termsCache
   const { termsCache, setTerms } = useVariationsStore();
@@ -115,9 +115,12 @@ const AddFromTermsItem = ({
 
     // 🔥 Native confirm במקום CustomConfirm
     const isConfirmed = window.confirm(
-      __(
-        `Are you sure you want to permanently delete the "{{name}}" term? This action will remove it from all products using this attribute.`,
-        { name: item.name }
+      sprintf(
+        __(
+          'Are you sure you want to permanently delete the "%s" term? This action will remove it from all products using this attribute.',
+          "whizmanage"
+        ),
+        item.name
       )
     );
 
@@ -135,9 +138,9 @@ const AddFromTermsItem = ({
       const updatedTerms = currentTerms.filter((t) => t.id !== item.id);
       setTerms(attributeId, updatedTerms);
 
-      toast.success(__('The "{{name}}" term has been permanently deleted.', {
-            name: item.name,
-          }));
+      toast.success(sprintf(__('The "%s" term has been permanently deleted.', "whizmanage"),
+        item.name
+      ));
     } catch (error) {
       console.error("Error deleting term:", error);
       toast.error(error?.response?.data?.message || __("Failed to delete term", "whizmanage"));
@@ -151,7 +154,7 @@ const AddFromTermsItem = ({
    */
   const handleSelectionChange = () => {
     setItemFoTaxonomy(item);
-    
+
     if (isSelected) {
       setValues(values.filter((v) => v !== item.name));
     } else {

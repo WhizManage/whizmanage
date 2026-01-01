@@ -278,6 +278,7 @@ export const productsApi = {
       return await putApi(url, { meta_data: pairs });
     }
 
+
     const knownFields = new Set([
       "sku",
       "name",
@@ -308,7 +309,6 @@ export const productsApi = {
       "downloads",
       "download_expiry",
       "download_limit",
-      "downloadable_settings",
       "featured",
       "sold_individually",
       "dimensions",
@@ -419,31 +419,6 @@ export const productsApi = {
             : parseInt(cleanValue, 10);
         break;
 
-      case "downloadable_settings":
-        // Batch update for all downloadable fields in one request
-        if (cleanValue && typeof cleanValue === "object") {
-          if (Array.isArray(cleanValue.downloads)) {
-            payload.downloads = cleanValue.downloads.map((item, index) => ({
-              id: item.id || `download_${index}`,
-              name: item.name || "",
-              file: item.file || "",
-            }));
-          }
-          if (cleanValue.download_expiry !== undefined) {
-            payload.download_expiry =
-              cleanValue.download_expiry === -1 || cleanValue.download_expiry === ""
-                ? -1
-                : parseInt(cleanValue.download_expiry, 10);
-          }
-          if (cleanValue.download_limit !== undefined) {
-            payload.download_limit =
-              cleanValue.download_limit === -1 || cleanValue.download_limit === ""
-                ? -1
-                : parseInt(cleanValue.download_limit, 10);
-          }
-        }
-        break;
-
       case "featured":
         payload.featured = !!cleanValue;
         break;
@@ -485,6 +460,13 @@ export const productsApi = {
       default:
         payload[field] = cleanValue;
     }
+
+
+
+    if (Object.keys(payload).length === 0) {
+      console.warn("⚠️ Empty payload! Nothing will be saved.");
+    }
+
     return await putApi(url, payload);
   },
 
@@ -732,13 +714,6 @@ export const productsMasterUpdateCell =
 
       // שמירת ערכים קודמים עבור שדות batch
       const getPreviousValue = () => {
-        if (columnId === "downloadable_settings") {
-          return {
-            downloads: rowData.downloads,
-            download_expiry: rowData.download_expiry,
-            download_limit: rowData.download_limit,
-          };
-        }
         if (columnId === "inventory") {
           return {
             manage_stock: rowData.manage_stock,
@@ -755,13 +730,6 @@ export const productsMasterUpdateCell =
 
       // עבור שדות batch נעדכן רק את השדות שקיימים ב-value
       const getUpdates = () => {
-        if (columnId === "downloadable_settings" && value && typeof value === "object") {
-          const updates = {};
-          if ("downloads" in value) updates.downloads = value.downloads;
-          if ("download_expiry" in value) updates.download_expiry = value.download_expiry;
-          if ("download_limit" in value) updates.download_limit = value.download_limit;
-          return updates;
-        }
         if (columnId === "inventory" && value && typeof value === "object") {
           const updates = {};
           if ("manage_stock" in value) updates.manage_stock = value.manage_stock;
@@ -793,8 +761,8 @@ export const productsMasterUpdateCell =
         }
 
         // ✅ עדכון ה-store והוספה להיסטוריה
-        // עבור שדות batch, נשמור את ה-columnId המקורי (inventory/downloadable_settings)
-        const batchFields = ["downloadable_settings", "inventory"];
+        // עבור שדות batch, נשמור את ה-columnId המקורי (inventory)
+        const batchFields = ["inventory"];
         const isBatchField = batchFields.includes(columnId);
 
         if (isBatchField) {
@@ -837,7 +805,7 @@ export const productsMasterUpdateCell =
             undoRedoHistory.addToHistory({
               type: "update",
               id: rowId,
-              field: columnId, // "inventory" או "downloadable_settings"
+              field: columnId, // "inventory"
               previousValues: filteredPrev, // רק השדות ששונו
               newValues: filteredCurr, // רק השדות ששונו
               rowData: { ...rowData },
@@ -955,7 +923,7 @@ export const productsMasterUpdateCell =
         return true;
       } catch (apiError) {
         // ✅ rollback – בלי היסטוריה
-        const batchFields = ["downloadable_settings", "inventory"];
+        const batchFields = ["inventory"];
         const rollbackUpdates = batchFields.includes(columnId)
           ? previousValue
           : { [columnId]: previousValue };

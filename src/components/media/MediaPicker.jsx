@@ -19,7 +19,7 @@ import { IconBadge } from "@components/ui/custom/IconBadge";
 import { useEffect, useMemo, useRef, useState } from "react";
  import { __ } from "@wordpress/i18n";
 import { IoIosSearch } from "react-icons/io";
-import ImageName from "./ImageName";
+import ImageMeta from "./ImageMeta";
 import MediaPagination from "./MediaPagination";
 import MediaUploader from "./MediaUploader";
 import useMediaStore from "./store/useMediaStore";
@@ -479,11 +479,13 @@ const MediaPicker = ({
                     imagesToDisplay.map((image) => {
                       const selected = isImageSelected(image);
                       // 🆕 בטופס אין תמונה ראשית מיוחדת
+                      // בתמונה בודדת (single) או בגלריה - רק התמונה הראשונה היא MAIN
                       const isMainImage =
                         !isForm &&
                         selected &&
-                        multiple &&
-                        localSelectedImages[0]?.id === image.id;
+                        (multiple
+                          ? localSelectedImages[0]?.id === image.id
+                          : true);
                       const isFile = !isImageFile(image);
 
                       return (
@@ -572,7 +574,7 @@ const MediaPicker = ({
                               <div className="absolute inset-0 bg-fuchsia-600/10" />
                             )}
                           </div>
-                          <ImageName image={image} />
+                          <ImageMeta image={image} isMainImage={isMainImage} />
                         </Card>
                       );
                     })

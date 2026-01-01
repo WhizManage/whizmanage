@@ -1,6 +1,6 @@
 // src/components/table/entities/customers/components/CustomerOrdersPopover.jsx
 import React, { useState } from "react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import {
     Popover,
@@ -25,7 +25,7 @@ const STATUS_COLORS = {
 };
 
 const CustomerOrdersPopover = ({ ordersCount = 0, orders = [], customerId }) => {
-     
+
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const triggerClickedRef = React.useRef(false);
@@ -193,10 +193,7 @@ const CustomerOrdersPopover = ({ ordersCount = 0, orders = [], customerId }) => 
                         {orders.length < ordersCount && (
                             <div className="border-t border-slate-100 dark:border-slate-700 px-4 py-2 bg-slate-50 dark:bg-slate-800">
                                 <p className="text-xs text-slate-500 text-center">
-                                    {__("Showing {{shown}} of {{total}} orders", {
-                                        shown: orders.length,
-                                        total: ordersCount,
-                                    })}
+                                    {`${__("Showing", "whizmanage")} ${orders.length} ${__("of", "whizmanage")} ${ordersCount} ${__("orders", "whizmanage")}`}
                                 </p>
                             </div>
                         )}

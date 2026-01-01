@@ -265,6 +265,11 @@ const PrintableOrderSummary = ({
                 <strong>{__("Phone", "whizmanage")}:</strong> {billing.phone}
               </div>
             )}
+            {billing?.email && (
+              <div>
+                <strong>{__("Email", "whizmanage")}:</strong> {billing.email}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -875,6 +880,14 @@ const OrderSummaryModal = ({
                                 {__("Phone", "whizmanage")}:
                               </span>{" "}
                               {billing.phone}
+                            </p>
+                          )}
+                          {billing?.email && (
+                            <p className="text-slate-600 dark:text-slate-300">
+                              <span className="font-medium">
+                                {__("Email", "whizmanage")}:
+                              </span>{" "}
+                              {billing.email}
                             </p>
                           )}
                         </div>

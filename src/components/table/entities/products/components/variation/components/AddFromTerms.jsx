@@ -18,6 +18,29 @@ import { postApi, putApi } from "/src/services/services";
 import CustomTooltip from "@components/ui/nextUI/Tooltip";
 
 /**
+ * 🔧 Helper: ממיר slugs ל-names באמצעות מיפוי terms
+ * @param {Array} options - מערך של slugs/names
+ * @param {Array} termsMap - מערך של terms עם name ו-slug
+ * @returns {Array} מערך של names
+ */
+const convertSlugsToNames = (options, termsMap) => {
+  if (!Array.isArray(options) || !Array.isArray(termsMap)) return options;
+
+  return options.map((opt) => {
+    // אם זה כבר name - נחזיר אותו
+    const termByName = termsMap.find((t) => t.name === opt);
+    if (termByName) return opt;
+
+    // חפש לפי slug והחזר את ה-name
+    const termBySlug = termsMap.find((t) => t.slug === opt);
+    if (termBySlug) return termBySlug.name;
+
+    // fallback - החזר את הערך המקורי
+    return opt;
+  });
+};
+
+/**
  * 🎯 AddFromTerms
  * ✅ משתמש ב-PUT endpoint כמו הקוד הישן שעבד
  */
@@ -126,19 +149,40 @@ const AddFromTerms = ({ terms, product, attribute, index, setAddMultiple }) => {
     setIsLoading(true);
 
     try {
-      // מציאת ה-slugs של ה-terms שנבחרו
+      // 🔍 DEBUG LOG
+      console.log("=== AddFromTerms DEBUG ===");
+      console.log("Product ID:", product.id);
+      console.log("Attribute:", { id: attribute.id, name: attribute.name, slug: attribute.slug });
+      console.log("localTerms:", localTerms);
+      console.log("itemsExist (current options):", itemsExist);
+      console.log("namesToAdd (selected):", namesToAdd);
+
+      // ✅ עבור תכונות גלובליות, WooCommerce מצפה לקבל NAMES (לא slugs!)
+      // כש-WooCommerce מקבל name, הוא מחפש את ה-term הקיים לפי name
+      // אם נשלח slug, הוא יצור אופציה חדשה עם השם של ה-slug
       const selectedTerms = (localTerms || []).filter((t) =>
         namesToAdd.includes(t.name)
       );
-      const slugsToAdd = selectedTerms.map((t) => t.slug || t.name);
+      const namesToSend = selectedTerms.map((t) => t.name);
 
-      // ה-options הקיימים - צריך לשלוח slugs!
+      console.log("selectedTerms:", selectedTerms);
+      console.log("namesToSend:", namesToSend);
+
+      // ה-options הקיימים - גם הם צריכים להיות names
       const existingOptions = itemsExist.map((optName) => {
-        const term = (localTerms || []).find((t) => t.name === optName);
-        return term?.slug || optName;
+        // אם זה כבר name - החזר אותו
+        const termByName = (localTerms || []).find((t) => t.name === optName);
+        if (termByName) return optName;
+        // אם זה slug - המר ל-name
+        const termBySlug = (localTerms || []).find((t) => t.slug === optName);
+        if (termBySlug) return termBySlug.name;
+        return optName;
       });
 
-      const newOptions = [...existingOptions, ...slugsToAdd];
+      console.log("existingOptions (after conversion):", existingOptions);
+
+      const newOptions = [...existingOptions, ...namesToSend];
+      console.log("newOptions (to send to WooCommerce):", newOptions);
 
       const existingProductAttributes = product.attributes || [];
 
@@ -200,13 +244,19 @@ const AddFromTerms = ({ terms, product, attribute, index, setAddMultiple }) => {
       const url = `${window.siteUrl}/wp-json/wc/v3/products/${product.id}`;
       const data = { attributes: updatedAttributes };
 
+      console.log("📤 Sending to WooCommerce:", JSON.stringify(data, null, 2));
+
       const updateRes = await putApi(url, data);
 
       const responseAttributes = updateRes?.data?.attributes;
 
+      console.log("📥 WooCommerce Response attributes:", responseAttributes);
+
       if (responseAttributes && responseAttributes.length > 0) {
         // ✅ בדיקה אם ה-attribute שלנו חזר ברספונס
         const ourAttr = responseAttributes.find((a) => a.id === attribute.id);
+
+        console.log("📥 Our attribute from response:", ourAttr);
 
         if (!ourAttr) {
           console.error(
@@ -225,18 +275,35 @@ const AddFromTerms = ({ terms, product, attribute, index, setAddMultiple }) => {
           return;
         }
 
-        product.attributes = responseAttributes;
+        // ✅ המרת slugs ל-names עבור תכונות גלובליות
+        // WooCommerce מחזיר options כ-slugs, אנחנו צריכים להציג names
+        const normalizedAttributes = responseAttributes.map((attr) => {
+          if (attr.id !== 0 && attr.id === attribute.id) {
+            // זו התכונה הגלובלית שלנו - המר את ה-options מ-slugs ל-names
+            return {
+              ...attr,
+              options: convertSlugsToNames(attr.options, localTerms),
+            };
+          }
+          return attr;
+        });
+
+        console.log("✅ Normalized attributes (after slug->name conversion):", normalizedAttributes);
+
+        product.attributes = normalizedAttributes;
+
+        // ✅ ה-options שנשמור כעת הם names (לא slugs)
+        const optionsAsNames = convertSlugsToNames(ourAttr.options, localTerms);
+        console.log("✅ optionsAsNames:", optionsAsNames);
+        console.log("=== END AddFromTerms DEBUG ===");
 
         // עדכון selectedAttributes
         const updatedSelectedAttributes = selectedAttributes.map(
           (attr, idx) => {
             if (idx === index) {
-              const updatedAttr = responseAttributes.find(
-                (a) => a.id === attribute.id
-              );
               return {
                 ...attr,
-                options: updatedAttr?.options || newOptions,
+                options: optionsAsNames,
               };
             }
             return attr;
@@ -246,9 +313,9 @@ const AddFromTerms = ({ terms, product, attribute, index, setAddMultiple }) => {
 
         if (typeof setAllAttributes === "function") {
           setAllAttributes((prev) => {
-            const prevIds = new Set(responseAttributes.map((attr) => attr.id));
+            const prevIds = new Set(normalizedAttributes.map((attr) => attr.id));
             const filteredPrev = prev.filter((attr) => !prevIds.has(attr.id));
-            const newAll = [...responseAttributes, ...filteredPrev];
+            const newAll = [...normalizedAttributes, ...filteredPrev];
             return newAll;
           });
         } else {

@@ -39,7 +39,7 @@ import {
   useRef,
   useState,
 } from "react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 
 import { toast } from "@/lib/utils";
 import { postApi } from "@/services/services";
@@ -49,6 +49,7 @@ import {
   buildPayloadForEntity,
   getEntityConfig,
 } from "../../forms/registry.js";
+import GenericItemModal from "../../forms/GenericItemModal.jsx";
 import StatusBarFilter from "../filters/StatusBarFilter.jsx";
 import { useDragReorder } from "../hooks/useDragReorder.js";
 import { useKeyboardNavigation } from "../hooks/useKeyboardNavigation.js";
@@ -92,8 +93,9 @@ export default function GenericDataTable({
   isTrash = false,
   importConfig = null,
 }) {
-   
+
   const [isBulkOpen, setIsBulkOpen] = useState(false);
+  const [editModalItem, setEditModalItem] = useState(null); // פריט לעריכה בטופס
   const __isRTL = window?.document?.documentElement?.dir === "rtl";
   const queryClient = useQueryClient();
   const fetchPage = config.fetchPage;
@@ -167,7 +169,7 @@ export default function GenericDataTable({
     addItem,
   } = store;
 
-  
+
 
   const selectionVersion = useMemo(
     () => Object.keys(rowSelection || {}).length,
@@ -398,6 +400,14 @@ export default function GenericDataTable({
     ]
   );
 
+  // Callback לעדכון פריט אחרי עריכה בטופס
+  const handleEditModalItemUpdated = useCallback((updatedItem) => {
+    store.updateItem?.(updatedItem.id, updatedItem);
+    setEditModalItem(null);
+    // רענון הנתונים מהשרת
+    queryClient.invalidateQueries({ queryKey: [entityName] });
+  }, [store.updateItem, queryClient, entityName]);
+
   const buildActions = useMemo(() => {
     const builder = makeUnifiedActionsBuilder({
       __,
@@ -410,6 +420,7 @@ export default function GenericDataTable({
       entityName: toolbarConfig?.entityName || entityName,
       allowTrash: toolbarConfig?.allowTrash ?? true,
       allowDelete: toolbarConfig?.allowDelete ?? true,
+      onEditInForm: (item) => setEditModalItem(defaultConfig.transformForEdit ? defaultConfig.transformForEdit(item) : item), // פתיחת עריכה בטופס
     });
 
     if (!isTrash) return builder;
@@ -1304,6 +1315,18 @@ export default function GenericDataTable({
           entityName={toolbarConfig?.entityName || entityName}
           queryClient={queryClient}
           {...toolbarConfig}
+        />
+      )}
+
+      {/* Edit in Form Modal */}
+      {editModalItem && (
+        <GenericItemModal
+          entityName={entityName}
+          config={resolveEntityConfig()}
+          initialData={editModalItem}
+          isOpen={!!editModalItem}
+          onClose={() => setEditModalItem(null)}
+          onItemUpdated={handleEditModalItemUpdated}
         />
       )}
     </div>

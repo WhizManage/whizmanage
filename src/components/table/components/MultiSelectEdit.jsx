@@ -20,7 +20,7 @@ import {
   PopoverTrigger,
 } from "@components/ui/popover-portal";
 import { Chip } from "@heroui/react";
-import { Check, ChevronsUpDown, Package, Plus, Undo2, X } from "lucide-react";
+import { Check, ChevronsUpDown, Package, Plus, Undo2 } from "lucide-react";
 import CustomTooltip from "@components/ui/nextUI/Tooltip.jsx";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { __, sprintf } from "@wordpress/i18n";
@@ -66,7 +66,7 @@ const MultiSelectEdit = ({
   const [addSubcategory, setAddSubcategory] = useState(null);
   const [newSubcategoryName, setNewSubcategoryName] = useState("");
   const [isProductsLoading, setIsProductsLoading] = useState(false);
-  const [productsCount, setProductsCount] = useState(0); // ✅ מעקב אחר מספר המוצרים לעדכון הצ'יפס
+  const [productsCount, setProductsCount] = useState(0);
 
   const source = editOptions?.source || null;
   const explicitTaxonomy = editOptions?.taxonomyType || null;
@@ -74,14 +74,15 @@ const MultiSelectEdit = ({
 
   const apiSlug =
     explicitTaxonomy === "product_cat" ||
-      explicitTaxonomy === "_product_cat" ||
-      columnName === "categories"
+    explicitTaxonomy === "_product_cat" ||
+    columnName === "categories"
       ? "categories"
       : explicitTaxonomy === "product_tag" || columnName === "tags"
         ? "tags"
         : explicitTaxonomy || columnName;
 
-  const objectSingular = editOptions?.objectSingularLabel || __("Item", "whizmanage");
+  const objectSingular =
+    editOptions?.objectSingularLabel || __("Item", "whizmanage");
 
   const oppositeColumnName = editOptions?.oppositeColumn || null;
   const oppositeColumnData =
@@ -92,12 +93,14 @@ const MultiSelectEdit = ({
     if (!Array.isArray(arr)) return [];
     return arr.map((x) => String(typeof x === "object" ? x.id : x));
   };
+
   const disabledIds = [
     ...new Set([
       ...normalizeIds(editOptions?.disabledIds || []),
       ...normalizeIds(oppositeColumnData),
     ]),
   ];
+
   const disabledIdsKey = useMemo(
     () => disabledIds.map(String).sort().join(","),
     [disabledIds]
@@ -105,30 +108,31 @@ const MultiSelectEdit = ({
 
   const columnLabel =
     columnName === "categories" || columnName === "tags" ? columnName : label;
+
   const labelT = __(columnLabel, "whizmanage");
   const TT = (key, extra = {}) => {
-    const label = extra.label ?? labelT;
-    return sprintf(__(key, "whizmanage"), label);
+    const lbl = extra.label ?? labelT;
+    return sprintf(__(key, "whizmanage"), lbl);
   };
 
-
+  // ✅ portalContainer בטוח: רק dialog "שבאמת עוטף את הטריגר", בלי querySelector גלובלי
   useEffect(() => {
     if (!isOpen || typeof document === "undefined") {
       setPortalContainer(null);
       return;
     }
+
     const findClosestModal = () => {
       if (!triggerRef.current) return document.body;
+
       let el = triggerRef.current;
       while (el && el !== document.body) {
-        if (el.getAttribute("role") === "dialog") return el;
+        if (el.getAttribute?.("role") === "dialog") return el;
         el = el.parentElement;
       }
-      const openModal =
-        document.querySelector('[role="dialog"][aria-hidden="false"]') ||
-        document.querySelector('[role="dialog"]:not([aria-hidden])');
-      return openModal || document.body;
+      return document.body;
     };
+
     setPortalContainer(findClosestModal());
   }, [isOpen]);
 
@@ -210,8 +214,7 @@ const MultiSelectEdit = ({
   useEffect(() => {
     if (!isOpen) return;
     if (source === "products" || isUserRoles) return;
-
-    if (!taxonomyName || isCore(taxonomyName)) return; // core נטען ב־useCoreTaxonomiesStore
+    if (!taxonomyName || isCore(taxonomyName)) return;
 
     if (typeof ensureCustomTax === "function") {
       ensureCustomTax(taxonomyName);
@@ -225,9 +228,15 @@ const MultiSelectEdit = ({
     if (!userRolesLoaded && !userRolesLoading) {
       loadUserRolesOnce();
     }
-  }, [isOpen, isUserRoles, userRolesLoaded, userRolesLoading, loadUserRolesOnce]);
+  }, [
+    isOpen,
+    isUserRoles,
+    userRolesLoaded,
+    userRolesLoading,
+    loadUserRolesOnce,
+  ]);
 
-  // ⬅️ טעינת מוצרים - בדיקה אם הנתונים כבר קיימים או עדיין נטענים
+  // ⬅️ טעינת מוצרים
   useEffect(() => {
     if (!isOpen) return;
     if (source !== "products") return;
@@ -242,20 +251,17 @@ const MultiSelectEdit = ({
       } else {
         setIsProductsLoading(true);
       }
-
       return currentCount;
     };
 
     let lastCount = checkProductsLoading();
 
-    // בדיקה מחזורית - ממשיכה לעקוב גם אחרי שיש מוצרים כדי לתפוס עדכונים
     const interval = setInterval(() => {
       const products = window?.listProduct;
       const currentCount = Array.isArray(products) ? products.length : 0;
 
       if (currentCount > 0) {
         setIsProductsLoading(false);
-        // עדכן רק אם יש שינוי במספר המוצרים
         if (currentCount !== lastCount) {
           setProductsCount(currentCount);
           lastCount = currentCount;
@@ -268,17 +274,19 @@ const MultiSelectEdit = ({
 
   // ⬅️ השתמש ב-store לתפקידי משתמש עם תרגומים
   const loadUserRoles = () => {
-    // אם יש נתונים ב-store - השתמש בהם (כולל תרגומים)
-    if (userRolesFromStore.length > 0) {
-      return userRolesFromStore; // [{id, name}]
-    }
-    // fallback לגישות ישנות רק אם ה-store ריק
+    if (userRolesFromStore.length > 0) return userRolesFromStore;
     try {
       if (Array.isArray(window?.whizUserRoles) && window.whizUserRoles.length)
-        return window.whizUserRoles.map((r) => ({ id: String(r), name: String(r) }));
+        return window.whizUserRoles.map((r) => ({
+          id: String(r),
+          name: String(r),
+        }));
       if (window?.wp_roles && typeof window.wp_roles.roles === "object")
-        return Object.entries(window.wp_roles.roles).map(([id, name]) => ({ id, name }));
-    } catch { }
+        return Object.entries(window.wp_roles.roles).map(([id, name]) => ({
+          id,
+          name,
+        }));
+    } catch {}
     return [
       { id: "administrator", name: "Administrator" },
       { id: "shop_manager", name: "Shop Manager" },
@@ -299,9 +307,7 @@ const MultiSelectEdit = ({
     }
     return selected.map((x) => {
       if (typeof x === "object" && x.id) return x;
-      const found =
-        sourceList.find((s) => String(s.id) === String(x)) ||
-        sourceList.find((s) => String(s.id) === String(x));
+      const found = sourceList.find((s) => String(s.id) === String(x));
       return found || { id: x, name: String(x) };
     });
   };
@@ -310,67 +316,53 @@ const MultiSelectEdit = ({
     setIsAdding(true);
     removeTempItems();
 
-    const itemData = {
-      name: item,
-      parent: parentId, // הוספת parent ID לתת-קטגוריה
-    };
+    const itemData = { name: item, parent: parentId };
 
-    // קביעת ה-URL וה-taxonomy name לעדכון ה-store
-    const isCoreTax = columnName === "categories" || columnName === "tags";
+    const isCoreTaxLocal = columnName === "categories" || columnName === "tags";
     const taxonomyNameForStore = explicitTaxonomy || columnName;
 
     let url;
-    if (isCoreTax) {
+    if (isCoreTaxLocal) {
       url = `${window.siteUrl}/wp-json/wc/v3/products/${columnName}`;
     } else {
       url = `${window.siteUrl}/wp-json/whizmanage/v1/taxonomy/${taxonomyNameForStore}/term`;
     }
 
-    if (columnName === "tags") {
-      delete itemData.parent;
-    }
+    if (columnName === "tags") delete itemData.parent;
 
     try {
       const res = await postApi(url, itemData);
-      const newItem = res?.data;
+      const created = res?.data;
 
-      // עדכון ה-state המקומי
       if (parentId === 0) {
-        setItemsExist((prev) => [newItem, ...prev]);
+        setItemsExist((prev) => [created, ...prev]);
       } else {
         setItemsExist((prev) => {
           const updatedItems = [...prev];
           const parentIndex = updatedItems.findIndex(
             (cat) => cat.id === parentId
           );
-
           if (parentIndex !== -1) {
             let insertIndex = parentIndex + 1;
-
             while (
               insertIndex < updatedItems.length &&
               updatedItems[insertIndex].parent === parentId
             ) {
               insertIndex++;
             }
-
-            newItem.depth = (updatedItems[parentIndex].depth || 0) + 1;
-            updatedItems.splice(insertIndex, 0, newItem);
+            created.depth = (updatedItems[parentIndex].depth || 0) + 1;
+            updatedItems.splice(insertIndex, 0, created);
             return updatedItems;
           }
-
-          return [...updatedItems, newItem];
+          return [...updatedItems, created];
         });
       }
 
-      // ✅ עדכון ה-store הגלובלי כדי שכל השורות יראו את ה-term החדש
-      if (isCoreTax) {
-        // עדכון core taxonomies store
-        updateTaxonomy(columnName, (prev) => [newItem, ...prev]);
+      if (isCoreTaxLocal) {
+        updateTaxonomy(columnName, (prev) => [created, ...prev]);
       } else if (!isUserRoles && taxonomyNameForStore) {
-        // ✅ עדכון custom taxonomies store
         const currentList = customStore.select(taxonomyNameForStore) || [];
-        customStore.setList(taxonomyNameForStore, [newItem, ...currentList]);
+        customStore.setList(taxonomyNameForStore, [created, ...currentList]);
       }
     } catch (error) {
       console.error("Error adding new item:", error);
@@ -394,11 +386,8 @@ const MultiSelectEdit = ({
         price: p.price ?? p.regular_price ?? "",
       }));
     }
-    if (isUserRoles) {
-      const roles = loadUserRoles();
-      // roles כבר מגיעים כ-{id, name} עם תרגומים מה-store
-      return roles;
-    }
+    if (isUserRoles) return loadUserRoles();
+
     const explicit = editOptions?.taxonomyType || null;
     if (
       explicit === "product_cat" ||
@@ -407,6 +396,7 @@ const MultiSelectEdit = ({
     )
       return categories;
     if (explicit === "product_tag" || columnName === "tags") return tags;
+
     const name = explicit || columnName;
     return isCore(name) ? [] : customStore.select(name) || [];
   };
@@ -480,8 +470,8 @@ const MultiSelectEdit = ({
         : isUserRoles
           ? data.sort((a, b) => (a.name || "").localeCompare(b.name || ""))
           : columnName === "categories" ||
-            editOptions?.taxonomyType === "product_cat" ||
-            editOptions?.taxonomyType === "_product_cat"
+              editOptions?.taxonomyType === "product_cat" ||
+              editOptions?.taxonomyType === "_product_cat"
             ? sortCategoriesWithDepth(data)
             : sortTagsBySelected(data);
 
@@ -497,15 +487,13 @@ const MultiSelectEdit = ({
     const cleaned =
       source === "products"
         ? normalized.filter(
-          (x) =>
-            !disabledIds.includes(String(typeof x === "object" ? x.id : x))
-        )
+            (x) =>
+              !disabledIds.includes(String(typeof x === "object" ? x.id : x))
+          )
         : normalized;
 
     setItemsProduct(cleaned);
-    if (cleaned.length !== normalized.length) {
-      emitChange(cleaned);
-    }
+    if (cleaned.length !== normalized.length) emitChange(cleaned);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isOpen,
@@ -519,44 +507,12 @@ const MultiSelectEdit = ({
     disabledIdsKey,
     isUserRoles,
     value,
-    productsCount, // ✅ התלות הזו גורמת לעדכון כשהמוצרים נטענים
+    productsCount,
   ]);
 
-  const labelFor = useCallback(
-    (raw, idx) => {
-      const id = typeof raw === "object" ? raw.id : raw;
-
-      const namesField = editOptions?.namesField;
-      const rowNames =
-        namesField && Array.isArray(row?.original?.[namesField])
-          ? row.original[namesField]
-          : null;
-      if (rowNames && rowNames[idx]) return rowNames[idx];
-
-      if (Array.isArray(window?.listProduct)) {
-        // ✅ מעדכן את המפה בכל פעם שהמוצרים משתנים
-        const currentLength = window.listProduct.length;
-        if (!window.__prodNameMap || window.__prodNameMapLength !== currentLength) {
-          window.__prodNameMap = Object.fromEntries(
-            window.listProduct.map((p) => [
-              String(p.id),
-              p.name || p.title || `#${p.id}`,
-            ])
-          );
-          window.__prodNameMapLength = currentLength;
-        }
-        const fromMap = window.__prodNameMap[String(id)];
-        if (fromMap) return fromMap;
-      }
-
-      if (typeof raw === "object" && raw.name) return raw.name;
-
-      return `#${id}`;
-    },
-    [editOptions?.namesField, row?.original]
-  );
-
-  const selectedItems = itemsProduct.map((it, i) => labelFor(it, i)).join(", ");
+  const selectedItems = itemsProduct
+    .map((it) => (typeof it === "object" ? it.name || `#${it.id}` : `#${it}`))
+    .join(", ");
 
   const emptyText = placeholder || TT("Select %s");
 
@@ -567,18 +523,20 @@ const MultiSelectEdit = ({
     );
   };
 
-  // ⬅️ פה הקסם: חישוב מצב טעינה משולב
   const isCustomLoading =
     isCustomTax && typeof isCustomLoadingFn === "function"
       ? !!isCustomLoadingFn(taxonomyName)
       : false;
 
-  const isAnyLoading = isCoreLoading || isCustomLoading || (source === "products" && isProductsLoading);
+  const isAnyLoading =
+    isCoreLoading ||
+    isCustomLoading ||
+    (source === "products" && isProductsLoading);
 
-  // פונקציה להסרת פריט מהבחירה
   const removeSelectedItem = useCallback(
     (itemToRemove) => {
-      const idToRemove = typeof itemToRemove === "object" ? itemToRemove.id : itemToRemove;
+      const idToRemove =
+        typeof itemToRemove === "object" ? itemToRemove.id : itemToRemove;
       setItemsProduct((prev) => {
         const next = prev.filter(
           (x) => String(typeof x === "object" ? x.id : x) !== String(idToRemove)
@@ -590,33 +548,20 @@ const MultiSelectEdit = ({
     [emitChange]
   );
 
-  // קבלת שם הפריט להצגה בצ'יפס - useMemo עם תלות ב-productsLoadedOnce לעדכון כשהמוצרים נטענים
   const itemLabelsMap = useMemo(() => {
     const map = new Map();
     itemsProduct.forEach((item) => {
       const id = typeof item === "object" ? item.id : item;
-      let label = `#${id}`;
-
-      // אם יש שם באובייקט עצמו
-      if (typeof item === "object" && item.name) {
-        label = item.name;
-      } else {
-        // חפש ב-itemsExist
+      let lbl = `#${id}`;
+      if (typeof item === "object" && item.name) lbl = item.name;
+      else {
         const found = itemsExist.find((x) => String(x.id) === String(id));
-        if (found?.name) {
-          label = found.name;
-        } else if (source === "products" && Array.isArray(window?.listProduct)) {
-          // חפש ב-window.listProduct למוצרים
-          const product = window.listProduct.find((p) => String(p.id) === String(id));
-          if (product) {
-            label = product.name || product.title || `#${id}`;
-          }
-        }
+        if (found?.name) lbl = found.name;
       }
-      map.set(String(id), label);
+      map.set(String(id), lbl);
     });
     return map;
-  }, [itemsProduct, itemsExist, source, productsCount]);
+  }, [itemsProduct, itemsExist]);
 
   const getItemLabel = useCallback(
     (item) => {
@@ -631,6 +576,7 @@ const MultiSelectEdit = ({
       <PopoverTrigger asChild>
         <Button
           ref={triggerRef}
+          type="button"
           variant="outline"
           className="flex h-8 w-full max-w-full items-center justify-between gap-2 overflow-hidden focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0"
         >
@@ -640,11 +586,16 @@ const MultiSelectEdit = ({
           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
+
       <PopoverContent
-        className="p-0 dark:bg-slate-800 w-[264px]"
+        className="p-0 dark:bg-slate-800 w-[264px] z-[999999]"
         align="start"
         sideOffset={5}
-        portalContainer={portalContainer}
+        portalContainer={
+          portalContainer ||
+          (typeof document !== "undefined" ? document.body : null)
+        }
+        onMouseDownCapture={(e) => e.stopPropagation()}
         onOpenAutoFocus={(e) => {
           e.preventDefault();
           const input = e.currentTarget.querySelector("[cmdk-input]");
@@ -666,6 +617,7 @@ const MultiSelectEdit = ({
               {newItem.trim().length > 0 ? (
                 <CustomTooltip title={__("Add", "whizmanage")} instantClose>
                   <Button
+                    type="button"
                     variant="outline"
                     className="h-8 rounded-sm"
                     onClick={() => {
@@ -680,6 +632,7 @@ const MultiSelectEdit = ({
               ) : (
                 <CustomTooltip title={__("Cancel", "whizmanage")} instantClose>
                   <Button
+                    type="button"
                     variant="outline"
                     className="h-8 rounded-sm"
                     onClick={() => setAddItem(false)}
@@ -699,6 +652,7 @@ const MultiSelectEdit = ({
               {source !== "products" && !isUserRoles && (
                 <CustomTooltip title={__("Add new", "whizmanage")} instantClose>
                   <Button
+                    type="button"
                     variant="ghost"
                     className="dark:hover:bg-slate-700 size-8 rounded-md"
                     size="icon"
@@ -712,12 +666,13 @@ const MultiSelectEdit = ({
           )}
 
           <CommandList className="max-h-[360px] overflow-y-auto scrollbar-whiz">
-            {/* ✅ צ'יפס של הפריטים שנבחרו - רק אלה עם שם (לא מוצרים מחוקים) */}
             {(() => {
               const validItems = itemsProduct.filter((item) => {
-                const label = getItemLabel(item);
+                const lbl = getItemLabel(item);
                 const id = typeof item === "object" ? item.id : item;
-                const isOnlyId = /^#?\d+$/.test(label) && String(label).replace("#", "") === String(id);
+                const isOnlyId =
+                  /^#?\d+$/.test(lbl) &&
+                  String(lbl).replace("#", "") === String(id);
                 return !isOnlyId;
               });
 
@@ -731,20 +686,22 @@ const MultiSelectEdit = ({
                   <div className="flex flex-wrap gap-1.5">
                     {validItems.map((item) => {
                       const id = typeof item === "object" ? item.id : item;
-                      const label = getItemLabel(item);
+                      const lbl = getItemLabel(item);
                       return (
-                        <CustomTooltip key={id} title={label}>
+                        <CustomTooltip key={id} title={lbl}>
                           <Chip
                             size="sm"
                             onClose={() => removeSelectedItem(item)}
                             variant="flat"
                             classNames={{
                               base: "bg-gradient-to-br from-fuchsia-50 dark:from-slate-700 to-fuchsia-100 dark:to-slate-600 h-6 max-w-[120px]",
-                              content: "text-fuchsia-700 dark:text-slate-200 text-xs px-1 truncate",
-                              closeButton: "text-fuchsia-600 dark:text-slate-300 hover:text-fuchsia-800 dark:hover:text-white",
+                              content:
+                                "text-fuchsia-700 dark:text-slate-200 text-xs px-1 truncate",
+                              closeButton:
+                                "text-fuchsia-600 dark:text-slate-300 hover:text-fuchsia-800 dark:hover:text-white",
                             }}
                           >
-                            {label}
+                            {lbl}
                           </Chip>
                         </CustomTooltip>
                       );
@@ -754,9 +711,12 @@ const MultiSelectEdit = ({
               );
             })()}
 
-            {!isAnyLoading && !!(itemsExist.length === 0) && (
-              <CommandEmpty>{__("No results found.", "whizmanage")}</CommandEmpty>
+            {!isAnyLoading && itemsExist.length === 0 && (
+              <CommandEmpty>
+                {__("No results found.", "whizmanage")}
+              </CommandEmpty>
             )}
+
             <CommandGroup
               heading={itemsExist.length > 0 ? TT("Existing %s") : ""}
             >
@@ -782,8 +742,8 @@ const MultiSelectEdit = ({
                             );
                             const next = exists
                               ? prev.filter(
-                                (x) => String(x.id ?? x) !== String(item.id)
-                              )
+                                  (x) => String(x.id ?? x) !== String(item.id)
+                                )
                               : [...prev, item];
                             emitChange(next);
                             return next;
@@ -855,8 +815,8 @@ const MultiSelectEdit = ({
                             );
                             const next = exists
                               ? prev.filter(
-                                (x) => String(x.id ?? x) !== String(item.id)
-                              )
+                                  (x) => String(x.id ?? x) !== String(item.id)
+                                )
                               : [...prev, item];
                             emitChange(next);
                             return next;

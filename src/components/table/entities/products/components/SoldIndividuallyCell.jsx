@@ -1,5 +1,4 @@
 // src/components/pages/table/products/components/SoldIndividuallyCell.jsx
-import i18n from "@/i18n";
 import { Switch, cn } from "@heroui/react";
 import { useState, useEffect } from "react";
 

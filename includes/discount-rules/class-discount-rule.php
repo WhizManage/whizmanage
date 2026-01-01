@@ -24,8 +24,8 @@ class Whiz_Discount_Rule
         $out = [
             'name' => sanitize_text_field($data['name'] ?? ''),
             'type' => sanitize_key($data['type'] ?? ''),
-            'start_date' => whiz_dr_parse_datetime($data['start_date'] ?? null),
-            'end_date' => whiz_dr_parse_datetime($data['end_date'] ?? null),
+            'start_date' => Whizmanage_Discount_Functions::parse_datetime($data['start_date'] ?? null),
+            'end_date' => Whizmanage_Discount_Functions::parse_datetime($data['end_date'] ?? null),
             'priority' => (int) ($data['priority'] ?? 0),
             'conditions' => [],
             'actions' => [],
@@ -40,7 +40,7 @@ class Whiz_Discount_Rule
         $out['status'] = $raw_status;
 
         // ----- conditions -----
-        $cond_in = whiz_dr_json_decode($data['conditions'] ?? []);
+        $cond_in = Whizmanage_Discount_Functions::json_decode($data['conditions'] ?? []);
         $logic = isset($cond_in['logic']) ? sanitize_key($cond_in['logic']) : 'all';
         if (!in_array($logic, ['all', 'any'], true)) {
             $logic = 'all';
@@ -162,7 +162,7 @@ class Whiz_Discount_Rule
         $out['conditions'] = $conditions;
 
         // ----- actions -----
-        $a_in = whiz_dr_json_decode($data['actions'] ?? []);
+        $a_in = Whizmanage_Discount_Functions::json_decode($data['actions'] ?? []);
         switch ($out['type']) {
             case 'product_adjustment':
             case 'cart_adjustment':

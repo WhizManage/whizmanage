@@ -1,5 +1,4 @@
 // src/components/pages/table/products/components/DownloadableCell.jsx
-import i18n from "@/i18n";
 import { cn } from "@/lib/utils";
 import MediaPicker from "@components/media/MediaPicker";
 import Button from "@components/ui/button";

@@ -331,7 +331,7 @@ const ColumnFilter = ({
           uniqueValues.map((opt) => (
             <DropdownMenuCheckboxItem
               key={opt.value}
-              className="text-end hover:bg-fuchsia-600 hover:text-white capitalize"
+              className="text-end hover:bg-fuchsia-100 dark:hover:bg-fuchsia-600 hover:text-fuchsia-700 dark:hover:text-white focus:bg-fuchsia-100 dark:focus:bg-fuchsia-600 focus:text-fuchsia-700 dark:focus:text-white capitalize"
               checked={filterValue.includes(opt.value)}
               onCheckedChange={(checked) =>
                 handleFilterChange(opt.value, checked)
@@ -350,7 +350,7 @@ const ColumnFilter = ({
 
         <DropdownMenuCheckboxItem
           key="no-value"
-          className="text-end hover:bg-fuchsia-600 hover:text-white capitalize"
+          className="text-end hover:bg-fuchsia-100 dark:hover:bg-fuchsia-600 hover:text-fuchsia-700 dark:hover:text-white focus:bg-fuchsia-100 dark:focus:bg-fuchsia-600 focus:text-fuchsia-700 dark:focus:text-white capitalize"
           checked={filterValue.includes("[None]")}
           onCheckedChange={(checked) =>
             handleFilterChange("[None]", checked)

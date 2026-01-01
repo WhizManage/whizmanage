@@ -1,6 +1,5 @@
 // src/components/table/products/components/variation/components/VariationDownloadableEdit.jsx
 
-import i18n from "@/i18n";
 import CustomTooltip from "@components/ui/nextUI/Tooltip";
 import Button from "@components/ui/button";
 import { Input } from "@components/ui/input";

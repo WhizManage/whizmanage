@@ -1,7 +1,5 @@
 // src/components/table/products/components/variation/components/VariationNameDisplay.jsx
 
-import { cn } from "@/lib/utils";
-
 /**
  * Helper: Decode URL-encoded strings (for Hebrew/Unicode characters from WooCommerce API)
  */
@@ -14,6 +12,36 @@ const decodeUrlString = (encodedString) => {
 };
 
 /**
+ * Helper: ממיר slug של option ל-name באמצעות terms מהמוצר האב
+ * @param {string} optionValue - הערך של ה-option (יכול להיות slug או name)
+ * @param {Object} attr - ה-attribute עם name/slug
+ * @param {Object} parentProduct - המוצר האב שמכיל את ה-terms
+ * @returns {string} ה-name של ה-option
+ */
+const convertOptionSlugToName = (optionValue, attr, parentProduct) => {
+  if (!optionValue || !parentProduct) return optionValue;
+
+  // מצא את שם ה-taxonomy key (למשל pa_צבע -> _pa_צבע)
+  const attrName = attr.name || attr.slug || "";
+  const taxonomyKey = attrName.startsWith("pa_") ? `_${attrName}` : `_pa_${attrName}`;
+
+  // קבל את ה-terms מהמוצר האב
+  const terms = parentProduct[taxonomyKey] || [];
+
+  if (terms.length === 0) return optionValue;
+
+  // בדוק אם זה כבר name
+  const termByName = terms.find((t) => t.name === optionValue);
+  if (termByName) return optionValue;
+
+  // חפש לפי slug והחזר את ה-name
+  const termBySlug = terms.find((t) => t.slug === optionValue);
+  if (termBySlug?.name) return termBySlug.name;
+
+  return optionValue;
+};
+
+/**
  * VariationNameDisplay - תצוגת שם מוצר/ווריאציה
  */
 const VariationNameDisplay = ({ value, __, row }) => {
@@ -22,6 +50,10 @@ const VariationNameDisplay = ({ value, __, row }) => {
 
   // אם זו ווריאציה, נבנה את השם מה-attributes
   if (isVariation) {
+    // ✅ קבל את המוצר האב דרך getParentRow()
+    const parentRow = row?.getParentRow?.();
+    const parentProduct = parentRow?.original || null;
+
     // ✅ נעדיף לקחת attributes מ-value (שמגיע מה-accessorFn) כי הוא מעודכן
     // fallback ל-row.original.attributes אם value לא מכיל attributes
     const attributes = (value && typeof value === 'object' && value.attributes)
@@ -46,7 +78,9 @@ const VariationNameDisplay = ({ value, __, row }) => {
           const attrName = decodeUrlString((attr.name || attr.slug || "").replace(/^pa_/, ""));
           return `${__("Any", "whizmanage")} ${attrName}`;
         }
-        return decodeUrlString(option);
+        // ✅ המרת slug ל-name עבור תכונות גלובליות באמצעות terms מהמוצר האב
+        const optionName = convertOptionSlugToName(option, attr, parentProduct);
+        return decodeUrlString(optionName);
       })
       .filter(Boolean)
       .join(" - ");
