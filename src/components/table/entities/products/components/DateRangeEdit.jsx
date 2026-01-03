@@ -2,6 +2,7 @@
 import CustomTooltip from "@components/ui/nextUI/Tooltip";
 import { Button } from "@components/ui/button";
 import { DateRangePicker } from "@heroui/date-picker";
+import { CalendarDateTime } from "@internationalized/date";
 import { CalendarClock, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
  import { __ } from "@wordpress/i18n";
@@ -37,8 +38,41 @@ const DateRangeEdit = ({
   const endFieldName =
     editOptions?.endFieldName || endFieldNameProp || "date_on_sale_to_gmt";
 
-  // ערך מקומי לבקרת ה-RangePicker (נעשה אותו controlled אחרי השינוי הראשון)
-  const [localValue, setLocalValue] = useState(null);
+  // המרת ISO string ל-CalendarDateTime
+  const parseToCalendarDateTime = (dateString) => {
+    if (!dateString) return null;
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return null;
+      return new CalendarDateTime(
+        date.getFullYear(),
+        date.getMonth() + 1,
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds()
+      );
+    } catch {
+      return null;
+    }
+  };
+
+  // חישוב ערך התחלתי מה-value או מה-row
+  const getInitialValue = () => {
+    const startStr = value?.start || row?.original?.[startFieldName];
+    const endStr = value?.end || row?.original?.[endFieldName];
+
+    if (!startStr && !endStr) return null;
+
+    const start = parseToCalendarDateTime(startStr);
+    const end = parseToCalendarDateTime(endStr);
+
+    if (!start && !end) return null;
+    return { start, end };
+  };
+
+  // ערך מקומי לבקרת ה-RangePicker
+  const [localValue, setLocalValue] = useState(getInitialValue);
   const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   // האם יש בכלל תקופת מבצע (להחליט אם להראות כפתור או את ה-picker)
@@ -98,6 +132,7 @@ const DateRangeEdit = ({
       // השמירה לשרת תקרה רק כש-EditableCell יסיים עריכה (finishEditing)
       onChange(dateRange);
     }
+
   };
 
   // הפעלה/כיבוי "תקופת מבצע"
@@ -196,6 +231,7 @@ const DateRangeEdit = ({
               // value מבוקר – מתחיל כ-null, מתמלא אחרי שינוי ראשון
               value={localValue}
               onChange={handleDateChange}
+              isOpen={isPickerOpen}
               onOpenChange={(open) => {
                 setIsPickerOpen(open);
                 if (!open && !isForm) {
@@ -204,11 +240,12 @@ const DateRangeEdit = ({
               }}
               variant="bordered"
               size="sm"
+              granularity="minute"
               hideTimeZone
               visibleMonths={2}
               isDisabled={isLoading}
               classNames={{
-                base: "relative flex items-center min-w-[180px]",
+                base: "relative flex items-center min-w-[180px] [direction:ltr]",
                 inputWrapper:
                   "!h-8 border rounded-md bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600",
                 input: "text-xs",
@@ -218,6 +255,29 @@ const DateRangeEdit = ({
               popoverProps={{
                 placement: "bottom-start",
                 offset: 4,
+              }}
+              calendarProps={{
+                onChange: (value) => {
+                  // כשנבחר טווח מלא בלוח השנה, עדכן את הערך וסגור
+                  if (value?.start && value?.end) {
+                    // המרה מ-CalendarDate ל-CalendarDateTime (עם שעה 00:00)
+                    const startDateTime = new CalendarDateTime(
+                      value.start.year,
+                      value.start.month,
+                      value.start.day,
+                      0, 0, 0
+                    );
+                    const endDateTime = new CalendarDateTime(
+                      value.end.year,
+                      value.end.month,
+                      value.end.day,
+                      23, 59, 0
+                    );
+                    // עדכון הערך דרך handleDateChange
+                    handleDateChange({ start: startDateTime, end: endDateTime });
+                    setTimeout(() => setIsPickerOpen(false), 150);
+                  }
+                },
               }}
             />
             <CustomTooltip title={translate("Cancel Sale Period","whizmanage")}>

@@ -17,23 +17,107 @@ import {
   ArrowUpZA,
   ChevronsUpDown,
   EyeOff,
+  Filter,
   Pin,
   PinOff,
   X,
 } from "lucide-react";
 import CustomTooltip from "@components/ui/nextUI/Tooltip.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
  import { __ } from "@wordpress/i18n";
 import { getCommonPinningStyles } from "../utils/tableUtils.js";
 
 export function ColumnHeader({ header, table, children, isActionsColumn }) {
-   
+
   const [showDropdown, setShowDropdown] = useState(false);
-  const [filterValue, setFilterValue] = useState(
-    header.column.getFilterValue() || ""
-  );
+
+  // 🆕 מקבלים את הפילטר המקומי מה-columnFilters
+  const localFilterId = `_local_${header.column.id}`;
+  const currentLocalFilter = table.getState().columnFilters?.find((f) => f.id === localFilterId);
+  const [filterValue, setFilterValue] = useState(currentLocalFilter?.value || "");
+
+  // 🆕 State לסינון ווריאציות מקומי
+  const [variationFilterValue, setVariationFilterValue] = useState("");
   const [isHovered, setIsHovered] = useState(false);
-const isRTL = window?.document?.documentElement?.dir === "rtl";
+
+  // 🆕 סנכרון הפילטר המקומי עם ה-state (לתמיכה באיפוס פילטרים)
+  useEffect(() => {
+    const externalValue = currentLocalFilter?.value || "";
+    if (externalValue !== filterValue) {
+      setFilterValue(externalValue);
+    }
+  }, [currentLocalFilter?.value]);
+
+  // 🆕 בדיקה אם לעמודה יש סינון ווריאציות
+  const hasVariationFilter = header.column.columnDef.meta?.hasVariationFilter;
+
+  // 🆕 בדיקה אם העמודה היא בוליאנית
+  const isBooleanColumn = header.column.columnDef.meta?.filterType === "boolean";
+
+  // 🆕 State לסינון בוליאני - כברירת מחדל שניהם פעילים
+  const boolFilterId = `_local_bool_${header.column.id}`;
+  const currentBoolFilter = table.getState().columnFilters?.find((f) => f.id === boolFilterId);
+  const [boolFilter, setBoolFilter] = useState(() => {
+    if (currentBoolFilter?.value) {
+      return currentBoolFilter.value;
+    }
+    return { yes: true, no: true }; // ברירת מחדל - שניהם פעילים
+  });
+
+  // 🆕 סנכרון פילטר בוליאני עם ה-state
+  useEffect(() => {
+    if (currentBoolFilter?.value) {
+      setBoolFilter(currentBoolFilter.value);
+    } else {
+      setBoolFilter({ yes: true, no: true });
+    }
+  }, [currentBoolFilter?.value]);
+
+  // 🆕 Handler לשינוי פילטר בוליאני
+  const handleBoolFilterChange = (type) => {
+    setBoolFilter((prev) => {
+      let newFilter;
+      if (type === "yes") {
+        // אם לוחצים על yes
+        if (prev.yes && prev.no) {
+          // שניהם פעילים - מבטלים את yes, נשאר רק no
+          newFilter = { yes: false, no: true };
+        } else if (prev.yes && !prev.no) {
+          // רק yes פעיל - מדליקים גם את no (חוזרים לשניהם)
+          newFilter = { yes: true, no: true };
+        } else {
+          // רק no פעיל - מדליקים את yes (יכבה את no אוטומטית כי אי אפשר ששניהם כבויים)
+          newFilter = { yes: true, no: false };
+        }
+      } else {
+        // אם לוחצים על no
+        if (prev.yes && prev.no) {
+          // שניהם פעילים - מבטלים את no, נשאר רק yes
+          newFilter = { yes: true, no: false };
+        } else if (!prev.yes && prev.no) {
+          // רק no פעיל - מדליקים גם את yes (חוזרים לשניהם)
+          newFilter = { yes: true, no: true };
+        } else {
+          // רק yes פעיל - מדליקים את no (יכבה את yes אוטומטית)
+          newFilter = { yes: false, no: true };
+        }
+      }
+
+      // עדכון ב-columnFilters
+      table.setColumnFilters((old = []) => {
+        const filtered = old.filter((f) => f.id !== boolFilterId);
+        // אם שניהם פעילים - לא צריך פילטר
+        if (newFilter.yes && newFilter.no) {
+          return filtered;
+        }
+        return [...filtered, { id: boolFilterId, value: newFilter }];
+      });
+
+      return newFilter;
+    });
+  };
+
+  const isRTL = window?.document?.documentElement?.dir === "rtl";
   const { theme } = useTheme();
   const handleSide = isRTL ? "left" : "right";
 
@@ -142,9 +226,30 @@ const isRTL = window?.document?.documentElement?.dir === "rtl";
     setShowDropdown(false);
   };
 
+  // 🆕 סינון מקומי - שומרים עם קידומת _local_ כדי שלא יישלח לשרת
   const handleFilterChange = (value) => {
     setFilterValue(value);
-    header.column.setFilterValue(value || undefined);
+    const localFilterId = `_local_${header.column.id}`;
+    table.setColumnFilters((old = []) => {
+      const filtered = old.filter((f) => f.id !== localFilterId);
+      if (value && value.trim()) {
+        return [...filtered, { id: localFilterId, value: value.trim() }];
+      }
+      return filtered;
+    });
+  };
+
+  // 🆕 Handler לסינון ווריאציות מקומי
+  const handleVariationFilterChange = (value) => {
+    setVariationFilterValue(value);
+    // שומרים את הפילטר ב-columnFilters תחת id מיוחד
+    table.setColumnFilters((old = []) => {
+      const filtered = old.filter((f) => f.id !== "variations_filter");
+      if (value && value.trim()) {
+        return [...filtered, { id: "variations_filter", value: value.trim() }];
+      }
+      return filtered;
+    });
   };
 
   const handleSortClick = (e) => {
@@ -381,18 +486,71 @@ const isRTL = window?.document?.documentElement?.dir === "rtl";
                 <div className="border-t border-gray-200 dark:border-gray-700" />
 
                 {/* סינון */}
-                <div className="p-2">
-                  <Input
-                    id={`filter-${header.id}`}
-                    type="text"
-                    placeholder={__("Type to filter", "whizmanage")}
-                    value={filterValue}
-                    onChange={(e) => handleFilterChange(e.target.value)}
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-full h-8"
-                    autoFocus
-                    aria-label={__("Filter column", { column: columnName })}
-                  />
+                <div className="p-2 space-y-2">
+                  <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                    <Filter className="size-3" />
+                    <span>{__("Filter", "whizmanage")}</span>
+                  </div>
+                  {/* 🆕 פילטר בוליאני - כפתורים Yes/No */}
+                  {isBooleanColumn ? (
+                    <div className="flex gap-1">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleBoolFilterChange("yes");
+                        }}
+                        className={`flex-1 px-3 py-1.5 text-sm rounded border transition-colors ${
+                          boolFilter.yes
+                            ? "border-slate-400 dark:border-slate-500 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200"
+                            : "border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:border-slate-300 dark:hover:border-slate-600"
+                        }`}
+                      >
+                        {__("Yes", "whizmanage")}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleBoolFilterChange("no");
+                        }}
+                        className={`flex-1 px-3 py-1.5 text-sm rounded border transition-colors ${
+                          boolFilter.no
+                            ? "border-slate-400 dark:border-slate-500 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200"
+                            : "border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:border-slate-300 dark:hover:border-slate-600"
+                        }`}
+                      >
+                        {__("No", "whizmanage")}
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <Input
+                        id={`filter-${header.id}`}
+                        type="text"
+                        placeholder={__("Type to filter", "whizmanage")}
+                        value={filterValue}
+                        onChange={(e) => handleFilterChange(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="w-full h-8"
+                        autoFocus
+                        aria-label={__("Filter column", { column: columnName })}
+                      />
+                      {/* 🆕 אינפוט נוסף לסינון ווריאציות - מופיע רק בעמודות עם hasVariationFilter */}
+                      {hasVariationFilter && (
+                        <Input
+                          id={`variation-filter-${header.id}`}
+                          type="text"
+                          placeholder={__("Filter variations...", "whizmanage")}
+                          value={variationFilterValue}
+                          onChange={(e) => handleVariationFilterChange(e.target.value)}
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-full h-8 border-fuchsia-300 focus:border-fuchsia-500"
+                          aria-label={__("Filter variations", "whizmanage")}
+                        />
+                      )}
+                    </>
+                  )}
                 </div>
               </PopoverContent>
             </Popover>

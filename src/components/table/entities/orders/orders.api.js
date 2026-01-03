@@ -164,14 +164,27 @@ export const ordersApi = {
     min_total,
     max_total,
     meta,
-    extra
+    extra,
+    // 🆕 Support text column filters
+    number,
+    customer_name,
+    billing_email,
   } = {}) => {
     const params = new URLSearchParams();
     params.set("page", String(page));
     params.set("per_page", String(perPage));
 
-    if (search && String(search).trim()) {
-      params.set("search", String(search).trim());
+    // 🆕 Merge text column filters into search
+    let finalSearch = search;
+    const textFilters = [number, customer_name, billing_email].filter(
+      (v) => v && typeof v === 'string' && v.trim()
+    );
+    if (textFilters.length > 0) {
+      finalSearch = textFilters[0].trim();
+    }
+
+    if (finalSearch && String(finalSearch).trim()) {
+      params.set("search", String(finalSearch).trim());
     }
 
     const appendArray = (key, arr) => {

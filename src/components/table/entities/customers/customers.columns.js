@@ -141,6 +141,9 @@ export const createCustomersColumns = (store, __, handleCellUpdate) => {
       header: __("Paying?", "whizmanage"),
       size: 110,
       minSize: 90,
+      meta: {
+        filterType: "boolean",
+      },
       cell: (props) => (props.getValue() ? __("Yes", "whizmanage") : __("No", "whizmanage")),
       filterFn: columnFilterFn,
     }),

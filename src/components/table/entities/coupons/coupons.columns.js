@@ -276,6 +276,7 @@ export const createCouponsColumns = (store, __, handleCellUpdate) => {
       meta: {
         editable: true,
         editType: "switch",
+        filterType: "boolean",
       },
       cell: (props) => <EditableCell {...props} onUpdate={onUpdate} />,
     }),
@@ -430,6 +431,7 @@ export const createCouponsColumns = (store, __, handleCellUpdate) => {
       meta: {
         editable: true,
         editType: "switch",
+        filterType: "boolean",
       },
       cell: (props) => <EditableCell {...props} onUpdate={onUpdate} />,
     }),
@@ -442,6 +444,7 @@ export const createCouponsColumns = (store, __, handleCellUpdate) => {
       meta: {
         editable: true,
         editType: "switch",
+        filterType: "boolean",
       },
       cell: (props) => <EditableCell {...props} onUpdate={onUpdate} />,
     }),

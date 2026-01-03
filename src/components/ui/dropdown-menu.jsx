@@ -22,14 +22,14 @@ const DropdownMenuSubTrigger = React.forwardRef(
     <DropdownMenuPrimitive.SubTrigger
       ref={ref}
       className={cn(
-        "flex font-light text-muted-foreground cursor-default gap-4 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-slate-100 dark:focus:bg-slate-700 transition-colors data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-700",
-        inset && "pl-8",
+        "flex w-full font-light text-muted-foreground cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-slate-100 dark:focus:bg-slate-700 transition-colors data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-700",
+        inset && "ps-8",
         className
       )}
       {...props}
     >
       {children}
-      <ChevronRight className="ml-auto rtl:ml-0 rtl:mr-auto h-4 w-4 rtl:rotate-180" />
+      <ChevronRight className="ms-auto h-4 w-4 rtl:rotate-180 shrink-0" />
     </DropdownMenuPrimitive.SubTrigger>
   )
 );
@@ -73,8 +73,8 @@ const DropdownMenuItem = React.forwardRef(
     <DropdownMenuPrimitive.Item
       ref={ref}
       className={cn(
-        "relative font-light text-muted-foreground flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-slate-100 dark:focus:bg-slate-700 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        inset && "pl-8",
+        "relative font-light text-muted-foreground flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-slate-100 dark:focus:bg-slate-700 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        inset && "ps-8",
         className
       )}
       {...props}
@@ -88,18 +88,19 @@ const DropdownMenuCheckboxItem = React.forwardRef(
     <DropdownMenuPrimitive.CheckboxItem
       ref={ref}
       className={cn(
-        "relative flex cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-slate-100 dark:focus:bg-slate-700 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "relative flex cursor-pointer select-none items-center rounded-sm py-1.5 px-2 text-sm outline-none transition-colors focus:bg-slate-100 dark:focus:bg-slate-700 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "ltr:flex-row rtl:flex-row-reverse",
         className
       )}
       checked={checked}
       {...props}
     >
-      <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+      <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center ltr:mr-2 rtl:ml-2">
         <DropdownMenuPrimitive.ItemIndicator>
           <Check className="h-4 w-4" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
-      {children}
+      <span className="flex-1 ltr:text-left rtl:text-right">{children}</span>
     </DropdownMenuPrimitive.CheckboxItem>
   )
 );

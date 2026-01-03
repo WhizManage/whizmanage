@@ -5,6 +5,7 @@ import { confirm } from "@components/ui/custom/CustomConfirm";
 import Button from "@components/ui/button";
 import { CommandItem } from "@components/ui/command";
 import { Input } from "@components/ui/input";
+import { Checkbox } from "@components/ui/checkbox";
 import { toast } from "@/lib/utils";
 import { Check, Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
@@ -36,9 +37,14 @@ const SelectAttributeItem = ({
   setDropdownOpen,
   variationMood,
   product, // 🔥 חדש: צריך את product כדי לעדכן את attributes
+  // 🆕 Multi-select props
+  multiSelectMode,
+  checkedItems,
+  setCheckedItems,
 }) => {
   const [isEditItem, setIsEditItem] = useState(false);
   const [newName, setNewName] = useState("");
+  const isRTL = window?.document?.documentElement?.dir === "rtl";
    
 
   const { mode, setAllAttributes } = useVariationsStore();
@@ -182,6 +188,33 @@ const SelectAttributeItem = ({
         : attr.id === item.id
   );
 
+  // 🆕 Check if item is in checkedItems for multi-select
+  const isChecked = checkedItems?.some(
+    (checkedItem) =>
+      item.id === 0
+        ? checkedItem.name === item.name
+        : checkedItem.id === item.id
+  );
+
+  // 🆕 Handle checkbox change for multi-select
+  const handleCheckboxChange = (checked) => {
+    if (!setCheckedItems) return;
+
+    if (checked) {
+      // Add to checked items
+      setCheckedItems((prev) => [...prev, item]);
+    } else {
+      // Remove from checked items
+      setCheckedItems((prev) =>
+        prev.filter((checkedItem) =>
+          item.id === 0
+            ? checkedItem.name !== item.name
+            : checkedItem.id !== item.id
+        )
+      );
+    }
+  };
+
   return (
     <CommandItem
       className="cursor-pointer dark:hover:bg-slate-700 group/item flex justify-between min-h-9"
@@ -214,12 +247,42 @@ const SelectAttributeItem = ({
         </div>
       ) : (
         <>
-          <Check
+          {/* Icon area - shows Check if selected, Checkbox on hover if multi-select enabled */}
+          <div
             className={cn(
-              "mr-2 h-4 w-4",
-              isSelected ? "opacity-100" : "opacity-0"
+              "size-4 flex items-center justify-center shrink-0",
+              isRTL ? "ml-2" : "mr-2"
             )}
-          />
+            onClick={(e) => {
+              if (multiSelectMode && !isSelected) {
+                e.stopPropagation();
+              }
+            }}
+          >
+            {isSelected ? (
+              // Already selected - show check mark
+              <Check className="size-4" />
+            ) : multiSelectMode ? (
+              // Multi-select mode - show checkbox on hover or if checked
+              <div
+                className={cn(
+                  "hidden group-hover/item:flex items-center justify-center",
+                  isChecked && "!flex"
+                )}
+              >
+                <Checkbox
+                  checked={isChecked}
+                  onCheckedChange={handleCheckboxChange}
+                  className="size-4"
+                />
+              </div>
+            ) : (
+              // Not selected and not multi-select - empty space
+              <span className="opacity-0">
+                <Check className="size-4" />
+              </span>
+            )}
+          </div>
           <span className="flex-1">
             {decodeUrlString(item.name.replace(/\\/g, "").replace(/"/g, "''"))}
           </span>

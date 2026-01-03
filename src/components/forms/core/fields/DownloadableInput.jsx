@@ -15,7 +15,7 @@ import {
 import { Link, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { useGenericForm } from "../FormProvider";
 
 export default function DownloadableInput({
@@ -27,7 +27,7 @@ export default function DownloadableInput({
   virtualField = "virtual", // שדה נוסף שמסונכרן עם downloadable
   rules,
 }) {
-   
+
   const { control, watch, setValue } = useGenericForm();
   const isRTL = window?.document?.documentElement?.dir === "rtl";
 
@@ -341,7 +341,7 @@ export default function DownloadableInput({
                                   className={cn(
                                     "flex-1 h-10 !rounded-lg",
                                     validationErrors[index]?.name &&
-                                      "border-red-500"
+                                    "border-red-500"
                                   )}
                                 />
                               </div>
@@ -371,7 +371,7 @@ export default function DownloadableInput({
                                   className={cn(
                                     "flex-1 h-10 !rounded-lg",
                                     validationErrors[index]?.file &&
-                                      "border-red-500"
+                                    "border-red-500"
                                   )}
                                 />
                               </div>

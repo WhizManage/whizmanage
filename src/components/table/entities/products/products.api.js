@@ -163,6 +163,9 @@ export const productsApi = {
     categories,
     tags,
     extraTax = {},
+    name,        // 🆕 Support name column text filter (sent to server)
+    sku,         // 🆕 Support sku column text filter (sent to server)
+    variations,  // 🆕 Ignored here - handled client-side for subRows filtering
     ...rest // ← catch any additional props (custom taxonomies come here)
   } = {}) => {
     // 🔧 Detect custom taxonomies that came as separate props (not inside extraTax)
@@ -180,8 +183,18 @@ export const productsApi = {
       }
     });
 
+    // 🆕 Merge text column filters into search
+    // 'name' and 'sku' are sent to server for product search
+    // 'variations' is handled client-side for subRows filtering (ignored here)
+    let finalSearch = search;
+    if (name && typeof name === 'string' && name.trim()) {
+      finalSearch = name.trim();
+    } else if (sku && typeof sku === 'string' && sku.trim()) {
+      finalSearch = sku.trim();
+    }
+
     const qs = buildProductsQueryString({
-      page, perPage, search,
+      page, perPage, search: finalSearch,
       status, type, downloadable,
       categories, tags,
       tax: mergedExtraTax,
@@ -206,13 +219,15 @@ export const productsApi = {
 
       // 🟢 זה החלק שחסר וגורם לפילטרים להימחק:
       filters: {
-        search: search ?? null,
+        search: finalSearch ?? null,
         status: status ?? [],
         type: type ?? [],
         downloadable: downloadable ?? null,
         categories: categories ?? [],
         tags: tags ?? [],
         extraTax: mergedExtraTax ?? {},
+        name: name ?? null,
+        sku: sku ?? null,
       },
     };
   },
@@ -315,7 +330,9 @@ export const productsApi = {
       "post_password",
       "purchase_note",
       "date_on_sale_to_gmt",
+      "date_on_sale_to_gmt",
       "date_on_sale_from_gmt",
+      "sale_date_range", // 🆕 Batch field
       "global_unique_id",
     ]);
 
@@ -453,6 +470,17 @@ export const productsApi = {
             if (cleanValue.backorders) {
               payload.backorders = cleanValue.backorders;
             }
+          }
+        }
+        break;
+
+      case "sale_date_range":
+        if (typeof cleanValue === "object" && cleanValue !== null) {
+          if (cleanValue.start !== undefined) {
+            payload.date_on_sale_from_gmt = cleanValue.start ? String(cleanValue.start) : "";
+          }
+          if (cleanValue.end !== undefined) {
+            payload.date_on_sale_to_gmt = cleanValue.end ? String(cleanValue.end) : "";
           }
         }
         break;
@@ -724,6 +752,12 @@ export const productsMasterUpdateCell =
             backorders: rowData.backorders,
           };
         }
+        if (columnId === "sale_date_range") {
+          return {
+            date_on_sale_from_gmt: rowData.date_on_sale_from_gmt,
+            date_on_sale_to_gmt: rowData.date_on_sale_to_gmt,
+          };
+        }
         return rowData[columnId];
       };
       const previousValue = getPreviousValue();
@@ -740,6 +774,12 @@ export const productsMasterUpdateCell =
           if ("low_stock_amount" in value) updates.low_stock_amount = value.low_stock_amount;
           if ("stock_status" in value) updates.stock_status = value.stock_status;
           if ("backorders" in value) updates.backorders = value.backorders;
+          return updates;
+        }
+        if (columnId === "sale_date_range" && value && typeof value === "object") {
+          const updates = {};
+          if (value.start !== undefined) updates.date_on_sale_from_gmt = value.start;
+          if (value.end !== undefined) updates.date_on_sale_to_gmt = value.end;
           return updates;
         }
         return { [columnId]: value };
@@ -761,8 +801,8 @@ export const productsMasterUpdateCell =
         }
 
         // ✅ עדכון ה-store והוספה להיסטוריה
-        // עבור שדות batch, נשמור את ה-columnId המקורי (inventory)
-        const batchFields = ["inventory"];
+        // עבור שדות batch, נשמור את ה-columnId המקורי (inventory, sale_date_range)
+        const batchFields = ["inventory", "sale_date_range"];
         const isBatchField = batchFields.includes(columnId);
 
         if (isBatchField) {
@@ -923,7 +963,7 @@ export const productsMasterUpdateCell =
         return true;
       } catch (apiError) {
         // ✅ rollback – בלי היסטוריה
-        const batchFields = ["inventory"];
+        const batchFields = ["inventory", "sale_date_range"];
         const rollbackUpdates = batchFields.includes(columnId)
           ? previousValue
           : { [columnId]: previousValue };

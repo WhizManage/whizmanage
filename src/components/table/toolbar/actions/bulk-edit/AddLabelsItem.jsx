@@ -17,7 +17,7 @@ import {
   PopoverTrigger,
 } from "@components/ui/popover-portal";
 import { Chip } from "@heroui/react";
-import { Plus, PlusIcon, Undo2 } from "lucide-react";
+import { Plus, PlusIcon, Undo2, MinusIcon } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
  import { __ } from "@wordpress/i18n";
 import { postApi } from "/src/services/services";
@@ -36,12 +36,49 @@ const CORE = new Set([
 ]);
 const isCoreName = (n) => CORE.has(String(n || ""));
 
-const AddLabelsItem = ({ columnName, index, updateValue, label }) => {
+const AddLabelsItem = ({
+  columnName,
+  index,
+  updateValue,
+  label,
+  mode = "add", // "add" or "remove"
+  disabledItems = [], // items selected in the opposite mode
+}) => {
   const [open, setOpen] = useState(false);
   const [itemsExist, setItemsExist] = useState([]);
   const [itemsProduct, setItemsProduct] = useState([]);
   const [addItem, setAddItem] = useState(false);
   const [newItem, setNewItem] = useState("");
+
+  // בשביל הפורטל בתוך המודל
+  const triggerRef = useRef(null);
+  const [portalContainer, setPortalContainer] = useState(null);
+
+  // מציאת מיכל פורטל (מודל) קרוב
+  useEffect(() => {
+    if (!open || typeof document === "undefined") {
+      setPortalContainer(null);
+      return;
+    }
+
+    const findClosestModal = () => {
+      if (!triggerRef.current) return document.body;
+      let el = triggerRef.current;
+
+      while (el && el !== document.body) {
+        if (el.getAttribute("role") === "dialog") return el;
+        el = el.parentElement;
+      }
+
+      const openModal =
+        document.querySelector('[role="dialog"][aria-hidden="false"]') ||
+        document.querySelector('[role="dialog"]:not([aria-hidden])');
+
+      return openModal || document.body;
+    };
+
+    setPortalContainer(findClosestModal());
+  }, [open]);
 
    
 
@@ -204,16 +241,38 @@ const AddLabelsItem = ({ columnName, index, updateValue, label }) => {
     updateValue(index, "value", next);
   };
 
+  // Set of disabled item IDs for quick lookup
+  const disabledIdsSet = useMemo(() => {
+    return new Set(
+      disabledItems.map((item) =>
+        String(typeof item === "object" ? item.id : item)
+      )
+    );
+  }, [disabledItems]);
+
+  const isItemDisabled = useCallback(
+    (item) => {
+      const itemId = String(typeof item === "object" ? item.id : item);
+      return disabledIdsSet.has(itemId);
+    },
+    [disabledIdsSet]
+  );
+
   return (
     <div className="flex gap-2 h-full items-center">
       <Popover open={open} onOpenChange={setOpen} modal={false}>
         <PopoverTrigger asChild>
           <Button
+            ref={triggerRef}
             onClick={() => setOpen((p) => !p)}
             variant="ghost"
             size="icon"
           >
-            <PlusIcon className="size-4" />
+            {mode === "remove" ? (
+              <MinusIcon className="size-4" />
+            ) : (
+              <PlusIcon className="size-4" />
+            )}
           </Button>
         </PopoverTrigger>
 
@@ -221,12 +280,15 @@ const AddLabelsItem = ({ columnName, index, updateValue, label }) => {
           strategy="fixed"
           className="p-0 dark:bg-slate-800 w-[264px] z-[2147483647]"
           align="start"
-          onOpenAutoFocus={(e) => e.preventDefault()}
+          sideOffset={5}
+          portalContainer={portalContainer}
+          onOpenAutoFocus={(e) => {
+            e.preventDefault();
+            const input = e.currentTarget.querySelector("[cmdk-input]");
+            if (input) input.focus();
+          }}
         >
-          <Command
-            className="dark:bg-slate-800"
-            onMouseDown={(e) => e.preventDefault()}
-          >
+          <Command className="dark:bg-slate-800">
             {addItem ? (
               <div className="h-12 px-1 gap-1 flex items-center justify-center">
                 <div className="relative h-10 border rounded-lg flex gap-1 items-center px-1 dark:bg-slate-700">
@@ -306,6 +368,7 @@ const AddLabelsItem = ({ columnName, index, updateValue, label }) => {
                       setItemsProduct={setItemsProduct}
                       columnName={columnName}
                       apiSlug={apiSlug}
+                      disabled={isItemDisabled(item)}
                       objectSingular={
                         apiSlug === "categories"
                           ? __("Product category", "whizmanage")
@@ -347,11 +410,19 @@ const AddLabelsItem = ({ columnName, index, updateValue, label }) => {
             key={idx}
             onClose={() => handleClose(item)}
             variant="flat"
-            classNames={{
-              base: "bg-gradient-to-br from-fuchsia-50 dark:from-slate-800 to-fuchsia-200 dark:to-slate-700 opacity-100",
-              content: "text-fuchsia-600 dark:text-slate-300",
-              closeButton: "text-fuchsia-600 dark:text-slate-300",
-            }}
+            classNames={
+              mode === "remove"
+                ? {
+                    base: "bg-gradient-to-br from-red-50 dark:from-red-900/30 to-red-200 dark:to-red-800/40 opacity-100",
+                    content: "text-red-600 dark:text-red-300",
+                    closeButton: "text-red-600 dark:text-red-300",
+                  }
+                : {
+                    base: "bg-gradient-to-br from-fuchsia-50 dark:from-slate-800 to-fuchsia-200 dark:to-slate-700 opacity-100",
+                    content: "text-fuchsia-600 dark:text-slate-300",
+                    closeButton: "text-fuchsia-600 dark:text-slate-300",
+                  }
+            }
           >
             {typeof item === "object" ? item.name : String(item)}
           </Chip>

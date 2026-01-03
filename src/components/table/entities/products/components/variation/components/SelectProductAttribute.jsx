@@ -21,6 +21,8 @@ import { useEffect, useState } from "react";
  import { __ } from "@wordpress/i18n";
 import SelectAttributeItem from "./SelectAttributeItem";
 import { putApi } from "/src/services/services";
+import { useVariationsStore } from "../store/variationsStore";
+import { toast } from "@/lib/utils";
 
 /**
  * 🎯 SelectProductAttribute - בחירת תכונת מוצר
@@ -48,6 +50,9 @@ const SelectProductAttribute = ({
   const [newItem, setNewItem] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [ItemsExist, setItemsExist] = useState([]);
+  // 🆕 Multi-select state
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [isAddingMultiple, setIsAddingMultiple] = useState(false);
    
 
 const isRTL = window?.document?.documentElement?.dir === "rtl";
@@ -98,6 +103,45 @@ const isRTL = window?.document?.documentElement?.dir === "rtl";
     } catch (error) {
       console.error("Error adding product attribute:", error);
       alert(error?.response?.data?.message || __("Failed to add attribute", "whizmanage"));
+    }
+  };
+
+  const { mode } = useVariationsStore();
+
+  /**
+   * 🆕 הוספת מספר תכונות מוצר בו זמנית
+   */
+  const handleAddMultiple = async () => {
+    if (checkedItems.length === 0) return;
+
+    setIsAddingMultiple(true);
+    const variationFlag = isSimple ? false : mode === "full" ? true : false;
+
+    try {
+      // הוספה ל-Store (selectedAttributes)
+      const newItems = checkedItems.map((item) => ({
+        ...item,
+        variation: variationFlag,
+        visible: true,
+      }));
+      setSelectedAttributes((prev) => [...prev, ...newItems]);
+
+      toast.success(
+        `${checkedItems.length} ${__("attributes added successfully", "whizmanage")}`
+      );
+
+      // ניקוי ה-state וסגירת הפופאפ
+      setCheckedItems([]);
+      setOpen(false);
+      setDropdownOpen(false);
+    } catch (error) {
+      console.error("Error adding multiple product attributes:", error);
+      toast.error(
+        error?.response?.data?.message ||
+          __("Failed to add attributes", "whizmanage")
+      );
+    } finally {
+      setIsAddingMultiple(false);
     }
   };
 
@@ -193,7 +237,7 @@ const isRTL = window?.document?.documentElement?.dir === "rtl";
                 (ItemsExist.map((item, index) => (
                   <SelectAttributeItem
                     key={item.id || index}
-                    variationMood={variationMood} // ⚠️ SelectAttributeItem יקרא mode מה-Store
+                    variationMood={variationMood}
                     item={item}
                     ItemsExist={ItemsExist}
                     setItemsExist={setItemsExist}
@@ -201,6 +245,11 @@ const isRTL = window?.document?.documentElement?.dir === "rtl";
                     setSelectedAttributes={setSelectedAttributes}
                     setOpen={setOpen}
                     setDropdownOpen={setDropdownOpen}
+                    product={product}
+                    // 🆕 Multi-select props
+                    multiSelectMode={true}
+                    checkedItems={checkedItems}
+                    setCheckedItems={setCheckedItems}
                   />
                 )))
               ) : (
@@ -227,6 +276,26 @@ const isRTL = window?.document?.documentElement?.dir === "rtl";
               )}
             </CommandGroup>
           </CommandList>
+
+          {/* 🆕 כפתור הוספת תכונות מרובות - מחוץ ל-CommandList */}
+          {checkedItems.length > 0 && (
+            <div className="border-t dark:border-slate-700 p-2">
+              <Button
+                variant="default"
+                size="sm"
+                className="w-full gap-2"
+                onClick={handleAddMultiple}
+                disabled={isAddingMultiple}
+              >
+                {isAddingMultiple ? (
+                  <Loader className="size-4" />
+                ) : (
+                  <Plus className="size-4" />
+                )}
+                {__("Add", "whizmanage")} {checkedItems.length} {__("selected", "whizmanage")}
+              </Button>
+            </div>
+          )}
         </Command>
       </DropdownMenuSubContent>
     </DropdownMenuSub>

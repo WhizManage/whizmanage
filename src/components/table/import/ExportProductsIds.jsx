@@ -344,7 +344,7 @@ const ExportProductsIds = ({
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="text-xs text-red-500 h-7"
+                          className={`text-xs text-red-500 h-7 ${selectedCategories.length === 0 ? "invisible" : ""}`}
                           onClick={() => {
                             clearCategories();
                             setFilterOpen(false);
@@ -418,7 +418,7 @@ const ExportProductsIds = ({
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="text-xs text-red-500 h-7"
+                          className={`text-xs text-red-500 h-7 ${selectedStatuses.length === 0 ? "invisible" : ""}`}
                           onClick={() => {
                             clearStatuses();
                             setStatusFilterOpen(false);
@@ -471,7 +471,7 @@ const ExportProductsIds = ({
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-xs text-red-500 h-4 px-1"
+                  className={`text-xs text-red-500 h-4 px-1 ${productIds.length === 0 ? "invisible" : ""}`}
                   onClick={() => setProductIds([])}
                 >
                   <X className="h-3 w-3 mr-1" />

@@ -291,6 +291,9 @@ export default function GenericDataTable({
   const [activeType, setActiveType] = useState(null);
   const [scrollPosition, setScrollPosition] = useState(0);
 
+  // 🆕 Ref לשמירת השורה האחרונה שנבחרה (עבור Shift+Click)
+  const lastSelectedRowIdRef = useRef(null);
+
   const headerCustomActions = useMemo(() => {
     const source = toolbarConfig?.customActions ?? customActions;
 
@@ -330,28 +333,270 @@ export default function GenericDataTable({
     [config]
   );
 
+  // 🆕 Helper: normalize strings for comparison (handles Hebrew and other Unicode)
+  const normalizeForSearch = useCallback((str) => {
+    if (!str || typeof str !== "string") return "";
+    // Normalize Unicode (NFC), lowercase, and remove extra whitespace
+    return str.normalize("NFC").toLowerCase().trim();
+  }, []);
+
+  // פילטרים מקומיים מכותרות העמודות (מתחילים ב-_local_)
+  const isLocalHeaderFilter = useCallback((id) => id?.startsWith?.("_local_"), []);
+
+  // 🆕 מוציאים את הפילטר של עמודת variations_filter לסינון מקומי של תתי-שורות (ווריאציות)
+  // הפילטר הזה לא נשלח לשרת - רק מסנן מקומית את הווריאציות
+  const variationsColumnFilter = useMemo(() => {
+    const variationsFilter = (columnFilters || []).find((f) => f.id === "variations_filter");
+    return variationsFilter?.value && typeof variationsFilter.value === "string"
+      ? normalizeForSearch(variationsFilter.value)
+      : null;
+  }, [columnFilters, config?.enableGrouping, normalizeForSearch]);
+
+  // 🆕 Helper: ממיר slug של option ל-name באמצעות terms מהמוצר האב
+  // זה נדרש כי הווריאציות שומרות את ה-option כ-slug (למשל "red")
+  // אבל המשתמש מחפש לפי השם בעברית (למשל "אדום")
+  const convertOptionSlugToName = useCallback((optionValue, attr, parentProduct) => {
+    if (!optionValue || !parentProduct) return optionValue;
+
+    // מצא את שם ה-taxonomy key (למשל pa_צבע -> _pa_צבע)
+    const attrSlug = attr.slug || "";
+    const attrName = attr.name || "";
+
+    // נסה למצוא את ה-terms לפי slug (pa_צבע) או name (צבע)
+    let terms = null;
+
+    // נסה קודם לפי slug
+    if (attrSlug) {
+      const taxonomyKey = attrSlug.startsWith("pa_") ? `_${attrSlug}` : `_pa_${attrSlug}`;
+      terms = parentProduct[taxonomyKey];
+    }
+
+    // אם לא נמצא, נסה לפי name
+    if (!terms || terms.length === 0) {
+      const taxonomyKey = `_pa_${attrName}`;
+      terms = parentProduct[taxonomyKey];
+    }
+
+    if (!terms || terms.length === 0) return optionValue;
+
+    // בדוק אם זה כבר name
+    const termByName = terms.find((t) => t.name === optionValue);
+    if (termByName) return optionValue;
+
+    // חפש לפי slug והחזר את ה-name
+    const termBySlug = terms.find((t) => t.slug === optionValue);
+    if (termBySlug?.name) return termBySlug.name;
+
+    return optionValue;
+  }, []);
+
+  // 🆕 Helper: בודק אם תת-שורה (ווריאציה) תואמת לפילטר
+  // משתמש בהמרת slug ל-name כדי לתמוך בחיפוש עברית
+  const subRowMatchesFilter = useCallback((subRow, parentRow, filter) => {
+    // בדיקה בשם הווריאציה (normalized)
+    const name = normalizeForSearch(subRow.name || "");
+    if (name.includes(filter)) return true;
+
+    // בדיקה באופציות התכונות (attributes)
+    // המרת slug ל-name באמצעות terms מהמוצר האב
+    const attributes = subRow.attributes || [];
+    return attributes.some((attr) => {
+      const rawOption = attr.option || attr.value || "";
+
+      // נסה קודם את הערך הגולמי
+      const normalizedRaw = normalizeForSearch(rawOption);
+      if (normalizedRaw.includes(filter)) return true;
+
+      // נסה URL-decoded version
+      try {
+        const decoded = normalizeForSearch(decodeURIComponent(rawOption));
+        if (decoded.includes(filter)) return true;
+      } catch (e) {
+        // decodeURIComponent failed, continue
+      }
+
+      // 🆕 נסה להמיר slug ל-name באמצעות terms מהמוצר האב
+      const optionName = convertOptionSlugToName(rawOption, attr, parentRow);
+      if (optionName !== rawOption) {
+        const normalizedName = normalizeForSearch(optionName);
+        if (normalizedName.includes(filter)) return true;
+      }
+
+      // בדוק גם את שם ה-attribute
+      const attrName = normalizeForSearch(attr.name || "");
+      if (attrName.includes(filter)) return true;
+
+      return false;
+    });
+  }, [normalizeForSearch, convertOptionSlugToName]);
+
+  // 🆕 פתיחה אוטומטית של כל המוצרים עם תתי-שורות כשיש סינון בעמודת variations_filter
+  useEffect(() => {
+    // רק אם יש סינון פעיל ויש grouping מופעל
+    if (!defaultConfig.enableGrouping || !variationsColumnFilter) return;
+
+    // מוצאים את כל המוצרים שיש להם תתי-שורות שתואמות לפילטר
+    const rowsToExpand = data
+      .filter((row) => {
+        const subRows = row.subRows ?? [];
+        if (subRows.length === 0) return false;
+
+        // בודקים אם יש לפחות תת-שורה אחת שתואמת לפילטר
+        return subRows.some((subRow) => subRowMatchesFilter(subRow, row, variationsColumnFilter));
+      })
+      .map((row) => String(getAnyId(row)));
+
+    if (rowsToExpand.length > 0) {
+      const newExpanded = {};
+      rowsToExpand.forEach((id) => {
+        newExpanded[id] = true;
+      });
+      setExpanded((prev) => ({ ...prev, ...newExpanded }));
+    }
+  }, [variationsColumnFilter, data, defaultConfig.enableGrouping, subRowMatchesFilter]);
+
+  // 🆕 פילטרים מקומיים מכותרות העמודות (טקסט)
+  const localHeaderFilters = useMemo(() => {
+    return (columnFilters || [])
+      .filter((f) => isLocalHeaderFilter(f.id) && !f.id.startsWith("_local_bool_") && f.value)
+      .map((f) => ({
+        // מוציאים את הקידומת _local_ כדי לקבל את שם העמודה האמיתי
+        columnId: f.id.replace("_local_", ""),
+        value: String(f.value).toLowerCase().trim(),
+      }))
+      .filter((f) => f.value);
+  }, [columnFilters, isLocalHeaderFilter]);
+
+  // 🆕 פילטרים בוליאניים מכותרות העמודות
+  const localBoolFilters = useMemo(() => {
+    return (columnFilters || [])
+      .filter((f) => f.id?.startsWith?.("_local_bool_") && f.value)
+      .map((f) => ({
+        columnId: f.id.replace("_local_bool_", ""),
+        value: f.value, // { yes: boolean, no: boolean }
+      }));
+  }, [columnFilters]);
+
+  // 🆕 פונקציה לבדיקה אם שורה עוברת את הפילטרים המקומיים
+  const rowPassesLocalFilters = useCallback((row, filters, boolFilters) => {
+    // בדיקת פילטרים טקסטואליים
+    if (filters && filters.length > 0) {
+      const passesTextFilters = filters.every(({ columnId, value }) => {
+        const cellValue = row[columnId];
+
+        // אם אין ערך בתא
+        if (cellValue === null || cellValue === undefined || cellValue === "") {
+          return false;
+        }
+
+        // המרה לסטרינג לחיפוש
+        let searchValue = "";
+
+        if (typeof cellValue === "string") {
+          searchValue = cellValue;
+        } else if (typeof cellValue === "number" || typeof cellValue === "boolean") {
+          searchValue = String(cellValue);
+        } else if (Array.isArray(cellValue)) {
+          // מערך - מחפשים בכל הערכים
+          searchValue = cellValue
+            .map((item) => {
+              if (typeof item === "object" && item !== null) {
+                return item.name || item.label || item.title || JSON.stringify(item);
+              }
+              return String(item);
+            })
+            .join(" ");
+        } else if (typeof cellValue === "object" && cellValue !== null) {
+          // אובייקט - מחפשים בשדות נפוצים
+          searchValue = cellValue.name || cellValue.label || cellValue.title || JSON.stringify(cellValue);
+        }
+
+        return searchValue.toLowerCase().includes(value);
+      });
+
+      if (!passesTextFilters) return false;
+    }
+
+    // בדיקת פילטרים בוליאניים
+    if (boolFilters && boolFilters.length > 0) {
+      const passesBoolFilters = boolFilters.every(({ columnId, value }) => {
+        const cellValue = row[columnId];
+        const isTruthy = Boolean(cellValue);
+
+        // אם שניהם פעילים - הכל עובר
+        if (value.yes && value.no) return true;
+
+        // אם רק yes פעיל - מציגים רק true
+        if (value.yes && !value.no) return isTruthy === true;
+
+        // אם רק no פעיל - מציגים רק false
+        if (!value.yes && value.no) return isTruthy === false;
+
+        return true;
+      });
+
+      if (!passesBoolFilters) return false;
+    }
+
+    return true;
+  }, []);
+
+  // 🆕 נתונים מסוננים מקומית (לפני עיבוד subRows)
+  const locallyFilteredData = useMemo(() => {
+    if (localHeaderFilters.length === 0 && localBoolFilters.length === 0) return data;
+    return data.filter((row) => rowPassesLocalFilters(row, localHeaderFilters, localBoolFilters));
+  }, [data, localHeaderFilters, localBoolFilters, rowPassesLocalFilters]);
+
   // ⚡ יוצרים דאטה מעובד עם תתי-שורות מוגבלות לפי visibleSubRowCounts
+  // 🆕 + סינון מקומי של תתי-שורות לפי variations_filter
   const processedData = useMemo(() => {
-    if (!defaultConfig.enableGrouping) return data;
+    // משתמשים בנתונים המסוננים מקומית
+    const dataToProcess = locallyFilteredData;
 
-    return data.map((row) => {
-      const allSubRows = row.subRows ?? [];
-      if (allSubRows.length === 0) return row;
+    if (!defaultConfig.enableGrouping) {
+      return dataToProcess;
+    }
 
+    return dataToProcess.map((row) => {
+      const originalSubRows = row.subRows ?? [];
+      if (originalSubRows.length === 0) return row;
+
+      let filteredSubRows = originalSubRows;
+
+      // 🆕 סינון תתי-שורות לפי variations_filter column
+      // מסנן לפי שם הווריאציה או לפי אופציות התכונות
+      // משתמש ב-subRowMatchesFilter שתומך בהמרת slug ל-name
+      if (variationsColumnFilter) {
+        filteredSubRows = originalSubRows.filter((subRow) =>
+          subRowMatchesFilter(subRow, row, variationsColumnFilter)
+        );
+
+        // 🆕 כשיש פילטר פעיל, מחזירים את כל התוצאות המסוננות (ללא slice)
+        return {
+          ...row,
+          subRows: filteredSubRows,
+          _totalSubRows: originalSubRows.length,
+          _filteredSubRowsCount: filteredSubRows.length,
+        };
+      }
+
+      // ללא פילטר - הלוגיקה המקורית של chunked rendering
       const rowId = String(getAnyId(row));
       const visibleCount = visibleSubRowCounts[rowId];
 
-      // אם אין הגבלה, מחזירים את השורה כמו שהיא
-      if (visibleCount === undefined) return row;
+      // אם אין הגבלה על כמות, מחזירים את השורה כמו שהיא
+      if (visibleCount === undefined) {
+        return row;
+      }
 
       // מחזירים שורה עם תתי-שורות מוגבלות
       return {
         ...row,
-        subRows: allSubRows.slice(0, visibleCount),
-        _totalSubRows: allSubRows.length, // שומרים את המספר האמיתי
+        subRows: originalSubRows.slice(0, visibleCount),
+        _totalSubRows: originalSubRows.length,
       };
     });
-  }, [data, visibleSubRowCounts, defaultConfig.enableGrouping]);
+  }, [locallyFilteredData, visibleSubRowCounts, defaultConfig.enableGrouping, variationsColumnFilter, subRowMatchesFilter]);
 
   const tableContainerRef = useRef(null);
   const hasLoadedOnceRef = useRef(false); // ⬅️ חדש: לזכור אם כבר נטענו פעם אחת
@@ -490,26 +735,77 @@ export default function GenericDataTable({
         size: 66,
         minSize: 66,
         maxSize: 66,
-        cell: ({ row }) => {
+        cell: ({ row, table }) => {
           const isSelected = row.getIsSelected();
           const canExpand = row.getCanExpand();
           const isRowExpanded = row.getIsExpanded();
           const isSubRow = row.depth > 0;
 
+          // 🆕 Handler for selecting with Shift+Click and Ctrl+Click support
+          const handleRowSelection = (next, event) => {
+            const allRows = table.getRowModel().flatRows;
+            const currentRowId = row.id;
+
+            // Shift+Click - בחירת טווח
+            if (event?.shiftKey && lastSelectedRowIdRef.current) {
+              const lastIndex = allRows.findIndex(r => r.id === lastSelectedRowIdRef.current);
+              const currentIndex = allRows.findIndex(r => r.id === currentRowId);
+
+              if (lastIndex !== -1 && currentIndex !== -1) {
+                const start = Math.min(lastIndex, currentIndex);
+                const end = Math.max(lastIndex, currentIndex);
+
+                // בחר את כל השורות בטווח
+                for (let i = start; i <= end; i++) {
+                  allRows[i].toggleSelected(true);
+                }
+                return;
+              }
+            }
+
+            // Ctrl+Click (או Cmd+Click ב-Mac) - הוספה/הסרה בודדת
+            // זה ההתנהגות הרגילה של toggleSelected
+
+            // בחירה רגילה
+            row.toggleSelected(next);
+
+            // If row is expanded and has subRows, also toggle their selection
+            if (isRowExpanded && canExpand && row.subRows?.length > 0) {
+              row.subRows.forEach((subRow) => {
+                subRow.toggleSelected(next);
+              });
+            }
+
+            // שמור את השורה הנוכחית כאחרונה שנבחרה
+            lastSelectedRowIdRef.current = currentRowId;
+          };
+
+          // 🆕 Handler ל-click על ה-wrapper - תופס את ה-event עם shiftKey
+          const handleCheckboxClick = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            const next = !isSelected;
+            handleRowSelection(next, event);
+          };
+
           return (
             <div className="flex items-center justify-between gap-1">
               {/* ⚡ הזחה לתתי-שורות - מוסיפים padding מימין ב-RTL (או משמאל ב-LTR) */}
               {isSubRow && <div className="w-4 flex-shrink-0" />}
-              <Checkbox
-                isSelected={isSelected}
-                onValueChange={(next) => row.toggleSelected(next)}
-                disableAnimation={false}
-                classNames={{
-                  base: "!p-0 !m-0",
-                  wrapper:
-                    "dark:border dark:!border-slate-600 text-white focus:!ring-slate-500 bg-white dark:!bg-slate-700 m-0 p-0",
-                }}
-              />
+              <div
+                onClick={handleCheckboxClick}
+                className="cursor-pointer"
+              >
+                <Checkbox
+                  isSelected={isSelected}
+                  disableAnimation={false}
+                  classNames={{
+                    base: "!p-0 !m-0 pointer-events-none",
+                    wrapper:
+                      "dark:border dark:!border-slate-600 text-white focus:!ring-slate-500 bg-white dark:!bg-slate-700 m-0 p-0",
+                  }}
+                />
+              </div>
               {canExpand && defaultConfig.enableGrouping ? (
                 <button
                   onClick={row.getToggleExpandedHandler()}
@@ -580,12 +876,22 @@ export default function GenericDataTable({
   ]);
 
   // === מיפוי פילטרים לצד שרת (כולל date_from/date_to) ===
+  // 🆕 פילטרים שמטופלים מקומית בלבד ולא נשלחים לשרת
+  // variations_filter מסנן תתי-שורות מקומית בלבד
+  // _local_* פילטרים מקומיים מה-ColumnHeader
+  const LOCAL_ONLY_FILTERS = ["variations_filter"];
+
   const mapColumnFiltersToServer = useCallback(() => {
     const out = {};
     (columnFilters || []).forEach((f) => {
       const id = f?.id;
       const val = f?.value;
       if (!id) return;
+
+      // דלג על פילטרים שמטופלים מקומית בלבד
+      if (LOCAL_ONLY_FILTERS.includes(id)) return;
+      // דלג על פילטרים מקומיים מכותרות העמודות
+      if (isLocalHeaderFilter(id)) return;
 
       // תאריכים — מעתיקים כמו שהם (yyyy-MM-dd)
       if (id === "date_from" || id === "date_to") {

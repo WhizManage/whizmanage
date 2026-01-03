@@ -473,19 +473,19 @@ const DownloadableCell = ({
                   {/* Validation Errors */}
                   {(validationErrors[index]?.name ||
                     validationErrors[index]?.file) && (
-                    <div className="flex gap-4 mt-2 ps-16">
-                      {validationErrors[index]?.name && (
-                        <span className="text-xs text-red-500 flex-1">
-                          {validationErrors[index].name}
-                        </span>
-                      )}
-                      {validationErrors[index]?.file && (
-                        <span className="text-xs text-red-500 flex-1">
-                          {validationErrors[index].file}
-                        </span>
-                      )}
-                    </div>
-                  )}
+                      <div className="flex gap-4 mt-2 ps-16">
+                        {validationErrors[index]?.name && (
+                          <span className="text-xs text-red-500 flex-1">
+                            {validationErrors[index].name}
+                          </span>
+                        )}
+                        {validationErrors[index]?.file && (
+                          <span className="text-xs text-red-500 flex-1">
+                            {validationErrors[index].file}
+                          </span>
+                        )}
+                      </div>
+                    )}
                 </div>
               ))}
             </div>

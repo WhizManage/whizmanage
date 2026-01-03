@@ -1,4 +1,6 @@
 <?php
+if (! defined('ABSPATH')) exit;
+
 require_once WHIZMANAGE_DIR . 'includes/customers/get-customers.php';
 
 if (!class_exists('Whizmanage_rest_functions_customers')) {

@@ -5,7 +5,7 @@ import { parseDateTime } from "@internationalized/date";
 import { Portal } from "@radix-ui/react-portal";
 import { Calendar, ChevronDown, TriangleAlert } from "lucide-react";
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { formatValue } from "../../../utils/formatValue.js";
 import { Input } from "../../ui/input";
 import {
@@ -30,7 +30,7 @@ export const EditableCell = memo(function EditableCell({
   onUpdate,
   renderDisplay,
 }) {
-   
+
   const isRTL = window?.document?.documentElement?.dir === "rtl";
 
 
@@ -147,7 +147,7 @@ export const EditableCell = memo(function EditableCell({
           }
           return message;
         }
-        if (rule.custom && !rule.custom(val, row.original)) {
+        if (rule.custom && !rule.custom(val, row.original, table)) {
           const message = rule.message || __("Invalid value", "whizmanage");
           if (showToast) {
             addToast({
@@ -162,7 +162,7 @@ export const EditableCell = memo(function EditableCell({
         }
       }
       if (column.columnDef.meta?.onValidate) {
-        const message = column.columnDef.meta.onValidate(val, row.original);
+        const message = column.columnDef.meta.onValidate(val, row.original, table);
         if (message && showToast) {
           addToast({
             title: "Validation Error",
@@ -256,8 +256,16 @@ export const EditableCell = memo(function EditableCell({
       console.error("Failed to update cell (via doUpdate):", error);
       setSaveState?.("error");
 
+      const errorMessage = error.message || __("Error saving changes", "whizmanage");
+
+      addToast({
+        title: __("Error", "whizmanage"),
+        description: errorMessage,
+        color: "danger",
+      });
+
       if (isMountedRef.current) {
-        setError(error.message || __("Error saving changes", "whizmanage"));
+        setError(errorMessage);
         setValue(initialValue);
       }
     } finally {
@@ -548,34 +556,34 @@ export const EditableCell = memo(function EditableCell({
             value={
               value
                 ? (() => {
-                    try {
-                      const date = new Date(value);
-                      if (isNaN(date.getTime())) return null;
+                  try {
+                    const date = new Date(value);
+                    if (isNaN(date.getTime())) return null;
 
-                      const year = date.getFullYear();
-                      const month = String(date.getMonth() + 1).padStart(
-                        2,
-                        "0"
-                      );
-                      const day = String(date.getDate()).padStart(2, "0");
-                      const hours = String(date.getHours()).padStart(2, "0");
-                      const minutes = String(date.getMinutes()).padStart(
-                        2,
-                        "0"
-                      );
-                      const seconds = String(date.getSeconds()).padStart(
-                        2,
-                        "0"
-                      );
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(
+                      2,
+                      "0"
+                    );
+                    const day = String(date.getDate()).padStart(2, "0");
+                    const hours = String(date.getHours()).padStart(2, "0");
+                    const minutes = String(date.getMinutes()).padStart(
+                      2,
+                      "0"
+                    );
+                    const seconds = String(date.getSeconds()).padStart(
+                      2,
+                      "0"
+                    );
 
-                      const localISOString = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+                    const localISOString = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 
-                      return parseDateTime(localISOString);
-                    } catch (e) {
-                      console.error("Error parsing date for edit:", e);
-                      return null;
-                    }
-                  })()
+                    return parseDateTime(localISOString);
+                  } catch (e) {
+                    console.error("Error parsing date for edit:", e);
+                    return null;
+                  }
+                })()
                 : null
             }
             onChange={(newDate) => {
@@ -880,9 +888,8 @@ export const EditableCell = memo(function EditableCell({
                 : "group-data-[selected=true]:ml-5 group-data-[selected=false]:ml-1"
             ),
           }}
-          aria-label={`${column.columnDef.header} - ${
-            value ? __("Enabled", "whizmanage") : __("Disabled", "whizmanage")
-          }`}
+          aria-label={`${column.columnDef.header} - ${value ? __("Enabled", "whizmanage") : __("Disabled", "whizmanage")
+            }`}
         />
       </div>
     );
@@ -982,26 +989,26 @@ export const EditableCell = memo(function EditableCell({
     </div>
   );
 },
-(prevProps, nextProps) => {
-  const prevValue = prevProps.getValue();
-  const nextValue = nextProps.getValue();
+  (prevProps, nextProps) => {
+    const prevValue = prevProps.getValue();
+    const nextValue = nextProps.getValue();
 
-  if (typeof prevValue !== "object" && typeof nextValue !== "object") {
-    if (prevValue !== nextValue) return false;
-  } else {
-    if (JSON.stringify(prevValue) !== JSON.stringify(nextValue)) return false;
-  }
+    if (typeof prevValue !== "object" && typeof nextValue !== "object") {
+      if (prevValue !== nextValue) return false;
+    } else {
+      if (JSON.stringify(prevValue) !== JSON.stringify(nextValue)) return false;
+    }
 
-  if (prevProps.row.id !== nextProps.row.id) return false;
+    if (prevProps.row.id !== nextProps.row.id) return false;
 
-  if (prevProps.column.id !== nextProps.column.id) return false;
+    if (prevProps.column.id !== nextProps.column.id) return false;
 
-  const prevOriginal = prevProps.row.original;
-  const nextOriginal = nextProps.row.original;
-  if (prevOriginal?._isNew !== nextOriginal?._isNew) return false;
-  if (prevOriginal?._needsSave !== nextOriginal?._needsSave) return false;
+    const prevOriginal = prevProps.row.original;
+    const nextOriginal = nextProps.row.original;
+    if (prevOriginal?._isNew !== nextOriginal?._isNew) return false;
+    if (prevOriginal?._needsSave !== nextOriginal?._needsSave) return false;
 
-  return true;
-});
+    return true;
+  });
 
 EditableCell.displayName = "EditableCell";

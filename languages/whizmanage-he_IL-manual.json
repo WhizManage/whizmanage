@@ -5753,7 +5753,15 @@
       "Add new option": ["הוסף אפשרות חדשה"],
       "Set Sale Period": ["הגדר תקופת מבצע"],
       "Select sale period": ["בחר תקופת מבצע"],
-      "Cancel Sale Period": ["בטל תקופת מבצע"]
+      "Cancel Sale Period": ["בטל תקופת מבצע"],
+      "variations":["וריאציות"],
+      "Filter variations": ["סנן וריאציות"],
+      "Items to remove": ["פריטים להסרה"],
+      "Items to add": ["פריטים להוספה"],
+      "Set a sale price before scheduling a sale": ["הגדר מחיר מבצע לפני תזמון המבצע"],
+      "Update": ["עדכן"],
+      "Sale price must be > 0 and ≤ regular price": ["מחיר המבצע חייב להיות פחות מהמחיר הרגיל"],
+      "No image to update alt text": ["אין תמונה לעדכון טקסט אלטרנטיבי"]
     }
   }
 }

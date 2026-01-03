@@ -74,17 +74,15 @@ export function TableActionsMenu({
           {__("Export table to CSV")}
         </DropdownMenuItem> */}
 
-        <DropdownMenuItem onClick={handleResetFilters}>
-          <RefreshCw className="mr-2 h-4 w-4" />
+        <DropdownMenuItem onClick={handleResetFilters} className="rtl:flex-row-reverse">
+          <RefreshCw className="h-4 w-4" />
           {__("Reset filters", "whizmanage")}
         </DropdownMenuItem>
 
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <div className="flex items-center">
-              <Columns className="mr-2 h-4 w-4" />
-              {__("Manage columns", "whizmanage")}
-            </div>
+          <DropdownMenuSubTrigger className="rtl:flex-row-reverse">
+            <Columns className="h-4 w-4" />
+            {__("Manage columns", "whizmanage")}
           </DropdownMenuSubTrigger>
 
           <DropdownMenuSubContent

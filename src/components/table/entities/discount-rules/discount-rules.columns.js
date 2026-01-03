@@ -68,11 +68,11 @@ export function createEntityColumns(store, __, handleCellUpdate) {
     columnHelper.accessor("show_message", {
       header: __("Show Msg", "whizmanage"), // כותרת קצרה
       size: 100,
-      meta: { editable: true },
+      meta: { editable: true, filterType: "boolean" },
       cell: (info) => {
         const { row, column } = info;
         const rowId = row.original?.id ?? row.id;
-     const isRTL = window?.document?.documentElement?.dir === "rtl";
+        const isRTL = window?.document?.documentElement?.dir === "rtl";
 
 
         // ברירת מחדל ל-true אם לא מוגדר

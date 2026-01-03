@@ -21,6 +21,8 @@ import { useEffect, useState } from "react";
  import { __ } from "@wordpress/i18n";
 import SelectAttributeItem from "./SelectAttributeItem";
 import { getApi, postApi } from "/src/services/services";
+import { useVariationsStore } from "../store/variationsStore";
+import { toast } from "@/lib/utils";
 
 const decodeUrlString = (encodedString) => {
   try {
@@ -48,6 +50,9 @@ const SelectGlobalAttribute = ({
   const [open, setOpen] = useState(false);
   const [newItem, setNewItem] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  // 🆕 Multi-select state
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [isAddingMultiple, setIsAddingMultiple] = useState(false);
    
 
   const isRTL = window?.document?.documentElement?.dir === "rtl";
@@ -138,6 +143,93 @@ const SelectGlobalAttribute = ({
     } catch (error) {
       console.error("Error adding attribute:", error);
       alert(error?.response?.data?.message || __("Failed to add attribute", "whizmanage"));
+    }
+  };
+
+  const { mode, setAllAttributes } = useVariationsStore();
+
+  /**
+   * 🆕 הוספת מספר תכונות בו זמנית
+   */
+  const handleAddMultiple = async () => {
+    if (checkedItems.length === 0) return;
+
+    setIsAddingMultiple(true);
+    const variationFlag = mode === "full" ? true : false;
+
+    try {
+      // בניית רשימת התכונות החדשות
+      const newAttributes = checkedItems.map((item, index) => ({
+        id: item.id,
+        name: item.name,
+        slug: item.slug,
+        options: [],
+        position: product.attributes.length + index,
+        variation: variationFlag,
+        visible: true,
+      }));
+
+      // הוספה ל-Store (selectedAttributes)
+      const newItems = checkedItems.map((item) => ({
+        ...item,
+        variation: variationFlag,
+        options: [],
+        visible: true,
+      }));
+      setSelectedAttributes((prev) => [...prev, ...newItems]);
+
+      // הוספה ל-product.attributes ב-WooCommerce
+      if (product && product.id) {
+        const updatedAttributes = [...product.attributes, ...newAttributes];
+
+        const data = {
+          update: [
+            {
+              id: product.id,
+              attributes: updatedAttributes,
+            },
+          ],
+        };
+
+        const updateRes = await postApi(
+          `${window.siteUrl}/wp-json/wc/v3/products/batch`,
+          data
+        );
+
+        // עדכון product.attributes מהשרת
+        product.attributes = updateRes?.data.update[0].attributes;
+
+        // סנכרון allAttributes (Store)
+        setAllAttributes((prev) => {
+          const productAttributes = product.attributes;
+          const prevIds = new Set(productAttributes.map((attr) => attr.id));
+          const filteredPrev = prev.filter((attr) => !prevIds.has(attr.id));
+          return [...productAttributes, ...filteredPrev];
+        });
+      }
+
+      toast.success(
+        `${checkedItems.length} ${__("attributes added successfully", "whizmanage")}`
+      );
+
+      // ניקוי ה-state וסגירת הפופאפ
+      setCheckedItems([]);
+      setOpen(false);
+      setDropdownOpen(false);
+    } catch (error) {
+      console.error("Error adding multiple attributes:", error);
+      toast.error(
+        error?.response?.data?.message ||
+          __("Failed to add attributes", "whizmanage")
+      );
+      // במקרה של שגיאה, מבטלים את ההוספה ל-Store
+      setSelectedAttributes((prev) =>
+        prev.filter(
+          (attr) => !checkedItems.some((item) => item.id === attr.id)
+        )
+      );
+    } finally {
+      setIsAddingMultiple(false);
     }
   };
 
@@ -241,7 +333,11 @@ const SelectGlobalAttribute = ({
                     setSelectedAttributes={setSelectedAttributes}
                     setOpen={setOpen}
                     setDropdownOpen={setDropdownOpen}
-                    product={product} // 🔥 חדש: העברת product
+                    product={product}
+                    // 🆕 Multi-select props
+                    multiSelectMode={true}
+                    checkedItems={checkedItems}
+                    setCheckedItems={setCheckedItems}
                   />
                 )))
               ) : (
@@ -268,6 +364,26 @@ const SelectGlobalAttribute = ({
               )}
             </CommandGroup>
           </CommandList>
+
+          {/* 🆕 כפתור הוספת תכונות מרובות - מחוץ ל-CommandList */}
+          {checkedItems.length > 0 && (
+            <div className="border-t dark:border-slate-700 p-2">
+              <Button
+                variant="default"
+                size="sm"
+                className="w-full gap-2"
+                onClick={handleAddMultiple}
+                disabled={isAddingMultiple}
+              >
+                {isAddingMultiple ? (
+                  <Loader className="size-4" />
+                ) : (
+                  <Plus className="size-4" />
+                )}
+                {__("Add", "whizmanage")} {checkedItems.length} {__("selected", "whizmanage")}
+              </Button>
+            </div>
+          )}
         </Command>
       </DropdownMenuSubContent>
     </DropdownMenuSub>

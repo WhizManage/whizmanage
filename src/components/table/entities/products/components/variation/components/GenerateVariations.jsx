@@ -295,6 +295,7 @@ const GenerateVariations = ({
             <DropdownMenuSeparator />
             <SelectGlobalAttribute
               variationMood={true}
+              product={product}
               selectedAttributes={selectedAttributes}
               setSelectedAttributes={setSelectedAttributes}
               setDropdownOpen={setDropdownOpen}

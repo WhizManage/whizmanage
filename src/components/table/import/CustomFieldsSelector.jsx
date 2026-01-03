@@ -167,28 +167,24 @@ const CustomFieldsSelector = ({ selectedFields = [], onChange, config }) => {
             {/* 🔼 בר עליון – Select all + Clear selection + Counter */}
             <div className="px-2 py-1 flex justify-between items-center border-b dark:border-slate-700">
               <div className="flex gap-2">
-                {!isAllSelected && availableFields.length > 0 && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-xs gap-2 h-4"
-                    onClick={handleSelectAll}
-                  >
-                    <CheckSquare className="h-3 w-3" />
-                    {__("Select all", "whizmanage")}
-                  </Button>
-                )}
-                {selectedFields.length > 0 && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-xs text-red-500 h-4"
-                    onClick={clearSelection}
-                  >
-                    <X className="h-3 w-3 mr-1" />
-                    {__("Clear selection", "whizmanage")}
-                  </Button>
-                )}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`text-xs gap-2 h-4 ${isAllSelected || availableFields.length === 0 ? "invisible" : ""}`}
+                  onClick={handleSelectAll}
+                >
+                  <CheckSquare className="h-3 w-3" />
+                  {__("Select all", "whizmanage")}
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={`text-xs text-red-500 h-4 ${selectedFields.length === 0 ? "invisible" : ""}`}
+                  onClick={clearSelection}
+                >
+                  <X className="h-3 w-3 mr-1" />
+                  {__("Clear selection", "whizmanage")}
+                </Button>
               </div>
               <span className="text-xs text-slate-500 h-4">
                 {selectedFields.length} {__("Selected", "whizmanage")}

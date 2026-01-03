@@ -1,105 +1,234 @@
-=== WhizManage ===
-Contributors: whizmanage, yosefelishayov
-Tags: woocommerce, bulk edit, google sheets, product management, variations
-Requires at least: 6.4
-Tested up to: 6.9
+=== WhizManage - The Ultimate WooCommerce Management Suite ===
+Contributors: whizmanage , yosefelishayov
+Tags: woocommerce, product management, variations, bulk edit, spreadsheet, coupons, discounts
+Requires at least: 5.8
+Tested up to: 6.4
+Stable tag: 2.0.0
 Requires PHP: 7.4
-Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Manage your entire WooCommerce store smarter and faster.
+Manage your entire WooCommerce store smarter, faster, and with zero frustration.
 
 == Description ==
 
-🚀 **The #1 Manager for WooCommerce — built for speed, power, and simplicity.**
+**WhizManage - The Ultimate WooCommerce Management Suite**
 
-WhizManage is the ultimate management suite for WooCommerce, designed to simplify every aspect of running your store.
+WhizManage is a powerful admin toolkit that replaces dozens of slow and repetitive WooCommerce screens with one modern, high-performance dashboard — built for store owners, agencies, and developers who want efficiency and control.
 
-We’ve built a powerful yet easy-to-use management system for products, coupons, and orders — designed to serve millions of WooCommerce users worldwide, helping store owners, agencies, and teams work faster and smarter.
+= 🚀 Why WhizManage? =
 
-Instead of wasting time navigating between dozens of product pages, WhizManage brings everything into one modern dashboard — a smart control center for your entire store.
-
----
-
-**Free version features:**
-
-- 🧾 **Advanced Product Management** – manage simple and variable products with an intuitive, spreadsheet-style interface, smart filters, and instant bulk edits.
-- 💡 **Variation Control** – edit all variations in one place: attributes, prices, stock, SKUs, and images.
-- 🎟️ **Coupon Management** – create, duplicate, and bulk edit coupons easily.
-- ⚙️ **Clean, fast, and RTL-friendly UI** – optimized for performance and designed to feel native inside WordPress.
+* Manage products, variations, taxonomies, coupons, customers, and orders — in seconds
+* Clean, fast, React-based UI that feels native to WordPress
+* Full RTL and multilingual support
+* Built to scale from small stores to very large catalogs
 
 ---
 
-**Pro version unlocks:**
+= 🆓 Free Version Features =
 
-- 🔄 **Full Google Sheets Sync** – complete synchronization between your WooCommerce store and Google Sheets.  
-  Add new products, edit existing ones (including variations), and manage your entire catalog directly from a spreadsheet — fast, simple, and seamless.
-- 📦 **Bulk Editing Everywhere** – perform mass edits not only on products but also on coupons, prices, and other key fields, all with advanced filters and multi-selection tools.
-- 🏷️ **Taxonomy Editing Made Easy** – quickly manage categories, tags, and custom taxonomies with inline editing and instant updates.
-- ➕ **Duplicate Multiple Products at Once** – clone several products (including all variations) in a single click to save hours of manual work.
-- ⚙️ **Advanced Variations Panel** – a dedicated workspace that lets you add attributes, create variations, and edit all related data from one convenient interface.
+= 🧾 Advanced Product Management =
 
-💎 **Upgrade to Pro:**  
-Unlock all advanced features and take full control of your WooCommerce store.  
-Learn more at [WhizManage.com](https://whizmanage.com/)
+Spreadsheet-style interface for editing simple and variable products.
+
+* Quick table editing
+* Easy product creation
+* Customizable columns
+* Smart filtering and search
 
 ---
 
-**Coming Soon:**
+= 💡 Variation Control =
 
-- 🧮 **Smart Orders Management** – advanced order filters, inline editing, and automation tools for large-scale stores.
+Manage prices, stock, attributes, and images for all variations from one panel.
 
-WhizManage focuses on giving store owners clarity and control.  
-Whether you’re updating stock, creating discounts, or syncing with Google Sheets — everything is built to be intuitive, fast, and reliable.
+* Product and global attributes
+* Any Mode for shared price/stock
+* Bulk variation generation
+* Visual variation management
 
-Built with performance, usability, and scalability in mind —  
-so your store runs smoothly even with thousands of products.
+---
+
+= 🎟️ Advanced Coupon Manager =
+
+Spreadsheet-style coupon management.
+
+* Inline editing
+* Coupon duplication
+* Bulk operations
+* Filters and search
+* Expiry and usage tracking
 
 ---
 
-== Source Code ==
+= 🏷️ Discount Rules (Free – Product Adjustments) =
 
-The full, non-minified source code for WhizManage (including the React application and build tools)  
-is publicly available on GitHub:
+Basic product-level discount rules are included in the free version.
 
-👉 https://github.com/WhizManage/whizmanage
-
-This repository contains the original `/src` files and build instructions used to generate the `/build` assets included in the plugin.
+* Product price adjustments
+* Apply rules to specific products
+* Priority-based execution
+* Real-time price calculation
 
 ---
+
+= 👥 Customer Management =
+
+Customer overview and management tools.
+
+* Customer directory table
+* Search by name, email, or orders
+* Purchase summaries
+* Contact information access
+* Behavior-based filtering
+
+---
+
+= 📦 Orders Management =
+
+Efficient order handling with bulk actions.
+
+* Spreadsheet-style orders dashboard
+* Status updates
+* Bulk processing
+* Advanced filters
+* Invoice and packing slip actions
+
+---
+
+= ⚙️ Clean & Fast UI =
+
+* Light and dark mode
+* Fully responsive
+* Full RTL support
+
+---
+
+= 💎 Pro Version Unlocks =
+
+= 🔄 Google Sheets Sync =
+
+Two-way synchronization with Google Sheets.
+
+* Product and variation import
+* Real-time updates
+* Image import
+* Category mapping
+* Team collaboration
+
+---
+
+= 📦 Bulk Editing Everywhere =
+
+Mass updates across products, variations, prices, coupons, and taxonomies.
+
+* Edit hundreds of items at once
+* Apply changes to filtered results
+* Undo and redo support
+
+---
+
+= 🏷️ Discount Rules Engine (Pro) =
+
+Note: The free version includes product-level discount rules only.
+
+The Pro version unlocks advanced discount logic:
+
+* Cart-level discounts
+* Quantity-based pricing
+* Buy X Get Y (BOGO)
+* Cross-product promotions
+* Shipping discounts
+* Bundle and spend rules
+* Scheduling and priorities
+* Complex conditions
+
+---
+
+= 🏷️ Taxonomy Manager =
+
+Inline editing for categories, tags, and custom taxonomies.
+
+---
+
+= ➕ Multi-Product Duplication =
+
+Duplicate multiple products with all variations in one action.
+
+---
+
+= ⚙️ Advanced Variations Panel =
+
+Unified editor for attributes, variations, stock, SKU, pricing, and images.
+
+👉 Upgrade to Pro: https://whizmanage.com/
+
+---
+
+= 🔮 Planned Features =
+
+* Advanced automation tools
+* Extended import/export formats
+* Advanced reporting and analytics
+* Custom field mapping enhancements
+
+---
+
+= 🔌 Integrations =
+
+* Advanced Custom Fields (ACF)
+* JetEngine
+* Yoast SEO
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/whizmanage` or install directly via the WordPress plugin installer.
-2. Activate **WhizManage** through the **Plugins** screen.
-3. Open **WhizManage → Products Editor** from the admin menu.
+1. Upload the plugin to `/wp-content/plugins/whizmanage` or install via the WordPress plugin installer
+2. Activate the plugin
+3. Go to **WhizManage → Products Editor**
+
+== System Requirements ==
+
+* Updated WordPress
+* Updated WooCommerce
+* Modern browser
+* Stable internet connection
 
 == Frequently Asked Questions ==
 
-= 🔌 Which plugins does WhizManage integrate with? =
-WhizManage integrates seamlessly with several popular WordPress and WooCommerce extensions, including:
+= Is this compatible with my theme? =
+Yes. WhizManage runs in the WordPress admin and is theme-independent.
 
-- **ACF (Advanced Custom Fields)** – supports custom product fields and meta data.
-- **JetEngine** – full compatibility with custom fields and taxonomies.
-- **Yoast SEO** – edit and manage SEO titles and meta descriptions directly from the product table.
+= Does it support RTL languages? =
+Yes. Full RTL support is included.
 
-These integrations make it easy to manage your store data without switching between plugins.
 
-= 📚 Is there documentation available? =
-Yes! Full documentation, tutorials, and setup guides are available at:  
-👉 https://docs.whizmanage.com/
+= How large can my store be? =
+WhizManage is designed to handle very large product catalogs efficiently.
 
-== Screenshots ==
-
-1. Advanced product management table – view and edit all your WooCommerce products and variations in one place.
 
 == Changelog ==
 
-= 1.3.3 =
-
-- Initial public release on WordPress.org
+= 2.0.0 =
+* Initial public release
+* Products editor
+* Variations management
+* Coupon manager
+* Product-level discount rules (Free)
+* Advanced discount rules (Pro)
+* Google Sheets sync (Pro)
+* RTL and dark mode support
 
 == Upgrade Notice ==
-= 1.3.3 =
-First public release on WordPress.org with improved WooCommerce management tools.
+
+= 2.0.0 =
+Initial release of WhizManage.
+
+== Documentation ==
+
+https://docs.whizmanage.com
+
+== Support ==
+
+Documentation: https://docs.whizmanage.com  
+Email: support@whizmanage.com  
+Website: https://whizmanage.com

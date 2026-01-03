@@ -86,6 +86,30 @@ function BulkEdit({
           );
         }
       }
+      // When adding items, remove them from removeValue
+      if (field === "value") {
+        setRows((prev) =>
+          prev.map((r) => {
+            if (r.id !== id || !r.removeValue) return r;
+            return {
+              ...r,
+              removeValue: withoutOverlap(r.removeValue, value || []),
+            };
+          })
+        );
+      }
+      // When removing items, remove them from value
+      if (field === "removeValue") {
+        setRows((prev) =>
+          prev.map((r) => {
+            if (r.id !== id || !r.value) return r;
+            return {
+              ...r,
+              value: withoutOverlap(r.value, value || []),
+            };
+          })
+        );
+      }
     },
     [setRowFieldById]
   );
@@ -161,13 +185,15 @@ function BulkEdit({
     try {
       setIsLoading(true);
 
-      // 1. סינון שדות
+      // 1. סינון שדות - כולל גם שורות עם removeValue
       const fieldsToUpdate = rows.filter((editRow) => {
         const value = editRow.value;
-        if (!value) return false;
-        if (value === "No Change") return false;
-        if (Array.isArray(value) && value.length === 0) return false;
-        return true;
+        const removeValue = editRow.removeValue;
+
+        const hasValue = value && value !== "No Change" && (!Array.isArray(value) || value.length > 0);
+        const hasRemoveValue = removeValue && Array.isArray(removeValue) && removeValue.length > 0;
+
+        return hasValue || hasRemoveValue;
       });
 
       if (fieldsToUpdate.length === 0) {
@@ -203,6 +229,16 @@ function BulkEdit({
               .map((v) => (typeof v === "object" ? v.id : v))
               .filter((id) => id != null);
 
+            // Get IDs to remove
+            const removeValue = editRow.removeValue;
+            const removeValuesAsArray = Array.isArray(removeValue) ? removeValue : [];
+            const idsToRemove = new Set(
+              removeValuesAsArray
+                .map((v) => (typeof v === "object" ? v.id : v))
+                .filter((id) => id != null)
+                .map((id) => String(id))
+            );
+
             const conflictMap = {
               product_categories: "excluded_product_categories",
               excluded_product_categories: "product_categories",
@@ -221,7 +257,11 @@ function BulkEdit({
                 filteredNewIds = newIdsFromForm.filter((id) => !opposingIdSet.has(id));
               }
             }
-            changes[field] = [...new Set([...existingIds, ...filteredNewIds])];
+
+            // Merge existing + new, then remove items marked for removal
+            const mergedIds = [...new Set([...existingIds, ...filteredNewIds])];
+            const finalIds = mergedIds.filter((id) => !idsToRemove.has(String(id)));
+            changes[field] = finalIds;
             return;
           }
 
@@ -325,13 +365,16 @@ function BulkEdit({
 
           // ✅ נורמליזציה של כל שדות הטקסונומיות (לא רק categories/tags)
           allTaxonomyFieldIds.forEach(key => {
-            if (Array.isArray(patch[key]) && patch[key].length > 0) {
-              patch[key] = patch[key].map(val => {
-                const id = (typeof val === 'object') ? val.id : val;
-                const idStr = String(id);
-                const name = termNameLookup.get(idStr) || `ID: ${id}`;
-                return { id: Number(id), name: name, slug: '' };
-              });
+            if (Array.isArray(patch[key])) {
+              if (patch[key].length > 0) {
+                patch[key] = patch[key].map(val => {
+                  const id = (typeof val === 'object') ? val.id : val;
+                  const idStr = String(id);
+                  const name = termNameLookup.get(idStr) || `ID: ${id}`;
+                  return { id: Number(id), name: name, slug: '' };
+                });
+              }
+              // Empty array is valid - all items were removed
             }
           });
 
@@ -366,7 +409,7 @@ function BulkEdit({
         toast.success(__("The updates have been saved successfully.", "whizmanage"));
         setIsLoading(false);
         store?.setRowSelection?.({});
-        setRows((prev) => prev.map((r) => ({ ...r, value: undefined })));
+        setRows((prev) => prev.map((r) => ({ ...r, value: undefined, removeValue: undefined })));
         onClose?.();
       };
 
@@ -519,7 +562,10 @@ function BulkEdit({
                                   {__("Type", "whizmanage")}
                                 </th>
                                 <th className="p-2 text-start text-slate-400 !font-semibold">
-                                  {__("Items", "whizmanage")}
+                                  {__("Items to add", "whizmanage")}
+                                </th>
+                                <th className="p-2 text-start text-slate-400 !font-semibold">
+                                  {__("Items to remove", "whizmanage")}
                                 </th>
                               </tr>
                             </thead>
@@ -544,6 +590,20 @@ function BulkEdit({
                                       index={0}
                                       columnName={row.id}
                                       label={row.name}
+                                      mode="add"
+                                      disabledItems={row.removeValue || []}
+                                    />
+                                  </td>
+                                  <td className="px-2 h-12">
+                                    <AddLabelsItem
+                                      updateValue={(_, __, val) =>
+                                        handleRowChange(row.id, "removeValue", val)
+                                      }
+                                      index={0}
+                                      columnName={row.id}
+                                      label={row.name}
+                                      mode="remove"
+                                      disabledItems={row.value || []}
                                     />
                                   </td>
                                 </tr>
@@ -551,7 +611,7 @@ function BulkEdit({
 
                               {extraLabelRows.length > 0 && (
                                 <tr>
-                                  <td colSpan={2} className="p-0">
+                                  <td colSpan={3} className="p-0">
                                     <Collapsible>
                                       <CollapsibleTrigger asChild>
                                         <Button
@@ -591,6 +651,24 @@ function BulkEdit({
                                                     index={0}
                                                     columnName={row.id}
                                                     label={row.name}
+                                                    mode="add"
+                                                    disabledItems={row.removeValue || []}
+                                                  />
+                                                </td>
+                                                <td className="px-2 h-12">
+                                                  <AddLabelsItem
+                                                    updateValue={(_, __, val) =>
+                                                      handleRowChange(
+                                                        row.id,
+                                                        "removeValue",
+                                                        val
+                                                      )
+                                                    }
+                                                    index={0}
+                                                    columnName={row.id}
+                                                    label={row.name}
+                                                    mode="remove"
+                                                    disabledItems={row.value || []}
                                                   />
                                                 </td>
                                               </tr>

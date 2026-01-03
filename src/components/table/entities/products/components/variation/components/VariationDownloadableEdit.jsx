@@ -13,7 +13,7 @@ import {
 } from "@heroui/react";
 import { Link, Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { useVariationsStore } from "../store/variationsStore";
 import MediaPicker from "@components/media/MediaPicker";
 
@@ -31,8 +31,8 @@ import MediaPicker from "@components/media/MediaPicker";
  * 🆕 שימוש ב-MediaPicker החדש לכל סוגי הקבצים
  */
 const VariationDownloadableEdit = ({ row }) => {
-   
- const isRTL = window?.document?.documentElement?.dir === "rtl";
+
+  const isRTL = window?.document?.documentElement?.dir === "rtl";
 
 
   // Store
@@ -196,9 +196,9 @@ const VariationDownloadableEdit = ({ row }) => {
         />
       </div>
       {isDownloadable && (
-        <Popover 
-          placement="bottom" 
-          showArrow 
+        <Popover
+          placement="bottom"
+          showArrow
           backdrop="transparent"
           isOpen={isPopoverOpen}
           onOpenChange={setIsPopoverOpen}
@@ -207,22 +207,22 @@ const VariationDownloadableEdit = ({ row }) => {
             // 1. Modal עצמו
             // 2. Backdrop של Modal
             // 3. כל אלמנט שהוא צאצא של Modal
-            
+
             // בדיקה אם זה Modal או חלק ממנו
             const isModalElement = element.closest('[role="dialog"]');
-            
+
             // בדיקה אם זה backdrop
-            const isBackdrop = element.hasAttribute('data-slot') && 
-                               element.getAttribute('data-slot') === 'backdrop';
-            
+            const isBackdrop = element.hasAttribute('data-slot') &&
+              element.getAttribute('data-slot') === 'backdrop';
+
             // בדיקה אם זה בתוך body ישירות (Portal של Modal)
             const isInModalPortal = element.closest('[data-slot="wrapper"]');
-            
+
             // אם זה אחד מאלה - אל תסגור את הפופאובר
             if (isModalElement || isBackdrop || isInModalPortal) {
               return false;
             }
-            
+
             // בכל מקרה אחר - סגור את הפופאובר
             return true;
           }}
@@ -238,7 +238,7 @@ const VariationDownloadableEdit = ({ row }) => {
               </Button>
             </PopoverTrigger>
           </CustomTooltip>
-          
+
           <PopoverContent className="w-auto max-w-4xl p-4">
             <div className="grid gap-4">
               <div className="space-y-2">
@@ -247,106 +247,106 @@ const VariationDownloadableEdit = ({ row }) => {
                 </h4>
               </div>
 
-                {/* Download Expiry and Limit settings */}
-                <div className="flex flex-col gap-4 px-4 text-muted-foreground">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="download-expiry">
-                        {__("Download Expiry (days)", "whizmanage")}
-                      </Label>
-                      <Input
-                        id="download-expiry"
-                        type="number"
-                        min="-1"
-                        value={downloadExpiry === -1 ? "" : downloadExpiry}
-                        onChange={(e) => handleExpiryChange(e.target.value)}
-                        placeholder={__("Unlimited", "whizmanage")}
-                        className="h-8"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="download-limit">
-                        {__("Download Limit", "whizmanage")}
-                      </Label>
-                      <Input
-                        id="download-limit"
-                        type="number"
-                        min="-1"
-                        value={downloadLimit === -1 ? "" : downloadLimit}
-                        onChange={(e) => handleLimitChange(e.target.value)}
-                        placeholder={__("Unlimited", "whizmanage")}
-                        className="h-8"
-                      />
-                    </div>
+              {/* Download Expiry and Limit settings */}
+              <div className="flex flex-col gap-4 px-4 text-muted-foreground">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="download-expiry">
+                      {__("Download Expiry (days)", "whizmanage")}
+                    </Label>
+                    <Input
+                      id="download-expiry"
+                      type="number"
+                      min="-1"
+                      value={downloadExpiry === -1 ? "" : downloadExpiry}
+                      onChange={(e) => handleExpiryChange(e.target.value)}
+                      placeholder={__("Unlimited", "whizmanage")}
+                      className="h-8"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="download-limit">
+                      {__("Download Limit", "whizmanage")}
+                    </Label>
+                    <Input
+                      id="download-limit"
+                      type="number"
+                      min="-1"
+                      value={downloadLimit === -1 ? "" : downloadLimit}
+                      onChange={(e) => handleLimitChange(e.target.value)}
+                      placeholder={__("Unlimited", "whizmanage")}
+                      className="h-8"
+                    />
                   </div>
                 </div>
+              </div>
 
-                <div className="flex flex-col divide-y-1 border border-slate-200 dark:border-slate-600 divide-slate-200 dark:divide-slate-600 rounded-md gap-4 p-4 pt-0 text-muted-foreground">
-                  {downloads.map((item, index) => (
-                    <div
-                      className="grid grid-cols-5 gap-4 w-[800px] pt-4"
-                      key={index}
-                    >
-                      <div className="flex col-span-2 items-center gap-2">
-                        <Label htmlFor={`name-${index}`}>{__("Name", "whizmanage")}:</Label>
-                        <Input
-                          id={`name-${index}`}
-                          value={item.name}
-                          onChange={(e) =>
-                            handleInputChange(index, "name", e.target.value)
-                          }
-                          className="flex-1 h-8"
-                        />
-                      </div>
-                      <div className="flex col-span-2 items-center gap-2">
-                        <Label htmlFor={`file-url-${index}`}>
-                          {__("File URL:", "whizmanage")}
-                        </Label>
-                        <Input
-                          id={`file-url-${index}`}
-                          value={item.file}
-                          onChange={(e) =>
-                            handleInputChange(index, "file", e.target.value)
-                          }
-                          className="flex-1 h-8"
-                        />
-                      </div>
-                      <div className="flex gap-2 items-center">
+              <div className="flex flex-col divide-y-1 border border-slate-200 dark:border-slate-600 divide-slate-200 dark:divide-slate-600 rounded-md gap-4 p-4 pt-0 text-muted-foreground">
+                {downloads.map((item, index) => (
+                  <div
+                    className="grid grid-cols-5 gap-4 w-[800px] pt-4"
+                    key={index}
+                  >
+                    <div className="flex col-span-2 items-center gap-2">
+                      <Label htmlFor={`name-${index}`}>{__("Name", "whizmanage")}:</Label>
+                      <Input
+                        id={`name-${index}`}
+                        value={item.name}
+                        onChange={(e) =>
+                          handleInputChange(index, "name", e.target.value)
+                        }
+                        className="flex-1 h-8"
+                      />
+                    </div>
+                    <div className="flex col-span-2 items-center gap-2">
+                      <Label htmlFor={`file-url-${index}`}>
+                        {__("File URL:", "whizmanage")}
+                      </Label>
+                      <Input
+                        id={`file-url-${index}`}
+                        value={item.file}
+                        onChange={(e) =>
+                          handleInputChange(index, "file", e.target.value)
+                        }
+                        className="flex-1 h-8"
+                      />
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <Button
+                        variant="outline"
+                        className="h-8"
+                        onClick={() => handleOpenMediaPicker(index)}
+                      >
+                        {__("Choose file", "whizmanage")}
+                      </Button>
+                      <CustomTooltip title={__("Delete file", "whizmanage")}>
                         <Button
                           variant="outline"
-                          className="h-8"
-                          onClick={() => handleOpenMediaPicker(index)}
+                          size="icon"
+                          className="size-8"
+                          onClick={() => handleDeleteFile(index)}
                         >
-                          {__("Choose file", "whizmanage")}
+                          <X />
                         </Button>
-                        <CustomTooltip title={__("Delete file", "whizmanage")}>
-                          <Button
-                            variant="outline"
-                            size="icon"
-                            className="size-8"
-                            onClick={() => handleDeleteFile(index)}
-                          >
-                            <X />
-                          </Button>
-                        </CustomTooltip>
-                      </div>
+                      </CustomTooltip>
                     </div>
-                  ))}
-                </div>
-                <div className="w-full flex justify-between px-4 pb-2">
-                  <Button className="gap-2" onClick={handleAddFile}>
-                    <Plus />
-                    {__("Add file", "whizmanage")}
-                  </Button>
-                  <Button 
-                    className="gap-2"
-                    onClick={() => setIsPopoverOpen(false)}
-                  >
-                    {__("Save", "whizmanage")}
-                  </Button>
-                </div>
+                  </div>
+                ))}
               </div>
-            </PopoverContent>
+              <div className="w-full flex justify-between px-4 pb-2">
+                <Button className="gap-2" onClick={handleAddFile}>
+                  <Plus />
+                  {__("Add file", "whizmanage")}
+                </Button>
+                <Button
+                  className="gap-2"
+                  onClick={() => setIsPopoverOpen(false)}
+                >
+                  {__("Save", "whizmanage")}
+                </Button>
+              </div>
+            </div>
+          </PopoverContent>
         </Popover>
       )}
       {/* 🆕 MediaPicker Modal - מחוץ ל-HeroUI Popover */}

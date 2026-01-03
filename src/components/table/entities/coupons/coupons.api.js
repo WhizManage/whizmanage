@@ -32,14 +32,20 @@ export const couponsApiForTrash = {
 
 // =============== Main coupons API ===============
 export const couponsApi = {
-  fetchPage: async ({ page = 1, perPage = 100, search, status, discount_type } = {}) => {
+  fetchPage: async ({ page = 1, perPage = 100, search, status, discount_type, code } = {}) => {
 
     const params = new URLSearchParams();
     params.set("page", String(page));
     params.set("per_page", String(perPage));
 
-    if (search && String(search).trim()) {
-      params.set("search", String(search).trim());
+    // 🆕 Merge text column filters (code) into search
+    let finalSearch = search;
+    if (code && typeof code === 'string' && code.trim()) {
+      finalSearch = code.trim();
+    }
+
+    if (finalSearch && String(finalSearch).trim()) {
+      params.set("search", String(finalSearch).trim());
     }
     if (status && status !== "any") {
       params.set("status", status);

@@ -3,6 +3,7 @@
 import { ConfirmationDialog } from "@components/ui/custom/CustomConfirm.jsx";
 import { HeroUIProvider } from "@heroui/system";
 import { ToastProvider } from "@heroui/toast";
+import { I18nProvider } from "@react-aria/i18n";
 import { ConfigProvider } from "antd";
  import { __ } from "@wordpress/i18n";
 import { Toaster } from "sonner";
@@ -15,6 +16,7 @@ const App = () => {
   return (
     <ErrorBoundary __={__}>
       <ConfigProvider theme={{ token: { colorPrimary: "#9c27b0" } }}>
+        <I18nProvider locale="en-GB">
         <HeroUIProvider>
           <ToastProvider
             toastProps={{
@@ -41,6 +43,7 @@ const App = () => {
           />
           <Layout />
         </HeroUIProvider>
+        </I18nProvider>
       </ConfigProvider>
     </ErrorBoundary>
   );

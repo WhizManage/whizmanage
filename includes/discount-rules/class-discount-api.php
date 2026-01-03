@@ -181,32 +181,44 @@ class Whiz_Discount_API
 
         global $wpdb;
 
-        $table = Whizmanage_Discount_Functions::get_table_name(); // חייב להיות פנימי בלבד (למשל: $wpdb->prefix . 'whiz_dr_rules')
+        /**
+         * Table name is internal (not user input). Still escape as identifier.
+         */
+        $table = Whizmanage_Discount_Functions::get_table_name();
+        $table = esc_sql($table); // identifier hardening
 
-        // Whitelist לעמודות מיון
+        // Whitelist ORDER BY
         $allowed_orderby = array('id', 'name', 'type', 'status', 'start_date', 'end_date', 'priority', 'updated_at', 'created_at');
         if (! in_array($orderby, $allowed_orderby, true)) {
             $orderby = 'id';
         }
         $order = (strtoupper($order) === 'ASC') ? 'ASC' : 'DESC';
 
-        // where_sql חייב להכיל רק פרגמנטים קבועים + placeholders (%s/%d)
-        // where_args מערך שטוח תואם placeholders
-        $count_sql  = "SELECT COUNT(*) FROM {$table} WHERE {$where_sql}";
-        $select_sql = "SELECT * FROM {$table} WHERE {$where_sql} ORDER BY {$orderby} {$order} LIMIT %d OFFSET %d";
+        /**
+         * IMPORTANT:
+         * $where_sql must include ONLY fixed SQL fragments + placeholders (%s/%d).
+         * $where_args must be a flat array matching the placeholders order.
+         */
 
-        // COUNT
-        $total = (int) $wpdb->get_var(
-            $wpdb->prepare($count_sql, ...$where_args)
-        );
+        // COUNT query (build as a single string, table already escaped)
+        $count_query = "SELECT COUNT(*) FROM {$table} WHERE {$where_sql}";
 
-        // SELECT
-        $select_args = array_merge($where_args, array((int) $per_page, (int) $offset));
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Prepared below; table is internal and escaped; where_sql contains placeholders only.
+        $count_prepared = $wpdb->prepare($count_query, ...$where_args);
 
-        $items = $wpdb->get_results(
-            $wpdb->prepare($select_sql, ...$select_args),
-            ARRAY_A
-        );
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $count_prepared is prepared via $wpdb->prepare().
+        $total = (int) $wpdb->get_var($count_prepared);
+
+        // SELECT query
+        $select_query = "SELECT * FROM {$table} WHERE {$where_sql} ORDER BY {$orderby} {$order} LIMIT %d OFFSET %d";
+        $select_args  = array_merge($where_args, array((int) $per_page, (int) $offset));
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Prepared below; table is internal and escaped; where_sql contains placeholders only.
+        $select_prepared = $wpdb->prepare($select_query, ...$select_args);
+
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $select_prepared is prepared via $wpdb->prepare().
+        $items = $wpdb->get_results($select_prepared, ARRAY_A);
+
 
 
 

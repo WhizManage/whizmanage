@@ -14,6 +14,7 @@ import {
 } from "@components/table/utils/mediaUtils";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Link2, Package } from "lucide-react";
+import ProBadge from "@components/ui/nextUI/ProBadge";
 import { formatCurrency, formatValue } from "../../../../utils/formatValue.js"; // 👈 תיקון סיומת
 import CategoryTagsDisplay from "../../components/CategoryTagsDisplay.jsx";
 import CategoryTagsEdit from "../../components/CategoryTagsEdit";
@@ -145,7 +146,7 @@ const PriceHtml = ({ html }) => {
 const columnHelper = createColumnHelper();
 
 // -------- META columns factory --------
-const createMetaColumns = (store, __ ,handleCellUpdate) =>
+const createMetaColumns = (store, __, handleCellUpdate) =>
   mergedMetaData.map((field) => {
     const { key, label, type, choices } = field;
     const isImg = type === "image" || isImageKey(key);
@@ -499,7 +500,7 @@ const withVariationBehavior = (
   };
 };
 
-export const createProductsColumns = (store, __ ,handleCellUpdate) => {
+export const createProductsColumns = (store, __, handleCellUpdate) => {
   // יצירת העמודות
   const baseColumns = [
     columnHelper.accessor("name", {
@@ -512,6 +513,8 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
         customDisplayComponent: VariationNameDisplay,
         customEditComponent: VariationNameEdit,
         autoFinishOnChange: false,
+        // 🆕 סימון שלעמודה הזו יש גם סינון ווריאציות מקומי
+        hasVariationFilter: true,
       },
       accessorFn: (row) => {
         // בdדיקה נכונה לזיהוי ווריאציה - בתוך accessorFn, row הוא האובייקט הגולמי
@@ -720,9 +723,14 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
           { min: 0, message: __("Price cannot be negative", "whizmanage") },
           {
             // ✅ רגיל לא יכול להיות נמוך ממבצע; אם יש מבצע—חייב להיות רגיל > 0
-            custom: (value, row) => {
+            custom: (value, row, table) => {
+              // table.options.meta.store holds the Store API or State
+              const storeInstance = table?.options?.meta?.store;
+              const data = storeInstance?.data || storeInstance?.getState?.()?.data || [];
+              const freshRow = data.find((r) => r.id === row.id) || row;
+
               const rp = parseFloat(value || 0);
-              const sp = parseFloat(row.sale_price || 0);
+              const sp = parseFloat(freshRow.sale_price || 0);
               if (sp > 0) return rp > 0 && rp >= sp;
               return true;
             },
@@ -792,13 +800,18 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
           step: 0.01,
           placeholder: __("0.00", "whizmanage"),
         },
+
         validationRules: [
           { required: false },
           { min: 0, message: __("Price cannot be negative", "whizmanage") },
           {
             // ✅ אם יש מבצע—חייב להיות רגיל > 0, ומבצע ≤ רגיל
-            custom: (value, row) => {
-              const rp = parseFloat(row.regular_price || 0);
+            custom: (value, row, table) => {
+              const storeInstance = table?.options?.meta?.store;
+              const data = storeInstance?.data || storeInstance?.getState?.()?.data || [];
+              const freshRow = data.find((r) => r.id === row.id) || row;
+
+              const rp = parseFloat(freshRow.regular_price || 0);
               const sp = parseFloat(value || 0);
               if (sp > 0) return rp > 0 && sp <= rp;
               return true;
@@ -1211,32 +1224,29 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
             {...props}
             onUpdate={async (id, field, value, rowDataLocal, isFromHistory) => {
               const rd = rowDataLocal || rowData;
+              // ✅ Fix: Use props.table to get the LIVE store state (closure 'store' is stale)
+              const liveStore = props.table?.options?.meta?.store;
+              const liveData = liveStore?.data || [];
+              const freshRow = liveData.find((r) => r.id == id) || rd;
 
               // חייב להיות sale_price > 0 כדי שהשרת לא יאפס את התאריכים
-              const salePriceNum = parseFloat(rd?.sale_price || 0);
+              const salePriceNum = parseFloat(freshRow?.sale_price || 0);
               if ((value?.start || value?.end) && !(salePriceNum > 0)) {
                 throw new Error(__("Set a sale price before scheduling a sale", "whizmanage"));
               }
 
               try {
-                if (value.start !== undefined) {
-                  await handleCellUpdate(
-                    id,
-                    "date_on_sale_from_gmt",
-                    value.start ? stripIsoTail(value.start) : null,
-                    rd,
-                    isFromHistory
-                  );
-                }
-                if (value.end !== undefined) {
-                  await handleCellUpdate(
-                    id,
-                    "date_on_sale_to_gmt",
-                    value.end ? stripIsoTail(value.end) : null,
-                    rd,
-                    isFromHistory
-                  );
-                }
+                // ✅ Batch update both dates in one request
+                await handleCellUpdate(
+                  id,
+                  "sale_date_range",
+                  {
+                    start: value.start !== undefined ? (value.start ? stripIsoTail(value.start) : null) : undefined,
+                    end: value.end !== undefined ? (value.end ? stripIsoTail(value.end) : null) : undefined,
+                  },
+                  rd,
+                  isFromHistory
+                );
               } catch (error) {
                 console.error("Failed to update sale date range:", error);
                 throw error;
@@ -1341,51 +1351,83 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
         // מוצר אב: התמונה הראשונה במערך images
         return data.images?.[0]?.alt || "";
       },
-      cell: (props) => (
-        <EditableCell
-          {...props}
-          onUpdate={async (id, field, value, rowData, isFromHistory) => {
-            const isVariation = rowData?.parent_id && rowData.parent_id > 0;
-            const imageId = isVariation
-              ? rowData.image?.id
-              : rowData.images?.[0]?.id;
+      cell: (props) => {
+        // 🔒 חסימה עבור Free users
+        const locked = typeof window !== "undefined" && window.hasLicence === false;
+        const value = props.getValue();
 
-            if (!imageId) {
-              throw new Error(__("No image to update alt text", "whizmanage"));
-            }
+        if (locked) {
+          return (
+            <div
+              className="flex items-center gap-1 px-3 py-2 max-w-full overflow-hidden"
+              title={value || ""}
+              onMouseDown={(e) => { e.stopPropagation(); e.preventDefault(); }}
+              onClick={(e) => { e.stopPropagation(); e.preventDefault(); }}
+              aria-disabled={true}
+              data-locked="true"
+            >
+              <span className="text-muted-foreground truncate">
+                {value || "—"}
+              </span>
+              <span className="ml-1 inline-flex items-center shrink-0">
+                <ProBadge />
+              </span>
+            </div>
+          );
+        }
 
-            // Optimistic update
-            if (isVariation) {
-              const updatedImage = { ...rowData.image, alt: value };
-              store.updateItemWithHistory(id, { image: updatedImage }, false);
-            } else {
-              const updatedImages = [...(rowData.images || [])];
-              if (updatedImages[0]) {
-                updatedImages[0] = { ...updatedImages[0], alt: value };
+        return (
+          <EditableCell
+            {...props}
+            onUpdate={async (id, field, value, rowData, isFromHistory) => {
+              const isVariation = rowData?.parent_id && rowData.parent_id > 0;
+
+              // ✅ Fix: Use props.table to get the LIVE store state (closure 'store' is stale)
+              const liveStore = props.table?.options?.meta?.store;
+              const liveData = liveStore?.data || [];
+              const freshRow = liveData.find((r) => r.id == id) || rowData;
+
+              const imageId = isVariation
+                ? freshRow.image?.id
+                : freshRow.images?.[0]?.id;
+
+              if (!imageId) {
+                throw new Error(__("No image to update alt text", "whizmanage"));
               }
-              store.updateItemWithHistory(id, { images: updatedImages }, false);
-            }
 
-            try {
-              // עדכון ה-alt text ישירות ב-WordPress media
-              await import("@/services/services").then(({ putApi }) =>
-                putApi(`${window.siteUrl}/wp-json/wp/v2/media/${imageId}/`, {
-                  alt_text: value,
-                })
-              );
-            } catch (error) {
-              console.error("❌ Failed to update image alt:", error);
-              // Rollback
+              // Optimistic update
               if (isVariation) {
-                store.updateItemWithHistory(id, { image: rowData.image }, false);
+                const updatedImage = { ...freshRow.image, alt: value };
+                store.updateItemWithHistory(id, { image: updatedImage }, false);
               } else {
-                store.updateItemWithHistory(id, { images: rowData.images }, false);
+                const updatedImages = [...(freshRow.images || [])];
+                if (updatedImages[0]) {
+                  updatedImages[0] = { ...updatedImages[0], alt: value };
+                }
+                store.updateItemWithHistory(id, { images: updatedImages }, false);
               }
-              throw error;
-            }
-          }}
-        />
-      ),
+
+              try {
+                // עדכון ה-alt text ישירות ב-WordPress media
+                await import("@/services/services").then(({ putApi }) =>
+                  putApi(`${window.siteUrl}/wp-json/wp/v2/media/${imageId}/`, {
+                    alt_text: value,
+                  })
+                );
+              } catch (error) {
+                console.error("❌ Failed to update image alt:", error);
+                // Rollback
+                if (isVariation) {
+                  store.updateItemWithHistory(id, { image: rowData.image }, false);
+                } else {
+                  store.updateItemWithHistory(id, { images: rowData.images }, false);
+                }
+                throw error;
+              }
+            }}
+          />
+        );
+      },
     }),
 
     columnHelper.accessor("gallery", {
@@ -1477,6 +1519,9 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
       maxSize: 180,
       enableResizing: true,
       filterFn: columnFilterFn,
+      meta: {
+        filterType: "boolean",
+      },
       cell: (props) => {
         const { row } = props;
         const isVariation = row.depth > 0;
@@ -1502,6 +1547,9 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
       maxSize: 120,
       enableResizing: true,
       filterFn: columnFilterFn,
+      meta: {
+        filterType: "boolean",
+      },
       cell: (props) => {
         return (
           <FeaturedCell
@@ -1520,6 +1568,9 @@ export const createProductsColumns = (store, __ ,handleCellUpdate) => {
       maxSize: 150,
       enableResizing: true,
       filterFn: columnFilterFn,
+      meta: {
+        filterType: "boolean",
+      },
       cell: (props) => {
         return (
           <SoldIndividuallyCell

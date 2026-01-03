@@ -586,7 +586,12 @@ export default function VariationsTable({ ProductRow }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="w-full flex items-center justify-center">
+      <div className="w-full flex items-end justify-between px-2">
+        {/* Variations count */}
+        <div className="text-sm text-slate-500 dark:text-slate-400">
+          {sortedItems.length} {__("variations", "whizmanage")}
+        </div>
+
         <div className="relative">
           <IoIosSearch className="size-4 text-slate-500 absolute start-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           <Input
@@ -596,7 +601,11 @@ export default function VariationsTable({ ProductRow }) {
             className="h-8 !px-0 !ps-8 !pe-3 !rounded-full w-96"
           />
         </div>
+
+        {/* Empty div for balance */}
+        <div className="w-24" />
       </div>
+
       {/* Table */}
       <DndContext
         sensors={sensors}

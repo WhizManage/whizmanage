@@ -29,13 +29,27 @@ export const customersApi = {
     roles,
     role,
     is_paying_customer,
+    // 🆕 Support text column filters
+    first_name,
+    last_name,
+    email,
+    username,
   } = {}) => {
     const params = new URLSearchParams();
     params.set("page", String(page));
     params.set("per_page", String(perPage));
 
-    if (search && String(search).trim()) {
-      params.set("search", String(search).trim());
+    // 🆕 Merge text column filters into search
+    let finalSearch = search;
+    const textFilters = [first_name, last_name, email, username].filter(
+      (v) => v && typeof v === 'string' && v.trim()
+    );
+    if (textFilters.length > 0) {
+      finalSearch = textFilters[0].trim();
+    }
+
+    if (finalSearch && String(finalSearch).trim()) {
+      params.set("search", String(finalSearch).trim());
     }
 
     // ---- תפקיד בודד בלבד ----
