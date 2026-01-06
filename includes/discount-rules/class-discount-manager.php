@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-
+if (!class_exists('Whiz_Discount_Manager')) {
 class Whiz_Discount_Manager
 {
     /** Guard כדי לא להיכנס ללולאה כאשר מוסיפים/מסירים שורות מתנה */
@@ -2516,4 +2516,5 @@ protected static function create_offer_message($title, $pct, $origin, $qty)
 
         return $base_price;
     }
+}
 }

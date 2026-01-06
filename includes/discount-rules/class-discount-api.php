@@ -2,7 +2,7 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-
+if (!class_exists('Whiz_Discount_API')) {
 class Whiz_Discount_API
 {
     public function register_routes()
@@ -178,7 +178,6 @@ class Whiz_Discount_API
         if (!in_array($orderby, $allowed_orderby, true)) {
             $orderby = 'id';
         }
-
         global $wpdb;
 
         /**
@@ -634,4 +633,5 @@ class Whiz_Discount_API
 
         return rest_ensure_response($out);
     }
+}
 }
