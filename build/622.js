@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwhizmanage=self.webpackChunkwhizmanage||[]).push([[622],{72622:(e,o,n)=>{n.r(o),n.d(o,{entityToolbarConfig:()=>r,ordersToolbarConfig:()=>r});var s=n(9838);const r=e=>({entityName:"orders",endpoint:`${window.siteUrl}/wp-json/wc/v3/orders`,customActions:(0,s.R)(e)})}}]);

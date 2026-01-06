@@ -1,8 +1,8 @@
 === WhizManage - The Ultimate WooCommerce Management Suite ===
 Contributors: whizmanage , yosefelishayov
 Tags: woocommerce, product management, variations, bulk edit, spreadsheet, coupons, discounts
-Requires at least: 5.8
-Tested up to: 6.4
+Requires at least: 6.4
+Tested up to: 6.9
 Stable tag: 2.0.0
 Requires PHP: 7.4
 License: GPLv2 or later

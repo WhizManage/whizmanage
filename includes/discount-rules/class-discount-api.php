@@ -201,20 +201,17 @@ class Whiz_Discount_API
          */
 
         // COUNT query (build as a single string, table already escaped)
-        $count_query = "SELECT COUNT(*) FROM {$table} WHERE {$where_sql}";
-
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Prepared below; table is internal and escaped; where_sql contains placeholders only.
-        $count_prepared = $wpdb->prepare($count_query, ...$where_args);
+        $count_prepared = $wpdb->prepare("SELECT COUNT(*) FROM {$table} WHERE {$where_sql}", ...$where_args);
 
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $count_prepared is prepared via $wpdb->prepare().
         $total = (int) $wpdb->get_var($count_prepared);
 
         // SELECT query
-        $select_query = "SELECT * FROM {$table} WHERE {$where_sql} ORDER BY {$orderby} {$order} LIMIT %d OFFSET %d";
         $select_args  = array_merge($where_args, array((int) $per_page, (int) $offset));
 
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Prepared below; table is internal and escaped; where_sql contains placeholders only.
-        $select_prepared = $wpdb->prepare($select_query, ...$select_args);
+        $select_prepared = $wpdb->prepare("SELECT * FROM {$table} WHERE {$where_sql} ORDER BY {$orderby} {$order} LIMIT %d OFFSET %d", ...$select_args);
 
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- $select_prepared is prepared via $wpdb->prepare().
         $items = $wpdb->get_results($select_prepared, ARRAY_A);
@@ -280,10 +277,8 @@ class Whiz_Discount_API
 
         $table = esc_sql(Whizmanage_Discount_Functions::get_table_name()); // Whizmanage_Discount_Functions::get_table_name() צריך להחזיר $wpdb->prefix . '...'
 
-        $sql = "SELECT * FROM {$table} WHERE id = %d";
-
         $existing = $wpdb->get_row(
-            $wpdb->prepare($sql, $id),
+            $wpdb->prepare("SELECT * FROM {$table} WHERE id = %d", $id),
             ARRAY_A
         );
 

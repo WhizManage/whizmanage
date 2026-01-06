@@ -29,7 +29,7 @@ if (! defined('ABSPATH')) {
 /**
  * Define plugin constants.
  */
-define('WHIZMANAGE_VERSION', '1.3.3');
+define('WHIZMANAGE_VERSION', '2.0.0');
 define('WHIZMANAGE_FILE', __FILE__);
 define('WHIZMANAGE_BASENAME', plugin_basename(__FILE__));
 define('WHIZMANAGE_DIR', plugin_dir_path(__FILE__));

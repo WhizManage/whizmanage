@@ -1,19 +1,22 @@
 const path = require('path');
+const webpack = require('webpack');
 const defaults = require('@wordpress/scripts/config/webpack.config');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   ...defaults,
+externals: {
+  ...(defaults.externals || {}),
+  react: 'React',
+  'react-dom': 'ReactDOM',
+  '@wordpress/i18n': 'wp.i18n',
+},
 
-  // 👇 חשוב: לא לדרוס, אלא למזג את externals של ברירת־המחדל
-  externals: {
-    ...(defaults.externals || {}),
-    react: 'React',
-    'react-dom': 'ReactDOM',
-    // ליתר ביטחון – אפשר להשאיר מפורש (גם אם כבר קיים בדיפולט):
-    '@wordpress/i18n': 'wp.i18n',
+  optimization: {
+    ...defaults.optimization,
+    splitChunks: { cacheGroups: { default: false } },
+    runtimeChunk: false,
   },
-
   resolve: {
     ...defaults.resolve,
     alias: {
@@ -27,7 +30,6 @@ module.exports = {
       buffer: require.resolve('buffer/'),
     },
   },
-
   module: {
     ...defaults.module,
     rules: [
@@ -37,14 +39,16 @@ module.exports = {
         include: [path.resolve(__dirname, 'node_modules/@heroui')],
         use: {
           loader: 'babel-loader',
-          options: { presets: ['@babel/preset-env', '@babel/preset-react'] },
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
         },
       },
     ],
   },
-
   plugins: [
     ...defaults.plugins,
     new Dotenv(),
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
   ],
 };

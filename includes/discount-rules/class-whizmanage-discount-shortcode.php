@@ -260,17 +260,18 @@ class Whizmanage_Discount_Shortcode
         $now   = current_time('mysql');
         $table = esc_sql(WHIZ_DR_TABLE); // קבוע פנימי, לא קלט משתמש
 
-        $sql = "
-        SELECT *
-        FROM `{$table}`
-        WHERE status = %s
-          AND (start_date IS NULL OR start_date <= %s)
-          AND (end_date   IS NULL OR end_date   >= %s)
-        ORDER BY priority ASC, id DESC
-    ";
-
         $rows = $wpdb->get_results(
-            $wpdb->prepare($sql, 'publish', $now, $now),
+            $wpdb->prepare(
+                "SELECT *
+                FROM `{$table}`
+                WHERE status = %s
+                  AND (start_date IS NULL OR start_date <= %s)
+                  AND (end_date   IS NULL OR end_date   >= %s)
+                ORDER BY priority ASC, id DESC",
+                'publish',
+                $now,
+                $now
+            ),
             ARRAY_A
         );
 
