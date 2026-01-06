@@ -15,6 +15,7 @@ const couponConfig = {
     description: "",
     discount_type: "fixed_cart",
     amount: "",
+    status: "publish",  // ✅ הוספה - ברירת מחדל מפורסם
     free_shipping: false,
     date_expires: null,
     minimum_amount: "",
@@ -79,6 +80,13 @@ const couponConfig = {
           rules: {
             required: "Amount is required",
             min: { value: 0, message: "Amount must be ≥ 0" },
+            // ✅ ולידציה מותאמת: אם אחוזים, לא יותר מ-100
+            validate: (value, formValues) => {
+              if (formValues?.discount_type === "percent" && Number(value) > 100) {
+                return "Percent discount cannot exceed 100";
+              }
+              return true;
+            },
           },
           placeholder: "0.00",
           helperText:

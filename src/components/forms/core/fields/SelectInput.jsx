@@ -14,8 +14,9 @@ import {
   HoverCardTrigger,
 } from "@components/ui/hover-card";
 import { Info } from "lucide-react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { useGenericForm } from "../FormProvider";
+import { Controller } from "react-hook-form";
 
 export default function SelectInput({
   name,
@@ -25,16 +26,14 @@ export default function SelectInput({
   options = [],
   helperText,
 }) {
-   
+
   const {
-    setValue,
-    watch,
+    control,
     formState: { errors },
   } = useGenericForm();
-  
+
   const err = errors?.[name];
-  const currentValue = watch(name) || "";
-  
+
   return (
     <div className="grid w-full gap-1.5 px-2">
       <div className="flex items-center gap-1.5">
@@ -59,21 +58,30 @@ export default function SelectInput({
           {rules?.required && <span className="text-red-500 ml-1">*</span>}
         </Label>
       </div>
-      <Select
-        value={currentValue}
-        onValueChange={(value) => setValue(name, value)}
-      >
-        <SelectTrigger className="h-10 dark:bg-slate-700 dark:hover:!bg-slate-600">
-          <SelectValue placeholder={placeholder ? __(placeholder, "whizmanage") : __("Select an option", "whizmanage")} />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((opt) => (
-            <SelectItem key={opt.value} value={opt.value}>
-              {__(opt.label, "whizmanage")}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <Controller
+        name={name}
+        control={control}
+        rules={rules}
+        render={({ field }) => (
+          <Select
+            value={field.value || ""}
+            onValueChange={(value) => {
+              field.onChange(value);
+            }}
+          >
+            <SelectTrigger className="h-10 dark:bg-slate-700 dark:hover:!bg-slate-600">
+              <SelectValue placeholder={placeholder ? __(placeholder, "whizmanage") : __("Select an option", "whizmanage")} />
+            </SelectTrigger>
+            <SelectContent>
+              {options.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {__(opt.label, "whizmanage")}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+      />
       {err && (
         <p className="text-red-500 dark:text-pink-500 text-sm px-2">
           {__(err.message, "whizmanage")}

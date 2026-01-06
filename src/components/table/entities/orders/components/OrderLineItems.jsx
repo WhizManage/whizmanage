@@ -267,12 +267,14 @@ const OrderLineItems = ({
     if (exists) {
       updateLineItem(exists.id, "quantity", exists.quantity + 1);
     } else {
+      const price = parseFloat(product.price || product.regular_price || 0);
       const newItem = {
         id: Date.now(),
         product_id: product.id,
         name: product.name,
-        price: product.price || product.regular_price || "0",
+        price: price,
         quantity: 1,
+        total: price, // quantity=1, so total = price
         image: product.image || null,
         stock_status: product.stock_status || null,
       };
@@ -291,6 +293,8 @@ const OrderLineItems = ({
         const updated = { ...i, [field]: value };
         if (field === "quantity") {
           updated.quantity = parseInt(value) || 1;
+          // Recalculate total when quantity changes
+          updated.total = parseFloat(updated.price || 0) * updated.quantity;
         }
         return updated;
       })

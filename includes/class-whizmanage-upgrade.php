@@ -29,6 +29,7 @@ if (! class_exists('Whizmanage_Upgrade')) {
 		public function on_activate()
 		{
 			$this->create_or_update_schema();
+			$this->register_whizmanage_role();
 			update_option(self::OPTION_VERSION, WHIZMANAGE_VERSION);
 		}
 
@@ -43,6 +44,11 @@ if (! class_exists('Whizmanage_Upgrade')) {
 				$this->create_or_update_schema();
 				$installed = WHIZMANAGE_VERSION;
 				update_option(self::OPTION_VERSION, $installed);
+			}
+
+			// Register WhizManage role on upgrade
+			if (version_compare($installed, WHIZMANAGE_VERSION, '<')) {
+				$this->register_whizmanage_role();
 			}
 
 			// Placeholder: add future migrations here if needed, e.g. run_migrations($installed, WHIZMANAGE_VERSION);
@@ -64,7 +70,7 @@ if (! class_exists('Whizmanage_Upgrade')) {
 
 			switch ($task) {
 				case 'seed_defaults':
-					$this->migrate_column_names_to_canonical_v1(); // משנה רק name, לא נוגע ב-reservedData
+					$this->migrate_column_names_to_canonical_v1(); // Changes only name, does not touch reservedData
 					break;
 
 					// Example for future tasks:
@@ -75,6 +81,54 @@ if (! class_exists('Whizmanage_Upgrade')) {
 
 			// Remove the flag to ensure the task runs only once.
 			delete_option(self::OPTION_FORCE_TASK);
+		}
+
+		/* ======================== ROLE REGISTRATION ======================== */
+
+		/**
+		 * Register WhizManage custom role and capabilities.
+		 * Called on activation and upgrade.
+		 */
+		protected function register_whizmanage_role()
+		{
+			// Add custom capability to admin and shop_manager
+			$admin = get_role('administrator');
+			if ($admin) {
+				$admin->add_cap('use_whizmanage');
+			}
+
+			$shop_manager = get_role('shop_manager');
+			if ($shop_manager) {
+				$shop_manager->add_cap('use_whizmanage');
+			}
+
+			// Get all shop_manager capabilities and copy them to WhizManage user
+			// This gives full WooCommerce data access, but menu is restricted by our filter
+			$shop_manager_caps = array();
+			if ($shop_manager) {
+				$shop_manager_caps = $shop_manager->capabilities;
+			}
+
+			// Build WhizManage role capabilities
+			$role_caps = array_merge(
+				array(
+					'read'           => true,  // Basic WP login capability
+					'use_whizmanage' => true,  // Our custom capability
+				),
+				$shop_manager_caps
+			);
+
+			// Remove manage_woocommerce to prevent access to WooCommerce settings
+			// (our filter handles menu access separately)
+			unset($role_caps['manage_woocommerce']);
+
+			// Remove and recreate role to update capabilities
+			remove_role('whizmanage_user');
+			add_role(
+				'whizmanage_user',
+				__('WhizManage User', 'whizmanage'),
+				$role_caps
+			);
 		}
 
 		/* ======================== ONE-TIME TASKS ======================== */

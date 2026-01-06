@@ -72,7 +72,7 @@ if (!class_exists('Whizmanage_rest_functions_customers')) {
 
         public function check_permissions()
         {
-            if (current_user_can('manage_options') || current_user_can('manage_woocommerce')) {
+            if (current_user_can('manage_options') || current_user_can('manage_woocommerce') || current_user_can('use_whizmanage')) {
                 return true;
             }
 

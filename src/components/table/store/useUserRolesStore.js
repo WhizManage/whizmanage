@@ -44,6 +44,7 @@ export const useUserRolesStore = create((set, get) => ({
                     roles: [
                         { id: "administrator", name: "Administrator" },
                         { id: "shop_manager", name: "Shop Manager" },
+                        { id: "whizmanage_user", name: "WhizManage User" },
                         { id: "customer", name: "Customer" },
                         { id: "subscriber", name: "Subscriber" },
                         { id: "editor", name: "Editor" },

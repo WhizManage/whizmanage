@@ -238,7 +238,7 @@ export default function CustomerSelectInput({
     const full =
       [first_name, last_name].filter(Boolean).join(" ") || `#${selectedCustomer.id}`;
     return email ? `${full} (${email})` : full;
-  }, [selectedCustomer, placeholder, t]);
+  }, [selectedCustomer, placeholder, __]);
 
   return (
     <div className="flex flex-col w-full gap-1.5 px-2">

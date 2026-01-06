@@ -17,7 +17,7 @@ class Whizmanage_Discount_Functions
 
     public static function is_admin_allowed()
     {
-        return current_user_can('manage_woocommerce') || current_user_can('manage_options');
+        return current_user_can('manage_woocommerce') || current_user_can('manage_options') || current_user_can('use_whizmanage');
     }
 
     public static function json_decode($maybe_json)

@@ -101,6 +101,11 @@ const registry = {
     cfg: couponConfig,
     // ✅ beforeSubmit לקופונים
     beforeSubmit: (values) => {
+      // ✅ הגדרת formatted עם הערכים + סטטוס ברירת מחדל
+      const formatted = {
+        ...values,
+        status: values.status || "publish"  // ✅ ברירת מחדל: מפורסם
+      };
 
       // המרת product_categories לרשימת IDs
       if (Array.isArray(formatted.product_categories)) {
@@ -375,10 +380,22 @@ const registry = {
         }
       }
 
+      // ✅ ניקוי coupon_lines - WooCommerce API לא מקבל id ביצירת הזמנה
+      if (Array.isArray(cleaned.coupon_lines)) {
+        cleaned.coupon_lines = cleaned.coupon_lines.map((coupon) => ({
+          code: coupon.code,
+        }));
+      }
+
       // ✅ ניקוי שדות פנימיים
       delete cleaned._isNew;
       delete cleaned._needsSave;
       delete cleaned._rowElement;
+
+      // ✅ ניקוי שדות חישוביים שלא נשלחים ל-API
+      delete cleaned.subtotal;
+      delete cleaned.discount_total;
+      delete cleaned.total;
 
       // ✅ ניקוי שדות ריקים ברמה העליונה
       ["customer_note", "transaction_id"].forEach((field) => {

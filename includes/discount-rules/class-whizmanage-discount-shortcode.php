@@ -263,10 +263,10 @@ class Whizmanage_Discount_Shortcode
         $rows = $wpdb->get_results(
             $wpdb->prepare(
                 "SELECT *
-                FROM `{$table}`
-                WHERE status = %s
-                  AND (start_date IS NULL OR start_date <= %s)
-                  AND (end_date   IS NULL OR end_date   >= %s)
+        FROM `{$table}`
+        WHERE status = %s
+          AND (start_date IS NULL OR start_date <= %s)
+          AND (end_date   IS NULL OR end_date   >= %s)
                 ORDER BY priority ASC, id DESC",
                 'publish',
                 $now,

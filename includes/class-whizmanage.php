@@ -34,8 +34,204 @@ if (! class_exists('Whizmanage')) {
         {
             add_action('admin_menu', array($this, 'create_admin_menu'));
             add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'), 20);
+              
+            // Allow whizmanage_user role to access WhizManage menu
+            add_filter('user_has_cap', array($this, 'grant_whizmanage_menu_access'), 10, 4);
+            
+            // Redirect whizmanage_user to WhizManage page after login
+            add_filter('login_redirect', array($this, 'redirect_whizmanage_user_after_login'), 10, 3);
+            
+            // Hide admin notices for WhizManage users on WhizManage pages
+            add_action('admin_head', array($this, 'hide_admin_notices_for_whizmanage_user'));
+            
+            // Hide all admin menus except WhizManage for whizmanage_user role
+            add_action('admin_menu', array($this, 'hide_admin_menus_for_whizmanage_user'), 9999);
+            
+            // Block direct URL access to non-WhizManage admin pages
+            add_action('admin_init', array($this, 'restrict_admin_access_for_whizmanage_user'));
         }
 
+
+         
+        /**
+         * Redirect WhizManage users to WhizManage if they try to access other admin pages
+         */
+        public function restrict_admin_access_for_whizmanage_user()
+        {
+            // Only apply to whizmanage_user role
+            $user = wp_get_current_user();
+            if (!in_array('whizmanage_user', (array) $user->roles, true)) {
+                return;
+            }
+            
+            // Allow AJAX requests
+            if (defined('DOING_AJAX') && DOING_AJAX) {
+                return;
+            }
+            
+            // Get current page
+            $page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
+            
+            // Allow WhizManage pages
+            if (strpos($page, 'whizmanage') === 0) {
+                return;
+            }
+            
+            // Allow profile.php for user to edit their own profile
+            global $pagenow;
+            $allowed_pages = array('profile.php', 'admin-ajax.php', 'async-upload.php');
+            if (in_array($pagenow, $allowed_pages, true)) {
+                return;
+            }
+            
+            // Redirect to WhizManage
+            wp_safe_redirect(admin_url('admin.php?page=whizmanage'));
+            exit;
+        }
+        
+        /**
+         * Hide all admin menu items except WhizManage for whizmanage_user role
+         */
+        public function hide_admin_menus_for_whizmanage_user()
+        {
+            // Only apply to whizmanage_user role (not admin or shop_manager)
+            $user = wp_get_current_user();
+            if (!in_array('whizmanage_user', (array) $user->roles, true)) {
+                return;
+            }
+            
+            global $menu, $submenu;
+            
+            // List of allowed menu slugs
+            $allowed_menus = array(
+                'whizmanage',
+                'whizmanage-coupons',
+                'whizmanage-orders', 
+                'whizmanage-customers',
+                'whizmanage-discount-rules',
+            );
+            
+            // Remove all menu items except allowed ones
+            if (is_array($menu)) {
+                foreach ($menu as $key => $item) {
+                    $menu_slug = isset($item[2]) ? $item[2] : '';
+                    if (!in_array($menu_slug, $allowed_menus, true) && strpos($menu_slug, 'whizmanage') === false) {
+                        remove_menu_page($menu_slug);
+                    }
+                }
+            }
+        }
+        
+        /**
+         * Hide admin notices for WhizManage users on WhizManage pages
+         * This prevents white space from failed notice requests
+         */
+        public function hide_admin_notices_for_whizmanage_user()
+        {
+            // Only for whizmanage_user role
+            if (!current_user_can('use_whizmanage') || current_user_can('manage_options')) {
+                return;
+            }
+            
+            // Only on WhizManage pages
+            $page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
+            if (strpos($page, 'whizmanage') !== 0) {
+                return;
+            }
+            
+            // Remove all admin notices
+            remove_all_actions('admin_notices');
+            remove_all_actions('all_admin_notices');
+            
+            // Also hide via CSS as fallback
+            echo '<style>
+                .notice, .update-nag, .updated, .error, .is-dismissible,
+                #wpbody-content > .notice, #wpbody-content > .updated,
+                .wrap > .notice, .wrap > .updated,
+                /* Hide WooCommerce Admin and Elementor containers that fail to load */
+                .woocommerce-layout,
+                .woocommerce-admin-page #wpbody-content > div:not(.wrap),
+                [class*="MuiBox-root"]:empty,
+                .woocommerce-store-alerts,
+                .woocommerce-layout__header,
+                .woocommerce-inbox-panel,
+                #wc-admin-test_helper {
+                    display: none !important;
+                }
+            </style>';
+        }
+        
+        /**
+         * Redirect WhizManage users to the WhizManage page after login
+         */
+        public function redirect_whizmanage_user_after_login($redirect_to, $requested_redirect_to, $user)
+        {
+            // Check if user object is valid
+            if (!isset($user->roles) || !is_array($user->roles)) {
+                return $redirect_to;
+            }
+            
+            // If user has whizmanage_user role, redirect to WhizManage page
+            if (in_array('whizmanage_user', $user->roles, true)) {
+                return admin_url('admin.php?page=whizmanage');
+            }
+            
+            // Also redirect if user only has use_whizmanage capability but no higher roles
+            if (
+                !in_array('administrator', $user->roles, true) &&
+                !in_array('shop_manager', $user->roles, true) &&
+                user_can($user, 'use_whizmanage')
+            ) {
+                return admin_url('admin.php?page=whizmanage');
+            }
+            
+            return $redirect_to;
+        }
+        
+        /**
+         * Grant manage_woocommerce capability to whizmanage_user for WhizManage menu access only
+         * This is scoped to only affect WhizManage pages, not WooCommerce itself
+         */
+        public function grant_whizmanage_menu_access($allcaps, $caps, $args, $user)
+        {
+            // Only process if checking for manage_woocommerce
+            if (!in_array('manage_woocommerce', $caps, true)) {
+                return $allcaps;
+            }
+            
+            // If user already has it, skip
+            if (!empty($allcaps['manage_woocommerce'])) {
+                return $allcaps;
+            }
+            
+            // Only grant if user has use_whizmanage
+            if (empty($allcaps['use_whizmanage'])) {
+                return $allcaps;
+            }
+            
+            // Check if we're in admin menu building phase
+            if (doing_action('admin_menu')) {
+                $allcaps['manage_woocommerce'] = true;
+                return $allcaps;
+            }
+            
+            // Check if we're on a WhizManage admin page
+            $page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
+            if (strpos($page, 'whizmanage') === 0) {
+                $allcaps['manage_woocommerce'] = true;
+                return $allcaps;
+            }
+            
+            // Check screen ID if available
+            if (function_exists('get_current_screen')) {
+                $screen = get_current_screen();
+                if ($screen && strpos($screen->id, 'whizmanage') !== false) {
+                    $allcaps['manage_woocommerce'] = true;
+                }
+            }
+            
+            return $allcaps;
+        }
         /**
          * Create WhizManage menu and submenus under WooCommerce.
          */

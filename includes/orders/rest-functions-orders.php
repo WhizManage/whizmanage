@@ -1,8 +1,5 @@
 <?php
-require_once WHIZMANAGE_DIR . 'includes/orders/get-orders.php';
-if (! defined('ABSPATH')) {
-    exit;
-}
+require_once ABSPATH . 'wp-content/plugins/whizmanage-pro/includes/orders/get-orders.php';
 if (!class_exists('Whizmanage_rest_functions_orders')) {
     class Whizmanage_rest_functions_orders
     {
@@ -817,7 +814,7 @@ if (!class_exists('Whizmanage_rest_functions_orders')) {
         {
 
             // בדיקה אם המשתמש הנוכחי הוא מנהל אתר או מנהל חנות
-            if (current_user_can('manage_options') || current_user_can('manage_woocommerce')) {
+            if (current_user_can('manage_options') || current_user_can('manage_woocommerce') || current_user_can('use_whizmanage')) {
                 return true;
             }
 

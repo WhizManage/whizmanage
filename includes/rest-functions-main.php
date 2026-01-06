@@ -457,7 +457,8 @@ if (! class_exists('Whizmanage_rest_functions_main')) {
 		 */
 		public function permission_admin_or_shop_manager()
 		{
-			if (current_user_can('manage_options') || current_user_can('manage_woocommerce')) {
+			if (current_user_can('manage_options') || current_user_can('manage_woocommerce') || current_user_can('use_whizmanage')) {
+
 				return true;
 			}
 			return new WP_Error(

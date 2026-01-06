@@ -1,4 +1,7 @@
 <?php
+if (! defined('ABSPATH')) {
+    exit;
+}
 if (!class_exists('WhizManage_Customers')) {
 
     class WhizManage_Customers

@@ -354,13 +354,19 @@ export const couponsMasterUpdateCell = (get) => async (
     if (patch && typeof patch === "object") {
       const updates = {};
       const fieldsToSync = [
-        "status",
+        // ✅ הסרת "status" מכאן - לא נסנכרן סטטוס אלא אם זה השדה שעודכן
         "date_modified_gmt",
         "date_modified",
         "date_expires",
         "date_expires_gmt",
         "usage_count",
       ];
+
+      // ✅ סנכרון סטטוס רק אם זה השדה שהמשתמש עידכן
+      if (columnId === "status" && patch.status !== undefined) {
+        updates.status = patch.status;
+      }
+
       fieldsToSync.forEach((f) => {
         if (patch[f] !== undefined && patch[f] !== rowData[f]) {
           updates[f] = patch[f];
