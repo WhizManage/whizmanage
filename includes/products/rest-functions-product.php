@@ -892,8 +892,8 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
             // if (!is_ssl()) {
             //     return new WP_Error('rest_forbidden', esc_html__('Only accessible over HTTPS', 'whizmanage'), array('status' => 403));
             // }
-            // Check if the current user is an administrator or shop manager
-            if (current_user_can('manage_options') || current_user_can('manage_woocommerce')) {
+            // Check if the current user is an administrator or shop manageror custom role
+            if (current_user_can('manage_options') || current_user_can('manage_woocommerce') || current_user_can('use_whizmanage')) {
                 return true;
             }
 
@@ -901,7 +901,12 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
             return new WP_Error(
                 'rest_forbidden',
                 esc_html__('You do not have permissions to access this.', 'whizmanage'),
-                array('status' => 403)
+                array(
+                    'status' => 403,
+                    'debug_user_id' => get_current_user_id(),
+                    'debug_roles' => wp_get_current_user()->roles,
+                    'debug_caps' => wp_get_current_user()->allcaps,
+                )
             );
         }
 

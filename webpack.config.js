@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const defaults = require('@wordpress/scripts/config/webpack.config');
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   ...defaults,
@@ -48,7 +47,6 @@ externals: {
   },
   plugins: [
     ...defaults.plugins,
-    new Dotenv(),
     new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
   ],
 };

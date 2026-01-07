@@ -102,7 +102,7 @@ if (!class_exists('Whizmanage_rest_functions_coupons')) {
         public function permissions_check()
         {
             // בדיקה אם המשתמש הנוכחי הוא מנהל אתר או מנהל חנות
-            if (current_user_can('manage_options') || current_user_can('manage_woocommerce')) {
+             if (current_user_can('manage_options') || current_user_can('manage_woocommerce') || current_user_can('use_whizmanage')) {
                 return true;
             }
 

@@ -62,9 +62,47 @@ function whizmanage_on_activation()
 	// Create or update required DB tables.
 	whizmanage_create_main_table();
 	whizmanage_create_history_table();
+	whizmanage_register_whizmanage_role();
 }
 register_activation_hook(__FILE__, 'whizmanage_on_activation');
 
+
+/**
+ * Register WhizManage custom role and capabilities
+ * Copies all shop_manager capabilities for full WooCommerce access
+ */
+function whizmanage_register_whizmanage_role()
+{
+	// Add use_whizmanage capability to admin and shop_manager
+	$admin = get_role('administrator');
+	if ($admin) {
+		$admin->add_cap('use_whizmanage');
+	}
+
+	$shop_manager = get_role('shop_manager');
+	if ($shop_manager) {
+		$shop_manager->add_cap('use_whizmanage');
+	}
+
+	// Copy shop_manager capabilities (or fallback to basic if WC not loaded)
+	$capabilities = array(
+		'read'           => true,
+		'use_whizmanage' => true,
+	);
+
+	if ($shop_manager && !empty($shop_manager->capabilities)) {
+		$capabilities = array_merge($capabilities, $shop_manager->capabilities);
+		unset($capabilities['manage_woocommerce']); // Remove WC settings access
+	}
+
+	// Recreate role with updated capabilities
+	remove_role('whizmanage_user');
+	add_role(
+		'whizmanage_user',
+		__('WhizManage User', 'whizmanage'),
+		$capabilities
+	);
+}
 /**
  * Soft check on every admin load – show notice if WooCommerce inactive.
  */
@@ -100,7 +138,7 @@ function whizmanage_plugins_loaded_bootstrap()
 	require_once WHIZMANAGE_DIR . 'includes/orders/rest-functions-orders.php';
 	// Discount rules: register routes, manager and helpers
 	require_once WHIZMANAGE_DIR . 'includes/discount-rules/class-whizmanage-discount-init.php';
-Whizmanage_Discount_Init::init();
+	Whizmanage_Discount_Init::init();
 
 	// Bootstrap classes.
 	new Whizmanage();
@@ -134,6 +172,13 @@ add_action('plugins_loaded', function () {
 	// Run any required migrations or one-time tasks, and update the stored plugin version.
 	$up->maybe_run_upgrades();
 }, 1);
+
+
+register_deactivation_hook(__FILE__, 'whizmanage_deactivate_plugin');
+function whizmanage_deactivate_plugin()
+{
+	remove_role('whizmanage_user');
+}
 
 
 /**

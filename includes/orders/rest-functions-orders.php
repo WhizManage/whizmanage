@@ -1,5 +1,9 @@
 <?php
-require_once ABSPATH . 'wp-content/plugins/whizmanage-pro/includes/orders/get-orders.php';
+if (! defined('ABSPATH')) {
+    exit;
+}
+require_once WHIZMANAGE_DIR . 'includes/orders/get-orders.php';
+
 if (!class_exists('Whizmanage_rest_functions_orders')) {
     class Whizmanage_rest_functions_orders
     {

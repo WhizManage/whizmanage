@@ -8,11 +8,11 @@ import {
 } from "@components/ui/hover-card";
 import { Label } from "@components/ui/label";
 import { DateRangePicker } from "@heroui/date-picker";
-import { parseAbsolute } from "@internationalized/date";
+import { parseAbsolute, parseDateTime } from "@internationalized/date";
 import { CalendarClock, Info, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { useGenericForm } from "../FormProvider";
 
 export default function DateRangeInput({
@@ -29,7 +29,7 @@ export default function DateRangeInput({
   required = false,
   useGMT = false, // אם true, ישתמש ב-_gmt suffix
 }) {
-   
+
   const { control, watch, setValue } = useGenericForm();
 
   // שדות עם או בלי _gmt
@@ -39,17 +39,33 @@ export default function DateRangeInput({
   const startDate = watch(startField);
   const endDate = watch(endField);
 
+  // Helper function to safely parse dates
+  const safeParse = (dateStr) => {
+    if (!dateStr) return null;
+    try {
+      // If it looks like it has a timezone (Z or offset), use parseAbsolute
+      if (dateStr.includes('Z') || /[+-]\d{2}:\d{2}/.test(dateStr)) {
+        return parseAbsolute(dateStr);
+      }
+      // Otherwise treat as local/floating time
+      return parseDateTime(dateStr);
+    } catch (e) {
+      console.error("Date parsing error:", e, dateStr);
+      return null;
+    }
+  };
+
   const [value, setValue_] = useState({
-    start: startDate ? parseAbsolute(startDate) : null,
-    end: endDate ? parseAbsolute(endDate) : null,
+    start: safeParse(startDate),
+    end: safeParse(endDate),
   });
 
   // סנכרון עם הטופס
   useEffect(() => {
     if (startDate && endDate) {
       setValue_({
-        start: parseAbsolute(startDate),
-        end: parseAbsolute(endDate),
+        start: safeParse(startDate),
+        end: safeParse(endDate),
       });
     }
   }, [startDate, endDate]);
