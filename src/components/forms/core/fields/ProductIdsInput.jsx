@@ -25,9 +25,10 @@ import { Chip } from "@heroui/react";
 import { Check, ChevronsUpDown, Info, Package } from "lucide-react";
 import { useEffect, useState, useMemo } from "react";
 import { Controller } from "react-hook-form";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { useGenericForm } from "../FormProvider";
 import CustomTooltip from "@components/ui/nextUI/Tooltip";
+import { getApi } from "@/services/services";
 
 /* ========================= ProductSelectItem ========================= */
 function ProductSelectItem({ product, isSelected, onToggle }) {
@@ -139,24 +140,52 @@ export default function ProductIdsInput({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // נטען ישירות מה־window, בלי קריאה לשרת
   const [productsExist, setProductsExist] = useState(() => {
     return Array.isArray(window?.listProduct) ? window.listProduct : [];
   });
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // כשפותחים את הפופאבר – נוודא שיש לנו את הרשימה המעודכנת מה־window
+  // כשפותחים את הפופאבר – טוען מוצרים מ-window או מהשרת
   useEffect(() => {
     if (!isOpen) return;
 
-    setIsLoading(true);
-    try {
-      const data = Array.isArray(window?.listProduct) ? window.listProduct : [];
-      setProductsExist(data);
-    } finally {
-      setIsLoading(false);
+    // If we already have products in window.listProduct, use them
+    if (Array.isArray(window?.listProduct) && window.listProduct.length > 0) {
+      setProductsExist(window.listProduct);
+      return;
     }
+
+    // Otherwise, fetch all products from API
+    const fetchAllProducts = async () => {
+      setIsLoading(true);
+      const url = `${window.siteUrl}/wp-json/whizmanage/v1/get_product_for_coupons/`;
+      const perPage = 1000;
+      let products = [];
+      let currentPage = 1;
+
+      try {
+        while (true) {
+          const res = await getApi(`${url}?page=${currentPage}&perPage=${perPage}`);
+          const parsed = typeof res.data === "string" ? JSON.parse(res.data) : res.data;
+          const flattened = parsed.flatMap((p) => [p, ...(p.subRows || [])]);
+          products = [...products, ...flattened];
+          setProductsExist(products);
+
+          if (flattened.length < perPage) break;
+          currentPage++;
+        }
+
+        // Save to window for use in other components
+        window.listProduct = products;
+      } catch (e) {
+        console.error("Failed to fetch products:", e);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAllProducts();
   }, [isOpen]);
 
   return (

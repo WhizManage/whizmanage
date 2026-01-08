@@ -277,6 +277,13 @@ const registry = {
         downloads: cleanValues.downloads,
         download_limit: cleanValues.download_limit,
         download_expiry: cleanValues.download_expiry,
+        // ✅ Linked products
+        upsell_ids: Array.isArray(cleanValues.upsell_ids)
+          ? cleanValues.upsell_ids.map((id) => Number(id))
+          : [],
+        cross_sell_ids: Array.isArray(cleanValues.cross_sell_ids)
+          ? cleanValues.cross_sell_ids.map((id) => Number(id))
+          : [],
         // ✅ Other fields
         purchase_note: cleanValues.purchase_note,
         meta_data: cleanValues.meta_data,

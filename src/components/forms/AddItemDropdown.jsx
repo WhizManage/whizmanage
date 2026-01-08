@@ -59,13 +59,13 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
         <button
           onClick={lockedAddNew ? undefined : () => setShowFormModal(true)}
           disabled={lockedAddNew}
-          className={`flex items-center gap-2 h-full px-3 text-white text-sm font-medium rounded-s-md transition-colors ${
+          className={`flex items-center gap-1.5 sm:gap-2 h-full px-2 sm:px-3 text-white text-sm font-medium rounded-s-md transition-colors ${
             lockedAddNew ? "cursor-not-allowed opacity-80" : "hover:bg-white/10"
           }`}
           title={lockedAddNew ? __("Pro feature - Free users can create only 1 discount rule", "whizmanage") : undefined}
         >
           <Plus className="h-4 w-4" />
-          {__(triggerLabel || cfg?.triggerLabel || `Add ${uiSingular}`, "whizmanage")}
+          <span className="hidden sm:inline">{__(triggerLabel || cfg?.triggerLabel || `Add ${uiSingular}`, "whizmanage")}</span>
         </button>
 
         <div className="w-px h-5 bg-white/20" />

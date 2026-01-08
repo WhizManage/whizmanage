@@ -169,7 +169,22 @@ export default function GenericDataTable({
     addItem,
   } = store;
 
+  // 📱 Disable column pinning on mobile for better horizontal scrolling
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" && window.innerWidth < 640
+  );
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Use empty pinning on mobile to allow free horizontal scroll
+  const effectiveColumnPinning = useMemo(() =>
+    isMobile ? { left: [], right: [] } : columnPinning,
+    [isMobile, columnPinning]
+  );
 
   const selectionVersion = useMemo(
     () => Object.keys(rowSelection || {}).length,
@@ -997,7 +1012,7 @@ export default function GenericDataTable({
     state: {
       rowSelection,
       columnOrder,
-      columnPinning,
+      columnPinning: effectiveColumnPinning,
       columnSizing,
       columnSizingInfo,
       sorting,
@@ -1170,7 +1185,7 @@ export default function GenericDataTable({
     : table.getFilteredRowModel().rows;
 
   // ⚡ אופטימיזציה: יוצרים את pinKey פעם אחת במקום בכל תא
-  const pinKey = useMemo(() => JSON.stringify(columnPinning), [columnPinning]);
+  const pinKey = useMemo(() => JSON.stringify(effectiveColumnPinning), [effectiveColumnPinning]);
 
   // בדיקת חסימת שורות עבור משתמשי Free ב-discount-rules
   const noLicence = typeof window !== "undefined" && window.hasLicence === false;

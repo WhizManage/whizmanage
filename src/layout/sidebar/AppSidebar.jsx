@@ -3,6 +3,7 @@
 import { Chip } from "@heroui/react";
 import {
   Percent,
+  Settings,
   ShoppingBasket,
   ShoppingCart,
   Ticket,
@@ -57,6 +58,12 @@ const menuItems = [
     icon: Users,
     tourId: "customers-menu",
   },
+  // {
+  //   name: "Settings",
+  //   page: "whizmanage-settings",
+  //   icon: Settings,
+  //   tourId: "settings-menu",
+  // },
 ];
 
 // Get current active page from URL

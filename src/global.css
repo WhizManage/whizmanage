@@ -250,9 +250,31 @@ tbody tr td {
 }
 
 .scrollbar-whiz {
-  @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-fuchsia-600 
+  @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-fuchsia-600
   scrollbar-thumb-rounded-full scrollbar-track-rounded-full
   /* pr-[11px] hover:pr-0 rtl:pr-0 rtl:pl-[11px] rtl:hover:pl-0 */;
+}
+
+/* Hide scrollbar for mobile */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Show scrollbar only on larger screens */
+@media (min-width: 640px) {
+  .sm\:scrollbar-whiz {
+    -ms-overflow-style: auto;
+    scrollbar-width: thin;
+  }
+  .sm\:scrollbar-whiz::-webkit-scrollbar {
+    display: block;
+    width: 8px;
+    height: 8px;
+  }
 }
 
 .rdw-editor-main {

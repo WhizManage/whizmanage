@@ -42,7 +42,7 @@ const CommandInput = React.forwardRef(({ className, ...props }, ref) => (
       ref={ref}
       type="search"
       className={cn(
-        "flex h-11 w-full border-none ring-0 dark:!bg-slate-800 dark:!text-slate-300 rounded-md py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-11 w-full border-none bg-transparent ring-0 focus:ring-0 focus-visible:ring-0 focus:outline-none focus-visible:outline-none dark:!bg-slate-800 dark:!text-slate-300 rounded-md py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-search-cancel-button]:hidden",
         className
       )}
       {...props}

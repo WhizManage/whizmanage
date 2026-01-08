@@ -5,6 +5,7 @@ import {
   Container,
   Image,
   LayoutList,
+  Link2,
   Package,
   Settings2,
   Tags,
@@ -26,6 +27,8 @@ const productConfig = {
     downloads: [],
     download_expiry: -1,
     download_limit: -1,
+    upsell_ids: [],
+    cross_sell_ids: [],
   },
   primaryField: "name",
 
@@ -183,6 +186,26 @@ const productConfig = {
           expiryField: "download_expiry",
           limitField: "download_limit",
           virtualField: "virtual",
+        },
+      ],
+    },
+    {
+      title: "Linked Products",
+      icon: Link2,
+      fields: [
+        {
+          name: "upsell_ids",
+          label: "Upsells",
+          type: "productids",
+          placeholder: "Select upsell products",
+          helperText: "Upsells are products which you recommend instead of the currently viewed product, for example, products that are more profitable or better quality or more expensive.",
+        },
+        {
+          name: "cross_sell_ids",
+          label: "Cross-sells",
+          type: "productids",
+          placeholder: "Select cross-sell products",
+          helperText: "Cross-sells are products which you promote in the cart, based on the current product.",
         },
       ],
     },

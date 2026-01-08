@@ -193,10 +193,10 @@ export const Pagination = memo(function Pagination({
             </Button>
           </CustomTooltip>
 
-          <div className="flex w-[100px] items-center justify-center text-sm text-muted-foreground gap-1">
-            <span>{__("Page", "whizmanage")}</span>
+          <div className="flex w-auto sm:w-[100px] items-center justify-center text-xs sm:text-sm text-muted-foreground gap-1">
+            <span className="hidden sm:inline">{__("Page", "whizmanage")}</span>
             <span>{pageCount > 0 ? pageIndex + 1 : 0}</span>
-            <span>{__("of", "whizmanage")}</span>
+            <span>/</span>
             <span>{pageCount || 0}</span>
           </div>
 
@@ -226,16 +226,15 @@ export const Pagination = memo(function Pagination({
         </div>
 
         {/* Page Size + Row Count */}
-        <div className="flex items-center space-x-2 rtl:flex-row-reverse !bg-transparent">
-          <div className="text-sm text-muted-foreground font-normal">
+        <div className="flex items-center space-x-1.5 sm:space-x-2 rtl:flex-row-reverse !bg-transparent">
+          <div className="text-xs sm:text-sm text-muted-foreground font-normal">
             {isAll ? (
               <span>
-                {totalLabel} {__(entityName, "whizmanage") || __("items", "whizmanage")}
+                {totalLabel} <span className="hidden sm:inline">{__(entityName, "whizmanage") || __("items", "whizmanage")}</span>
               </span>
             ) : (
               <span>
-                {startRow}-{endRow} {__("of", "whizmanage")} {totalLabel}{" "}
-                {__(entityName, "whizmanage") || __("items", "whizmanage")}
+                {startRow}-{endRow} <span className="hidden sm:inline">{__("of", "whizmanage")} {totalLabel} {__(entityName, "whizmanage") || __("items", "whizmanage")}</span>
               </span>
             )}
           </div>

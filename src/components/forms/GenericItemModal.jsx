@@ -21,13 +21,14 @@ import {
   FileEdit,
 } from "lucide-react";
 import { IconBadge } from "@components/ui/custom/IconBadge";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
  import { __ } from "@wordpress/i18n";
 import { MdError } from "react-icons/md";
 import { toast } from "@/lib/utils";
 import FormProvider from "./core/FormProvider";
 import GenericForm from "./core/GenericForm";
 import { buildPayloadForEntity } from "./registry";
+import { useFieldVisibility, getEntityKeyFromName } from "@/hooks/useFieldVisibility";
 
 const GenericItemModal = ({
   onItemCreated,
@@ -50,6 +51,16 @@ const GenericItemModal = ({
   const [isEditMode, setIsEditMode] = useState(!!initialData?.id);
   const [currentProductId, setCurrentProductId] = useState(initialData?.id || null);
   const [formKey, setFormKey] = useState(0); // מפתח לאיפוס מלא של הטופס
+
+  // Field visibility filtering
+  const { filterFormConfig, isLoaded: visibilityLoaded } = useFieldVisibility();
+  const entityKey = getEntityKeyFromName(entityName);
+
+  // Filter form groups based on hidden fields settings
+  const filteredGroups = useMemo(() => {
+    if (!config?.groups) return [];
+    return filterFormConfig(entityKey, config.groups);
+  }, [config?.groups, entityKey, filterFormConfig]);
 
   // עדכון מצב עריכה כאשר initialData משתנה
   useEffect(() => {
@@ -238,18 +249,24 @@ const GenericItemModal = ({
                   size={10}
                   className="w-full h-full scrollbar-whiz px-1"
                 >
-                  <FormProvider
-                    key={formKey}
-                    initialRow={initialData || config?.defaults || {}}
-                    onSubmit={onSubmit}
-                    onError={(errors) => {
-                      console.warn("Form validation errors:", errors);
-                      setErrorMessage(__("Please fix the errors in the form", "whizmanage"));
-                    }}
-                    onProductSaved={handleProductSaved}
-                  >
-                    <GenericForm groups={config?.groups || []} />
-                  </FormProvider>
+                  {!visibilityLoaded ? (
+                    <div className="flex items-center justify-center py-12">
+                      <RefreshCcw className="w-6 h-6 animate-spin text-fuchsia-500" />
+                    </div>
+                  ) : (
+                    <FormProvider
+                      key={formKey}
+                      initialRow={initialData || config?.defaults || {}}
+                      onSubmit={onSubmit}
+                      onError={(errors) => {
+                        console.warn("Form validation errors:", errors);
+                        setErrorMessage(__("Please fix the errors in the form", "whizmanage"));
+                      }}
+                      onProductSaved={handleProductSaved}
+                    >
+                      <GenericForm groups={filteredGroups} />
+                    </FormProvider>
+                  )}
                 </ScrollShadow>
               </ModalBody>
 

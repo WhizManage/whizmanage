@@ -113,8 +113,8 @@ export const TopPanel = memo(
     );
 
     return (
-      <div className="pt-2 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <div className="pt-2 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap sm:flex-nowrap">
           {undoRedoProps && (
             <div className="flex-shrink-0 h-8">
               <UndoRedoButtons {...undoRedoProps} />
@@ -122,7 +122,7 @@ export const TopPanel = memo(
           )}
 
           {undoRedoProps && (
-            <div className="h-8 w-px bg-slate-200 dark:bg-slate-700" />
+            <div className="h-8 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
           )}
 
           {Array.isArray(enableFilters) &&
@@ -190,17 +190,17 @@ export const TopPanel = memo(
           )}
 
           {customActions && (
-            <div className="flex items-center gap-2">{customActions}</div>
+            <div className="flex items-center gap-1.5 sm:gap-2">{customActions}</div>
           )}
 
-          <div className="h-8 w-px bg-slate-200 dark:bg-slate-700" />
+          <div className="h-8 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block" />
 
-          <div className="relative h-8 flex-1 max-w-72 rounded-lg hover:shadow-sm transition-shadow">
-            <Search className="absolute start-2 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4 pointer-events-none" />
+          <div className="relative w-full sm:w-auto sm:flex-1 sm:max-w-72 min-w-[120px] rounded-lg hover:shadow-sm transition-shadow order-first sm:order-none mb-0.5 sm:mb-0">
+            <Search className="absolute start-2 top-1/2 -translate-y-1/2 text-slate-400 h-3 sm:h-4 w-3 sm:w-4 pointer-events-none" />
             <Input
               value={localFilter}
               onChange={handleInputChange}
-              className="w-full h-8 !ps-8 !pe-8 border rounded-lg"
+              className="w-full h-[22px] sm:h-8 !ps-6 sm:!ps-8 !pe-6 sm:!pe-8 border rounded sm:rounded-lg text-[11px] sm:text-sm"
               placeholder={__("Search", "whizmanage")}
               type="text"
               aria-label={__("Search in table", "whizmanage")}
@@ -209,10 +209,10 @@ export const TopPanel = memo(
               <CustomTooltip title={__("Clear search", "whizmanage")} instantClose>
                 <button
                   onClick={handleClear}
-                  className="absolute end-2 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-1 rounded-sm hover:bg-slate-200 dark:hover:bg-slate-700"
+                  className="absolute end-1.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-0.5 rounded-sm hover:bg-slate-200 dark:hover:bg-slate-700"
                   aria-label={__("Clear search", "whizmanage")}
                 >
-                  <X className="h-3.5 w-3.5" />
+                  <X className="h-3 w-3" />
                 </button>
               </CustomTooltip>
             )}
@@ -231,7 +231,7 @@ export const TopPanel = memo(
             </>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
           {/* ✅ Import Button - נעילה לפי window.hasLicence בלבד */}
           {importConfig?.enabled && importConfig?.showInTopPanel && !isTrash && (
             <>

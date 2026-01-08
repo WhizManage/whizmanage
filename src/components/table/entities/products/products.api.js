@@ -334,6 +334,8 @@ export const productsApi = {
       "date_on_sale_from_gmt",
       "sale_date_range", // 🆕 Batch field
       "global_unique_id",
+      "upsell_ids",
+      "cross_sell_ids",
     ]);
 
     if (!knownFields.has(field)) {
@@ -483,6 +485,14 @@ export const productsApi = {
             payload.date_on_sale_to_gmt = cleanValue.end ? String(cleanValue.end) : "";
           }
         }
+        break;
+
+      case "upsell_ids":
+      case "cross_sell_ids":
+        // WooCommerce expects array of product IDs
+        payload[field] = Array.isArray(cleanValue)
+          ? cleanValue.map((id) => parseInt(id, 10)).filter(Number.isInteger)
+          : [];
         break;
 
       default:

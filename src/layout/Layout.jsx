@@ -16,6 +16,7 @@ import CouponsTablePage from "@/components/table/entities/coupons/CouponsPage";
 import OrdersTablePage from "@/components/table/entities/orders/OrdersPage";
 import DiscountRulesPage from "@/components/table/entities/discount-rules/DiscountRulesPage";
 import CustomersTablePage from "@/components/table/entities/customers/CustomersPage";
+import SettingsPage from "@/components/settings/SettingsPage";
 
 // פתרון בעיית ריקורסיה בצד העיצוב במיוחד בטבלה של הווריאציות
 export function useSafeFocusPatch() {
@@ -42,7 +43,7 @@ export function useSafeFocusPatch() {
 export default function Layout() {
   useSafeFocusPatch();
   useEffect(() => {
-
+ 
   }, []);
 
   window.hasLicence = false;
@@ -92,6 +93,9 @@ export default function Layout() {
                     }
                     if (currentUrl === baseUrl + "whizmanage-discount-rules") {
                       return <DiscountRulesPage />;
+                    }
+                    if (currentUrl === baseUrl + "whizmanage-settings") {
+                      return <SettingsPage />;
                     }
 
                     return null;
