@@ -21,7 +21,7 @@ const FeaturedCell = ({ row, table, onUpdate }) => {
         <button
           onClick={handleToggleFeatured}
           className={cn(
-            "p-2 rounded-md transition-all cursor-pointer",
+            "p-1 rounded-md transition-all cursor-pointer",
             "hover:scale-110 active:scale-95",
             isFeatured
               ? "text-fuchsia-600 hover:text-pink-500"

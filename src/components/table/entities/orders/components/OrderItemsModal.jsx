@@ -159,7 +159,7 @@ export default function OrderItemsModal({
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <svg
-                    className="animate-spin h-4 w-4"
+                    className="animate-spin size-4"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

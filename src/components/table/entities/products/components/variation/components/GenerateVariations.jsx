@@ -238,7 +238,7 @@ const GenerateVariations = ({
 
   return (
     <div className="w-full flex flex-col gap-4 items-center justify-center">
-      <div className="w-full" ref={ref1}>
+      <div className="w-full" ref={ref1} data-tour="variations-step-1">
         <table className="w-full">
           <thead className="border-b dark:border-b-slate-700">
             <tr className="font-semibold">
@@ -246,7 +246,7 @@ const GenerateVariations = ({
               <th className="w-32 p-2 text-start font-extralight">{__("Attribute", "whizmanage")}</th>
               <th className="w-24 p-2 text-start font-extralight">{__("Type", "whizmanage")}</th>
               <th className="w-28 p-2 text-start font-extralight">{__("For variations", "whizmanage")}</th>
-              <th className="p-2 text-start font-extralight" ref={ref2}>{__("Options", "whizmanage")}</th>
+              <th className="p-2 text-start font-extralight" ref={ref2} data-tour="variations-step-2">{__("Options", "whizmanage")}</th>
               <th className="w-10 p-2"></th>
             </tr>
           </thead>
@@ -319,6 +319,7 @@ const GenerateVariations = ({
           disabled={selectedAttributes?.length < 1 || potentialVariationsCount === 0}
           size="sm"
           className="relative"
+          data-tour="variations-step-3"
         >
           {__("Combine & Generate", "whizmanage")}
           {potentialVariationsCount > 0 && (

@@ -178,7 +178,7 @@ const isRTL = (document.documentElement.dir || "ltr") === "rtl";
           variant="outline"
           size="icon"
         >
-          {allExported ? <Eye className="w-4 h-4" /> : <ExternalLink className="w-4 h-4" />}
+          {allExported ? <Eye className="size-4" /> : <ExternalLink className="size-4" />}
         </Button>
       </CustomTooltip>
     );

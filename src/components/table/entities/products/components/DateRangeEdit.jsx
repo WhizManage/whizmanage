@@ -217,7 +217,7 @@ const DateRangeEdit = ({
             className="h-8 flex items-center gap-2"
             disabled={isLoading}
           >
-            <CalendarClock className="h-4 w-4 opacity-50" />
+            <CalendarClock className="size-4 opacity-50" />
             <span className="text-sm">{translate("Set Sale Period","whizmanage")}</span>
           </Button>
         )}
@@ -285,10 +285,10 @@ const DateRangeEdit = ({
                 onClick={handleClearDates}
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 hover:bg-red-50 dark:hover:bg-fuchsia-900/20"
+                className="size-7 hover:bg-red-50 dark:hover:bg-fuchsia-900/20"
                 disabled={isLoading}
               >
-                <X className="h-3.5 w-3.5 text-fuchsia-500" />
+                <X className="size-3.5 text-fuchsia-600" />
               </Button>
             </CustomTooltip>
           </>

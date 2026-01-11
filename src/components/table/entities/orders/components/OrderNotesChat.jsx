@@ -130,7 +130,7 @@ const OrderNotesChat = ({ row }) => {
     n.added_by === "Customer" ? __("Customer", "whizmanage") : n.customer_note ? __("To Customer", "whizmanage") : __("Internal Note", "whizmanage");
 
   const iconFor = (n) =>
-    n.added_by === "Customer" ? <User className="w-4 h-4" /> : n.customer_note ? <Users className="w-4 h-4" /> : <Lock className="w-4 h-4" />;
+    n.added_by === "Customer" ? <User className="size-4" /> : n.customer_note ? <Users className="size-4" /> : <Lock className="size-4" />;
 
   const stylesFor = (n) => {
     const isFromCustomer = n.added_by === "Customer";
@@ -167,7 +167,7 @@ const OrderNotesChat = ({ row }) => {
         size="sm"
         className="mr-2 rtl:ml-2 rtl:mr-0 !h-8 flex items-center gap-2 transition-all duration-200"
       >
-        <MessageCircle className="w-4 h-4" />
+        <MessageCircle className="size-4" />
         {__("Order Notes", "whizmanage")}
       </Button>
       <Modal
@@ -196,7 +196,7 @@ const OrderNotesChat = ({ row }) => {
           <ModalHeader className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
             <div className="flex items-center gap-3 py-2">
               <div className="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg">
-                <MessageCircle className="w-5 h-5 text-slate-600 dark:text-slate-300" />
+                <MessageCircle className="size-5 text-slate-600 dark:text-slate-300" />
               </div>
               <h2 className="text-xl font-semibold text-slate-900 dark:text-white">{__("Order Notes", "whizmanage")}</h2>
             </div>
@@ -225,7 +225,7 @@ const OrderNotesChat = ({ row }) => {
                                 onClick={() => delNote(n.id)}
                                 className="mx-2 w-6 h-6 rounded-md bg-slate-200/40 hover:bg-slate-500/30 dark:bg-slate-900/30 dark:hover:bg-slate-500/30 text-slate-500 hover:text-slate-600 dark:text-slate-300 dark:hover:text-slate-300 opacity-0 group-hover:opacity-100 transition-all duration-200 flex items-center justify-center"
                               >
-                                <Trash2 className="w-3 h-3" />
+                                <Trash2 className="size-3" />
                               </button>
                             </CustomTooltip>
                           </div>
@@ -235,7 +235,7 @@ const OrderNotesChat = ({ row }) => {
                   })
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full text-slate-400 dark:text-slate-500">
-                    <MessageCircle className="w-16 h-16 mb-4 opacity-50" />
+                    <MessageCircle className="size-16 mb-4 opacity-50" />
                     <p className="text-lg font-medium">{__("No notes yet", "whizmanage")}</p>
                     <p className="text-sm">{__("Start a conversation...", "whizmanage")}</p>
                   </div>
@@ -262,7 +262,7 @@ const OrderNotesChat = ({ row }) => {
                             mode === "customer" ? "bg-fuchsia-500 hover:bg-fuchsia-600" : "bg-pink-500 hover:bg-pink-600"
                           } disabled:bg-slate-300 disabled:cursor-not-allowed text-white flex items-center justify-center transition-colors shadow-md`}
                         >
-                          <Send className="w-4 h-4" />
+                          <Send className="size-4" />
                         </button>
                       </CustomTooltip>
                     </div>
@@ -280,7 +280,7 @@ const OrderNotesChat = ({ row }) => {
                       onClick={() => setMode("private")}
                       className="flex items-center gap-2"
                     >
-                      <Lock className="w-4 h-4" />
+                      <Lock className="size-4" />
                       {__("Add Private Note", "whizmanage")}
                     </Button>
                     <Button
@@ -288,7 +288,7 @@ const OrderNotesChat = ({ row }) => {
                       onClick={() => setMode("customer")}
                       className="flex items-center gap-2"
                     >
-                      <Users className="w-4 h-4" />
+                      <Users className="size-4" />
                       {__("Add Customer Note", "whizmanage")}
                     </Button>
                   </div>

@@ -3,7 +3,7 @@ Contributors: whizmanage , yosefelishayov
 Tags: woocommerce, product management, variations, bulk edit, spreadsheet, coupons, discounts
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 2.0.0
+Stable tag: 2.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -208,6 +208,13 @@ WhizManage is designed to handle very large product catalogs efficiently.
 
 == Changelog ==
 
+= 2.1.1 =
+* Fixed readme.txt version mismatch.
+
+= 2.1.0 =
+* Added General Settings area
+* Bug fixes and performance improvements
+
 = 2.0.0 =
 * Initial public release
 * Products editor
@@ -217,6 +224,7 @@ WhizManage is designed to handle very large product catalogs efficiently.
 * Advanced discount rules (Pro)
 * Google Sheets sync (Pro)
 * RTL and dark mode support
+
 
 == Upgrade Notice ==
 

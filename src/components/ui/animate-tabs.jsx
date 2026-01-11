@@ -12,7 +12,7 @@ const AnimateTabsList = React.forwardRef(({ className, ...props }, ref) => (
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "relative inline-flex h-12 items-center justify-center rounded-lg sm:rounded-xl bg-slate-100 dark:bg-slate-700/70 p-1.5 sm:p-1 text-slate-500 dark:text-slate-400 dark:border dark:border-slate-600/50",
+      "relative inline-flex items-center justify-center rounded-lg sm:rounded-xl bg-slate-100 dark:bg-slate-700/70 p-1 text-slate-500 dark:text-slate-400 dark:border dark:border-slate-600/50",
       className
     )}
     {...props}
@@ -78,7 +78,7 @@ const AnimateTabsTriggerSimple = React.forwardRef(
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2",
           "disabled:pointer-events-none disabled:opacity-50",
           isActive
-            ? "text-slate-900 dark:text-white"
+            ? "text-fuchsia-600 dark:text-fuchsia-400"
             : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200",
           className
         )}

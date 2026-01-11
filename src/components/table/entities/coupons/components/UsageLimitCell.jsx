@@ -227,7 +227,7 @@ const UsageLimitCell = ({ getValue, row, column, table, onUpdate }) => {
                 </h2>
                 <HoverCard openDelay={300}>
                   <HoverCardTrigger asChild>
-                    <Info className="h-5 w-5 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
+                    <Info className="size-5 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
                   </HoverCardTrigger>
                   <HoverCardContent className="w-80">
                     <div className="space-y-1">
@@ -253,7 +253,7 @@ const UsageLimitCell = ({ getValue, row, column, table, onUpdate }) => {
                 <div className="w-full flex items-center justify-start gap-1.5 px-1">
                   <HoverCard openDelay={300}>
                     <HoverCardTrigger asChild>
-                      <Info className="h-3 w-3 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
+                      <Info className="size-3 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
                     </HoverCardTrigger>
                     <HoverCardContent className="w-80">
                       <div className="space-y-1">
@@ -282,7 +282,7 @@ const UsageLimitCell = ({ getValue, row, column, table, onUpdate }) => {
                 <div className="w-full flex items-center justify-start gap-1.5 px-1">
                   <HoverCard openDelay={300}>
                     <HoverCardTrigger asChild>
-                      <Info className="h-3 w-3 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
+                      <Info className="size-3 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
                     </HoverCardTrigger>
                     <HoverCardContent className="w-80">
                       <div className="space-y-1">
@@ -319,7 +319,7 @@ const UsageLimitCell = ({ getValue, row, column, table, onUpdate }) => {
                 <div className="w-full flex items-center justify-start gap-1.5 px-1">
                   <HoverCard openDelay={300}>
                     <HoverCardTrigger asChild>
-                      <Info className="h-3 w-3 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
+                      <Info className="size-3 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
                     </HoverCardTrigger>
                     <HoverCardContent className="w-80">
                       <div className="space-y-1">
@@ -359,7 +359,7 @@ const UsageLimitCell = ({ getValue, row, column, table, onUpdate }) => {
                 <div className="w-full flex items-center justify-start gap-1.5 px-1">
                   <HoverCard openDelay={300}>
                     <HoverCardTrigger asChild>
-                      <Info className="h-3 w-3 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
+                      <Info className="size-3 text-fuchsia-600 text-opacity-50 hover:text-opacity-100 cursor-pointer" />
                     </HoverCardTrigger>
                     <HoverCardContent className="w-80">
                       <div className="space-y-1">
@@ -405,7 +405,7 @@ const UsageLimitCell = ({ getValue, row, column, table, onUpdate }) => {
               >
                 {isSaving ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                    <Loader2 className="size-4 animate-spin mr-2" />
                     {__("Saving...", "whizmanage")}
                   </>
                 ) : (

@@ -15,6 +15,7 @@ import {
 import { Table2, History } from "lucide-react";
 import SettingsCardHeader from "../SettingsCardHeader";
 import FieldVisibilitySettings from "./FieldVisibilitySettings";
+import CustomFieldsVisibilitySettings from "./CustomFieldsVisibilitySettings";
 
 const ROWS_PER_PAGE_OPTIONS = [
   { value: "25", label: "25 rows" },
@@ -129,6 +130,9 @@ export default function WhizManageTab({ settings, onUpdate }) {
       {/* Field Visibility Settings */}
       <FieldVisibilitySettings settings={settings} onUpdate={onUpdate} />
 
+      {/* Custom Fields Visibility Settings */}
+      <CustomFieldsVisibilitySettings settings={settings} onUpdate={onUpdate} />
+
       {/* About Card */}
       <Card className="border-fuchsia-200 dark:border-fuchsia-800 bg-gradient-to-br from-fuchsia-50 to-purple-50 dark:from-fuchsia-900/20 dark:to-purple-900/20">
         <CardContent className="pt-6">
@@ -138,7 +142,9 @@ export default function WhizManageTab({ settings, onUpdate }) {
             </div>
             <div className="flex-1">
               <h3 className="font-semibold text-slate-800 dark:text-slate-200">
-                WhizManage Pro
+                {window.hasLicence
+                  ? "WhizManage Pro"
+                  : "WhizManage"}
               </h3>
               <p className="text-sm text-muted-foreground">
                 {__("Version", "whizmanage")} {window?.version || "2.0"}
@@ -146,10 +152,15 @@ export default function WhizManageTab({ settings, onUpdate }) {
             </div>
           </div>
           <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
-            {__(
-              "Thank you for using WhizManage Pro! For support and documentation, visit our website.",
-              "whizmanage"
-            )}
+            {window.hasLicence
+              ? __(
+                "Thank you for using WhizManage Pro! For support and documentation, visit our website.",
+                "whizmanage"
+              )
+              : __(
+                "Thank you for using WhizManage! For support and documentation, visit our website.",
+                "whizmanage"
+              )}
           </p>
         </CardContent>
       </Card>

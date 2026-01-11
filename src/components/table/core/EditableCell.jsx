@@ -837,7 +837,7 @@ export const EditableCell = memo(function EditableCell({
   if (!isEditable) {
     return (
       <div
-        className="px-2 sm:px-3 py-2 sm:py-1.5 text-muted-foreground opacity-60 min-h-[44px] sm:min-h-0 flex items-center"
+        className="px-2 sm:px-3 py-2 sm:py-0 text-muted-foreground opacity-60 min-h-[44px] sm:min-h-0 flex items-center"
         aria-label={`${column.columnDef.header}: ${formattedValue}`}
       >
         {formattedValue}
@@ -913,7 +913,7 @@ export const EditableCell = memo(function EditableCell({
     <div
       ref={cellRef}
       className={cn(
-        "relative px-2 sm:px-2 py-2 sm:py-1.5 h-full w-full flex items-center justify-between min-h-[44px] sm:min-h-0",
+        "relative px-2 sm:px-2 py-2 sm:py-0 h-full w-full flex items-center justify-between min-h-[44px] sm:min-h-0",
         "transition-all duration-200 group",
         "hover:bg-slate-100/50 dark:hover:bg-slate-700/30",
         editType === "text" ? "cursor-text" : "cursor-pointer"

@@ -15,7 +15,7 @@ const DimensionsDisplay = ({ value, row }) => {
   if (!length && !width && !height) {
     return (
       <div className="flex items-center gap-2 text-muted-foreground">
-        <Ruler className="w-4 h-4" />
+        <Ruler className="size-4" />
         <span>—</span>
       </div>
     );
@@ -38,7 +38,7 @@ const DimensionsDisplay = ({ value, row }) => {
 
   return (
     <div className="flex items-center gap-2">
-      <Ruler className="w-4 h-4 text-muted-foreground" />
+      <Ruler className="size-4 text-muted-foreground" />
       <span className="text-muted-foreground">
         {displayText}
         <span className="text-xs ml-1 opacity-70">{dimensionUnit}</span>

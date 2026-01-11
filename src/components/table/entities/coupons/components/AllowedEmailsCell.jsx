@@ -162,7 +162,7 @@ const AllowedEmailsCell = ({ row, table, onUpdate }) => {
                   disabled={busy}
                   className="h-10"
                 >
-                  <Plus className="h-4 w-4 mr-1" />
+                  <Plus className="size-4 mr-1" />
                   {__("Add", "whizmanage")}
                 </Button>
               </div>
@@ -177,7 +177,7 @@ const AllowedEmailsCell = ({ row, table, onUpdate }) => {
                 </Button>
                 <Button onClick={onSave} disabled={busy} className="min-w-24">
                   {busy ? __("Saving...", "whizmanage") : __("Save", "whizmanage")}
-                  {busy && <RefreshCcw className="ml-2 h-4 w-4 animate-spin" />}
+                  {busy && <RefreshCcw className="ml-2 size-4 animate-spin" />}
                 </Button>
               </div>
             </div>

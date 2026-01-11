@@ -114,7 +114,7 @@ export default function LinkedProductsCell({ row, table }) {
             className="h-7 gap-1.5 px-2 flex-shrink-0 text-muted-foreground hover:text-slate-900 dark:hover:text-slate-100"
             onClick={onOpen}
           >
-            <Link2 className="h-4 w-4" />
+            <Link2 className="size-4" />
             {__("Edit", "whizmanage")}
             {totalCount > 0 && (
               <span className="ml-1.5 inline-flex items-center justify-center min-w-4 h-4 text-[10px] font-medium rounded-full bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-700 dark:text-fuchsia-400 px-1">

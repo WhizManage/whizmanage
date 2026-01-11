@@ -4,8 +4,8 @@ import { CalendarRange, CalendarOff } from "lucide-react";
 const DateRangeDisplay = ({ value, __}) => {
   if (!value || (!value.start && !value.end)) {
     return (
-      <div className="flex items-center gap-1 text-muted-foreground">
-        <CalendarOff className="h-3.5 w-3.5" />
+      <div className="flex items-center gap-1.5 text-muted-foreground">
+        <CalendarOff className="size-3.5" />
         <span className="text-xs">{__?.("No schedule","whizmanage") || __("No schedule", "whizmanage")}</span>
       </div>
     );
@@ -21,8 +21,8 @@ const DateRangeDisplay = ({ value, __}) => {
   };
 
   return (
-    <div className="flex items-center gap-1">
-      <CalendarRange className="h-3.5 w-3.5 text-fuchsia-600" />
+    <div className="flex items-center gap-1.5">
+      <CalendarRange className="size-3.5 text-fuchsia-600" />
       <div className="flex items-center gap-1 text-xs">
         <span className="text-sm">{formatDate(value.start)}</span>
         <span className="text-muted-foreground">-</span>

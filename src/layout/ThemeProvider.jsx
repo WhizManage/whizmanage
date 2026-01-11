@@ -1,8 +1,15 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState, useMemo } from "react"
 
+function getSystemTheme() {
+  if (typeof window === "undefined") return "light"
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light"
+}
 
 const initialState = {
   theme: "system",
+  resolvedTheme: "light",
   setTheme: () => null,
 }
 
@@ -10,38 +17,48 @@ const ThemeProviderContext = createContext(initialState)
 
 export function ThemeProvider({
   children,
-  defaultTheme,
-  storageKey,
+  defaultTheme = "system",
+  storageKey = "whizmanage-theme",
   ...props
 }) {
-  const [theme, setTheme] = useState(
+  const [theme, setThemeState] = useState(
     () => (localStorage.getItem(storageKey)) || defaultTheme
   )
+  const [systemTheme, setSystemTheme] = useState(() => getSystemTheme())
 
+  // Listen for system theme changes
   useEffect(() => {
-    const root = window.document.documentElement
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
 
-    root.classList.remove("light", "dark")
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light"
-
-      root.classList.add(systemTheme)
-      return
+    const handleChange = (e) => {
+      setSystemTheme(e.matches ? "dark" : "light")
     }
 
-    root.classList.add(theme)
-  }, [theme])
+    mediaQuery.addEventListener("change", handleChange)
+    return () => mediaQuery.removeEventListener("change", handleChange)
+  }, [])
+
+  // Calculate resolved theme
+  const resolvedTheme = useMemo(() => {
+    return theme === "system" ? systemTheme : theme
+  }, [theme, systemTheme])
+
+  // Apply theme to document
+  useEffect(() => {
+    const root = window.document.documentElement
+    root.classList.remove("light", "dark")
+    root.classList.add(resolvedTheme)
+  }, [resolvedTheme])
+
+  const setTheme = (newTheme) => {
+    localStorage.setItem(storageKey, newTheme)
+    setThemeState(newTheme)
+  }
 
   const value = {
     theme,
-    setTheme: (theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
-    },
+    resolvedTheme,
+    setTheme,
   }
 
   return (

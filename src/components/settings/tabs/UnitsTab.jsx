@@ -92,9 +92,9 @@ export default function UnitsTab({ settings, onUpdate }) {
       </Card>
 
       {/* Info Card */}
-      <Card className="border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20">
+      <Card className="border-fuchsia-200 dark:border-fuchsia-800 bg-fuchsia-50 dark:bg-fuchsia-900/20">
         <CardContent className="pt-6">
-          <p className="text-sm text-blue-700 dark:text-blue-300">
+          <p className="text-sm text-fuchsia-700 dark:text-fuchsia-300">
             <strong>{__("Note:", "whizmanage")}</strong>{" "}
             {__(
               "Changing these settings will not automatically convert existing product weights and dimensions. You will need to update your products if you change units.",

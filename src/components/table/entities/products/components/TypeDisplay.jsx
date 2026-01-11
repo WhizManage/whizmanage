@@ -44,11 +44,11 @@ const TypeDisplay = ({ value, editOptions, row, t }) => {
               type="button"
               variant="outline"
               size="icon"
-              className="flex px-2 !size-8 opacity-60 cursor-not-allowed"
+              className="flex px-2 !size-7 opacity-60 cursor-not-allowed"
               disabled
               aria-disabled
             >
-              <Settings2 className="!size-5" />
+              <Settings2 className="!size-4" />
               <span className="pointer-events-none absolute -top-1 -right-1 z-[50]">
                 <ProBadge />
               </span>

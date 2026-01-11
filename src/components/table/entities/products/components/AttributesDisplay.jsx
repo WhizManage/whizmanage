@@ -45,13 +45,13 @@ const AttributesDisplay = ({ value, row, __, isEditing = false, onCancel }) => {
       <>
         <div
           ref={containerRef}
-          className="flex items-center gap-2 w-full h-full py-1"
+          className="flex items-center gap-2 w-full h-full"
         >
           {isEditing && (
-            <Settings2 className="w-4 h-4 text-fuchsia-500 flex-shrink-0" />
+            <Settings2 className="size-4 text-fuchsia-600 flex-shrink-0" />
           )}
           <span className="text-muted-foreground flex items-center gap-1.5">
-            <Package className="w-3.5 h-3.5" />
+            <Package className="size-3.5" />
             {__("No attributes", "whizmanage")}
           </span>
         </div>
@@ -73,17 +73,17 @@ const AttributesDisplay = ({ value, row, __, isEditing = false, onCancel }) => {
     <>
       <div
         ref={containerRef}
-        className="flex items-center gap-2 max-w-full w-full h-full py-1"
+        className="flex items-center gap-2 max-w-full w-full h-full"
         title={attributes.map((attr) => attr.name).join(", ")}
       >
         {/* אייקון עריכה במצב editing */}
         {isEditing && (
-          <Settings2 className="w-4 h-4 text-fuchsia-500 flex-shrink-0" />
+          <Settings2 className="size-4 text-fuchsia-600 flex-shrink-0" />
         )}
 
         {/* אייקון + מספר תכונות */}
         <div className="flex items-center gap-1.5 text-muted-foreground">
-          <Layers className="w-3.5 h-3.5" />
+          <Layers className="size-3.5" />
           <span className="text-xs font-medium">{attributes.length}</span>
         </div>
 

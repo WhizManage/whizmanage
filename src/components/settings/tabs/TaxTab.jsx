@@ -139,9 +139,9 @@ export default function TaxTab({ settings, onUpdate }) {
 
       {/* Info Card */}
       {taxEnabled && (
-        <Card className="border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20">
+        <Card className="border-fuchsia-200 dark:border-fuchsia-800 bg-fuchsia-50 dark:bg-fuchsia-900/20">
           <CardContent className="pt-6">
-            <p className="text-sm text-amber-700 dark:text-amber-300">
+            <p className="text-sm text-fuchsia-700 dark:text-fuchsia-300">
               <strong>{__("Note:", "whizmanage")}</strong>{" "}
               {__(
                 "For detailed tax rate configuration, please visit WooCommerce Settings > Tax in the WordPress admin.",

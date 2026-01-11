@@ -14,12 +14,12 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@heroui/react";
-import { Tour } from "antd";
 import {
   ExternalLink,
   Info,
   RefreshCcw,
 } from "lucide-react";
+import { VariationsTour } from "@/components/tour/VariationsTour";
 import { toast } from "@/lib/utils";
 import { IconBadge } from "@components/ui/custom/IconBadge";
 import { Sliders } from "lucide-react";
@@ -623,105 +623,6 @@ const ManageVariationsModal = ({
     }
   };
 
-  const tourSteps =
-    mode === "full"
-      ? [
-          {
-            title: (
-              <div className="flex gap-1 items-center">
-                <h2 className="text-fuchsia-600 font-bold text-lg">
-                  {__("Step 1: ", "whizmanage")}
-                </h2>
-                <p className="font-bold text-lg">
-                  {__("Select Product Attributes", "whizmanage")}
-                </p>
-              </div>
-            ),
-            description: (
-              <div className="flex flex-col gap-2">
-                <p>
-                  {__(
-                    "Begin by adding attributes to your product. Attributes define the different aspects of your product that may vary, such as color, size, or material. You have two options when creating an attribute:",
-                    "whizmanage"
-                  )}
-                </p>
-                <p>
-                  <span className="font-bold mr-1 rtl:mr-0 rtl:ml-1">
-                    {__("Product Attribute:", "whizmanage")}
-                  </span>
-                  {__(
-                    'Select this option to add attributes that are unique to this specific product, such as "Storage Capacity" for electronics or "Frame Material" for glasses.',
-                    "whizmanage"
-                  )}
-                </p>
-                <p>
-                  <span className="font-bold mr-1 rtl:mr-0 rtl:ml-1">
-                    {__("Global Attribute:", "whizmanage")}
-                  </span>
-                  {__(
-                    'Select this for attributes like "Size" or "Color" that are common across multiple products. Creating a global attribute once allows you to reuse it, avoiding repetitive setup for each product.',
-                    "whizmanage"
-                  )}
-                </p>
-              </div>
-            ),
-            target: () => document.querySelector('[data-tour="step-1"]'),
-          },
-          {
-            title: (
-              <div className="flex gap-1 items-center">
-                <h2 className="text-fuchsia-600 font-bold text-lg">
-                  {__("Step 2: ", "whizmanage")}
-                </h2>
-                <p className="font-bold text-lg">
-                  {__("Define Attribute Options", "whizmanage")}
-                </p>
-              </div>
-            ),
-            description: (
-              <div className="flex flex-col gap-2">
-                <p>
-                  {__(
-                    "After selecting an attribute for your product, you now need to define the available options. For instance, if the attribute is 'Color', you will need to specify the available colors.",
-                    "whizmanage"
-                  )}
-                </p>
-                <p>
-                  {__(
-                    "The default option is 'Any', which will display all available options for the attribute to the customers in the store. This is suitable when you do not wish to specify different settings for each variation, such as different prices, stock levels, or images. If the attribute is global, options can be imported from existing terms instead of creating them individually.",
-                    "whizmanage"
-                  )}
-                </p>
-              </div>
-            ),
-            target: () => document.querySelector('[data-tour="step-2"]'),
-          },
-          {
-            title: (
-              <div className="flex gap-1 items-center">
-                <h2 className="text-fuchsia-600 font-bold text-lg">
-                  {__("Step 3: ", "whizmanage")}
-                </h2>
-                <p className="font-bold text-lg">
-                  {__("Combine and Generate Variations", "whizmanage")}
-                </p>
-              </div>
-            ),
-            description: (
-              <div className="flex flex-col gap-2">
-                <p>
-                  {__(
-                    "At this stage, by clicking 'Generate', you will create combinations of the selected attributes and options for your product, resulting in new variations. For example, selecting 'Color' with options 'Blue' and 'Green', and 'Size' with options 'Small' and 'Large', will generate four product variations: Small Blue, Large Blue, Small Green, and Large Green.",
-                    "whizmanage"
-                  )}
-                </p>
-              </div>
-            ),
-            target: () => document.querySelector('[data-tour="step-3"]'),
-          },
-        ]
-      : [];
-
   return (
     <>
       {trigger && <div onClick={onOpen}>{trigger}</div>}
@@ -856,16 +757,11 @@ const ManageVariationsModal = ({
           )}
         </ModalContent>
       </Modal>
-      {/* ✅ Tour עם mask + zIndex גבוה מעל המודל */}
+      {/* ✅ Tour חדש עם עיצוב מודרני ותמיכה בדארק מוד */}
       {mode === "full" && showTour && (
-        <Tour
-          open={openTour}
+        <VariationsTour
+          isOpen={openTour}
           onClose={() => setOpenTour(false)}
-          steps={tourSteps}
-          zIndex={200000}
-          mask={{
-            color: "rgba(0, 0, 0, 0.8)",
-          }}
         />
       )}
     </>

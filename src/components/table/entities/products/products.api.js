@@ -336,6 +336,8 @@ export const productsApi = {
       "global_unique_id",
       "upsell_ids",
       "cross_sell_ids",
+      "shipping_class",
+      "downloadable_settings",
     ]);
 
     if (!knownFields.has(field)) {
@@ -438,6 +440,34 @@ export const productsApi = {
             : parseInt(cleanValue, 10);
         break;
 
+      case "downloadable_settings":
+        // Handle batch update of downloadable settings
+        if (typeof cleanValue === "object" && cleanValue !== null) {
+          // Downloads array
+          if (Array.isArray(cleanValue.downloads)) {
+            payload.downloads = cleanValue.downloads.map((item, index) => ({
+              id: item.id || `download_${index}`,
+              name: item.name || "",
+              file: item.file || "",
+            }));
+          }
+          // Download expiry
+          if (cleanValue.download_expiry !== undefined) {
+            payload.download_expiry =
+              cleanValue.download_expiry === -1 || cleanValue.download_expiry === ""
+                ? -1
+                : parseInt(cleanValue.download_expiry, 10);
+          }
+          // Download limit
+          if (cleanValue.download_limit !== undefined) {
+            payload.download_limit =
+              cleanValue.download_limit === -1 || cleanValue.download_limit === ""
+                ? -1
+                : parseInt(cleanValue.download_limit, 10);
+          }
+        }
+        break;
+
       case "featured":
         payload.featured = !!cleanValue;
         break;
@@ -493,6 +523,10 @@ export const productsApi = {
         payload[field] = Array.isArray(cleanValue)
           ? cleanValue.map((id) => parseInt(id, 10)).filter(Number.isInteger)
           : [];
+        break;
+
+      case "shipping_class":
+        payload.shipping_class = cleanValue ? String(cleanValue) : "";
         break;
 
       default:

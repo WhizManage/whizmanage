@@ -56,10 +56,24 @@ export default function CustomFieldsInput({
       fields = fieldsSource;
     }
 
-    // סינון multi-select
+    // קבלת רשימת השדות המוסתרים מההגדרות
+    let hiddenCustomFields = [];
+    try {
+      const stored = window?.WhizManageSettings?.whizmanage_hidden_custom_fields;
+      if (stored) {
+        hiddenCustomFields = typeof stored === "string" ? JSON.parse(stored) : stored;
+      }
+    } catch (e) {
+      console.warn("Failed to parse hidden custom fields settings:", e);
+    }
+
+    // סינון multi-select ושדות מוסתרים
     const filtered = fields.filter(
       (field) =>
-        field && typeof field === "object" && field.type !== "multi-select"
+        field &&
+        typeof field === "object" &&
+        field.type !== "multi-select" &&
+        !hiddenCustomFields.includes(field.key)
     );
 
     setCustomFields(filtered);

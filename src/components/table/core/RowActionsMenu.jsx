@@ -49,11 +49,11 @@ export function RowActionsMenu({ row, actions = [], withSeparator = false }) {
     if (!icon) return null;
     if (typeof icon === "string") {
       const IconCmp = ICONS[icon] || null;
-      return IconCmp ? <IconCmp className="mr-2 h-4 w-4" /> : null;
+      return IconCmp ? <IconCmp className="size-4" /> : null;
     }
     // ReactNode מותאם-אישית
     return (
-      <span className="mr-2 h-4 w-4 inline-flex items-center justify-center">
+      <span className="size-4 inline-flex items-center justify-center">
         {icon}
       </span>
     );

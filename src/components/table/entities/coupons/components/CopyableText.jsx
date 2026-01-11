@@ -110,9 +110,9 @@ const CopyableText = ({ getValue, row, column, table, onUpdate }) => {
           aria-label="Copy code"
         >
           {copied ? (
-            <Check className="w-4 h-4 text-green-500" />
+            <Check className="size-4 text-green-500" />
           ) : (
-            <Copy className="w-4 h-4 text-slate-400" />
+            <Copy className="size-4 text-slate-400" />
           )}
         </button>
       </CustomTooltip>

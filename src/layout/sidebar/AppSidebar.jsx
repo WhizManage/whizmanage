@@ -58,12 +58,12 @@ const menuItems = [
     icon: Users,
     tourId: "customers-menu",
   },
-  // {
-  //   name: "Settings",
-  //   page: "whizmanage-settings",
-  //   icon: Settings,
-  //   tourId: "settings-menu",
-  // },
+  {
+    name: "Settings",
+    page: "whizmanage-settings",
+    icon: Settings,
+    tourId: "settings-menu",
+  },
 ];
 
 // Get current active page from URL

@@ -494,7 +494,7 @@ const RefundModal = ({
               disabled={isProcessingRefund}
               className="hover:bg-slate-100 dark:hover:bg-slate-800"
             >
-              <X className="h-5 w-5" />
+              <X className="size-5" />
             </Button>
           </ModalHeader>
 
@@ -504,7 +504,7 @@ const RefundModal = ({
               {/* Alerts */}
               {refundSuccess && (
                 <Alert className="border-green-200 bg-green-50 dark:bg-green-900/20 dark:border-green-800">
-                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  <CheckCircle className="size-4 text-green-600 dark:text-green-400" />
                   <AlertDescription className="text-green-800 dark:text-green-300">
                     {refundSuccess}
                   </AlertDescription>
@@ -513,7 +513,7 @@ const RefundModal = ({
 
               {refundError && (
                 <Alert className="border-red-200 bg-red-50 dark:bg-red-900/20 dark:border-red-800">
-                  <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                  <AlertTriangle className="size-4 text-red-600 dark:text-red-400" />
                   <AlertDescription className="text-red-800 dark:text-red-300">
                     {refundError}
                   </AlertDescription>
@@ -523,7 +523,7 @@ const RefundModal = ({
               {/* Payment Method Info */}
               <div className="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
                 <div className="flex items-center gap-2 mb-2">
-                  <CreditCard className="w-4 h-4 text-slate-600 dark:text-slate-300" />
+                  <CreditCard className="size-4 text-slate-600 dark:text-slate-300" />
                   <h3 className="font-medium text-slate-900 dark:text-white">
                     {__("Payment Method", "whizmanage")}
                   </h3>
@@ -549,7 +549,7 @@ const RefundModal = ({
               {refundedData.totalRefunded > 0 && (
                 <div className="bg-fuchsia-50 dark:bg-fuchsia-900/20 rounded-xl p-4 border border-fuchsia-200 dark:border-fuchsia-800">
                   <div className="flex items-center gap-2 mb-3">
-                    <Info className="w-4 h-4 text-fuchsia-600 dark:text-fuchsia-400" />
+                    <Info className="size-4 text-fuchsia-600 dark:text-fuchsia-400" />
                     <h3 className="font-medium text-slate-900 dark:text-white">
                       {__("Refund Summary", "whizmanage")}
                     </h3>
@@ -757,7 +757,7 @@ const RefundModal = ({
                                       className="size-7 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                                       disabled={refundQty <= 0 || isProcessingRefund}
                                     >
-                                      <Minus className="h-3 w-3" />
+                                      <Minus className="size-3" />
                                     </Button>
 
                                     <Input
@@ -778,7 +778,7 @@ const RefundModal = ({
                                       className="size-7 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
                                       disabled={refundQty >= availableQty || isProcessingRefund}
                                     >
-                                      <Plus className="h-3 w-3" />
+                                      <Plus className="size-3" />
                                     </Button>
                                   </div>
                                 )}
@@ -840,7 +840,7 @@ const RefundModal = ({
                 {refundType === "full" &&
                   remainingRefundableAmount !== parseFloat(total) && (
                     <div className="mt-3 text-sm text-slate-600 dark:text-slate-300 flex items-start gap-2">
-                      <Info className="w-4 h-4 mt-0.5 shrink-0" />
+                      <Info className="size-4 mt-0.5 shrink-0" />
                       <span>
                         {__(
                           "Full refund will include only the remaining refundable amount",
@@ -925,7 +925,7 @@ const RefundModal = ({
                   </>
                 ) : (
                   <>
-                    <FileText className="w-4 h-4 me-2" />
+                    <FileText className="size-4 me-2" />
                     {__("Manual Refund", "whizmanage")} ({formatCurrency(refundAmount)})
                   </>
                 )}
@@ -946,7 +946,7 @@ const RefundModal = ({
                       </>
                     ) : (
                       <>
-                        <CreditCard className="w-4 h-4 me-2" />
+                        <CreditCard className="size-4 me-2" />
                         {__("Auto Refund", "whizmanage")} ({formatCurrency(refundAmount)})
                       </>
                     )}

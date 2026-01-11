@@ -169,8 +169,7 @@ const SpotlightRing = React.forwardRef(({ className, ...props }, ref) => {
       ref={ref}
       className={cn(
         "fixed pointer-events-none rounded-lg ring-2 ring-fuchsia-500 ring-offset-2 ring-offset-transparent transition-all duration-300",
-        "shadow-[0_0_0_4px_rgba(217,70,219,0.2),0_0_20px_rgba(217,70,219,0.4)]",
-        "animate-pulse",
+        "shadow-[0_0_0_4px_rgba(217,70,219,0.2),0_0_15px_rgba(217,70,219,0.3)]",
         className
       )}
       style={{

@@ -192,7 +192,7 @@ export default function SettingsPage() {
           className="flex-1 flex flex-col overflow-hidden"
           dir={isRtl ? "rtl" : "ltr"}
         >
-          <AnimateTabsList className="flex sm:grid sm:grid-cols-7 w-full mb-4 sm:mb-6 shrink-0 h-12 sm:h-12 overflow-x-auto scrollbar-hide gap-1.5 sm:gap-0 px-1.5 sm:px-0">
+          <AnimateTabsList className="flex sm:grid sm:grid-cols-7 w-full mb-4 sm:mb-6 shrink-0 overflow-x-auto scrollbar-hide gap-1.5 sm:gap-0">
             {TABS.map((tab) => (
               <AnimateTabsTriggerSimple
                 key={tab.id}

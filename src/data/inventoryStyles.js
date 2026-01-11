@@ -49,7 +49,7 @@ export const getInventoryConfig = (data) => {
 export const getInventoryBadgeClasses = (data) => {
   const config = getInventoryConfig(data);
   return {
-    container: cn("inline-flex items-center gap-2 px-2.5 py-1 rounded-md", config.bg),
+    container: cn("inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md", config.bg),
     dot: cn("w-2 h-2 rounded-full", config.dot),
     text: cn("font-semibold text-sm", config.text),
   };

@@ -63,12 +63,12 @@ const AddVariations = ({
             }}
             className={cn(
               "flex px-2",
-              isNew ? "!min-h-10 !min-w-10 !h-10 !w-10" : "!size-8"
+              isNew ? "!min-h-10 !min-w-10 !h-10 !w-10" : "!size-7"
             )}
             variant="outline"
             size="icon"
           >
-            <Settings2 className="!size-5" />
+            <Settings2 className="!size-4" />
           </Button>
         </CustomTooltip>
       }

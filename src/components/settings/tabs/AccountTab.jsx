@@ -155,7 +155,7 @@ export default function AccountTab({ userInfo, countries = [], onUpdateUserInfo 
             </div>
           </div>
 
-          <p className="text-sm text-muted-foreground bg-blue-50 dark:bg-blue-900/20 p-3 rounded-md">
+          <p className="text-sm text-fuchsia-700 dark:text-fuchsia-300 bg-fuchsia-50 dark:bg-fuchsia-900/20 p-3 rounded-md">
             {__("Your profile image is managed through Gravatar and is linked to your email address.", "whizmanage")}
           </p>
 
@@ -650,7 +650,7 @@ export default function AccountTab({ userInfo, countries = [], onUpdateUserInfo 
 
       {/* Store Owner Card (if different from current user) */}
       {store_owner && store_owner.id !== current_user?.id && (
-        <Card className="border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20">
+        <Card className="border-fuchsia-200 dark:border-fuchsia-800 bg-fuchsia-50 dark:bg-fuchsia-900/20">
           <CardHeader>
             <CardTitle className="text-slate-800 dark:text-slate-100 text-base">
               {__("Store Owner", "whizmanage")}
@@ -660,7 +660,7 @@ export default function AccountTab({ userInfo, countries = [], onUpdateUserInfo 
             <div className="flex items-center gap-3">
               <Avatar className="w-12 h-12">
                 <AvatarImage src={store_owner?.avatar_url} alt={store_owner?.display_name} />
-                <AvatarFallback className="bg-blue-100 text-blue-600 dark:bg-blue-900/50 dark:text-blue-300">
+                <AvatarFallback className="bg-fuchsia-100 text-fuchsia-600 dark:bg-fuchsia-900/50 dark:text-fuchsia-300">
                   {getInitials(store_owner?.display_name)}
                 </AvatarFallback>
               </Avatar>

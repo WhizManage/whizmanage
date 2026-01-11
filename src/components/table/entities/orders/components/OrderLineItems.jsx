@@ -325,7 +325,7 @@ const OrderLineItems = ({
 
     return (
       <div className="w-12 h-12 bg-slate-100 dark:bg-slate-700 flex items-center justify-center rounded-md border border-slate-200 dark:border-slate-600">
-        <Package className="w-6 h-6 text-slate-400" />
+        <Package className="size-6 text-slate-400" />
       </div>
     );
   };
@@ -351,7 +351,7 @@ const OrderLineItems = ({
                 className="flex justify-between text-left h-10 w-full"
               >
                 <span>{__("Search for products", "whizmanage")}</span>
-                <Search className="h-4 w-4 shrink-0 opacity-50" />
+                <Search className="size-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="p-0 w-full min-w-[300px]" align="start">
@@ -407,7 +407,7 @@ const OrderLineItems = ({
                             />
                           ) : (
                             <div className="w-8 h-8 bg-slate-100 dark:bg-slate-600 rounded-sm flex items-center justify-center">
-                              <Package className="w-4 h-4 opacity-50" />
+                              <Package className="size-4 opacity-50" />
                             </div>
                           )}
                           <div className="flex flex-col flex-1 min-w-0">
@@ -453,7 +453,7 @@ const OrderLineItems = ({
         {lineItems.length === 0 ? (
           <div className="text-center py-16 text-muted-foreground border-2 border-dashed rounded-xl bg-slate-50/50 dark:bg-slate-800/50">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-700 mb-4">
-              <Package className="w-8 h-8 text-slate-400" />
+              <Package className="size-8 text-slate-400" />
             </div>
             <p className="text-lg font-medium mb-2">
               {__("No items in this order", "whizmanage")}
@@ -567,7 +567,7 @@ const OrderLineItems = ({
                       className="size-6"
                       disabled={!canEdit || parseInt(item.quantity) <= 1}
                     >
-                      <Minus className="h-3 w-3" />
+                      <Minus className="size-3" />
                     </Button>
 
                     <Input
@@ -603,7 +603,7 @@ const OrderLineItems = ({
                       className="size-6"
                       disabled={!canEdit}
                     >
-                      <Plus className="h-3 w-3" />
+                      <Plus className="size-3" />
                     </Button>
                   </div>
 
@@ -621,7 +621,7 @@ const OrderLineItems = ({
                         onClick={() => removeLineItem(item.id)}
                         className="md:ml-auto h-8 w-8 text-muted-foreground hover:text-destructive"
                       >
-                        <X className="h-4 w-4" />
+                        <X className="size-4" />
                       </Button>
                     )}
                   </div>
@@ -654,7 +654,7 @@ const OrderLineItems = ({
                 className={`flex items-center justify-between p-3 rounded-lg border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20 transition-opacity ${loadingCoupon ? "opacity-50" : ""}`}
               >
                 <div className="flex items-center gap-2">
-                  <Tag className="w-4 h-4 text-green-600 dark:text-green-400" />
+                  <Tag className="size-4 text-green-600 dark:text-green-400" />
                   <div className="flex flex-col">
                     <span className="font-medium text-sm">{coupon.code}</span>
                     <span className="text-xs text-green-700 dark:text-green-300">
@@ -669,7 +669,7 @@ const OrderLineItems = ({
                       className="p-1 hover:bg-red-100 dark:hover:bg-red-900/30 rounded transition-colors"
                       disabled={loadingCoupon}
                     >
-                      <X className="w-4 h-4 text-red-600 dark:text-red-400" />
+                      <X className="size-4 text-red-600 dark:text-red-400" />
                     </button>
                   </CustomTooltip>
                 )}
@@ -748,7 +748,7 @@ const OrderLineItems = ({
 
           {loadingCoupon && (
             <div className="flex items-center gap-2 text-sm text-fuchsia-600 dark:text-fuchsia-400">
-              <div className="w-4 h-4 border-2 border-fuchsia-600 border-t-transparent rounded-full animate-spin" />
+              <div className="size-4 border-2 border-fuchsia-600 border-t-transparent rounded-full animate-spin" />
               <span>{__("Recalculating discount...", "whizmanage")}</span>
             </div>
           )}
@@ -756,7 +756,7 @@ const OrderLineItems = ({
           {couponError && canEdit && (
             <div className="flex items-center justify-between gap-2 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-sm text-red-600 dark:text-red-400">
               <div className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0" />
+                <AlertCircle className="size-4 shrink-0" />
                 <span>{couponError}</span>
               </div>
               <button
@@ -765,7 +765,7 @@ const OrderLineItems = ({
                 className="p-1.5 hover:bg-red-200 dark:hover:bg-red-800/50 rounded-full transition-colors cursor-pointer flex-shrink-0"
                 aria-label={__("Dismiss", "whizmanage")}
               >
-                <X className="w-4 h-4" />
+                <X className="size-4" />
               </button>
             </div>
           )}
@@ -785,7 +785,7 @@ const OrderLineItems = ({
             <div className="flex items-center justify-between p-4 bg-pink-50 dark:bg-pink-900/10 rounded-lg border border-pink-200 dark:border-pink-800 overflow-hidden">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-pink-100 dark:bg-pink-900/30 rounded-lg">
-                  <RotateCcw className="w-5 h-5 text-pink-600 dark:text-pink-400" />
+                  <RotateCcw className="size-5 text-pink-600 dark:text-pink-400" />
                 </div>
                 <div>
                   <h3 className="font-medium text-slate-900 dark:text-white">
@@ -801,7 +801,7 @@ const OrderLineItems = ({
                 className="flex items-center gap-2 border-pink-300 hover:bg-pink-100 dark:border-pink-700 dark:hover:bg-pink-900/20"
                 onClick={() => setIsRefundModalOpen(true)}
               >
-                <RotateCcw className="w-4 h-4" />
+                <RotateCcw className="size-4" />
                 {__("Process Refund", "whizmanage")}
               </Button>
             </div>
@@ -837,7 +837,7 @@ const OrderLineItems = ({
             {discountTotal > 0 && (
               <div className="flex justify-between items-center py-2 text-sm border-b border-slate-200 dark:border-slate-700">
                 <span className="text-green-600 dark:text-green-400 flex items-center gap-2">
-                  <Tag className="w-4 h-4" />
+                  <Tag className="size-4" />
                   {__("Discount", "whizmanage")}
                 </span>
                 <span className="font-medium text-green-600 dark:text-green-400">

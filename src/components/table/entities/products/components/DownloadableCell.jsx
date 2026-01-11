@@ -308,12 +308,12 @@ const DownloadableCell = ({
                 <Button
                   type="button"
                   variant="outline"
-                  size="icon"
-                  className="relative flex px-2 !size-8"
+                  size="sm"
+                  className="flex items-center gap-1 h-7 px-2"
                 >
-                  <FileDown className="!size-5" />
+                  <FileDown className="!size-4" />
                   {filesCount > 0 && (
-                    <span className="pointer-events-none absolute -top-1.5 -end-1.5 z-[50] bg-fuchsia-500 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                    <span className="text-xs text-muted-foreground">
                       {filesCount}
                     </span>
                   )}
