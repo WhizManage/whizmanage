@@ -3126,9 +3126,6 @@
       "View Shipping Information": [
         "צפייה בפרטי משלוח"
       ],
-      "Tax": [
-        "מס"
-      ],
       "Customer note": [
         "הערת לקוח"
       ],
@@ -5103,9 +5100,6 @@
       "Email is required": [
         "נדרש דוא\"ל"
       ],
-      "First name": [
-        "שם פרטי"
-      ],
       "Internal note (optional)": [
         "הערה פנימית (רשות)"
       ],
@@ -5114,9 +5108,6 @@
       ],
       "John": [
         "ג'ון"
-      ],
-      "Last name": [
-        "שם משפחה"
       ],
       "Leave empty to auto-generate": [
         "השאירו ריק ליצירה אוטומטית"
@@ -5761,7 +5752,316 @@
       "Set a sale price before scheduling a sale": ["הגדר מחיר מבצע לפני תזמון המבצע"],
       "Update": ["עדכן"],
       "Sale price must be > 0 and ≤ regular price": ["מחיר המבצע חייב להיות פחות מהמחיר הרגיל"],
-      "No image to update alt text": ["אין תמונה לעדכון טקסט אלטרנטיבי"]
+      "No image to update alt text": ["אין תמונה לעדכון טקסט אלטרנטיבי"],
+
+      "Settings": ["הגדרות"],
+      "Manage your WooCommerce and WhizManage settings": ["נהל את הגדרות WooCommerce ו-WhizManage שלך"],
+      "Loading settings...": ["טוען הגדרות..."],
+      "Settings saved successfully": ["ההגדרות נשמרו בהצלחה"],
+      "Failed to save settings": ["שמירת ההגדרות נכשלה"],
+      "You have unsaved changes": ["יש לך שינויים שלא נשמרו"],
+      "Currency": ["מטבע"],
+      "Units": ["יחידות"],
+      "Tax": ["מיסים"],
+      "WhizManage": ["WhizManage"],
+
+      "Store Address": ["כתובת החנות"],
+      "Configure your store's physical address": ["הגדר את הכתובת הפיזית של החנות שלך"],
+      "Address line": ["שורת כתובת"],
+      "Your city": ["העיר שלך"],
+      "Postal code": ["מיקוד"],
+      "Your postal code": ["המיקוד שלך"],
+      "Country / State": ["מדינה / אזור"],
+      "Select a country...": ["בחר מדינה..."],
+      "Search country...": ["חפש מדינה..."],
+      "No country found": ["לא נמצאה מדינה"],
+
+      "Store Features": ["תכונות החנות"],
+      "Enable or disable store features": ["הפעל או בטל תכונות של החנות"],
+      "Enable coupons": ["הפעל קופונים"],
+      "Enable the use of coupon codes in your store": ["אפשר שימוש בקודי קופון בחנות שלך"],
+
+      "Currency Options": ["אפשרויות מטבע"],
+      "Configure how prices are displayed": ["הגדר כיצד מחירים מוצגים"],
+      "Store currency": ["מטבע החנות"],
+      "Search currency...": ["חפש מטבע..."],
+      "No currency found": ["לא נמצא מטבע"],
+      "Select currency...": ["בחר מטבע..."],
+      "Currency position": ["מיקום המטבע"],
+      "Left with space": ["שמאל עם רווח"],
+      "Right with space": ["ימין עם רווח"],
+      "Thousand separator": ["מפריד אלפים"],
+      "Decimal separator": ["מפריד עשרוני"],
+      "Number of decimals": ["מספר ספרות עשרוניות"],
+
+      "Price Preview": ["תצוגה מקדימה של מחיר"],
+
+      "Measurement Units": ["יחידות מידה"],
+      "Set the default units for weight and dimensions": ["הגדר את יחידות ברירת המחדל למשקל ומידות"],
+      "Weight unit": ["יחידת משקל"],
+      "Used for product weight": ["משמש למשקל מוצר"],
+      "Dimension unit": ["יחידת מידה"],
+      "Used for product dimensions (length, width, height)": ["משמש למידות מוצר (אורך, רוחב, גובה)"],
+      "Kilograms": ["קילוגרם"],
+      "Grams": ["גרם"],
+      "Pounds": ["ליברות"],
+      "Ounces": ["אונקיות"],
+      "Meters": ["מטרים"],
+      "Centimeters": ["סנטימטרים"],
+      "Millimeters": ["מילימטרים"],
+      "Inches": ["אינצ'ים"],
+      "Yards": ["יארדים"],
+
+      "Tax Settings": ["הגדרות מיסים"],
+      "Configure how taxes are calculated and displayed": ["הגדר כיצד מיסים מחושבים ומוצגים"],
+      "Enable taxes": ["הפעל מיסים"],
+      "Enable tax rates and calculations": ["הפעל חישובי ושיעורי מס"],
+      "Prices entered with tax": ["מחירים שהוזנו כוללים מס"],
+      "When enabled, product prices include tax by default": ["כאשר מופעל, מחירי המוצרים כוללים מס כברירת מחדל"],
+      "Display prices in the shop": ["הצג מחירים בחנות"],
+      "This option is for prices on the frontend of your store": ["אפשרות זו מיועדת למחירים בחזית החנות שלך"],
+      "Display prices during cart and checkout": ["הצג מחירים בעגלה ובקופה"],
+      "This option is for prices displayed in cart and checkout": ["אפשרות זו מיועדת למחירים המוצגים בעגלה ובקופה"],
+      "Including tax": ["כולל מס"],
+      "Excluding tax": ["לא כולל מס"],
+      "Note:": ["הערה:"],
+      "For detailed tax rate configuration, please visit WooCommerce Settings > Tax in the WordPress admin.": ["להגדרות מפורטות של שיעורי מס, בקר בהגדרות WooCommerce > מיסים בלוח הבקרה של וורדפרס."],
+
+      "Table Settings": ["הגדרות טבלה"],
+      "Configure default table behavior": ["הגדר התנהגות ברירת מחדל של הטבלה"],
+      "Default rows per page": ["שורות ברירת מחדל בעמוד"],
+      "The default number of rows displayed in tables. Higher values may affect performance.": ["מספר השורות המוצגות בטבלאות כברירת מחדל. ערכים גבוהים עלולים להשפיע על הביצועים."],
+      "25 rows": ["25 שורות"],
+      "50 rows": ["50 שורות"],
+      "100 rows": ["100 שורות"],
+      "200 rows": ["200 שורות"],
+      "500 rows": ["500 שורות"],
+
+      "History & Tracking": ["היסטוריה ומעקב"],
+      "Configure change history and tracking options": ["הגדר אפשרויות היסטוריית שינויים ומעקב"],
+      "Enable history tracking": ["הפעל מעקב היסטוריה"],
+      "Track changes made to products, orders, and other items": ["עקוב אחר שינויים שנעשו במוצרים, הזמנות ופריטים אחרים"],
+      "History retention (days)": ["שמירת היסטוריה (ימים)"],
+      "How many days to keep history records. Older records will be automatically deleted.": ["כמה ימים לשמור רשומות היסטוריה. רשומות ישנות יותר יימחקו אוטומטית."],
+
+      "WhizManage Pro": ["WhizManage Pro"],
+      "Thank you for using WhizManage Pro! For support and documentation, visit our website.": ["תודה שאתה משתמש ב-WhizManage Pro! לתמיכה ותיעוד, בקר באתר שלנו."],
+
+      "This is where your business is located. Tax rates and shipping costs will use this address.": ["כאן נמצא העסק שלך. שיעורי מס ועלויות משלוח ישתמשו בכתובת זו."],
+      
+      "Postcode / ZIP": ["מיקוד"],
+  
+      "Country / Region": ["מדינה / אזור"],
+      "Select country": ["בחר מדינה"],
+      "State / Province": ["מחוז / מדינה"],
+      "Select state": ["בחר מחוז"],
+      "Features": ["תכונות"],
+      "Enable the use of coupon codes": ["אפשר שימוש בקודי קופון"],
+      "Configure how prices are displayed in your store": ["הגדר כיצד מחירים מוצגים בחנות שלך"],
+      "No currency found.": ["לא נמצא מטבע."],
+      "Currency Position": ["מיקום מטבע"],
+      "Left ($99.99)": ["שמאל ($99.99)"],
+      "Right (99.99$)": ["ימין (99.99$)"],
+      "Left with space ($ 99.99)": ["שמאל עם רווח ($ 99.99)"],
+      "Right with space (99.99 $)": ["ימין עם רווח (99.99 $)"],
+      "Thousand Separator": ["מפריד אלפים"],
+      "Decimal Separator": ["מפריד עשרוני"],
+      "Number of Decimals": ["מספר ספרות עשרוניות"],
+
+      "Measurements": ["מידות"],
+      "Set the units used for product weights and dimensions": ["הגדר את היחידות המשמשות למשקלים ומידות מוצרים"],
+      "Weight Unit": ["יחידת משקל"],
+      "This controls what unit you will define weights in.": ["זה קובע באיזו יחידה תגדיר משקלים."],
+      "Dimensions Unit": ["יחידת מידות"],
+      "This controls what unit you will define lengths in.": ["זה קובע באיזו יחידה תגדיר אורכים."],
+      "Kilograms (kg)": ["קילוגרם (kg)"],
+      "Grams (g)": ["גרם (g)"],
+      "Pounds (lbs)": ["ליברות (lbs)"],
+      "Ounces (oz)": ["אונקיות (oz)"],
+      "Meters (m)": ["מטרים (m)"],
+      "Centimeters (cm)": ["סנטימטרים (cm)"],
+      "Millimeters (mm)": ["מילימטרים (mm)"],
+      "Inches (in)": ["אינצ'ים (in)"],
+      "Yards (yd)": ["יארדים (yd)"],
+      "Changing these settings will not automatically convert existing product weights and dimensions. You will need to update your products if you change units.": ["שינוי הגדרות אלה לא ימיר אוטומטית משקלים ומידות של מוצרים קיימים. תצטרך לעדכן את המוצרים שלך אם תשנה יחידות."],
+
+      "Site Language": ["שפת האתר"],
+      "Choose the language for your WordPress admin and store": ["בחר את השפה עבור לוח הניהול והחנות"],
+      "Language": ["שפה"],
+      "Search language...": ["חפש שפה..."],
+      "No language found.": ["לא נמצאה שפה."],
+      "Changing the language requires a page refresh to take effect.": ["שינוי השפה דורש רענון עמוד כדי להיכנס לתוקף."],
+
+      "Account": ["חשבון"],
+      "Your Profile": ["הפרופיל שלך"],
+      "Your account information and settings": ["פרטי החשבון וההגדרות שלך"],
+      "First name": ["שם פרטי"],
+      "Last name": ["שם משפחה"],
+      "Display Name": ["שם תצוגה"],
+      "Display name": ["שם תצוגה"],
+      "Email address": ["כתובת אימייל"],
+      "Member since": ["חבר מאז"],
+
+      "Store Information": ["פרטי החנות"],
+      "Your store's contact information": ["פרטי יצירת הקשר של החנות שלך"],
+      "Store Name": ["שם החנות"],
+      "Your store name": ["שם החנות שלך"],
+      "Store Email": ["אימייל החנות"],
+      "store@example.com": ["store@example.com"],
+      "Store Phone": ["טלפון החנות"],
+      "Phone number": ["מספר טלפון"],
+
+      "Store Owner": ["בעל החנות"],
+
+      "Site Identity": ["זהות האתר"],
+      "Basic information about your WordPress site": ["מידע בסיסי על אתר הוורדפרס שלך"],
+      "Site Title": ["כותרת האתר"],
+      "My WordPress Site": ["אתר הוורדפרס שלי"],
+      "Tagline": ["תיאור"],
+      "Just another WordPress site": ["עוד אתר וורדפרס"],
+      "In a few words, explain what this site is about.": ["במילים ספורות, הסבר במה עוסק האתר."],
+      "WordPress Address (URL)": ["כתובת וורדפרס (URL)"],
+      "Site Address (URL)": ["כתובת האתר (URL)"],
+      "Administration Email Address": ["כתובת אימייל ניהולית"],
+      "This address is used for admin purposes.": ["כתובת זו משמשת למטרות ניהול."],
+
+      "Membership": ["חברות"],
+      "User registration and role settings": ["הגדרות הרשמה ותפקידים"],
+      "Anyone can register": ["כל אחד יכול להירשם"],
+      "Allow new users to register on your site": ["אפשר למשתמשים חדשים להירשם באתר"],
+      "New User Default Role": ["תפקיד ברירת מחדל למשתמש חדש"],
+      "Select role": ["בחר תפקיד"],
+
+      "Timezone": ["אזור זמן"],
+      "Choose either a city in the same timezone as you or a UTC timezone offset.": ["בחר עיר באותו אזור זמן שלך או הפרש UTC."],
+      "Search timezone...": ["חפש אזור זמן..."],
+      "No timezone found.": ["לא נמצא אזור זמן."],
+      "UTC Offsets": ["הפרשי UTC"],
+      "Timezones": ["אזורי זמן"],
+
+      "Date and Time Format": ["מבנה תאריך ושעה"],
+      "Set the format for displaying dates and times": ["הגדר את המבנה להצגת תאריכים ושעות"],
+      "Date Format": ["מבנה תאריך"],
+      "Time Format": ["מבנה שעה"],
+      "Custom:": ["מותאם אישית:"],
+      "Week Starts On": ["השבוע מתחיל ב"],
+
+      "Sunday": ["ראשון"],
+      "Monday": ["שני"],
+      "Tuesday": ["שלישי"],
+      "Wednesday": ["רביעי"],
+      "Thursday": ["חמישי"],
+      "Friday": ["שישי"],
+      "Saturday": ["שבת"],
+
+      "Recently Used": ["בשימוש לאחרונה"],
+      "All Languages": ["כל השפות"],
+      "Settings saved. Reloading page to apply language change...": ["ההגדרות נשמרו. מרענן את הדף להחלת שינוי השפה..."],
+
+      "Stock Management": ["ניהול מלאי"],
+      "Configure how stock is managed in your store": ["הגדר כיצד מנוהל המלאי בחנות שלך"],
+      "Enable stock management": ["הפעל ניהול מלאי"],
+      "Track stock levels for products": ["עקוב אחר רמות מלאי למוצרים"],
+      "Hold stock (minutes)": ["החזק מלאי (דקות)"],
+      "Hold stock for unpaid orders for this many minutes. Set to 0 to disable.": ["החזק מלאי עבור הזמנות שלא שולמו למשך דקות אלה. הגדר 0 כדי לבטל."],
+      "Hide out of stock items": ["הסתר פריטים שאזלו מהמלאי"],
+      "Hide out of stock items from the catalog": ["הסתר מהקטלוג פריטים שאזלו מהמלאי"],
+
+      "Stock Notifications": ["התראות מלאי"],
+      "Configure email notifications for stock levels": ["הגדר התראות דוא\"ל לרמות מלאי"],
+      "Low stock notifications": ["התראות מלאי נמוך"],
+      "Enable email notifications for low stock": ["הפעל התראות דוא\"ל למלאי נמוך"],
+      "Out of stock notifications": ["התראות אזל מהמלאי"],
+      "Enable email notifications when products go out of stock": ["הפעל התראות דוא\"ל כאשר מוצרים אוזלים מהמלאי"],
+      "Notification recipient": ["נמען ההתראות"],
+      "Email address to receive stock notifications": ["כתובת דוא\"ל לקבלת התראות מלאי"],
+      "When product stock reaches this amount, a notification will be sent": ["כאשר מלאי המוצר מגיע לכמות זו, תישלח התראה"],
+      "Out of stock threshold": ["סף אזל מהמלאי"],
+      "When product stock reaches this amount, it will be considered out of stock": ["כאשר מלאי המוצר מגיע לכמות זו, הוא ייחשב כאזל מהמלאי"],
+
+      "Products Display": ["תצוגת מוצרים"],
+      "Configure how products are displayed in your catalog": ["הגדר כיצד מוצרים מוצגים בקטלוג שלך"],
+      "Products per row": ["מוצרים בשורה"],
+      "Number of products to display per row in the catalog (1-6)": ["מספר מוצרים להצגה בשורה בקטלוג (1-6)"],
+      "Number of rows to display per page in the catalog (1-10)": ["מספר שורות להצגה בעמוד בקטלוג (1-10)"],
+      "Default product sorting": ["מיון מוצרים ברירת מחדל"],
+      "Default sorting order for products in the catalog": ["סדר מיון ברירת מחדל למוצרים בקטלוג"],
+      "Default sorting (custom ordering + name)": ["מיון ברירת מחדל (סדר מותאם + שם)"],
+      "Popularity (sales)": ["פופולריות (מכירות)"],
+      "Average rating": ["דירוג ממוצע"],
+      "Sort by most recent": ["מיין לפי חדש ביותר"],
+      "Sort by price (asc)": ["מיין לפי מחיר (עולה)"],
+      "Sort by price (desc)": ["מיין לפי מחיר (יורד)"],
+
+      "Checkout": ["קופה"],
+      "Configure checkout options for your store": ["הגדר אפשרויות קופה לחנות שלך"],
+      "Guest checkout": ["קנייה כאורח"],
+      "Allow customers to place orders without an account": ["אפשר ללקוחות לבצע הזמנות ללא חשבון"],
+      "Login reminder": ["תזכורת התחברות"],
+      "Show a login form at checkout for returning customers": ["הצג טופס התחברות בקופה ללקוחות חוזרים"],
+      "Account creation during checkout": ["יצירת חשבון בעת הקנייה"],
+      "Allow customers to create an account during checkout": ["אפשר ללקוחות ליצור חשבון בעת הקנייה"],
+
+      "Change on Gravatar": ["שנה ב-Gravatar"],
+      "Your profile image is managed through Gravatar and is linked to your email address.": ["תמונת הפרופיל שלך מנוהלת דרך Gravatar ומקושרת לכתובת הדוא\"ל שלך."],
+      "Nickname": ["כינוי"],
+      "Website": ["אתר אינטרנט"],
+      "About You": ["אודותיך"],
+      "Biographical information that may be displayed publicly": ["מידע ביוגרפי שעשוי להיות מוצג באופן פומבי"],
+      "Biographical Info": ["מידע ביוגרפי"],
+      "Share a little biographical information to fill out your profile. This may be shown publicly.": ["שתף מעט מידע ביוגרפי כדי למלא את הפרופיל שלך. מידע זה עשוי להיות מוצג באופן פומבי."],
+      "Your billing address for orders": ["כתובת החיוב שלך להזמנות"],
+
+      "Your shipping address for deliveries": ["כתובת המשלוח שלך למשלוחים"],
+      "Copy from billing": ["העתק מכתובת חיוב"],
+
+      "Billing address copied to shipping address": ["כתובת החיוב הועתקה לכתובת המשלוח"],
+
+
+      "Form Fields Visibility": ["הצגת שדות בטפסים"],
+      "Choose which fields to show or hide in creation forms. Required fields cannot be hidden.": ["בחר אילו שדות להציג או להסתיר בטפסי יצירה. שדות חובה לא ניתנים להסתרה."],
+      "Reset all": ["אפס הכל"],
+      "fields": ["שדות"],
+      "hidden": ["מוסתרים"],
+      "Show all fields": ["הצג את כל השדות"],
+
+      "Sale Schedule": ["תזמון מבצע"],
+
+
+      "Product Gallery": ["גלריית מוצר"],
+
+      "Categories & Tags": ["קטגוריות ותגיות"],
+
+      "Downloadable Settings": ["הגדרות להורדה"],
+
+      "Limit Per User": ["מגבלה למשתמש"],
+      "Limit to X Items": ["מגבלה ל-X פריטים"],
+
+      "Product Restrictions": ["הגבלות מוצר"],
+      "Excluded Categories": ["קטגוריות לא כלולות"],
+
+      "Line Items": ["פריטים"],
+
+      "Customer Details": ["פרטי לקוח"],
+ 
+      "Billing First Name": ["שם פרטי לחיוב"],
+      "Billing Last Name": ["שם משפחה לחיוב"],
+  
+      "Shipping First Name": ["שם פרטי למשלוח"],
+      "Shipping Last Name": ["שם משפחה למשלוח"],
+
+
+      "Rule Details": ["פרטי כלל"],
+      "Rule Name": ["שם הכלל"],
+      "Custom Fields Visibility": ["הצגת שדות מותאמים אישית"],
+      "Control which custom fields appear in the product form. Fields from ACF, JetEngine, and Yoast SEO are automatically detected.": ["שלוט באילו שדות מותאמים אישית מופיעים בטופס המוצר. שדות מ-ACF, JetEngine ו-Yoast SEO מזוהים אוטומטית."],
+      "Field Visibility Overview": ["סקירת הצגת שדות"],
+      "Hide All": ["הסתר הכל"],
+      "Show All": ["הצג הכל"],
+      "Hidden": ["מוסתר"],
+      "Visible": ["גלוי"]
+
+
     }
   }
 }

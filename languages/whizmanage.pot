@@ -1,15 +1,15 @@
-# Copyright (C) 2025 Whizmanage
+# Copyright (C) 2026 Whizmanage
 # This file is distributed under the same license as the Whizmanage Pro plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Whizmanage Pro 2.0.3\n"
+"Project-Id-Version: Whizmanage Pro 2.0.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/whizmanage-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-29T11:01:05+01:00\n"
+"POT-Creation-Date: 2026-01-08T10:05:11+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: whizmanage\n"
@@ -34,68 +34,79 @@ msgstr ""
 msgid "https://whizmanage.com/"
 msgstr ""
 
-#: includes/class-whizmanage.php:44
-#: includes/class-whizmanage.php:45
+#: includes/class-whizmanage-upgrade.php:129
+#: whizmanage-pro.php:418
+msgid "WhizManage User"
+msgstr ""
+
+#: includes/class-whizmanage.php:240
+#: includes/class-whizmanage.php:241
 msgid "WhizManage"
 msgstr ""
 
-#: includes/class-whizmanage.php:59
-#: includes/class-whizmanage.php:60
+#: includes/class-whizmanage.php:255
+#: includes/class-whizmanage.php:256
 #: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:801
-#: src/components/table/entities/coupons/coupons.columns.js:551
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:369
+#: src/components/table/entities/coupons/coupons.columns.js:554
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:373
 #: src/components/table/import/ExportProductsIds.jsx:484
 #: src/layout/menu/History.jsx:275
 #: src/layout/menu/History.jsx:334
 msgid "Products"
 msgstr ""
 
-#: includes/class-whizmanage.php:72
-#: includes/class-whizmanage.php:73
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:635
+#: includes/class-whizmanage.php:268
+#: includes/class-whizmanage.php:269
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:639
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:906
 #: src/layout/menu/History.jsx:289
 #: src/layout/menu/History.jsx:336
 msgid "Coupons"
 msgstr ""
 
-#: includes/class-whizmanage.php:83
-#: includes/class-whizmanage.php:84
+#: includes/class-whizmanage.php:279
+#: includes/class-whizmanage.php:280
 #: src/components/table/entities/customers/customers.columns.js:76
 #: src/layout/menu/History.jsx:282
 #: src/layout/menu/History.jsx:335
 msgid "Orders"
 msgstr ""
 
-#: includes/class-whizmanage.php:94
-#: includes/class-whizmanage.php:95
+#: includes/class-whizmanage.php:290
+#: includes/class-whizmanage.php:291
 #: src/layout/menu/History.jsx:296
 #: src/layout/menu/History.jsx:337
 msgid "Customers"
 msgstr ""
 
-#: includes/class-whizmanage.php:105
-#: includes/class-whizmanage.php:106
+#: includes/class-whizmanage.php:301
+#: includes/class-whizmanage.php:302
 #: src/components/tour/WhatsNewTour.jsx:115
 #: src/layout/menu/History.jsx:303
 #: src/layout/menu/History.jsx:338
 msgid "Discount Rules"
 msgstr ""
 
+#: includes/class-whizmanage.php:312
+#: includes/class-whizmanage.php:313
+#: src/components/settings/SettingsPage.jsx:148
+msgid "Settings"
+msgstr ""
+
 #: includes/coupons/rest-functions-coupons.php:112
-#: includes/customers/rest-functions-customers.php:79
+#: includes/customers/rest-functions-customers.php:80
 #: includes/orders/rest-functions-orders.php:824
-#: includes/products/rest-functions-product.php:903
-#: includes/rest-functions-main.php:348
+#: includes/products/rest-functions-product.php:916
+#: includes/rest-functions-main.php:349
 msgid "You do not have permissions to access this."
 msgstr ""
 
-#: includes/discount-rules/class-discount-api.php:279
+#: includes/discount-rules/class-discount-api.php:290
 msgid "Rule not found"
 msgstr ""
 
 #: includes/discount-rules/class-discount-manager.php:287
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:837
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:841
 msgid "Discount"
 msgstr ""
 
@@ -155,113 +166,113 @@ msgstr ""
 msgid "Could not add the offer item to the cart."
 msgstr ""
 
-#: includes/discount-rules/init.php:210
+#: includes/discount-rules/class-whizmanage-discount-init.php:284
 msgid "Special Offer!"
 msgstr ""
 
-#: includes/discount-rules/init.php:211
+#: includes/discount-rules/class-whizmanage-discount-init.php:285
 msgid "We have a special offer for you!"
 msgstr ""
 
-#: includes/discount-rules/init.php:215
-#: includes/discount-rules/init.php:461
+#: includes/discount-rules/class-whizmanage-discount-init.php:289
+#: includes/discount-rules/class-whizmanage-discount-init.php:498
 msgid "Add to Cart"
 msgstr ""
 
-#: includes/discount-rules/init.php:219
+#: includes/discount-rules/class-whizmanage-discount-init.php:293
 msgid "No Thanks"
 msgstr ""
 
-#: includes/discount-rules/init.php:243
+#: includes/discount-rules/class-whizmanage-discount-init.php:315
 msgid "Apply discounts as a single coupon (don&#8217;t change item prices)"
 msgstr ""
 
-#: includes/discount-rules/init.php:316
-#: includes/discount-rules/init.php:335
+#: includes/discount-rules/class-whizmanage-discount-init.php:355
+#: includes/discount-rules/class-whizmanage-discount-init.php:374
 msgid "Security check failed. Please refresh the page and try again."
 msgstr ""
 
-#: includes/discount-rules/init.php:457
+#: includes/discount-rules/class-whizmanage-discount-init.php:494
 msgid "Gift Available!"
 msgstr ""
 
-#: includes/discount-rules/init.php:481
+#: includes/discount-rules/class-whizmanage-discount-init.php:518
 msgid "Special Deal!"
 msgstr ""
 
 #. translators: 1: product title, 2: discount percentage
-#: includes/discount-rules/init.php:485
+#: includes/discount-rules/class-whizmanage-discount-init.php:522
 #, php-format
 msgid "%1$s at %2$s%% OFF"
 msgstr ""
 
-#: includes/discount-rules/init.php:498
+#: includes/discount-rules/class-whizmanage-discount-init.php:535
 msgid "Add Offer"
 msgstr ""
 
 #. translators: %s: discount percentage
-#: includes/discount-rules/shortcode.php:514
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:536
 #, php-format
 msgid "Special Offer: Get %s%% off this item!"
 msgstr ""
 
-#: includes/discount-rules/shortcode.php:518
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:540
 msgid "Special Offer: Discount on this item!"
 msgstr ""
 
 #. translators: 1: minimum quantity, 2: discount percentage
-#: includes/discount-rules/shortcode.php:537
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:559
 #, php-format
 msgid "Buy %1$d+ items, get %2$s%% off!"
 msgstr ""
 
 #. translators: 1: minimum quantity, 2: discount amount (formatted price)
-#: includes/discount-rules/shortcode.php:544
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:566
 #, php-format
 msgid "Buy %1$d+ items, get %2$s discount!"
 msgstr ""
 
-#: includes/discount-rules/shortcode.php:550
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:572
 msgid "Quantity Discount Available! Buy more to save more."
 msgstr ""
 
 #. translators: 1: quantity to buy, 2: quantity free
-#: includes/discount-rules/shortcode.php:562
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:584
 #, php-format
 msgid "Buy %1$d Get %2$d FREE!"
 msgstr ""
 
 #. translators: 1: quantity to buy, 2: quantity discounted, 3: discount percentage
-#: includes/discount-rules/shortcode.php:569
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:591
 #, php-format
 msgid "Buy %1$d Get %2$d at %3$s%% off!"
 msgstr ""
 
 #. translators: 1: quantity to buy, 2: quantity free
-#: includes/discount-rules/shortcode.php:585
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:607
 #, php-format
 msgid "Bundle Deal: Buy %1$d get %2$d FREE!"
 msgstr ""
 
 #. translators: 1: quantity to buy, 2: quantity discounted, 3: discount percentage
-#: includes/discount-rules/shortcode.php:592
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:614
 #, php-format
 msgid "Bundle Deal: Buy %1$d get %2$d at %3$s%% off!"
 msgstr ""
 
-#: includes/discount-rules/shortcode.php:601
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:623
 msgid "Free Shipping eligible with this product!"
 msgstr ""
 
-#: includes/discount-rules/shortcode.php:605
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:627
 msgid "Spend Bundle: Special offer available!"
 msgstr ""
 
-#: includes/discount-rules/shortcode.php:609
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:631
 msgid "Special discount applicable to this product!"
 msgstr ""
 
-#: includes/discount-rules/shortcode.php:645
+#: includes/discount-rules/class-whizmanage-discount-shortcode.php:667
 msgid "Discount applied in cart"
 msgstr ""
 
@@ -271,20 +282,24 @@ msgstr ""
 msgid "Email sent manually: %1$s to %2$s"
 msgstr ""
 
-#: includes/products/rest-functions-product.php:313
+#: includes/products/rest-functions-product.php:326
 msgid "Local rebalance failed to create a gap"
 msgstr ""
 
-#: includes/products/rest-functions-product.php:346
+#: includes/products/rest-functions-product.php:359
 msgid "Reordered"
 msgstr ""
 
-#: includes/rest-functions-main.php:269
+#: includes/rest-functions-main.php:270
 msgid "Failed to insert row into whizmanage table."
 msgstr ""
 
-#: includes/rest-functions-main.php:277
+#: includes/rest-functions-main.php:278
 msgid "Failed to update whizmanage row."
+msgstr ""
+
+#: includes/settings/rest-functions-settings.php:854
+msgid "You do not have permissions to manage settings."
 msgstr ""
 
 #: whizmanage-pro.php:46
@@ -310,7 +325,7 @@ msgid "Header"
 msgstr ""
 
 #: src/components/editor/components/TableDialog.jsx:120
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:470
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:474
 msgid "Price"
 msgstr ""
 
@@ -375,7 +390,7 @@ msgstr ""
 #: src/components/editor/components/VideoDialog.jsx:282
 #: src/components/editor/components/VideoDialog.jsx:624
 #: src/components/editor/HtmlEditor.jsx:718
-#: src/components/forms/core/fields/DownloadableInput.jsx:427
+#: src/components/forms/core/fields/DownloadableInput.jsx:426
 #: src/components/forms/core/fields/MultiSelectInput.jsx:355
 #: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1288
 #: src/components/media/MediaPicker.jsx:271
@@ -393,19 +408,19 @@ msgstr ""
 #: src/components/table/entities/orders/components/RefundModal.jsx:912
 #: src/components/table/entities/orders/EmailTemplateModal.jsx:189
 #: src/components/table/entities/products/components/DimensionsEdit.jsx:189
-#: src/components/table/entities/products/components/DownloadableCell.jsx:524
+#: src/components/table/entities/products/components/DownloadableCell.jsx:523
 #: src/components/table/entities/products/components/external/ManageExternalModal.jsx:144
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:268
 #: src/components/table/entities/products/components/TypeEdit.jsx:49
 #: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:400
 #: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:506
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:78
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:185
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:145
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:84
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:277
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:189
 #: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:306
 #: src/components/table/entities/products/components/YoastSEOModal.jsx:949
 #: src/components/table/filters/DateFilterTabs.jsx:331
-#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:252
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:314
 #: src/components/table/toolbar/actions/genericActions.js:45
 #: src/components/table/toolbar/actions/genericActions.js:164
 #: src/components/table/toolbar/actions/genericActions.js:385
@@ -481,7 +496,7 @@ msgid "Cell"
 msgstr ""
 
 #: src/components/editor/components/TableEditorDialog.jsx:523
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:714
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:718
 #: src/components/table/filters/DateFilterTabs.jsx:339
 msgid "Apply"
 msgstr ""
@@ -713,7 +728,7 @@ msgstr ""
 #: src/components/table/components/MultiSelectEditItem.jsx:236
 #: src/components/table/components/MultiSelectEditItem.jsx:440
 #: src/components/table/entities/orders/components/OrderNotesChat.jsx:223
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:77
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:83
 msgid "Delete"
 msgstr ""
 
@@ -887,9 +902,9 @@ msgid "Close"
 msgstr ""
 
 #: src/components/editor/RichEditorModal.jsx:131
-#: src/components/forms/core/fields/DownloadableInput.jsx:435
+#: src/components/forms/core/fields/DownloadableInput.jsx:434
 #: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1295
-#: src/components/forms/GenericItemModal.jsx:291
+#: src/components/forms/GenericItemModal.jsx:308
 #: src/components/media/MediaPagination.jsx:99
 #: src/components/table/components/MultiSelectEditItem.jsx:364
 #: src/components/table/components/MultiSelectEditItem.jsx:373
@@ -901,13 +916,13 @@ msgstr ""
 #: src/components/table/entities/orders/components/OrderShippingModal.jsx:405
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1214
 #: src/components/table/entities/products/components/DimensionsEdit.jsx:199
-#: src/components/table/entities/products/components/DownloadableCell.jsx:538
+#: src/components/table/entities/products/components/DownloadableCell.jsx:537
 #: src/components/table/entities/products/components/external/ManageExternalModal.jsx:151
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:281
 #: src/components/table/entities/products/components/variation/components/AddFromTermsItem.jsx:212
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:212
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:245
 #: src/components/table/entities/products/components/variation/components/SelectOptionsItem.jsx:257
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:346
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:345
 #: src/components/ui/nextUI/EditableTooltip.jsx:169
 msgid "Save"
 msgstr ""
@@ -938,6 +953,9 @@ msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:131
 #: src/components/forms/core/fields/AddressInput.jsx:135
+#: src/components/settings/tabs/AccountTab.jsx:167
+#: src/components/settings/tabs/AccountTab.jsx:293
+#: src/components/settings/tabs/AccountTab.jsx:460
 #: src/components/table/entities/orders/components/OrderBillingModal.jsx:248
 #: src/components/table/entities/orders/components/OrderShippingModal.jsx:243
 msgid "First Name"
@@ -945,6 +963,9 @@ msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:148
 #: src/components/forms/core/fields/AddressInput.jsx:152
+#: src/components/settings/tabs/AccountTab.jsx:179
+#: src/components/settings/tabs/AccountTab.jsx:301
+#: src/components/settings/tabs/AccountTab.jsx:468
 #: src/components/table/entities/orders/components/OrderBillingModal.jsx:261
 #: src/components/table/entities/orders/components/OrderShippingModal.jsx:259
 msgid "Last Name"
@@ -952,6 +973,8 @@ msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:166
 #: src/components/forms/core/fields/AddressInput.jsx:171
+#: src/components/settings/tabs/AccountTab.jsx:222
+#: src/components/settings/tabs/AccountTab.jsx:422
 #: src/components/table/entities/customers/customers.columns.js:14
 #: src/components/table/entities/orders/components/OrderBillingModal.jsx:366
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:270
@@ -961,6 +984,8 @@ msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:186
 #: src/components/forms/core/fields/AddressInput.jsx:190
+#: src/components/settings/tabs/AccountTab.jsx:409
+#: src/components/settings/tabs/AccountTab.jsx:575
 #: src/components/table/entities/customers/customers.columns.js:101
 #: src/components/table/entities/customers/customers.columns.js:104
 #: src/components/table/entities/orders/components/OrderBillingModal.jsx:382
@@ -977,18 +1002,25 @@ msgid "Company (optional)"
 msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:208
+#: src/components/settings/tabs/AccountTab.jsx:312
+#: src/components/settings/tabs/AccountTab.jsx:479
 #: src/components/table/entities/orders/components/OrderBillingModal.jsx:277
 #: src/components/table/entities/orders/components/OrderShippingModal.jsx:278
 msgid "Company"
 msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:221
+#: src/components/settings/tabs/AccountTab.jsx:322
+#: src/components/settings/tabs/AccountTab.jsx:489
 #: src/components/table/entities/orders/components/OrderBillingModal.jsx:292
 #: src/components/table/entities/orders/components/OrderShippingModal.jsx:296
 msgid "Address Line 1"
 msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:225
+#: src/components/settings/tabs/AccountTab.jsx:326
+#: src/components/settings/tabs/AccountTab.jsx:493
+#: src/components/settings/tabs/GeneralTab.jsx:606
 msgid "Street address"
 msgstr ""
 
@@ -997,11 +1029,18 @@ msgid "Address Line 2 (optional)"
 msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:242
+#: src/components/settings/tabs/AccountTab.jsx:335
+#: src/components/settings/tabs/AccountTab.jsx:502
+#: src/components/settings/tabs/GeneralTab.jsx:622
 msgid "Apartment, suite, etc."
 msgstr ""
 
 #: src/components/forms/core/fields/AddressInput.jsx:255
 #: src/components/forms/core/fields/AddressInput.jsx:259
+#: src/components/settings/tabs/AccountTab.jsx:343
+#: src/components/settings/tabs/AccountTab.jsx:510
+#: src/components/settings/tabs/GeneralTab.jsx:630
+#: src/components/settings/tabs/GeneralTab.jsx:637
 #: src/components/table/entities/customers/customers.columns.js:111
 #: src/components/table/entities/customers/customers.columns.js:114
 #: src/components/table/entities/orders/components/OrderBillingModal.jsx:322
@@ -1042,10 +1081,10 @@ msgstr ""
 
 #: src/components/forms/core/fields/CustomerSelectInput.jsx:292
 #: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1325
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:42
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:41
 #: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:247
-#: src/components/table/entities/products/products.columns.js:937
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:519
+#: src/components/table/entities/products/products.columns.js:950
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:562
 msgid "Type"
 msgstr ""
 
@@ -1057,40 +1096,40 @@ msgstr ""
 msgid "No customers found"
 msgstr ""
 
-#: src/components/forms/core/fields/CustomFieldsInput.jsx:256
-#: src/components/table/core/EditableCell.jsx:885
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:270
+#: src/components/table/core/EditableCell.jsx:891
 #: src/components/table/entities/products/components/YoastSEOModal.jsx:499
 msgid "Enabled"
 msgstr ""
 
-#: src/components/forms/core/fields/CustomFieldsInput.jsx:257
-#: src/components/table/core/EditableCell.jsx:885
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:271
+#: src/components/table/core/EditableCell.jsx:891
 #: src/components/table/entities/products/components/YoastSEOModal.jsx:500
 msgid "Disabled"
 msgstr ""
 
-#: src/components/forms/core/fields/CustomFieldsInput.jsx:284
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:298
 #: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:267
 msgid "Unsupported field type"
 msgstr ""
 
-#: src/components/forms/core/fields/CustomFieldsInput.jsx:296
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:310
 msgid "No custom fields configured"
 msgstr ""
 
-#: src/components/forms/core/fields/CustomFieldsInput.jsx:299
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:313
 msgid "Custom fields can be added using ACF or JetEngine plugins"
 msgstr ""
 
-#: src/components/forms/core/fields/CustomFieldsInput.jsx:319
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:333
 msgid "Custom Product Fields"
 msgstr ""
 
-#: src/components/forms/core/fields/CustomFieldsInput.jsx:322
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:336
 msgid "fields available"
 msgstr ""
 
-#: src/components/forms/core/fields/CustomFieldsInput.jsx:376
+#: src/components/forms/core/fields/CustomFieldsInput.jsx:390
 #: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:311
 msgid "Default"
 msgstr ""
@@ -1128,12 +1167,14 @@ msgstr ""
 #: src/components/table/components/MultiSelectEditItem.jsx:486
 #: src/components/table/components/MultiSelectEditItem.jsx:493
 #: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:397
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:182
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:274
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:383
 #: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:369
 #: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:524
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:142
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:186
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:295
 #: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:303
-#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:249
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:311
 msgid "Add"
 msgstr ""
 
@@ -1141,107 +1182,107 @@ msgstr ""
 msgid "No custom fields added yet"
 msgstr ""
 
-#: src/components/forms/core/fields/DateRangeInput.jsx:143
+#: src/components/forms/core/fields/DateRangeInput.jsx:159
 msgid "(optional)"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:98
+#: src/components/forms/core/fields/DownloadableInput.jsx:97
 #: src/components/table/entities/discount-rules/discount-rules.api.js:173
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:24
-#: src/components/table/entities/products/components/DownloadableCell.jsx:144
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:23
+#: src/components/table/entities/products/components/DownloadableCell.jsx:143
 msgid "Name is required"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:103
-#: src/components/table/entities/products/components/DownloadableCell.jsx:148
+#: src/components/forms/core/fields/DownloadableInput.jsx:102
+#: src/components/table/entities/products/components/DownloadableCell.jsx:147
 msgid "File URL is required"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:109
-#: src/components/table/entities/products/components/DownloadableCell.jsx:154
+#: src/components/forms/core/fields/DownloadableInput.jsx:108
+#: src/components/table/entities/products/components/DownloadableCell.jsx:153
 msgid "URL must start with http:// or https://"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:233
-#: src/components/forms/core/fields/DownloadableInput.jsx:249
-#: src/components/table/entities/products/components/DownloadableCell.jsx:270
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:166
-#: src/components/table/entities/products/products.columns.js:1474
+#: src/components/forms/core/fields/DownloadableInput.jsx:232
+#: src/components/forms/core/fields/DownloadableInput.jsx:248
+#: src/components/table/entities/products/components/DownloadableCell.jsx:269
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:165
+#: src/components/table/entities/products/products.columns.js:1516
 msgid "Downloadable"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:233
-#: src/components/forms/core/fields/DownloadableInput.jsx:249
-#: src/components/table/entities/products/components/DownloadableCell.jsx:271
+#: src/components/forms/core/fields/DownloadableInput.jsx:232
+#: src/components/forms/core/fields/DownloadableInput.jsx:248
+#: src/components/table/entities/products/components/DownloadableCell.jsx:270
 msgid "Not downloadable"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:261
-#: src/components/forms/core/fields/DownloadableInput.jsx:278
-#: src/components/table/entities/products/components/DownloadableCell.jsx:308
-#: src/components/table/entities/products/components/DownloadableCell.jsx:333
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:231
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:247
+#: src/components/forms/core/fields/DownloadableInput.jsx:260
+#: src/components/forms/core/fields/DownloadableInput.jsx:277
+#: src/components/table/entities/products/components/DownloadableCell.jsx:307
+#: src/components/table/entities/products/components/DownloadableCell.jsx:332
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:230
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:246
 msgid "Downloadable files"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:286
-#: src/components/table/entities/products/components/DownloadableCell.jsx:350
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:256
+#: src/components/forms/core/fields/DownloadableInput.jsx:285
+#: src/components/table/entities/products/components/DownloadableCell.jsx:349
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:255
 msgid "Download Expiry (days)"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:298
-#: src/components/forms/core/fields/DownloadableInput.jsx:314
+#: src/components/forms/core/fields/DownloadableInput.jsx:297
+#: src/components/forms/core/fields/DownloadableInput.jsx:313
 #: src/components/table/entities/coupons/components/UsageLimitCell.jsx:312
 #: src/components/table/entities/coupons/components/UsageLimitCell.jsx:352
 #: src/components/table/entities/coupons/components/UsageLimitCell.jsx:392
-#: src/components/table/entities/products/components/DownloadableCell.jsx:358
-#: src/components/table/entities/products/components/DownloadableCell.jsx:376
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:264
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:278
+#: src/components/table/entities/products/components/DownloadableCell.jsx:357
+#: src/components/table/entities/products/components/DownloadableCell.jsx:375
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:263
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:277
 msgid "Unlimited"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:304
-#: src/components/table/entities/products/components/DownloadableCell.jsx:368
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:270
+#: src/components/forms/core/fields/DownloadableInput.jsx:303
+#: src/components/table/entities/products/components/DownloadableCell.jsx:367
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:269
 msgid "Download Limit"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:330
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:18
-#: src/components/table/entities/products/components/DownloadableCell.jsx:409
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:292
-#: src/components/table/entities/products/products.columns.js:506
+#: src/components/forms/core/fields/DownloadableInput.jsx:329
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:17
+#: src/components/table/entities/products/components/DownloadableCell.jsx:408
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:291
+#: src/components/table/entities/products/products.columns.js:507
 msgid "Name"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:359
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:304
+#: src/components/forms/core/fields/DownloadableInput.jsx:358
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:303
 msgid "File URL:"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:393
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:321
+#: src/components/forms/core/fields/DownloadableInput.jsx:392
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:320
 msgid "Choose file"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:395
-#: src/components/table/entities/products/components/DownloadableCell.jsx:459
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:323
+#: src/components/forms/core/fields/DownloadableInput.jsx:394
+#: src/components/table/entities/products/components/DownloadableCell.jsx:458
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:322
 msgid "Delete file"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:418
-#: src/components/table/entities/products/components/DownloadableCell.jsx:514
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:340
+#: src/components/forms/core/fields/DownloadableInput.jsx:417
+#: src/components/table/entities/products/components/DownloadableCell.jsx:513
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:339
 msgid "Add file"
 msgstr ""
 
-#: src/components/forms/core/fields/DownloadableInput.jsx:462
-#: src/components/table/entities/products/components/DownloadableCell.jsx:557
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:363
+#: src/components/forms/core/fields/DownloadableInput.jsx:461
+#: src/components/table/entities/products/components/DownloadableCell.jsx:556
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:362
 msgid "Select File"
 msgstr ""
 
@@ -1255,7 +1296,7 @@ msgstr ""
 
 #: src/components/forms/core/fields/InventoryInput.jsx:106
 #: src/components/forms/core/fields/InventoryInput.jsx:110
-#: src/components/table/entities/products/products.columns.js:578
+#: src/components/table/entities/products/products.columns.js:581
 msgid "SKU"
 msgstr ""
 
@@ -1273,8 +1314,8 @@ msgstr ""
 
 #: src/components/forms/core/fields/InventoryInput.jsx:153
 #: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:263
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:471
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:550
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:475
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:554
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:146
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:733
 msgid "Quantity"
@@ -1330,7 +1371,7 @@ msgstr ""
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:402
 #: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:371
 #: src/components/table/import/ExportProductsIds.jsx:469
-#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:288
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:350
 #: src/components/table/toolbar/actions/bulk-edit/SelectedRows.jsx:89
 msgid "No results found."
 msgstr ""
@@ -1339,37 +1380,37 @@ msgstr ""
 msgid "No products found. Please add products first."
 msgstr ""
 
-#: src/components/forms/core/fields/ProductIdsInput.jsx:250
+#: src/components/forms/core/fields/ProductIdsInput.jsx:279
 msgid "No excluded products"
 msgstr ""
 
-#: src/components/forms/core/fields/ProductIdsInput.jsx:250
+#: src/components/forms/core/fields/ProductIdsInput.jsx:279
 msgid "No products"
 msgstr ""
 
-#: src/components/forms/core/fields/ProductIdsInput.jsx:263
+#: src/components/forms/core/fields/ProductIdsInput.jsx:292
 msgid "Select excluded products"
 msgstr ""
 
-#: src/components/forms/core/fields/ProductIdsInput.jsx:264
+#: src/components/forms/core/fields/ProductIdsInput.jsx:293
 #: src/components/table/entities/discount-rules/components/ConditionsEditor.jsx:238
 msgid "Select products"
 msgstr ""
 
-#: src/components/forms/core/fields/ProductIdsInput.jsx:277
+#: src/components/forms/core/fields/ProductIdsInput.jsx:306
 msgid "Find products by name or SKU"
 msgstr ""
 
-#: src/components/forms/core/fields/ProductIdsInput.jsx:284
+#: src/components/forms/core/fields/ProductIdsInput.jsx:313
 msgid "No products found."
 msgstr ""
 
-#: src/components/forms/core/fields/ProductIdsInput.jsx:291
-#: src/components/table/entities/coupons/coupons.columns.js:648
+#: src/components/forms/core/fields/ProductIdsInput.jsx:320
+#: src/components/table/entities/coupons/coupons.columns.js:651
 msgid "Excluded products"
 msgstr ""
 
-#: src/components/forms/core/fields/ProductIdsInput.jsx:292
+#: src/components/forms/core/fields/ProductIdsInput.jsx:321
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:403
 msgid "Available products"
 msgstr ""
@@ -1415,7 +1456,7 @@ msgstr ""
 msgid "Please fill in the product name first to enable product type selection"
 msgstr ""
 
-#: src/components/forms/core/fields/SelectInput.jsx:67
+#: src/components/forms/core/fields/SelectInput.jsx:73
 msgid "Select an option"
 msgstr ""
 
@@ -1517,7 +1558,7 @@ msgid "Enable recursive to repeat the offer"
 msgstr ""
 
 #: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:148
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:38
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:37
 msgid "Shipping discount"
 msgstr ""
 
@@ -1728,6 +1769,7 @@ msgid "Discount settings"
 msgstr ""
 
 #: src/components/forms/core/fields/TypeWithDiscountSettings.jsx:1295
+#: src/components/settings/SettingsPage.jsx:175
 #: src/components/table/core/Pagination.jsx:53
 #: src/components/table/entities/coupons/components/UsageLimitCell.jsx:409
 #: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:293
@@ -1736,7 +1778,7 @@ msgstr ""
 #: src/components/table/entities/orders/components/OrderItemsModal.jsx:181
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1214
 #: src/components/table/entities/products/components/DimensionsEdit.jsx:196
-#: src/components/table/entities/products/components/DownloadableCell.jsx:535
+#: src/components/table/entities/products/components/DownloadableCell.jsx:534
 #: src/components/table/entities/products/components/external/ManageExternalModal.jsx:151
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:278
 #: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:514
@@ -1778,24 +1820,24 @@ msgstr ""
 msgid "Add tier"
 msgstr ""
 
-#: src/components/forms/GenericItemModal.jsx:108
+#: src/components/forms/GenericItemModal.jsx:119
 msgid "Item updated successfully"
 msgstr ""
 
-#: src/components/forms/GenericItemModal.jsx:133
-#: src/components/table/core/DataTable.jsx:798
+#: src/components/forms/GenericItemModal.jsx:144
+#: src/components/table/core/DataTable.jsx:1119
 msgid "Item created successfully"
 msgstr ""
 
-#: src/components/forms/GenericItemModal.jsx:247
+#: src/components/forms/GenericItemModal.jsx:263
 msgid "Please fix the errors in the form"
 msgstr ""
 
-#: src/components/forms/GenericItemModal.jsx:258
+#: src/components/forms/GenericItemModal.jsx:275
 msgid "Reset form"
 msgstr ""
 
-#: src/components/forms/GenericItemModal.jsx:291
+#: src/components/forms/GenericItemModal.jsx:308
 msgid "Update"
 msgstr ""
 
@@ -1860,7 +1902,6 @@ msgstr ""
 
 #: src/components/media/MediaPagination.jsx:40
 #: src/components/media/MediaPagination.jsx:62
-#: src/components/table/core/Pagination.jsx:199
 #: src/components/table/core/Pagination.jsx:237
 #: src/components/table/entities/customers/components/CustomerOrdersPopover.jsx:196
 msgid "of"
@@ -1912,7 +1953,7 @@ msgstr ""
 
 #: src/components/media/MediaPicker.jsx:356
 #: src/components/media/MediaPicker.jsx:386
-#: src/components/table/core/Pagination.jsx:249
+#: src/components/table/core/Pagination.jsx:248
 #: src/layout/menu/History.jsx:333
 msgid "All"
 msgstr ""
@@ -1926,6 +1967,8 @@ msgid "Files"
 msgstr ""
 
 #: src/components/media/MediaPicker.jsx:386
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:306
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:489
 msgid "Show All"
 msgstr ""
 
@@ -1933,7 +1976,7 @@ msgstr ""
 #: src/components/table/components/MultiSelectEdit.jsx:684
 #: src/components/table/core/DisplayColumns.jsx:315
 #: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:364
-#: src/components/table/import/CustomFieldsSelector.jsx:194
+#: src/components/table/import/CustomFieldsSelector.jsx:190
 msgid "Selected"
 msgstr ""
 
@@ -2033,8 +2076,792 @@ msgstr ""
 msgid "The file is too large."
 msgstr ""
 
+#: src/components/settings/SettingsPage.jsx:102
+#: src/components/settings/SettingsPage.jsx:112
+msgid "Success"
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:103
+msgid "Settings saved. Reloading page to apply language change..."
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:113
+msgid "Settings saved successfully"
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:119
+#: src/components/table/core/EditableCell.jsx:262
+msgid "Error"
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:121
+msgid "Failed to save settings"
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:133
+msgid "Loading settings..."
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:151
+msgid "Manage your WooCommerce and WhizManage settings"
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:163
+msgid "Reset"
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:180
+#: src/components/table/entities/orders/components/OrderItemsModal.jsx:184
+#: src/components/table/entities/products/components/YoastSEOModal.jsx:955
+msgid "Save Changes"
+msgstr ""
+
+#: src/components/settings/SettingsPage.jsx:321
+msgid "You have unsaved changes"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:94
+#: src/ErrorBoundary.jsx:102
+msgid "Copied"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:95
+msgid "Billing address copied to shipping address"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:116
+msgid "Your Profile"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:117
+msgid "Your account information and settings"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:136
+msgid "Change on Gravatar"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:153
+msgid "Member since"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:159
+msgid "Your profile image is managed through Gravatar and is linked to your email address."
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:174
+#: src/components/table/entities/customers/customers.columns.js:31
+#: src/components/table/entities/customers/customers.columns.js:34
+msgid "First name"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:186
+#: src/components/table/entities/customers/customers.columns.js:41
+#: src/components/table/entities/customers/customers.columns.js:44
+msgid "Last name"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:195
+#: src/components/settings/tabs/AccountTab.jsx:202
+msgid "Nickname"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:207
+msgid "Display Name"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:214
+msgid "Display name"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:230
+msgid "Email address"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:240
+msgid "Website"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:261
+msgid "About You"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:262
+msgid "Biographical information that may be displayed publicly"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:266
+msgid "Biographical Info"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:273
+msgid "Share a little biographical information to fill out your profile. This may be shown publicly."
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:286
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:252
+msgid "Billing Address"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:287
+msgid "Your billing address for orders"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:331
+#: src/components/settings/tabs/AccountTab.jsx:498
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:306
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:313
+msgid "Address Line 2"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:351
+#: src/components/settings/tabs/AccountTab.jsx:518
+#: src/components/settings/tabs/GeneralTab.jsx:643
+msgid "Postcode / ZIP"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:364
+#: src/components/settings/tabs/AccountTab.jsx:531
+#: src/components/settings/tabs/GeneralTab.jsx:661
+msgid "Country / Region"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:370
+#: src/components/settings/tabs/AccountTab.jsx:537
+#: src/components/settings/tabs/GeneralTab.jsx:665
+msgid "Select country"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:384
+#: src/components/settings/tabs/AccountTab.jsx:551
+#: src/components/settings/tabs/GeneralTab.jsx:680
+msgid "State / Province"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:390
+#: src/components/settings/tabs/AccountTab.jsx:557
+#: src/components/settings/tabs/GeneralTab.jsx:684
+msgid "Select state"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:442
+#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:231
+msgid "Shipping Address"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:443
+msgid "Your shipping address for deliveries"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:453
+msgid "Copy from billing"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:594
+msgid "Store Information"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:595
+msgid "Your store's contact information"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:599
+msgid "Store Name"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:606
+msgid "Your store name"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:615
+msgid "Store Email"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:624
+msgid "store@example.com"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:632
+msgid "Store Phone"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:641
+msgid "Phone number"
+msgstr ""
+
+#: src/components/settings/tabs/AccountTab.jsx:656
+msgid "Store Owner"
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:93
+msgid "Currency Options"
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:94
+msgid "Configure how prices are displayed in your store"
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:99
+#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:153
+msgid "Currency"
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:110
+msgid "Select currency..."
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:117
+msgid "Search currency..."
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:122
+msgid "No currency found."
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:161
+msgid "Currency Position"
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:185
+msgid "Thousand Separator"
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:200
+msgid "Decimal Separator"
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:218
+msgid "Number of Decimals"
+msgstr ""
+
+#: src/components/settings/tabs/CurrencyTab.jsx:242
+msgid "Price Preview"
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:187
+msgid "Hidden"
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:251
+#: src/components/settings/tabs/FieldVisibilitySettings.jsx:308
+msgid "fields"
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:258
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:531
+#: src/components/settings/tabs/FieldVisibilitySettings.jsx:311
+msgid "hidden"
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:320
+msgid "Hide All"
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:350
+msgid "No Custom Fields Found"
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:353
+msgid "Custom fields can be added using plugins like Advanced Custom Fields (ACF), JetEngine, or Yoast SEO. Once configured, they will appear here for visibility management."
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:475
+msgid "Custom Fields Visibility"
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:476
+msgid "Control which custom fields appear in the product form. Fields from ACF, JetEngine, and Yoast SEO are automatically detected."
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:501
+msgid "Field Visibility Overview"
+msgstr ""
+
+#: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:521
+#: src/components/table/core/DisplayColumns.jsx:275
+msgid "visible"
+msgstr ""
+
+#: src/components/settings/tabs/FieldVisibilitySettings.jsx:340
+msgid "Show all fields"
+msgstr ""
+
+#: src/components/settings/tabs/FieldVisibilitySettings.jsx:438
+msgid "Form Fields Visibility"
+msgstr ""
+
+#: src/components/settings/tabs/FieldVisibilitySettings.jsx:439
+msgid "Choose which fields to show or hide in creation forms. Required fields cannot be hidden."
+msgstr ""
+
+#: src/components/settings/tabs/FieldVisibilitySettings.jsx:449
+msgid "Reset all"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:198
+msgid "Site Identity"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:199
+msgid "Basic information about your WordPress site"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:204
+msgid "Site Title"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:209
+msgid "My WordPress Site"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:216
+msgid "Tagline"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:221
+msgid "Just another WordPress site"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:225
+msgid "In a few words, explain what this site is about."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:232
+msgid "WordPress Address (URL)"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:244
+msgid "Site Address (URL)"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:259
+msgid "Administration Email Address"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:270
+msgid "This address is used for admin purposes."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:280
+msgid "Membership"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:281
+msgid "User registration and role settings"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:287
+msgid "Anyone can register"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:289
+msgid "Allow new users to register on your site"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:302
+msgid "New User Default Role"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:308
+msgid "Select role"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:326
+msgid "Site Language"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:327
+msgid "Choose the language for your WordPress admin and store"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:331
+msgid "Language"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:347
+msgid "Search language..."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:352
+msgid "No language found."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:355
+msgid "Recently Used"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:380
+msgid "All Languages"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:409
+msgid "Changing the language requires a page refresh to take effect."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:419
+#: src/components/settings/tabs/GeneralTab.jsx:424
+msgid "Timezone"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:420
+msgid "Choose either a city in the same timezone as you or a UTC timezone offset."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:440
+msgid "Search timezone..."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:445
+msgid "No timezone found."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:447
+msgid "UTC Offsets"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:465
+msgid "Timezones"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:495
+msgid "Date and Time Format"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:496
+msgid "Set the format for displaying dates and times"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:501
+msgid "Date Format"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:519
+#: src/components/settings/tabs/GeneralTab.jsx:552
+msgid "Custom:"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:534
+msgid "Time Format"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:567
+msgid "Week Starts On"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:591
+msgid "Store Address"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:592
+msgid "This is where your business is located. Tax rates and shipping costs will use this address."
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:598
+msgid "Address line 1"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:614
+msgid "Address line 2"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:651
+#: src/components/table/entities/customers/customers.columns.js:131
+#: src/components/table/entities/customers/customers.columns.js:134
+#: src/components/table/entities/orders/components/OrderBillingModal.jsx:336
+#: src/components/table/entities/orders/components/OrderShippingModal.jsx:349
+msgid "Postcode"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:705
+msgid "Features"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:706
+msgid "Enable or disable store features"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:712
+msgid "Enable coupons"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:714
+msgid "Enable the use of coupon codes"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:731
+msgid "Checkout"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:732
+msgid "Configure checkout options for your store"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:738
+msgid "Guest checkout"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:740
+msgid "Allow customers to place orders without an account"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:754
+msgid "Login reminder"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:756
+msgid "Show a login form at checkout for returning customers"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:770
+msgid "Account creation during checkout"
+msgstr ""
+
+#: src/components/settings/tabs/GeneralTab.jsx:772
+msgid "Allow customers to create an account during checkout"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:34
+msgid "Stock Management"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:35
+msgid "Configure how stock is managed in your store"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:41
+msgid "Enable stock management"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:43
+msgid "Track stock levels for products"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:59
+msgid "Hold stock (minutes)"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:73
+msgid "Hold stock for unpaid orders for this many minutes. Set to 0 to disable."
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:83
+msgid "Hide out of stock items"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:85
+msgid "Hide out of stock items from the catalog"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:105
+msgid "Stock Notifications"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:106
+msgid "Configure email notifications for stock levels"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:112
+msgid "Low stock notifications"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:114
+msgid "Enable email notifications for low stock"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:131
+msgid "Out of stock notifications"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:133
+msgid "Enable email notifications when products go out of stock"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:149
+msgid "Notification recipient"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:160
+msgid "Email address to receive stock notifications"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:169
+#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:137
+msgid "Low stock threshold"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:182
+msgid "When product stock reaches this amount, a notification will be sent"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:191
+msgid "Out of stock threshold"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:204
+msgid "When product stock reaches this amount, it will be considered out of stock"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:217
+msgid "Products Display"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:218
+msgid "Configure how products are displayed in your catalog"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:223
+msgid "Products per row"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:237
+msgid "Number of products to display per row in the catalog (1-6)"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:246
+msgid "Rows per page"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:260
+msgid "Number of rows to display per page in the catalog (1-10)"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:269
+msgid "Default product sorting"
+msgstr ""
+
+#: src/components/settings/tabs/InventoryTab.jsx:288
+msgid "Default sorting order for products in the catalog"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:31
+msgid "Tax Settings"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:32
+msgid "Configure how taxes are calculated and displayed"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:38
+msgid "Enable taxes"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:40
+msgid "Enable tax rates and calculations"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:59
+msgid "Prices entered with tax"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:61
+msgid "When enabled, product prices include tax by default"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:80
+msgid "Display prices in the shop"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:99
+msgid "This option is for prices on the frontend of your store"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:109
+msgid "Display prices during cart and checkout"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:129
+msgid "This option is for prices displayed in cart and checkout"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:145
+#: src/components/settings/tabs/UnitsTab.jsx:98
+msgid "Note:"
+msgstr ""
+
+#: src/components/settings/tabs/TaxTab.jsx:146
+msgid "For detailed tax rate configuration, please visit WooCommerce Settings > Tax in the WordPress admin."
+msgstr ""
+
+#: src/components/settings/tabs/UnitsTab.jsx:38
+msgid "Measurements"
+msgstr ""
+
+#: src/components/settings/tabs/UnitsTab.jsx:39
+msgid "Set the units used for product weights and dimensions"
+msgstr ""
+
+#: src/components/settings/tabs/UnitsTab.jsx:44
+msgid "Weight Unit"
+msgstr ""
+
+#: src/components/settings/tabs/UnitsTab.jsx:63
+msgid "This controls what unit you will define weights in."
+msgstr ""
+
+#: src/components/settings/tabs/UnitsTab.jsx:69
+msgid "Dimensions Unit"
+msgstr ""
+
+#: src/components/settings/tabs/UnitsTab.jsx:88
+msgid "This controls what unit you will define lengths in."
+msgstr ""
+
+#: src/components/settings/tabs/UnitsTab.jsx:99
+msgid "Changing these settings will not automatically convert existing product weights and dimensions. You will need to update your products if you change units."
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:35
+msgid "Table Settings"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:36
+msgid "Configure default table behavior"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:41
+msgid "Default rows per page"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:60
+msgid "The default number of rows displayed in tables. Higher values may affect performance."
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:73
+msgid "History & Tracking"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:74
+msgid "Configure change history and tracking options"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:80
+msgid "Enable history tracking"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:82
+msgid "Track changes made to products, orders, and other items"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:100
+msgid "History retention (days)"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:120
+msgid "How many days to keep history records. Older records will be automatically deleted."
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:148
+#: src/components/table/entities/orders/orders.columns.js:981
+#: src/layout/sidebar/AppSidebar.jsx:173
+msgid "Version"
+msgstr ""
+
+#: src/components/settings/tabs/WhizManageTab.jsx:153
+msgid "Thank you for using WhizManage Pro! For support and documentation, visit our website."
+msgstr ""
+
 #: src/components/table/components/MultiSelectEdit.jsx:85
-#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:314
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:377
 msgid "Item"
 msgstr ""
 
@@ -2071,7 +2898,7 @@ msgid "The"
 msgstr ""
 
 #: src/components/table/components/MultiSelectEditItem.jsx:249
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:87
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:93
 msgid "has been permanently deleted"
 msgstr ""
 
@@ -2091,77 +2918,103 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
-#: src/components/table/core/ColumnHeader.jsx:65
-#: src/components/table/core/ColumnHeader.jsx:70
+#: src/components/table/core/ColumnHeader.jsx:149
+#: src/components/table/core/ColumnHeader.jsx:154
 msgid "Pin to right"
 msgstr ""
 
-#: src/components/table/core/ColumnHeader.jsx:66
-#: src/components/table/core/ColumnHeader.jsx:69
+#: src/components/table/core/ColumnHeader.jsx:150
+#: src/components/table/core/ColumnHeader.jsx:153
 msgid "Pin to left"
 msgstr ""
 
-#: src/components/table/core/ColumnHeader.jsx:157
-#: src/components/table/core/ColumnHeader.jsx:278
+#: src/components/table/core/ColumnHeader.jsx:262
+#: src/components/table/core/ColumnHeader.jsx:383
 msgid "Sort ascending"
 msgstr ""
 
-#: src/components/table/core/ColumnHeader.jsx:158
-#: src/components/table/core/ColumnHeader.jsx:293
+#: src/components/table/core/ColumnHeader.jsx:263
+#: src/components/table/core/ColumnHeader.jsx:398
 msgid "Sort descending"
 msgstr ""
 
-#: src/components/table/core/ColumnHeader.jsx:159
-#: src/components/table/core/ColumnHeader.jsx:306
+#: src/components/table/core/ColumnHeader.jsx:264
+#: src/components/table/core/ColumnHeader.jsx:411
 msgid "Clear sort"
 msgstr ""
 
-#: src/components/table/core/ColumnHeader.jsx:201
-#: src/components/table/core/ColumnHeader.jsx:359
+#: src/components/table/core/ColumnHeader.jsx:306
+#: src/components/table/core/ColumnHeader.jsx:464
 msgid "Unpin"
 msgstr ""
 
-#: src/components/table/core/ColumnHeader.jsx:377
+#: src/components/table/core/ColumnHeader.jsx:482
 msgid "Hide column"
 msgstr ""
 
-#: src/components/table/core/ColumnHeader.jsx:388
+#: src/components/table/core/ColumnHeader.jsx:492
+msgid "Filter"
+msgstr ""
+
+#: src/components/table/core/ColumnHeader.jsx:509
+#: src/components/table/entities/customers/customers.columns.js:147
+#: src/components/table/entities/orders/orders.columns.js:1024
+#: src/components/table/entities/orders/orders.columns.js:1029
+msgid "Yes"
+msgstr ""
+
+#: src/components/table/core/ColumnHeader.jsx:523
+#: src/components/table/entities/customers/customers.columns.js:147
+#: src/components/table/entities/orders/orders.columns.js:1025
+#: src/components/table/entities/orders/orders.columns.js:1029
+msgid "No"
+msgstr ""
+
+#: src/components/table/core/ColumnHeader.jsx:531
 msgid "Type to filter"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:518
+#: src/components/table/core/ColumnHeader.jsx:544
+msgid "Filter variations..."
+msgstr ""
+
+#: src/components/table/core/ColumnHeader.jsx:549
+msgid "Filter variations"
+msgstr ""
+
+#: src/components/table/core/DataTable.jsx:829
 msgid "Collapse subRows"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:518
+#: src/components/table/core/DataTable.jsx:829
 msgid "Expand subRows"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:801
+#: src/components/table/core/DataTable.jsx:1122
 msgid "Failed to create item"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:1029
+#: src/components/table/core/DataTable.jsx:1350
 msgid "Save order failed"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:1030
+#: src/components/table/core/DataTable.jsx:1351
 msgid "Could not persist new order"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:1173
+#: src/components/table/core/DataTable.jsx:1494
 msgid "Data table"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:1274
+#: src/components/table/core/DataTable.jsx:1595
 msgid "Try changing the filters"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:1284
+#: src/components/table/core/DataTable.jsx:1605
 msgid "Reset Filters"
 msgstr ""
 
-#: src/components/table/core/DataTable.jsx:1290
+#: src/components/table/core/DataTable.jsx:1611
 msgid "Add sample data"
 msgstr ""
 
@@ -2179,10 +3032,6 @@ msgstr ""
 
 #: src/components/table/core/DisplayColumns.jsx:272
 msgid "Display columns"
-msgstr ""
-
-#: src/components/table/core/DisplayColumns.jsx:275
-msgid "visible"
 msgstr ""
 
 #: src/components/table/core/DisplayColumns.jsx:285
@@ -2213,37 +3062,37 @@ msgstr ""
 msgid "Hidden columns"
 msgstr ""
 
-#: src/components/table/core/EditableCell.jsx:100
+#: src/components/table/core/EditableCell.jsx:99
 msgid "Field required"
 msgstr ""
 
-#: src/components/table/core/EditableCell.jsx:139
+#: src/components/table/core/EditableCell.jsx:138
 msgid "Invalid format"
 msgstr ""
 
-#: src/components/table/core/EditableCell.jsx:152
+#: src/components/table/core/EditableCell.jsx:151
 msgid "Invalid value"
 msgstr ""
 
-#: src/components/table/core/EditableCell.jsx:261
+#: src/components/table/core/EditableCell.jsx:259
 msgid "Error saving changes"
 msgstr ""
 
-#: src/components/table/core/EditableCell.jsx:500
-#: src/components/table/core/EditableCell.jsx:503
+#: src/components/table/core/EditableCell.jsx:507
+#: src/components/table/core/EditableCell.jsx:510
 #: src/components/table/entities/products/components/SelectEdit.jsx:64
 msgid "Select value"
 msgstr ""
 
-#: src/components/table/core/EditableCell.jsx:598
+#: src/components/table/core/EditableCell.jsx:605
 msgid "Choose date"
 msgstr ""
 
-#: src/components/table/core/EditableCell.jsx:927
+#: src/components/table/core/EditableCell.jsx:933
 msgid "Click enter or F2 to edit"
 msgstr ""
 
-#: src/components/table/core/EditableCell.jsx:973
+#: src/components/table/core/EditableCell.jsx:979
 msgid "Expand for full view"
 msgstr ""
 
@@ -2286,13 +3135,13 @@ msgid "Go to last page"
 msgstr ""
 
 #: src/components/table/core/Pagination.jsx:233
-#: src/components/table/core/Pagination.jsx:238
+#: src/components/table/core/Pagination.jsx:237
 #: src/components/table/entities/orders/orders.columns.js:522
 #: src/components/table/entities/orders/orders.columns.js:554
 msgid "items"
 msgstr ""
 
-#: src/components/table/core/Pagination.jsx:246
+#: src/components/table/core/Pagination.jsx:245
 msgid "Select rows per page"
 msgstr ""
 
@@ -2320,7 +3169,7 @@ msgstr ""
 msgid "Table actions menu"
 msgstr ""
 
-#: src/components/table/core/TableActionsMenu.jsx:86
+#: src/components/table/core/TableActionsMenu.jsx:85
 msgid "Manage columns"
 msgstr ""
 
@@ -2329,7 +3178,7 @@ msgid "Loading data..."
 msgstr ""
 
 #: src/components/table/core/TopPanel.jsx:138
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:245
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:244
 msgid "Filters"
 msgstr ""
 
@@ -2427,51 +3276,51 @@ msgstr ""
 msgid "The maximum number of individual items this coupon can apply to."
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.api.js:187
+#: src/components/table/entities/coupons/coupons.api.js:193
 msgid "Coupon code is required"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.api.js:205
+#: src/components/table/entities/coupons/coupons.api.js:211
 msgid "Coupon code already exists"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.api.js:215
-#: src/components/table/entities/coupons/coupons.api.js:230
+#: src/components/table/entities/coupons/coupons.api.js:221
+#: src/components/table/entities/coupons/coupons.api.js:236
 msgid "Amount must be a positive number"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.api.js:219
+#: src/components/table/entities/coupons/coupons.api.js:225
 msgid "Percent discount cannot exceed 100"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.api.js:243
-#: src/components/table/entities/coupons/coupons.api.js:246
-#: src/components/table/entities/coupons/coupons.columns.js:334
+#: src/components/table/entities/coupons/coupons.api.js:249
+#: src/components/table/entities/coupons/coupons.api.js:252
+#: src/components/table/entities/coupons/coupons.columns.js:335
 msgid "Minimum cannot be greater than maximum"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.api.js:249
-#: src/components/table/entities/coupons/coupons.columns.js:383
+#: src/components/table/entities/coupons/coupons.api.js:255
+#: src/components/table/entities/coupons/coupons.columns.js:384
 msgid "Maximum cannot be less than minimum"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.api.js:320
-#: src/components/table/entities/coupons/coupons.api.js:390
-#: src/components/table/entities/customers/customers.api.js:187
-#: src/components/table/entities/customers/customers.api.js:239
+#: src/components/table/entities/coupons/coupons.api.js:326
+#: src/components/table/entities/coupons/coupons.api.js:402
+#: src/components/table/entities/customers/customers.api.js:201
+#: src/components/table/entities/customers/customers.api.js:253
 #: src/components/table/entities/discount-rules/discount-rules.api.js:358
-#: src/components/table/entities/orders/orders.api.js:289
-#: src/components/table/entities/orders/orders.api.js:364
-#: src/components/table/entities/products/products.api.js:768
-#: src/components/table/entities/products/products.api.js:945
+#: src/components/table/entities/orders/orders.api.js:302
+#: src/components/table/entities/orders/orders.api.js:377
+#: src/components/table/entities/products/products.api.js:807
+#: src/components/table/entities/products/products.api.js:984
 msgid "Update error"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.api.js:391
-#: src/components/table/entities/customers/customers.api.js:241
+#: src/components/table/entities/coupons/coupons.api.js:403
+#: src/components/table/entities/customers/customers.api.js:255
 #: src/components/table/entities/discount-rules/discount-rules.api.js:362
-#: src/components/table/entities/orders/orders.api.js:365
-#: src/components/table/entities/products/products.api.js:947
+#: src/components/table/entities/orders/orders.api.js:378
+#: src/components/table/entities/products/products.api.js:986
 msgid "Error occurred while saving data"
 msgstr ""
 
@@ -2520,7 +3369,7 @@ msgid "Expiry date"
 msgstr ""
 
 #: src/components/table/entities/coupons/coupons.columns.js:258
-#: src/components/table/entities/products/products.columns.js:1122
+#: src/components/table/entities/products/products.columns.js:1135
 msgid "Description"
 msgstr ""
 
@@ -2532,29 +3381,29 @@ msgstr ""
 msgid "Individual use"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:289
+#: src/components/table/entities/coupons/coupons.columns.js:290
 msgid "Allowed emails"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:312
+#: src/components/table/entities/coupons/coupons.columns.js:313
 msgid "Minimum spend"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:322
-#: src/components/table/entities/coupons/coupons.columns.js:371
+#: src/components/table/entities/coupons/coupons.columns.js:323
+#: src/components/table/entities/coupons/coupons.columns.js:372
 msgid "Enter a valid amount"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:327
-#: src/components/table/entities/coupons/coupons.columns.js:376
+#: src/components/table/entities/coupons/coupons.columns.js:328
+#: src/components/table/entities/coupons/coupons.columns.js:377
 msgid "Value must be ≥ 0"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:361
+#: src/components/table/entities/coupons/coupons.columns.js:362
 msgid "Maximum spend"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:400
+#: src/components/table/entities/coupons/coupons.columns.js:401
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:100
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:196
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:635
@@ -2562,62 +3411,62 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:427
+#: src/components/table/entities/coupons/coupons.columns.js:428
 msgid "Exclude sale items"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:439
+#: src/components/table/entities/coupons/coupons.columns.js:441
 msgid "Free shipping"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:451
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:127
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:175
+#: src/components/table/entities/coupons/coupons.columns.js:454
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:126
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:174
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:106
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:649
 #: src/components/table/entities/orders/orders.columns.js:337
-#: src/components/table/entities/products/products.columns.js:908
+#: src/components/table/entities/products/products.columns.js:921
 #: src/components/table/import/ExportProductsIds.jsx:434
 msgid "Status"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:462
-#: src/components/table/entities/products/products.columns.js:921
+#: src/components/table/entities/coupons/coupons.columns.js:465
+#: src/components/table/entities/products/products.columns.js:934
 #: src/components/table/import/ExportProductsIds.jsx:105
 #: src/components/table/import/ExportProductsIds.jsx:113
 msgid "Published"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:463
-#: src/components/table/entities/products/products.columns.js:922
+#: src/components/table/entities/coupons/coupons.columns.js:466
+#: src/components/table/entities/products/products.columns.js:935
 #: src/components/table/import/ExportProductsIds.jsx:106
 #: src/components/table/import/ExportProductsIds.jsx:114
 msgid "Draft"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:464
-#: src/components/table/entities/products/products.columns.js:923
+#: src/components/table/entities/coupons/coupons.columns.js:467
+#: src/components/table/entities/products/products.columns.js:936
 #: src/components/table/import/ExportProductsIds.jsx:107
 #: src/components/table/import/ExportProductsIds.jsx:115
 msgid "Pending"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:475
-#: src/components/table/entities/coupons/coupons.columns.js:485
+#: src/components/table/entities/coupons/coupons.columns.js:478
+#: src/components/table/entities/coupons/coupons.columns.js:488
 msgid "Product categories"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:486
-#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:311
+#: src/components/table/entities/coupons/coupons.columns.js:489
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:374
 msgid "Product category"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:513
-#: src/components/table/entities/coupons/coupons.columns.js:523
+#: src/components/table/entities/coupons/coupons.columns.js:516
+#: src/components/table/entities/coupons/coupons.columns.js:526
 msgid "Excluded product categories"
 msgstr ""
 
-#: src/components/table/entities/coupons/coupons.columns.js:524
+#: src/components/table/entities/coupons/coupons.columns.js:527
 msgid "Excluded product category"
 msgstr ""
 
@@ -2660,27 +3509,17 @@ msgstr ""
 msgid "orders"
 msgstr ""
 
-#: src/components/table/entities/customers/customers.api.js:120
+#: src/components/table/entities/customers/customers.api.js:134
 msgid "Email is required"
 msgstr ""
 
-#: src/components/table/entities/customers/customers.api.js:124
+#: src/components/table/entities/customers/customers.api.js:138
 #: src/components/table/entities/customers/customers.columns.js:23
 msgid "Invalid email address"
 msgstr ""
 
-#: src/components/table/entities/customers/customers.api.js:132
+#: src/components/table/entities/customers/customers.api.js:146
 msgid "Value is too long"
-msgstr ""
-
-#: src/components/table/entities/customers/customers.columns.js:31
-#: src/components/table/entities/customers/customers.columns.js:34
-msgid "First name"
-msgstr ""
-
-#: src/components/table/entities/customers/customers.columns.js:41
-#: src/components/table/entities/customers/customers.columns.js:44
-msgid "Last name"
 msgstr ""
 
 #: src/components/table/entities/customers/customers.columns.js:51
@@ -2708,34 +3547,15 @@ msgstr ""
 msgid "Country code (e.g. IL)"
 msgstr ""
 
-#: src/components/table/entities/customers/customers.columns.js:131
-#: src/components/table/entities/customers/customers.columns.js:134
-#: src/components/table/entities/orders/components/OrderBillingModal.jsx:336
-#: src/components/table/entities/orders/components/OrderShippingModal.jsx:349
-msgid "Postcode"
-msgstr ""
-
 #: src/components/table/entities/customers/customers.columns.js:141
 msgid "Paying?"
 msgstr ""
 
-#: src/components/table/entities/customers/customers.columns.js:144
-#: src/components/table/entities/orders/orders.columns.js:1024
-#: src/components/table/entities/orders/orders.columns.js:1029
-msgid "Yes"
-msgstr ""
-
-#: src/components/table/entities/customers/customers.columns.js:144
-#: src/components/table/entities/orders/orders.columns.js:1025
-#: src/components/table/entities/orders/orders.columns.js:1029
-msgid "No"
-msgstr ""
-
-#: src/components/table/entities/customers/customers.columns.js:150
+#: src/components/table/entities/customers/customers.columns.js:153
 msgid "Created at"
 msgstr ""
 
-#: src/components/table/entities/customers/customers.columns.js:169
+#: src/components/table/entities/customers/customers.columns.js:172
 msgid "Updated at"
 msgstr ""
 
@@ -2769,7 +3589,7 @@ msgstr ""
 
 #: src/components/table/entities/discount-rules/components/ConditionsCell.jsx:131
 #: src/components/table/entities/discount-rules/components/FiltersCell.jsx:146
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:375
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:418
 msgid "Unknown error"
 msgstr ""
 
@@ -2909,8 +3729,8 @@ msgid "Find attribute or term"
 msgstr ""
 
 #: src/components/table/entities/discount-rules/components/FiltersEditor.jsx:270
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:220
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:180
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:312
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:224
 msgid "No attributes found."
 msgstr ""
 
@@ -3050,60 +3870,60 @@ msgstr ""
 msgid "Type changed; rule disabled until settings are updated."
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:33
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:32
 msgid "Product adjustment"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:34
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:33
 msgid "Cart adjustment"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:35
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:34
 msgid "Bulk discount"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:36
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:35
 msgid "BOGO"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:37
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:36
 msgid "BXGY"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:39
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:38
 msgid "Spend bundle"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:56
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:55
 msgid "Message"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:70
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:69
 msgid "Show Msg"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:108
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:107
 msgid "Show Message"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:196
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:195
 msgid "Start date"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:206
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:224
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:205
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:223
 msgid "End date must be after start date"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:215
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:214
 msgid "End date"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:233
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:232
 msgid "Priority"
 msgstr ""
 
-#: src/components/table/entities/discount-rules/discount-rules.columns.js:252
+#: src/components/table/entities/discount-rules/discount-rules.columns.js:251
 msgid "Conditions"
 msgstr ""
 
@@ -3136,16 +3956,6 @@ msgstr ""
 msgid "Billing Information"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderBillingModal.jsx:306
-#: src/components/table/entities/orders/components/OrderShippingModal.jsx:313
-msgid "Address Line 2"
-msgstr ""
-
-#: src/components/table/entities/orders/components/OrderItemsModal.jsx:184
-#: src/components/table/entities/products/components/YoastSEOModal.jsx:955
-msgid "Save Changes"
-msgstr ""
-
 #: src/components/table/entities/orders/components/OrderLineItems.jsx:215
 #: src/components/table/entities/orders/components/OrderLineItems.jsx:234
 msgid "Coupon not found or invalid"
@@ -3155,63 +3965,63 @@ msgstr ""
 msgid "Error applying coupon"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:336
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:340
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:137
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:710
 msgid "Order Items"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:341
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:345
 msgid "Add Products"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:349
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:353
 msgid "Search for products"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:356
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:360
 msgid "Search products"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:364
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:368
 #: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:233
 msgid "Loading products..."
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:366
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:370
 msgid "Type to search products"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:367
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:371
 msgid "No products found"
-msgstr ""
-
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:422
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:528
-msgid "In Stock"
 msgstr ""
 
 #: src/components/table/entities/orders/components/OrderLineItems.jsx:426
 #: src/components/table/entities/orders/components/OrderLineItems.jsx:532
+msgid "In Stock"
+msgstr ""
+
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:430
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:536
 msgid "Out of Stock"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:455
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:459
 msgid "No items in this order"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:459
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:463
 msgid "Click the search button above to add products to this order"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:469
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:473
 #: src/components/table/entities/orders/components/RefundModal.jsx:640
 #: src/components/table/entities/products/components/variation/components/GenerateRowItem.jsx:131
 msgid "Product"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:472
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:608
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:476
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:612
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:115
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:152
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:669
@@ -3219,62 +4029,62 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:639
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:643
 msgid "coupons applied"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:662
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:666
 msgid "Remove coupon"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:684
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:688
 msgid "Enter coupon code"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:714
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:718
 msgid "Applying..."
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:748
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:752
 msgid "Recalculating discount..."
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:762
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:766
 msgid "Dismiss"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:771
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:775
 msgid "No coupons applied to this order"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:788
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:792
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:187
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:765
 msgid "Refunds"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:791
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:795
 msgid "Process full or partial refund"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:801
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:805
 #: src/components/table/entities/orders/components/RefundModal.jsx:483
 msgid "Process Refund"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:811
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:815
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:989
 msgid "Subtotal"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:824
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:828
 #: src/components/table/entities/orders/components/OrderShippingModal.jsx:187
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:1009
 #: src/components/table/entities/orders/orders.columns.js:785
 msgid "Shipping"
 msgstr ""
 
-#: src/components/table/entities/orders/components/OrderLineItems.jsx:846
+#: src/components/table/entities/orders/components/OrderLineItems.jsx:850
 msgid "Order Total"
 msgstr ""
 
@@ -3449,14 +4259,6 @@ msgstr ""
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:210
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:784
 msgid "Refund"
-msgstr ""
-
-#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:231
-msgid "Shipping Address"
-msgstr ""
-
-#: src/components/table/entities/orders/components/OrderSummaryModal.jsx:252
-msgid "Billing Address"
 msgstr ""
 
 #: src/components/table/entities/orders/components/OrderSummaryModal.jsx:292
@@ -3829,7 +4631,6 @@ msgstr ""
 
 #: src/components/table/entities/orders/orders.columns.js:469
 #: src/components/table/entities/orders/orders.columns.js:547
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:522
 msgid "Items"
 msgstr ""
 
@@ -3918,11 +4719,6 @@ msgstr ""
 msgid "Shipping Address 2"
 msgstr ""
 
-#: src/components/table/entities/orders/orders.columns.js:981
-#: src/layout/sidebar/AppSidebar.jsx:166
-msgid "Version"
-msgstr ""
-
 #: src/components/table/entities/orders/orders.columns.js:990
 msgid "Notes"
 msgstr ""
@@ -3948,7 +4744,7 @@ msgid "Failed to save dimensions"
 msgstr ""
 
 #: src/components/table/entities/products/components/DimensionsEdit.jsx:107
-#: src/components/table/entities/products/products.columns.js:1536
+#: src/components/table/entities/products/products.columns.js:1587
 msgid "Dimensions"
 msgstr ""
 
@@ -3960,23 +4756,23 @@ msgstr ""
 msgid "Length"
 msgstr ""
 
-#: src/components/table/entities/products/components/DownloadableCell.jsx:336
+#: src/components/table/entities/products/components/DownloadableCell.jsx:335
 msgid "Manage download files and settings"
 msgstr ""
 
-#: src/components/table/entities/products/components/DownloadableCell.jsx:400
+#: src/components/table/entities/products/components/DownloadableCell.jsx:399
 msgid "File"
 msgstr ""
 
-#: src/components/table/entities/products/components/DownloadableCell.jsx:416
+#: src/components/table/entities/products/components/DownloadableCell.jsx:415
 msgid "File name"
 msgstr ""
 
-#: src/components/table/entities/products/components/DownloadableCell.jsx:428
+#: src/components/table/entities/products/components/DownloadableCell.jsx:427
 msgid "URL"
 msgstr ""
 
-#: src/components/table/entities/products/components/DownloadableCell.jsx:446
+#: src/components/table/entities/products/components/DownloadableCell.jsx:445
 msgid "Choose from media"
 msgstr ""
 
@@ -4001,7 +4797,7 @@ msgid "Unknown error occurred"
 msgstr ""
 
 #: src/components/table/entities/products/components/external/ManageExternalModal.jsx:91
-#: src/components/table/entities/products/products.columns.js:950
+#: src/components/table/entities/products/products.columns.js:963
 msgid "External/Affiliate product"
 msgstr ""
 
@@ -4058,7 +4854,7 @@ msgid "Manage"
 msgstr ""
 
 #: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:216
-#: src/components/table/entities/products/products.columns.js:949
+#: src/components/table/entities/products/products.columns.js:962
 msgid "Grouped product"
 msgstr ""
 
@@ -4067,8 +4863,8 @@ msgid "A grouped product allows you to combine multiple related products that ca
 msgstr ""
 
 #: src/components/table/entities/products/components/grouped/ManageGroupedModal.jsx:260
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:849
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:780
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:750
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:858
 #: src/layout/menu/LicenseMange.jsx:263
 msgid "Save changes"
 msgstr ""
@@ -4105,7 +4901,7 @@ msgstr ""
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:108
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:165
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:174
-#: src/components/table/entities/products/products.columns.js:1617
+#: src/components/table/entities/products/products.columns.js:1668
 msgid "Linked Products"
 msgstr ""
 
@@ -4120,7 +4916,9 @@ msgstr ""
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:212
 #: src/components/table/entities/products/components/LinkedProductsCell.jsx:248
 #: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:451
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:383
 #: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:440
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:295
 #: src/components/table/import/ExportProductsIds.jsx:356
 #: src/components/table/import/ExportProductsIds.jsx:430
 #: src/components/table/import/ExportProductsIds.jsx:481
@@ -4145,12 +4943,12 @@ msgstr ""
 msgid "Select option"
 msgstr ""
 
-#: src/components/table/entities/products/components/SoldIndividuallyCell.jsx:51
-#: src/components/table/entities/products/products.columns.js:1517
+#: src/components/table/entities/products/components/SoldIndividuallyCell.jsx:50
+#: src/components/table/entities/products/products.columns.js:1565
 msgid "Sold Individually"
 msgstr ""
 
-#: src/components/table/entities/products/components/SoldIndividuallyCell.jsx:52
+#: src/components/table/entities/products/components/SoldIndividuallyCell.jsx:51
 msgid "Multiple Purchases Allowed"
 msgstr ""
 
@@ -4214,7 +5012,7 @@ msgstr ""
 #: src/components/table/entities/products/components/variation/components/AddFromTerms.jsx:434
 #: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:423
 #: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:348
-#: src/components/table/import/CustomFieldsSelector.jsx:178
+#: src/components/table/import/CustomFieldsSelector.jsx:177
 msgid "Select all"
 msgstr ""
 
@@ -4285,7 +5083,7 @@ msgid "Any"
 msgstr ""
 
 #: src/components/table/entities/products/components/variation/components/GenerateRowItem.jsx:196
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:72
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:78
 msgid "Delete attribute"
 msgstr ""
 
@@ -4309,7 +5107,7 @@ msgstr ""
 msgid "Attribute Type"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:322
+#: src/components/table/entities/products/components/variation/components/GenerateVariations.jsx:324
 msgid "Combine & Generate"
 msgstr ""
 
@@ -4321,161 +5119,115 @@ msgstr ""
 msgid "Variations have been saved successfully."
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:633
-msgid "Step 1: "
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:636
-msgid "Select Product Attributes"
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:643
-msgid "Begin by adding attributes to your product. Attributes define the different aspects of your product that may vary, such as color, size, or material. You have two options when creating an attribute:"
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:650
-msgid "Product Attribute:"
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:652
-msgid "Select this option to add attributes that are unique to this specific product, such as \"Storage Capacity\" for electronics or \"Frame Material\" for glasses."
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:659
-msgid "Global Attribute:"
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:661
-msgid "Select this for attributes like \"Size\" or \"Color\" that are common across multiple products. Creating a global attribute once allows you to reuse it, avoiding repetitive setup for each product."
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:674
-msgid "Step 2: "
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:677
-msgid "Define Attribute Options"
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:684
-msgid "After selecting an attribute for your product, you now need to define the available options. For instance, if the attribute is 'Color', you will need to specify the available colors."
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:690
-msgid "The default option is 'Any', which will display all available options for the attribute to the customers in the store. This is suitable when you do not wish to specify different settings for each variation, such as different prices, stock levels, or images. If the attribute is global, options can be imported from existing terms instead of creating them individually."
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:703
-msgid "Step 3: "
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:706
-msgid "Combine and Generate Variations"
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:713
-msgid "At this stage, by clicking 'Generate', you will create combinations of the selected attributes and options for your product, resulting in new variations. For example, selecting 'Color' with options 'Blue' and 'Green', and 'Size' with options 'Small' and 'Large', will generate four product variations: Small Blue, Large Blue, Small Green, and Large Green."
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:768
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:669
 msgid "Manage Attributes of"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:769
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:670
 msgid "Manage Variations of"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:782
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:683
 msgid "Variations"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:785
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:686
 msgid "Variations are different versions of a product, each with unique attributes such as size, color, or material. By using variations, you can offer multiple options for a single product, allowing customers to choose exactly what they prefer. This feature simplifies inventory management and enhances the shopping experience by grouping similar items under one product listing. For a guided tour of how to use variations, please visit this link:"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:794
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:695
 msgid "Take a tour"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:804
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:705
 msgid "View variations documentation"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:819
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:720
 msgid "Product attributes"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:820
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:721
 msgid "Existing product attributes"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:833
+#: src/components/table/entities/products/components/variation/components/ManageVariationsModal.jsx:734
 msgid "Existing product variations"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:60
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:66
 msgid "The attribute has been successfully updated to"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:66
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:72
 msgid "Failed to update attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:73
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:79
 msgid "Are you sure you want to permanently delete this attribute?"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:87
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:93
 msgid "The attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:94
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:100
 msgid "Failed to delete attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:164
+#: src/components/table/entities/products/components/variation/components/SelectAttributeItem.jsx:170
 msgid "Failed to add attribute to product"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:140
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:100
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:145
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:105
 msgid "Failed to add attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:150
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:212
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:130
+msgid "attributes added successfully"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:223
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:141
+msgid "Failed to add attributes"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:242
 msgid "Global Attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:159
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:119
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:251
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:163
 msgid "new attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:202
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:162
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:294
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:206
 msgid "Find attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:205
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:165
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:297
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:209
 msgid "Add new attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:224
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:184
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:316
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:228
 msgid "Existing attributes"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:252
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:348
 msgid "No attributes yet"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:255
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:351
 msgid "Create your first global attribute to get started"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:265
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:224
+#: src/components/table/entities/products/components/variation/components/SelectGlobalAttribute.jsx:361
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:273
 msgid "Create Attribute"
 msgstr ""
 
@@ -4510,7 +5262,7 @@ msgstr ""
 
 #: src/components/table/entities/products/components/variation/components/SelectGlobalOptions.jsx:434
 #: src/components/table/entities/products/components/variation/components/SelectProductOptions.jsx:359
-#: src/components/table/import/CustomFieldsSelector.jsx:189
+#: src/components/table/import/CustomFieldsSelector.jsx:186
 #: src/components/table/import/ExportProductsIds.jsx:478
 msgid "Clear selection"
 msgstr ""
@@ -4557,15 +5309,15 @@ msgstr ""
 msgid "Delete option"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:110
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:154
 msgid "Product Attribute"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:211
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:260
 msgid "No product attributes yet"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:214
+#: src/components/table/entities/products/components/variation/components/SelectProductAttribute.jsx:263
 msgid "Create your first product attribute to get started"
 msgstr ""
 
@@ -4585,7 +5337,7 @@ msgstr ""
 msgid "Create Option"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:166
+#: src/components/table/entities/products/components/variation/components/VariationDownloadableEdit.jsx:165
 msgid "Undownloadable"
 msgstr ""
 
@@ -4599,10 +5351,6 @@ msgstr ""
 
 #: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:113
 msgid "Enter quantity"
-msgstr ""
-
-#: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:137
-msgid "Low stock threshold"
 msgstr ""
 
 #: src/components/table/entities/products/components/variation/components/VariationInventoryEdit.jsx:142
@@ -4622,11 +5370,15 @@ msgstr ""
 msgid "Delete variation"
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:593
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:592
+msgid "variations"
+msgstr ""
+
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:598
 msgid "Search variation..."
 msgstr ""
 
-#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:702
+#: src/components/table/entities/products/components/variation/components/VariationsTable.jsx:711
 msgid "No variations found"
 msgstr ""
 
@@ -4874,215 +5626,215 @@ msgstr ""
 msgid "Social Media Settings"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:178
-#: src/components/table/entities/products/products.columns.js:1406
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:501
+#: src/components/table/entities/products/products.columns.js:179
+#: src/components/table/entities/products/products.columns.js:1448
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:544
 msgid "Select Gallery Images"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:178
-#: src/components/table/entities/products/products.columns.js:1264
+#: src/components/table/entities/products/products.columns.js:179
+#: src/components/table/entities/products/products.columns.js:1274
 msgid "Select Product Image"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:221
+#: src/components/table/entities/products/products.columns.js:222
 msgid "Enter content"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:587
+#: src/components/table/entities/products/products.columns.js:590
 msgid "e.g. PROD-001"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:599
+#: src/components/table/entities/products/products.columns.js:602
 msgid "This product code already exists"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:607
+#: src/components/table/entities/products/products.columns.js:610
 msgid "Slug"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:616
+#: src/components/table/entities/products/products.columns.js:619
 msgid "e.g. my-product"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:700
+#: src/components/table/entities/products/products.columns.js:703
 msgid "Regular Price"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:716
-#: src/components/table/entities/products/products.columns.js:793
-#: src/components/table/entities/products/products.columns.js:1026
+#: src/components/table/entities/products/products.columns.js:719
+#: src/components/table/entities/products/products.columns.js:801
+#: src/components/table/entities/products/products.columns.js:1039
 msgid "0.00"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:720
-#: src/components/table/entities/products/products.columns.js:797
+#: src/components/table/entities/products/products.columns.js:723
+#: src/components/table/entities/products/products.columns.js:806
 msgid "Price cannot be negative"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:729
+#: src/components/table/entities/products/products.columns.js:737
 msgid "Regular price cannot be lower than sale price"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:777
+#: src/components/table/entities/products/products.columns.js:785
 msgid "Sale Price"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:806
+#: src/components/table/entities/products/products.columns.js:819
 msgid "Sale price must be > 0 and ≤ regular price"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:822
+#: src/components/table/entities/products/products.columns.js:835
 msgid "Inventory"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:861
+#: src/components/table/entities/products/products.columns.js:874
 msgid "Yoast"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:870
+#: src/components/table/entities/products/products.columns.js:883
 msgid "Created Date"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:924
+#: src/components/table/entities/products/products.columns.js:937
 #: src/components/table/import/ExportProductsIds.jsx:108
 #: src/components/table/import/ExportProductsIds.jsx:116
 msgid "Private"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:947
+#: src/components/table/entities/products/products.columns.js:960
 msgid "Simple product"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:948
+#: src/components/table/entities/products/products.columns.js:961
 msgid "Variable product"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:962
+#: src/components/table/entities/products/products.columns.js:975
 msgid "Password"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:971
+#: src/components/table/entities/products/products.columns.js:984
 msgid "Enter password"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:974
+#: src/components/table/entities/products/products.columns.js:987
 msgid "No password"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:984
+#: src/components/table/entities/products/products.columns.js:997
 msgid "Barcode"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:993
+#: src/components/table/entities/products/products.columns.js:1006
 msgid "Enter barcode"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:999
+#: src/components/table/entities/products/products.columns.js:1012
 msgid "Only numbers and dashes (-) are allowed"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1010
+#: src/components/table/entities/products/products.columns.js:1023
 msgid "Weight"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1030
+#: src/components/table/entities/products/products.columns.js:1043
 msgid "Weight cannot be negative"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1037
-#: src/components/table/entities/products/products.columns.js:1049
+#: src/components/table/entities/products/products.columns.js:1050
+#: src/components/table/entities/products/products.columns.js:1062
 msgid "Categories"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1074
-#: src/components/table/entities/products/products.columns.js:1117
-#: src/components/table/entities/products/products.columns.js:1469
+#: src/components/table/entities/products/products.columns.js:1087
+#: src/components/table/entities/products/products.columns.js:1130
+#: src/components/table/entities/products/products.columns.js:1511
 msgid "Same as parent"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1079
-#: src/components/table/entities/products/products.columns.js:1091
+#: src/components/table/entities/products/products.columns.js:1092
+#: src/components/table/entities/products/products.columns.js:1104
 msgid "Tags"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1134
+#: src/components/table/entities/products/products.columns.js:1147
 msgid "Enter product description"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1138
+#: src/components/table/entities/products/products.columns.js:1151
 msgid "Description is too long"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1145
+#: src/components/table/entities/products/products.columns.js:1158
 msgid "Short Description"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1157
+#: src/components/table/entities/products/products.columns.js:1170
 msgid "Enter short description"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1161
+#: src/components/table/entities/products/products.columns.js:1174
 msgid "Short description is too long"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1168
+#: src/components/table/entities/products/products.columns.js:1181
 msgid "Sale Period"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1198
+#: src/components/table/entities/products/products.columns.js:1211
 msgid "Duration derived from variations"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1218
+#: src/components/table/entities/products/products.columns.js:1235
 msgid "Set a sale price before scheduling a sale"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1251
+#: src/components/table/entities/products/products.columns.js:1261
 msgid "Image"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1323
+#: src/components/table/entities/products/products.columns.js:1333
 msgid "Image Alt"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1332
+#: src/components/table/entities/products/products.columns.js:1342
 msgid "Enter image alt text"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1354
+#: src/components/table/entities/products/products.columns.js:1395
 msgid "No image to update alt text"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1392
+#: src/components/table/entities/products/products.columns.js:1434
 msgid "Gallery"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1448
+#: src/components/table/entities/products/products.columns.js:1490
 msgid "Attributes"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1499
+#: src/components/table/entities/products/products.columns.js:1544
 msgid "Featured"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1555
+#: src/components/table/entities/products/products.columns.js:1606
 msgid "Purchase Note"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1565
+#: src/components/table/entities/products/products.columns.js:1616
 msgid "Note to customer after purchase"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1569
+#: src/components/table/entities/products/products.columns.js:1620
 msgid "Purchase note is too long"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1579
+#: src/components/table/entities/products/products.columns.js:1630
 msgid "Shipping Class"
 msgstr ""
 
-#: src/components/table/entities/products/products.columns.js:1598
+#: src/components/table/entities/products/products.columns.js:1649
 msgid "Select delivery type"
 msgstr ""
 
@@ -5126,15 +5878,15 @@ msgstr ""
 msgid "Find custom fields"
 msgstr ""
 
-#: src/components/table/import/CustomFieldsSelector.jsx:199
+#: src/components/table/import/CustomFieldsSelector.jsx:195
 msgid "Loading..."
 msgstr ""
 
-#: src/components/table/import/CustomFieldsSelector.jsx:199
+#: src/components/table/import/CustomFieldsSelector.jsx:195
 msgid "No custom fields found."
 msgstr ""
 
-#: src/components/table/import/CustomFieldsSelector.jsx:202
+#: src/components/table/import/CustomFieldsSelector.jsx:198
 #: src/components/table/import/ImportSettings.jsx:399
 msgid "Custom Fields"
 msgstr ""
@@ -5279,7 +6031,7 @@ msgstr ""
 msgid "No images selected yet"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:313
+#: src/components/table/toolbar/actions/bulk-edit/AddLabelsItem.jsx:376
 msgid "Tag"
 msgstr ""
 
@@ -5302,7 +6054,7 @@ msgid "No images selected"
 msgstr ""
 
 #: src/components/table/toolbar/actions/bulk-edit/BulkCustomFields.jsx:278
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:746
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:824
 msgid "Custom fields"
 msgstr ""
 
@@ -5310,51 +6062,59 @@ msgstr ""
 msgid "Only fields with non-empty values will be applied to all selected products."
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:174
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:200
 msgid "No changes to save"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:366
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:409
 msgid "The updates have been saved successfully."
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:473
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:516
 msgid "Bulk Edit"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:493
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:536
 msgid "Add images"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:511
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:554
 msgid "Add labels"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:562
-msgid "Additional Taxonomies"
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:565
+msgid "Items to add"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:614
-msgid "Edit fields"
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:568
+msgid "Items to remove"
 msgstr ""
 
 #: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:622
+msgid "Additional Taxonomies"
+msgstr ""
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:692
+msgid "Edit fields"
+msgstr ""
+
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:700
 msgid "Field to Edit"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:625
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:703
 msgid "Change Amount"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:628
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:706
 msgid "Change Type"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:631
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:709
 msgid "Value Type"
 msgstr ""
 
-#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:634
+#: src/components/table/toolbar/actions/bulk-edit/BulkEdit.jsx:712
 msgid "Reference Base"
 msgstr ""
 
@@ -5373,10 +6133,6 @@ msgstr ""
 #: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:114
 #: src/layout/menu/History.jsx:1373
 msgid "New Value"
-msgstr ""
-
-#: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:153
-msgid "Currency"
 msgstr ""
 
 #: src/components/table/toolbar/actions/bulk-edit/BulkEditRow.jsx:184
@@ -5523,6 +6279,89 @@ msgstr ""
 msgid "rows selected"
 msgstr ""
 
+#: src/components/tour/VariationsTour.jsx:64
+msgid "Step 1: Select Product Attributes"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:68
+msgid "Begin by adding attributes to your product. Attributes define the different aspects of your product that may vary, such as color, size, or material."
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:79
+msgid "Product Attribute:"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:82
+msgid "Unique to this specific product, like 'Storage Capacity' for electronics."
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:95
+msgid "Global Attribute:"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:98
+msgid "Common across multiple products like 'Size' or 'Color'. Create once, reuse everywhere."
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:112
+msgid "Step 2: Define Attribute Options"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:116
+msgid "After selecting an attribute, define the available options. For example, if the attribute is 'Color', specify the available colors like Blue, Red, or Green."
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:123
+msgid "Tip:"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:124
+msgid "The 'Any' option displays all available options to customers. Use it when you don't need different settings per variation."
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:137
+msgid "Step 3: Generate Variations"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:141
+msgid "Click 'Combine & Generate' to create all possible combinations of your selected attributes and options."
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:148
+msgid "Example:"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:152
+msgid "Color:"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:161
+msgid "Size:"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:172
+msgid "Creates 4 variations:"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:242
+#: src/components/tour/WhatsNewTour.jsx:205
+msgid "Skip tour"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:247
+#: src/components/tour/WhatsNewTour.jsx:210
+msgid "Back"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:251
+msgid "Got it!"
+msgstr ""
+
+#: src/components/tour/VariationsTour.jsx:252
+#: src/components/tour/WhatsNewTour.jsx:213
+msgid "Next"
+msgstr ""
+
 #: src/components/tour/WhatsNewTour.jsx:65
 msgid "Inline Table Editing"
 msgstr ""
@@ -5583,20 +6422,8 @@ msgstr ""
 msgid "Access detailed customer information, order history, and lifetime value all in one place."
 msgstr ""
 
-#: src/components/tour/WhatsNewTour.jsx:205
-msgid "Skip tour"
-msgstr ""
-
-#: src/components/tour/WhatsNewTour.jsx:210
-msgid "Back"
-msgstr ""
-
 #: src/components/tour/WhatsNewTour.jsx:213
 msgid "Finish"
-msgstr ""
-
-#: src/components/tour/WhatsNewTour.jsx:213
-msgid "Next"
 msgstr ""
 
 #: src/components/ui/custom/CustomConfirm.jsx:131
@@ -5645,10 +6472,6 @@ msgstr ""
 
 #: src/ErrorBoundary.jsx:80
 msgid "An unexpected error occurred"
-msgstr ""
-
-#: src/ErrorBoundary.jsx:102
-msgid "Copied"
 msgstr ""
 
 #: src/ErrorBoundary.jsx:123
@@ -5874,19 +6697,19 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: src/layout/ModeToggle.jsx:21
+#: src/layout/ModeToggle.jsx:30
 msgid "Theme"
 msgstr ""
 
-#: src/layout/ModeToggle.jsx:30
+#: src/layout/ModeToggle.jsx:42
 msgid "Light"
 msgstr ""
 
-#: src/layout/ModeToggle.jsx:37
+#: src/layout/ModeToggle.jsx:55
 msgid "Dark"
 msgstr ""
 
-#: src/layout/ModeToggle.jsx:44
+#: src/layout/ModeToggle.jsx:68
 msgid "System"
 msgstr ""
 

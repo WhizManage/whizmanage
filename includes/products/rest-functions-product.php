@@ -211,7 +211,7 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
             $window    = max(1, (int) $window);
             $gap       = 1000;
 
-            // Center query – uses $wpdb with prepare and is completely safe.
+            // 1. Get center order
             $center_order = (int) $wpdb->get_var(
                 $wpdb->prepare(
                     "SELECT menu_order FROM {$wpdb->posts} WHERE ID = %d",
@@ -219,51 +219,64 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
                 )
             );
 
-            if (0 === $center_order) {
-                // If center value not found – nothing to balance
-                return 0;
-            }
+            // 2. Split window: Get $half_window before and $half_window after
+            $half_window = (int) ceil($window / 2);
 
-            // Window around center order (still direct DB usage, but justified for performance)
-            $rows = $wpdb->get_results(
+            // Fetch "before" items (<= center)
+            // We use ID as secondary sort to ensure stable cut
+            $before_rows = $wpdb->get_results(
                 $wpdb->prepare(
-                    "
-                SELECT ID
-                FROM {$wpdb->posts}
-                WHERE post_type = %s
-                  AND menu_order BETWEEN %d - 500000 AND %d + 500000
-                ORDER BY menu_order ASC, ID ASC
-                LIMIT %d
-            ",
-                    'product',
+                    "SELECT ID FROM {$wpdb->posts}
+                     WHERE post_type = 'product'
+                     AND (menu_order < %d OR (menu_order = %d AND ID <= %d))
+                     ORDER BY menu_order DESC, ID DESC
+                     LIMIT %d",
                     $center_order,
                     $center_order,
-                    $window
+                    $center_id,
+                    $half_window
                 )
             );
+
+            // Fetch "after" items (> center)
+            $after_rows = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT ID FROM {$wpdb->posts}
+                     WHERE post_type = 'product'
+                     AND (menu_order > %d OR (menu_order = %d AND ID > %d))
+                     ORDER BY menu_order ASC, ID ASC
+                     LIMIT %d",
+                    $center_order,
+                    $center_order,
+                    $center_id,
+                    $half_window
+                )
+            );
+
+            // 3. Merge and Sort
+            // $before_rows came out DESC, so reverse them to be ASC
+            $before_rows = array_reverse($before_rows);
+            
+            $rows = array_merge($before_rows, $after_rows);
 
             if (empty($rows)) {
                 return 0;
             }
 
-            // Renumber in fixed jumps (GAP) – O(window)
+            // 4. Renumber in fixed jumps
             $i = 1;
-
             foreach ($rows as $row) {
                 $post_id    = (int) $row->ID;
                 $menu_order = $i * $gap;
 
-                // Here we switched to wp_update_post instead of $wpdb->update
-                wp_update_post(
-                    array(
-                       // Always load product by post ID
-                        'ID'         => $post_id,
-                        'menu_order' => $menu_order,
-                    )
+                $wpdb->update(
+                    $wpdb->posts,
+                    array('menu_order' => $menu_order),
+                    array('ID' => $post_id)
                 );
 
+                // Optional: Just clear cache instead of full save to be faster
                 clean_post_cache($post_id);
-
                 if (function_exists('wc_delete_product_transients')) {
                     wc_delete_product_transients($post_id);
                 }

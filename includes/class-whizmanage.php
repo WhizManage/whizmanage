@@ -307,6 +307,16 @@ if (! class_exists('Whizmanage')) {
                 array($this, 'whizmanage_disconut_rules')
             );
             $this->page_hook_suffixes[] = $hook;
+               // Settings page
+            $hook = add_submenu_page(
+                'whizmanage',
+                __('Settings', 'whizmanage'),
+                __('Settings', 'whizmanage'),
+                'manage_woocommerce',
+                'whizmanage-settings',
+                array($this, 'whizmanage_settings_page')
+            );
+            $this->page_hook_suffixes[] = $hook;
         }
 
 
@@ -447,6 +457,20 @@ if (! class_exists('Whizmanage')) {
         public function whizmanage_disconut_rules()
         {
             $this->load_common_data();
+            require_once plugin_dir_path(__FILE__) . '../templates/app.php';
+        }
+
+     /**
+         * Settings admin page.
+         */
+        public function whizmanage_settings_page()
+        {
+            $this->load_common_data();
+
+            // Load custom fields for visibility settings
+            $custom_fields_manager = new Whizmanage_Custom_Fields_Manager();
+            $custom_fields_manager->custom_fields_collector();
+
             require_once plugin_dir_path(__FILE__) . '../templates/app.php';
         }
 

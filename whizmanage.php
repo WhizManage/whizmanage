@@ -138,6 +138,7 @@ function whizmanage_plugins_loaded_bootstrap()
 	require_once WHIZMANAGE_DIR . 'includes/orders/rest-functions-orders.php';
 	// Discount rules: register routes, manager and helpers
 	require_once WHIZMANAGE_DIR . 'includes/discount-rules/class-whizmanage-discount-init.php';
+	require_once WHIZMANAGE_DIR  . 'includes/settings/rest-functions-settings.php';
 	Whizmanage_Discount_Init::init();
 
 	// Bootstrap classes.
@@ -151,6 +152,7 @@ function whizmanage_plugins_loaded_bootstrap()
 	new Whizmanage_custom_taxonomy_exporter();
 	new Whizmanage_general_coupons_functions();
 	new Whizmanage_general_products_functions();
+	 new Whizmanage_rest_functions_settings();
 }
 add_action('plugins_loaded', 'whizmanage_plugins_loaded_bootstrap', 5);
 
