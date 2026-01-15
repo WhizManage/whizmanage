@@ -194,6 +194,7 @@ export default function TypeWithDiscountSettingsCell(props) {
         <ModalContent ref={modalRef}>
           {(onClose) => (
             <>
+              <div id="radix-select-portal" />
               <ModalHeader className="flex gap-3 justify-center items-center px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80">
                 <IconBadge icon={Settings2} variant="default" size="default" />
                 <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">

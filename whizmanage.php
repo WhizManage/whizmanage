@@ -4,7 +4,7 @@
  * Plugin Name:       WhizManage
  * Plugin URI:        https://whizmanage.com/
  * Description:       Easily manage your WooCommerce store with advanced bulk editing, product organization, and smart tools.
- * Version:           2.1.1
+ * Version:           2.1.2
  * Author:            WhizManage
  * Requires at least: 6.4
  * Requires PHP:      7.4
@@ -29,7 +29,7 @@ if (! defined('ABSPATH')) {
 /**
  * Define plugin constants.
  */
-define('WHIZMANAGE_VERSION', '2.1.1');
+define('WHIZMANAGE_VERSION', '2.1.2');
 define('WHIZMANAGE_FILE', __FILE__);
 define('WHIZMANAGE_BASENAME', plugin_basename(__FILE__));
 define('WHIZMANAGE_DIR', plugin_dir_path(__FILE__));

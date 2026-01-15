@@ -70,10 +70,16 @@ export default function SettingsPage() {
     resetSettings,
     hasChanges,
     hasUserInfoChanges,
+    // PerPage settings
+    perPageSettings,
+    updatePerPageSetting,
+    savePerPageSettings,
+    resetPerPageSettings,
+    hasPerPageChanges,
   } = useSettings();
 
   // Combined hasChanges check
-  const hasAnyChanges = hasChanges || hasUserInfoChanges;
+  const hasAnyChanges = hasChanges || hasUserInfoChanges || hasPerPageChanges;
 
   // Check if language was changed
   const languageChanged = settings.WPLANG !== originalSettings.WPLANG;
@@ -94,6 +100,11 @@ export default function SettingsPage() {
         if (!result.success) {
           throw new Error(result.errors?.join(", ") || "Failed to save user info");
         }
+      }
+
+      // Save perPage settings if changed
+      if (hasPerPageChanges) {
+        await savePerPageSettings();
       }
 
       // If language was changed, show toast and reload after delay
@@ -122,6 +133,12 @@ export default function SettingsPage() {
         color: "danger",
       });
     }
+  };
+
+  // Combined reset function
+  const handleReset = () => {
+    resetSettings();
+    resetPerPageSettings();
   };
 
   if (isLoading) {
@@ -157,7 +174,7 @@ export default function SettingsPage() {
             <Button
               variant="outline"
               size="sm"
-              onClick={resetSettings}
+              onClick={handleReset}
               className="dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-200 dark:border-slate-600 px-2 sm:px-3"
             >
               {__("Reset", "whizmanage")}
@@ -290,7 +307,12 @@ export default function SettingsPage() {
                   exit={{ opacity: 0, x: isRtl ? 20 : -20 }}
                   transition={{ duration: 0.2, ease: "easeInOut" }}
                 >
-                  <WhizManageTab settings={settings} onUpdate={updateSetting} />
+                  <WhizManageTab
+                    settings={settings}
+                    onUpdate={updateSetting}
+                    perPageSettings={perPageSettings}
+                    onUpdatePerPage={updatePerPageSetting}
+                  />
                 </motion.div>
               )}
 

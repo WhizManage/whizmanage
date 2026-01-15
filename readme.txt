@@ -3,7 +3,7 @@ Contributors: whizmanage , yosefelishayov
 Tags: woocommerce, product management, variations, bulk edit, spreadsheet, coupons, discounts
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -14,7 +14,7 @@ Manage your entire WooCommerce store smarter, faster, and with zero frustration.
 
 **WhizManage - The Ultimate WooCommerce Management Suite**
 
-WhizManage is a powerful admin toolkit that replaces dozens of slow and repetitive WooCommerce screens with one modern, high-performance dashboard — built for store owners, agencies, and developers who want efficiency and control.
+WhizManage is a powerful admin toolkit that replaces dozens of slow and repetitive WooCommerce screens with one modern, high-performance dashboard — from importing products with variations to creating discount rules in a single click — built for store owners, agencies, and developers who demand efficiency and control.
 
 = 🚀 Why WhizManage? =
 

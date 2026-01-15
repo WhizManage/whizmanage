@@ -13,6 +13,21 @@ import {
   getRoles,
 } from "@/services/settingsService";
 import { invalidateFieldVisibilityCache } from "@/hooks/useFieldVisibility";
+import { putApi } from "@/services/services";
+
+// Helper to get initial perPage settings from window.getWhizmanage
+const getInitialPerPageSettings = () => {
+  const whizmanageData = window?.getWhizmanage || [];
+  const perPageRow = whizmanageData.find((item) => item.name === "perPage");
+  const savedData = perPageRow?.reservedData || {};
+  return {
+    products: savedData.products || 100,
+    orders: savedData.orders || 100,
+    customers: savedData.customers || 100,
+    coupons: savedData.coupons || 100,
+    "discount-rules": savedData["discount-rules"] || 100,
+  };
+};
 
 /**
  * Custom hook for managing WhizManage settings
@@ -31,6 +46,10 @@ export function useSettings() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState(null);
+
+  // PerPage settings (stored in wp_whizmanage table, not wp_options)
+  const [perPageSettings, setPerPageSettings] = useState(getInitialPerPageSettings);
+  const [originalPerPageSettings, setOriginalPerPageSettings] = useState(getInitialPerPageSettings);
 
   // Load settings on mount
   useEffect(() => {
@@ -194,6 +213,50 @@ export function useSettings() {
     }
   }, [userInfo]);
 
+  // Update perPage setting for a specific entity (local state only)
+  const updatePerPageSetting = useCallback((entityId, value) => {
+    setPerPageSettings((prev) => ({
+      ...prev,
+      [entityId]: parseInt(value, 10),
+    }));
+  }, []);
+
+  // Check if perPage settings have changes
+  const hasPerPageChanges = useCallback(() => {
+    return JSON.stringify(perPageSettings) !== JSON.stringify(originalPerPageSettings);
+  }, [perPageSettings, originalPerPageSettings]);
+
+  // Save perPage settings to database
+  const savePerPageSettings = useCallback(async () => {
+    try {
+      const url = `${window.siteUrl}/wp-json/whizmanage/v1/columns/perPage`;
+      await putApi(url, { reservedData: perPageSettings });
+
+      // Update window.getWhizmanage to keep it in sync
+      const whizmanageData = window?.getWhizmanage || [];
+      const perPageIndex = whizmanageData.findIndex((item) => item.name === "perPage");
+      if (perPageIndex !== -1) {
+        whizmanageData[perPageIndex].reservedData = perPageSettings;
+      } else {
+        whizmanageData.push({ name: "perPage", reservedData: perPageSettings });
+      }
+      window.getWhizmanage = whizmanageData;
+
+      // Update original to reflect saved state
+      setOriginalPerPageSettings({ ...perPageSettings });
+
+      return { success: true };
+    } catch (err) {
+      console.error("Failed to save perPage settings:", err);
+      throw err;
+    }
+  }, [perPageSettings]);
+
+  // Reset perPage settings to original values
+  const resetPerPageSettings = useCallback(() => {
+    setPerPageSettings({ ...originalPerPageSettings });
+  }, [originalPerPageSettings]);
+
   return {
     settings,
     originalSettings,
@@ -216,5 +279,11 @@ export function useSettings() {
     hasChanges: hasChanges(),
     hasUserInfoChanges: hasUserInfoChanges(),
     getChangedSettings,
+    // PerPage settings
+    perPageSettings,
+    updatePerPageSetting,
+    savePerPageSettings,
+    resetPerPageSettings,
+    hasPerPageChanges: hasPerPageChanges(),
   };
 }

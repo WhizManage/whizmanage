@@ -7,19 +7,32 @@ import { __ } from "@wordpress/i18n";
 /** =========================
  *  Shape helpers (אחידות שדות)
  *  ========================= */
+const safeParse = (val, fallback) => {
+  if (!val) return fallback;
+  if (typeof val !== "string") return val;
+  try {
+    return JSON.parse(val);
+  } catch (e) {
+    console.warn("safeParse failed for:", val, e);
+    return fallback;
+  }
+};
+
 export const discountRulesShape = {
   toActive: (r) => ({
     ...r,
+    id: r?.id ? String(r.id) : r?.id,
     name: r?.name || "",
     type: r?.type || "product_adjustment",
     status: r?.status ?? "draft",
     start_date: r?.start_date || null,
     end_date: r?.end_date || null,
-    priority: r?.priority ?? 0,
-    conditions: r?.conditions || { logic: "all", rules: [] },
-    // נשמור actions בדיוק כפי שמגיע (אם אין – אובייקט ריק)
+    priority: r?.priority !== undefined ? Number(r.priority) : 0,
+    show_message: r?.show_message !== undefined ? (r.show_message === "1" || r.show_message === 1 || r.show_message === true) : true,
+    conditions: safeParse(r?.conditions, { logic: "all", rules: [] }),
+    filters: safeParse(r?.filters, []),
+    actions: safeParse(r?.actions, {}),
     message: r?.message || "",
-    actions: r?.actions ?? {},
   }),
   toTrash: (r) => ({
     ...r,
@@ -238,134 +251,134 @@ export const discountRulesTrashApi = {
  *  ========================= */
 export const discountRulesMasterUpdateCell =
   (get) =>
-  async (rowId, columnId, value, rowData, isFromHistory = false) => {
-    const { updateItemWithHistory } = get();
-    const { setSaveState, setLastSaveTime } = useTableSaveStateStore.getState();
+    async (rowId, columnId, value, rowData, isFromHistory = false) => {
+      const { updateItemWithHistory } = get();
+      const { setSaveState, setLastSaveTime } = useTableSaveStateStore.getState();
 
-    const previousValue = rowData[columnId];
+      const previousValue = rowData[columnId];
 
-    const isTemp =
-      String(rowId).startsWith("temp_") ||
-      rowData?._isNew === true ||
-      isFromHistory === "temp";
+      const isTemp =
+        String(rowId).startsWith("temp_") ||
+        rowData?._isNew === true ||
+        isFromHistory === "temp";
 
-    const fieldsToSync = [
-      "status",
-      "type",
-      "start_date",
-      "end_date",
-      "priority",
-      "updated_at",
-      "created_at",
-      "actions",
-      "message",
-      "conditions",
-    ];
+      const fieldsToSync = [
+        "status",
+        "type",
+        "start_date",
+        "end_date",
+        "priority",
+        "updated_at",
+        "created_at",
+        "actions",
+        "message",
+        "conditions",
+      ];
 
-    try {
-      setSaveState?.("saving");
+      try {
+        setSaveState?.("saving");
 
-      if (isTemp) {
-        const type = rowData?.type || "product_adjustment";
-        const defaultActions = getDefaultActionsForType(type);
+        if (isTemp) {
+          const type = rowData?.type || "product_adjustment";
+          const defaultActions = getDefaultActionsForType(type);
 
-        const cleanValue =
-          typeof value === "object" && value !== null && !Array.isArray(value)
-            ? (value.value ?? value.id ?? value)
-            : value;
+          const cleanValue =
+            typeof value === "object" && value !== null && !Array.isArray(value)
+              ? (value.value ?? value.id ?? value)
+              : value;
 
-        const payload = {
-          name: rowData?.name || "New Discount Rule",
-          type: type,
-          status: rowData?.status ?? "draft",
-          start_date: rowData?.start_date ?? null,
-          end_date: rowData?.end_date ?? null,
-          priority: Number(rowData?.priority ?? 0),
-          conditions: rowData?.conditions || { logic: "all", rules: [] },
-          actions: rowData?.actions || defaultActions,
-        };
-        if (columnId) payload[columnId] = cleanValue;
+          const payload = {
+            name: rowData?.name || "New Discount Rule",
+            type: type,
+            status: rowData?.status ?? "draft",
+            start_date: rowData?.start_date ?? null,
+            end_date: rowData?.end_date ?? null,
+            priority: Number(rowData?.priority ?? 0),
+            conditions: rowData?.conditions || { logic: "all", rules: [] },
+            actions: rowData?.actions || defaultActions,
+          };
+          if (columnId) payload[columnId] = cleanValue;
 
 
-        const createdRes = await discountRulesApi.create(payload);
-        const created = createdRes?.data ?? createdRes ?? {};
+          const createdRes = await discountRulesApi.create(payload);
+          const created = createdRes?.data ?? createdRes ?? {};
 
-        get().setData?.((prev = []) =>
-          prev.map((r) =>
-            String(r.id) === String(rowId)
-              ? { ...created, _isNew: false, _needsSave: false }
-              : r
-          )
+          get().setData?.((prev = []) =>
+            prev.map((r) =>
+              String(r.id) === String(rowId)
+                ? { ...created, _isNew: false, _needsSave: false }
+                : r
+            )
+          );
+
+          setSaveState?.("saved");
+          setLastSaveTime?.(new Date());
+          return true;
+        }
+
+        if (!isFromHistory) {
+          if (typeof updateItemWithHistory === "function") {
+            updateItemWithHistory(rowId, { [columnId]: value }, true);
+          } else {
+            get().updateItem(rowId, { [columnId]: value });
+          }
+        } else {
+          get().updateItem(rowId, { [columnId]: value });
+        }
+
+        const serverRes = await discountRulesApi.updateField(
+          rowId,
+          columnId,
+          value,
+          rowData
         );
+        const patch = serverRes?.data ?? serverRes ?? {};
+
+        const updates = {};
+        fieldsToSync.forEach((f) => {
+          if (patch[f] !== undefined && patch[f] !== rowData[f]) {
+            updates[f] = patch[f];
+          }
+        });
+
+        if (Object.keys(updates).length) {
+          get().updateItem(rowId, updates);
+
+          if (
+            columnId === "type" &&
+            updates.status === "draft" &&
+            rowData.status !== "draft"
+          ) {
+            toast.info(__("Rule moved to Draft", "whizmanage"), {
+              description: __("Type changed; rule disabled until settings are updated.", "whizmanage"),
+              duration: 3500,
+            });
+          }
+        }
 
         setSaveState?.("saved");
         setLastSaveTime?.(new Date());
         return true;
-      }
+      } catch (apiError) {
+        console.error("masterUpdateCell error:", apiError);
 
-      if (!isFromHistory) {
-        if (typeof updateItemWithHistory === "function") {
-          updateItemWithHistory(rowId, { [columnId]: value }, true);
-        } else {
-          get().updateItem(rowId, { [columnId]: value });
+        if (!isTemp) {
+          get().updateItem(rowId, { [columnId]: previousValue });
         }
-      } else {
-        get().updateItem(rowId, { [columnId]: value });
-      }
 
-      const serverRes = await discountRulesApi.updateField(
-        rowId,
-        columnId,
-        value,
-        rowData
-      );
-      const patch = serverRes?.data ?? serverRes ?? {};
-
-      const updates = {};
-      fieldsToSync.forEach((f) => {
-        if (patch[f] !== undefined && patch[f] !== rowData[f]) {
-          updates[f] = patch[f];
-        }
-      });
-
-      if (Object.keys(updates).length) {
-        get().updateItem(rowId, updates);
-
-        if (
-          columnId === "type" &&
-          updates.status === "draft" &&
-          rowData.status !== "draft"
-        ) {
-          toast.info(__("Rule moved to Draft", "whizmanage"), {
-            description: __("Type changed; rule disabled until settings are updated.", "whizmanage"),
-            duration: 3500,
+        setSaveState?.("error");
+        if (!isFromHistory) {
+          toast.error(__("Update error", "whizmanage"), {
+            description:
+              apiError?.response?.data?.message ||
+              apiError.message ||
+              __("Error occurred while saving data", "whizmanage"),
+            duration: 4000,
           });
         }
+        throw apiError;
       }
-
-      setSaveState?.("saved");
-      setLastSaveTime?.(new Date());
-      return true;
-    } catch (apiError) {
-      console.error("masterUpdateCell error:", apiError);
-
-      if (!isTemp) {
-        get().updateItem(rowId, { [columnId]: previousValue });
-      }
-
-      setSaveState?.("error");
-      if (!isFromHistory) {
-        toast.error(__("Update error", "whizmanage"), {
-          description:
-            apiError?.response?.data?.message ||
-            apiError.message ||
-            __("Error occurred while saving data", "whizmanage"),
-          duration: 4000,
-        });
-      }
-      throw apiError;
-    }
-  };
+    };
 
 /** ייצוא בשמות האחידים */
 export {

@@ -3,8 +3,8 @@
 import { __ } from "@wordpress/i18n";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
 import {
   Select,
   SelectContent,
@@ -12,20 +12,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Table2, History } from "lucide-react";
+import { Table2, History, Package, ShoppingCart, Users, Ticket, Percent } from "lucide-react";
 import SettingsCardHeader from "../SettingsCardHeader";
 import FieldVisibilitySettings from "./FieldVisibilitySettings";
 import CustomFieldsVisibilitySettings from "./CustomFieldsVisibilitySettings";
 
 const ROWS_PER_PAGE_OPTIONS = [
-  { value: "25", label: "25 rows" },
-  { value: "50", label: "50 rows" },
-  { value: "100", label: "100 rows" },
-  { value: "200", label: "200 rows" },
-  { value: "500", label: "500 rows" },
+  { value: "25", label: "25" },
+  { value: "50", label: "50" },
+  { value: "100", label: "100" },
+  { value: "200", label: "200" },
+  { value: "500", label: "500" },
 ];
 
-export default function WhizManageTab({ settings, onUpdate }) {
+// Table entities configuration - ids must match storeName in createTableStore
+const TABLE_ENTITIES = [
+  { id: "products", label: "Products", icon: Package },
+  { id: "orders", label: "Orders", icon: ShoppingCart },
+  { id: "customers", label: "Customers", icon: Users },
+  { id: "coupons", label: "Coupons", icon: Ticket },
+  { id: "discount-rules", label: "Discount Rules", icon: Percent },
+];
+
+export default function WhizManageTab({ settings, onUpdate, perPageSettings, onUpdatePerPage }) {
   return (
     <div className="space-y-6 text-start">
       {/* Table Settings Card */}
@@ -33,35 +42,54 @@ export default function WhizManageTab({ settings, onUpdate }) {
         <SettingsCardHeader
           icon={Table2}
           title={__("Table Settings", "whizmanage")}
-          description={__("Configure default table behavior", "whizmanage")}
+          description={__("Configure number of rows for each table", "whizmanage")}
         />
         <CardContent className="space-y-6">
-          {/* Default Rows Per Page */}
-          <div className="space-y-2">
-            <Label>{__("Default rows per page", "whizmanage")}</Label>
-            <Select
-              value={String(settings.whizmanage_default_rows_per_page || "100")}
-              onValueChange={(value) =>
-                onUpdate("whizmanage_default_rows_per_page", parseInt(value, 10))
-              }
-            >
-              <SelectTrigger className="dark:bg-slate-700 w-[200px] text-start">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {ROWS_PER_PAGE_OPTIONS.map((option) => (
-                  <SelectItem key={option.value} value={option.value} className="text-start">
-                    {__(option.label, "whizmanage")}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <p className="text-sm text-muted-foreground">
+          {/* Rows Per Page for each table */}
+          <div className="space-y-4">
+            <Label className="text-base font-medium">{__("Rows per page", "whizmanage")}</Label>
+            <p className="text-sm text-muted-foreground -mt-2">
               {__(
-                "The default number of rows displayed in tables. Higher values may affect performance.",
+                "Set the default number of rows displayed for each table. Higher values may affect performance.",
                 "whizmanage"
               )}
             </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+              {TABLE_ENTITIES.map((entity) => {
+                const Icon = entity.icon;
+                return (
+                  <div
+                    key={entity.id}
+                    className="flex items-center gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50"
+                  >
+                    <div className="flex items-center justify-center w-8 h-8 rounded-md bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-600 dark:text-fuchsia-400">
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <Label className="text-sm font-medium truncate block">
+                        {__(entity.label, "whizmanage")}
+                      </Label>
+                    </div>
+                    <Select
+                      value={String(perPageSettings?.[entity.id] || "100")}
+                      onValueChange={(value) => onUpdatePerPage(entity.id, value)}
+                    >
+                      <SelectTrigger className="dark:bg-slate-700 w-20 text-start h-8 text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {ROWS_PER_PAGE_OPTIONS.map((option) => (
+                          <SelectItem key={option.value} value={option.value} className="text-start">
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -95,26 +123,33 @@ export default function WhizManageTab({ settings, onUpdate }) {
 
           {/* History Retention */}
           {settings.whizmanage_enable_history === "yes" && (
-            <div className="space-y-2">
-              <Label htmlFor="history_retention">
-                {__("History retention (days)", "whizmanage")}
-              </Label>
-              <div className="w-24">
-                <Input
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="history_retention">
+                  {__("History retention (days)", "whizmanage")}
+                </Label>
+                <span className="text-sm font-medium bg-fuchsia-100 dark:bg-fuchsia-900/30 text-fuchsia-600 dark:text-fuchsia-400 px-3 py-1 rounded-full" dir="ltr">
+                  {settings.whizmanage_history_retention_days || 30} {__("days", "whizmanage")}
+                </span>
+              </div>
+              <div className="px-1">
+                <Slider
                   id="history_retention"
-                  type="number"
-                  min="1"
-                  max="365"
-                  value={settings.whizmanage_history_retention_days || 30}
-                  onChange={(e) =>
-                    onUpdate(
-                      "whizmanage_history_retention_days",
-                      parseInt(e.target.value, 10) || 30
-                    )
+                  min={1}
+                  max={90}
+                  step={1}
+                  value={[parseInt(settings.whizmanage_history_retention_days, 10) || 30]}
+                  onValueChange={([value]) =>
+                    onUpdate("whizmanage_history_retention_days", value)
                   }
-                  className="dark:bg-slate-700 text-center"
-                  dir="ltr"
+                  className="w-full"
                 />
+                <div className="flex justify-between text-xs text-muted-foreground mt-2" dir="ltr">
+                  <span>1</span>
+                  <span>30</span>
+                  <span>60</span>
+                  <span>90</span>
+                </div>
               </div>
               <p className="text-sm text-muted-foreground">
                 {__(
@@ -134,7 +169,7 @@ export default function WhizManageTab({ settings, onUpdate }) {
       <CustomFieldsVisibilitySettings settings={settings} onUpdate={onUpdate} />
 
       {/* About Card */}
-      <Card className="border-fuchsia-200 dark:border-fuchsia-800 bg-gradient-to-br from-fuchsia-50 to-purple-50 dark:from-fuchsia-900/20 dark:to-purple-900/20">
+      <Card className="border-fuchsia-200/70 dark:border-fuchsia-400/20 bg-gradient-to-br from-fuchsia-50 to-purple-50 dark:!bg-slate-900/70 dark:from-transparent dark:to-transparent">
         <CardContent className="pt-6">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center shrink-0">

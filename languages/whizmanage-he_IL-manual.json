@@ -6060,7 +6060,8 @@
       "Show All": ["הצג הכל"],
       "Hidden": ["מוסתר"],
       "Visible": ["גלוי"],
-      "Thank you for using WhizManage! For support and documentation, visit our website.": ["תודה שאתה משתמש ב-WhizManage! לתמיכה ותיעוד, בקר באתר שלנו."]
+      "Thank you for using WhizManage! For support and documentation, visit our website.": ["תודה שאתה משתמש ב-WhizManage! לתמיכה ותיעוד, בקר באתר שלנו."],
+      "Use / to filter multiple attributes. Example: red/electric": ["השתמש ב-/ כדי לסנן תכונות מרובות. לדוגמה: אדום/חשמלי:"]
 
 
     }

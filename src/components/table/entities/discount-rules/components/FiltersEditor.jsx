@@ -94,11 +94,22 @@ function AttributesPickerForRules({ value = [], onChange }) {
   const [open, setOpen] = useState(false);
 
   const normalizedSelected = useMemo(() => {
-    return (Array.isArray(value) ? value : []).map((v) => {
-      if (typeof v === "object") return v;
-      const [taxonomy, idStr] = String(v).split(":");
-      return { taxonomy, term_id: Number(idStr) };
-    });
+    return (Array.isArray(value) ? value : [])
+      .map((v) => {
+        if (typeof v === "object" && v !== null) {
+          const tax = v.taxonomy || v.tax || v.slug;
+          const tid = v.term_id ?? v.id;
+          if (tax && tid !== undefined) {
+            return { taxonomy: String(tax), term_id: Number(tid) };
+          }
+        }
+        if (typeof v === "string" && v.includes(":")) {
+          const [taxonomy, idStr] = v.split(":");
+          return { taxonomy, term_id: Number(idStr) };
+        }
+        return null;
+      })
+      .filter((item) => item !== null && !isNaN(item.term_id));
   }, [value]);
 
   const selectedIds = useMemo(
@@ -115,7 +126,8 @@ function AttributesPickerForRules({ value = [], onChange }) {
   };
 
   const selectedLabel = useMemo(() => {
-    if (!attributes.length || !selectedIds.size) return __("Select attributes", "whizmanage");
+    if (!attributes.length || !selectedIds.size)
+      return __("Select attributes", "whizmanage");
 
     const allTerms = attributes.flatMap((a) =>
       (a.options || []).map((opt) => ({
@@ -129,16 +141,21 @@ function AttributesPickerForRules({ value = [], onChange }) {
       const found = allTerms.find((x) => x.id === id);
       if (found) names.push(found.name);
     }
-    return names.join(", ");
-  }, [attributes, selectedIds, t]);
+    return names.length > 0 ? names.join(", ") : __("Select attributes", "whizmanage");
+  }, [attributes, selectedIds]);
 
   const toggle = useCallback(
     (taxonomy, term) => {
-      const id = `${taxonomy}:${term.id}`;
+      const termId = Number(term.id ?? term.term_id);
+      if (isNaN(termId)) return;
+
+      const id = `${taxonomy}:${termId}`;
       const exists = selectedIds.has(id);
+
       const next = exists
         ? normalizedSelected.filter((p) => `${p.taxonomy}:${p.term_id}` !== id)
-        : [...normalizedSelected, { taxonomy, term_id: Number(term.id) }];
+        : [...normalizedSelected, { taxonomy: String(taxonomy), term_id: termId }];
+
       onChange(next);
     },
     [normalizedSelected, selectedIds, onChange]
@@ -172,7 +189,7 @@ function AttributesPickerForRules({ value = [], onChange }) {
               name: label,
               slug: tax.name.startsWith("_") ? tax.name.slice(1) : tax.name,
               options: (tax.terms || []).map((term) => ({
-                id: term.id,
+                id: term.id ?? term.term_id,
                 name: decodeSafe(term.name),
                 slug: term.slug,
               })),
@@ -205,7 +222,7 @@ function AttributesPickerForRules({ value = [], onChange }) {
               name: attr.name || attr.slug,
               slug: attr.slug || attr.name,
               options: terms.map((t) => ({
-                id: t.id,
+                id: t.id ?? t.term_id,
                 name: decodeSafe(t.name),
                 slug: t.slug,
               })),
@@ -244,9 +261,9 @@ function AttributesPickerForRules({ value = [], onChange }) {
         sideOffset={6}
         onInteractOutside={(e) => {
           const modalElement =
-            e.target.closes__(".nextui-modal-wrapper") ||
+            e.target.closest(".nextui-modal-wrapper") ||
             e.target.closest('[data-slot="base"]') ||
-            e.target.closes__(".max-h-\\[60vh\\]");
+            e.target.closest(".max-h-\\[60vh\\]");
           if (modalElement) {
             e.preventDefault();
           }
@@ -440,7 +457,7 @@ function ValuesEditor({ row, onChange, __ }) {
         for (const attr of attrs) {
           const slug = attr.name.startsWith("_") ? attr.name.slice(1) : attr.name;
           if (slug === val.taxonomy) {
-            const term = (attr.terms || []).find(t => String(t.id) === String(val.term_id));
+            const term = (attr.terms || []).find(t => String(t.id ?? t.term_id) === String(val.term_id));
             if (term) {
               let attrLabel = attr.label || attr.name;
               if (typeof attrLabel === "string") {

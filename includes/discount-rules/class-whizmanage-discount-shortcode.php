@@ -20,13 +20,11 @@ class Whizmanage_Discount_Shortcode
 
         add_filter('woocommerce_available_variation', __CLASS__ . '::variation_data_on_pdp', 20, 3);
         
-        // הסרת הוקים ישנים אם קיימים
         remove_action('woocommerce_single_product_summary', 'whiz_dr_render_savings_banner_minimal_buy_at', 22);
         remove_action('woocommerce_single_product_summary', 'whiz_dr_render_bogo_banner_on_pdp', 23);
         remove_action('woocommerce_single_product_summary', 'whiz_dr_render_bxgy_banner_on_pdp', 24);
         remove_action('woocommerce_single_product_summary', 'whiz_dr_render_universal_discount_banner', 25);
 
-        // הוספת ההוקים החדשים - מספר נקודות תצוגה לתמיכה בכל התבניות
         // Hook 1: Standard WooCommerce hook (works with most themes)
         add_action('woocommerce_single_product_summary', __CLASS__ . '::render_universal_discount_banner', 25);
         
@@ -79,27 +77,54 @@ class Whizmanage_Discount_Shortcode
                         $vals = Whizmanage_Discount_Functions::expand_term_ids_with_children(array_map('intval', $values));
                         $prod_cats = array_map('intval', (array) wc_get_product_term_ids($product_id, 'product_cat'));
                         $has = (bool) array_intersect($vals, $prod_cats);
-                        $passes = ($op === 'include') ? $has : !$has;
+                        $passes = ($op === 'exclude') ? !$has : $has;
                         break;
 
                     case 'products':
                         $vals = array_map('intval', $values);
                         $has = in_array($product_id, $vals, true);
-                        $passes = ($op === 'include') ? $has : !$has;
+                        $passes = ($op === 'exclude') ? !$has : $has;
                         break;
 
                     case 'tags':
                         $vals = array_map('intval', $values);
                         $prod_tags = array_map('intval', (array) wc_get_product_term_ids($product_id, 'product_tag'));
                         $has = (bool) array_intersect($vals, $prod_tags);
-                        $passes = ($op === 'include') ? $has : !$has;
+                        $passes = ($op === 'exclude') ? !$has : $has;
                         break;
 
                     case 'skus':
                         $needles = array_map('strtolower', array_map('strval', $values));
                         $sku = $prod ? strtolower((string) $prod->get_sku()) : '';
                         $has = ($sku !== '' && in_array($sku, $needles, true));
-                        $passes = ($op === 'include') ? $has : !$has;
+                        $passes = ($op === 'exclude') ? !$has : $has;
+                        break;
+
+                    case 'attributes':
+                        $has = false;
+                        foreach ($values as $pair) {
+                            if (!is_array($pair)) continue;
+                            $tax = $pair['taxonomy'] ?? '';
+                            $tid = (int) ($pair['term_id'] ?? 0);
+                            if ($tax && $tid > 0 && Whizmanage_Discount_Functions::product_has_attribute_term($product_id, $tax, $tid)) {
+                                $has = true;
+                                break;
+                            }
+                        }
+                        $passes = ($op === 'exclude') ? !$has : $has;
+                        break;
+
+                    case 'user_roles':
+                        $user = wp_get_current_user();
+                        $uRoles = $user->exists() ? (array) $user->roles : [];
+                        $vals = array_map('strval', $values);
+                        $has = (bool) array_intersect($vals, $uRoles);
+                        $passes = ($op === 'exclude') ? !$has : $has;
+                        break;
+
+                    case 'on_sale':
+                        $has = $prod ? $prod->is_on_sale() : false;
+                        $passes = ($op === 'exclude') ? !$has : $has;
                         break;
 
                     default:
@@ -270,18 +295,20 @@ class Whizmanage_Discount_Shortcode
         $now   = current_time('mysql');
         $table = esc_sql(WHIZ_DR_TABLE); // קבוע פנימי, לא קלט משתמש
 
-        $rows = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT *
+        // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter -- Checked and safe.
+        // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter
+        $sql = "
+        SELECT *
         FROM `{$table}`
         WHERE status = %s
           AND (start_date IS NULL OR start_date <= %s)
           AND (end_date   IS NULL OR end_date   >= %s)
-                ORDER BY priority ASC, id DESC",
-                'publish',
-                $now,
-                $now
-            ),
+        ORDER BY priority ASC, id DESC
+    ";
+
+        $rows = $wpdb->get_results(
+            // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+            $wpdb->prepare($sql, 'publish', $now, $now),
             ARRAY_A
         );
 
@@ -454,8 +481,8 @@ class Whizmanage_Discount_Shortcode
         if ($product_id <= 0)
             return $data;
 
-        // שימוש במאתר האוניברסלי
-        $rule = self::get_first_applicable_rule($product_id);
+        // שימוש במאתר האוניברסלי - שימוש ב-ID של הווריאציה עצמה למציאת החוק המתאים
+        $rule = self::get_first_applicable_rule($variation->get_id());
 
         // רק אם סוג החוק הוא product_adjustment
         if (!$rule || ($rule['type'] ?? '') !== 'product_adjustment')

@@ -538,16 +538,21 @@ export function ColumnHeader({ header, table, children, isActionsColumn }) {
                       />
                       {/* 🆕 אינפוט נוסף לסינון ווריאציות - מופיע רק בעמודות עם hasVariationFilter */}
                       {hasVariationFilter && (
-                        <Input
-                          id={`variation-filter-${header.id}`}
-                          type="text"
-                          placeholder={__("Filter variations...", "whizmanage")}
-                          value={variationFilterValue}
-                          onChange={(e) => handleVariationFilterChange(e.target.value)}
-                          onClick={(e) => e.stopPropagation()}
-                          className="w-full h-8 border-fuchsia-300 focus:border-fuchsia-500"
-                          aria-label={__("Filter variations", "whizmanage")}
-                        />
+                        <CustomTooltip
+                          title={__("Use / to filter multiple attributes. Example: red/electric", "whizmanage")}
+                          placement="top"
+                        >
+                          <Input
+                            id={`variation-filter-${header.id}`}
+                            type="text"
+                            placeholder={__("Filter variations", "whizmanage")}
+                            value={variationFilterValue}
+                            onChange={(e) => handleVariationFilterChange(e.target.value)}
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full h-8 border-fuchsia-300 focus:border-fuchsia-500"
+                            aria-label={__("Filter variations", "whizmanage")}
+                          />
+                        </CustomTooltip>
                       )}
                     </>
                   )}

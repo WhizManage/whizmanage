@@ -206,7 +206,7 @@ function SourceGroup({
   onShowAll,
   onHideAll,
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const config = SOURCE_CONFIG[source] || SOURCE_CONFIG.ACF;
   const Icon = config.icon;
 
@@ -492,50 +492,6 @@ export default function CustomFieldsVisibilitySettings({ settings, onUpdate }) {
       </SettingsCardHeader>
 
       <CardContent className="pt-0">
-        {/* Stats bar */}
-        {hasFields && (
-          <div className="flex items-center gap-4 mb-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200/50 dark:border-slate-700/50">
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
-                  {__("Field Visibility Overview", "whizmanage")}
-                </span>
-              </div>
-              {/* Progress bar */}
-              <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-fuchsia-500 to-purple-600 transition-all duration-500 ease-out rounded-full"
-                  style={{
-                    width: `${stats.total > 0 ? (stats.visible / stats.total) * 100 : 100}%`,
-                  }}
-                />
-              </div>
-            </div>
-            <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-1.5">
-                <Eye className="w-4 h-4 text-fuchsia-500" />
-                <span className="font-semibold text-slate-700 dark:text-slate-200">
-                  {stats.visible}
-                </span>
-                <span className="text-slate-400 dark:text-slate-500 hidden sm:inline">
-                  {__("visible", "whizmanage")}
-                </span>
-              </div>
-              {stats.hidden > 0 && (
-                <div className="flex items-center gap-1.5">
-                  <EyeOff className="w-4 h-4 text-slate-400" />
-                  <span className="font-semibold text-slate-700 dark:text-slate-200">
-                    {stats.hidden}
-                  </span>
-                  <span className="text-slate-400 dark:text-slate-500 hidden sm:inline">
-                    {__("hidden", "whizmanage")}
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
         {/* Source groups */}
         {hasFields ? (
           <div className="space-y-4">

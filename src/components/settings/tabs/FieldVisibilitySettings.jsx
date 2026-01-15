@@ -1,6 +1,6 @@
 // src/components/settings/tabs/FieldVisibilitySettings.jsx
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { __ } from "@wordpress/i18n";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -13,18 +13,25 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   Package,
   Tag,
   ShoppingCart,
   Users,
   Percent,
-  ChevronDown,
   ChevronRight,
+  Eye,
   EyeOff,
   RotateCcw,
   SlidersHorizontal,
 } from "lucide-react";
 import SettingsCardHeader from "../SettingsCardHeader";
+import { cn } from "@/lib/utils";
 
 // Entity definitions with their fields
 const ENTITY_CONFIGS = {
@@ -275,18 +282,107 @@ const ENTITY_CONFIGS = {
   },
 };
 
-function EntityFieldSettings({ entityKey, config, hiddenFields, onToggleField, onResetEntity }) {
+// Single field item component
+function FieldItem({ field, isHidden, onToggle }) {
+  return (
+    <div
+      className={cn(
+        "group relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300",
+        "border border-transparent",
+        "hover:border-slate-200 dark:hover:border-slate-600",
+        "hover:bg-white dark:hover:bg-slate-800/50",
+        "hover:shadow-sm",
+        isHidden && "opacity-60"
+      )}
+    >
+      {/* Field info */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2">
+          <span
+            className={cn(
+              "text-sm font-medium truncate transition-colors",
+              isHidden
+                ? "text-slate-400 dark:text-slate-500"
+                : "text-slate-700 dark:text-slate-200"
+            )}
+          >
+            {__(field.label, "whizmanage")}
+            {field.required && (
+              <span className="text-red-500 ms-1">*</span>
+            )}
+          </span>
+        </div>
+        <code
+          className={cn(
+            "text-[10px] font-mono px-1.5 py-0.5 rounded mt-1 inline-block transition-colors",
+            isHidden
+              ? "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600"
+              : "bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400"
+          )}
+        >
+          {field.name}
+        </code>
+      </div>
+
+      {/* Visibility toggle */}
+      <div className="flex items-center gap-2 shrink-0">
+        {isHidden && (
+          <Badge
+            variant="secondary"
+            className="hidden sm:flex bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 text-[10px] px-1.5 py-0.5"
+          >
+            <EyeOff className="w-3 h-3 me-1" />
+            {__("Hidden", "whizmanage")}
+          </Badge>
+        )}
+        <TooltipProvider delayDuration={300}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div>
+                <Switch
+                  checked={!isHidden}
+                  onCheckedChange={onToggle}
+                  disabled={field.required}
+                  className="data-[state=checked]:bg-fuchsia-600"
+                />
+              </div>
+            </TooltipTrigger>
+            {field.required && (
+              <TooltipContent side="top" className="text-xs">
+                {__("Required field cannot be hidden", "whizmanage")}
+              </TooltipContent>
+            )}
+          </Tooltip>
+        </TooltipProvider>
+      </div>
+    </div>
+  );
+}
+
+// Entity group component (like SourceGroup in CustomFieldsVisibilitySettings)
+function EntityGroup({
+  entityKey,
+  config,
+  hiddenFields,
+  onToggleField,
+  onShowAll,
+  onHideAll,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const Icon = config.icon;
 
-  const hiddenCount = useMemo(() => {
-    const entityHidden = hiddenFields[entityKey] || [];
-    return entityHidden.length;
-  }, [hiddenFields, entityKey]);
-
-  const totalFields = useMemo(() => {
-    return config.groups.reduce((sum, group) => sum + group.fields.length, 0);
+  const allFields = useMemo(() => {
+    return config.groups.flatMap((group) => group.fields);
   }, [config.groups]);
+
+  const visibleCount = useMemo(() => {
+    const entityHidden = hiddenFields[entityKey] || [];
+    return allFields.filter((f) => !entityHidden.includes(f.name)).length;
+  }, [allFields, hiddenFields, entityKey]);
+
+  const hiddenCount = allFields.length - visibleCount;
+  const allHidden = hiddenCount === allFields.length;
+  const allVisible = visibleCount === allFields.length;
 
   const isFieldHidden = (fieldName) => {
     const entityHidden = hiddenFields[entityKey] || [];
@@ -294,84 +390,131 @@ function EntityFieldSettings({ entityKey, config, hiddenFields, onToggleField, o
   };
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <CollapsibleTrigger asChild>
-        <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-4 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-fuchsia-100 dark:bg-fuchsia-900/30 flex items-center justify-center shrink-0">
-            <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-fuchsia-600 dark:text-fuchsia-400" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <h4 className="font-medium text-sm sm:text-base text-slate-800 dark:text-slate-200 truncate">
-              {__(config.label, "whizmanage")}
-            </h4>
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              {totalFields} {__("fields", "whizmanage")}
-              {hiddenCount > 0 && (
-                <span className="text-amber-600 dark:text-amber-400 ms-1">
-                  • {hiddenCount} {__("hidden", "whizmanage")}
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="group/entity">
+      <div
+        className={cn(
+          "rounded-2xl border transition-all duration-300 overflow-hidden",
+          "border-slate-200 dark:border-slate-700",
+          isOpen ? "shadow-md" : "shadow-sm hover:shadow-md"
+        )}
+      >
+        {/* Entity header */}
+        <CollapsibleTrigger asChild>
+          <div
+            className={cn(
+              "flex items-center gap-3 p-4 cursor-pointer transition-all duration-300",
+              "bg-slate-50 dark:bg-slate-800/50",
+              "hover:bg-slate-100 dark:hover:bg-slate-800"
+            )}
+          >
+            {/* Entity icon with brand gradient background */}
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br from-fuchsia-500 to-purple-600 shadow-lg">
+              <Icon className="w-5 h-5 text-white" />
+            </div>
+
+            {/* Entity info */}
+            <div className="flex-1 min-w-0">
+              <h4 className="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200">
+                {__(config.label, "whizmanage")}
+              </h4>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="text-xs text-slate-500 dark:text-slate-400">
+                  {allFields.length} {__("fields", "whizmanage")}
                 </span>
+                {hiddenCount > 0 && (
+                  <>
+                    <span className="text-slate-300 dark:text-slate-600">•</span>
+                    <span className="text-xs text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                      <EyeOff className="w-3 h-3" />
+                      {hiddenCount} {__("hidden", "whizmanage")}
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* Stats badge */}
+            <div className="hidden sm:flex items-center gap-2">
+              <Badge
+                variant="secondary"
+                className="text-xs px-2 py-1 bg-fuchsia-100 dark:bg-fuchsia-900/40 text-fuchsia-700 dark:text-fuchsia-300"
+              >
+                <Eye className="w-3 h-3 me-1" />
+                {visibleCount}/{allFields.length}
+              </Badge>
+            </div>
+
+            {/* Chevron */}
+            <div
+              className={cn(
+                "w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300",
+                "bg-white/50 dark:bg-slate-700/50",
+                isOpen && "rotate-90"
               )}
-            </p>
+            >
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </div>
           </div>
-          {hiddenCount > 0 && (
-            <Badge variant="secondary" className="hidden sm:flex bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-xs shrink-0">
-              <EyeOff className="w-3 h-3 me-1" />
-              {hiddenCount}
-            </Badge>
-          )}
-          {isOpen ? (
-            <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 shrink-0" />
-          ) : (
-            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 shrink-0" />
-          )}
-        </div>
-      </CollapsibleTrigger>
-      <CollapsibleContent>
-        <div className="px-2 sm:px-4 pb-4 space-y-3 sm:space-y-4">
-          {hiddenCount > 0 && (
-            <div className="flex justify-end">
+        </CollapsibleTrigger>
+
+        {/* Fields list */}
+        <CollapsibleContent>
+          <div className="bg-slate-50/50 dark:bg-slate-900/30">
+            {/* Bulk actions */}
+            <div className="flex items-center justify-end gap-2 px-4 py-2 border-b border-slate-200/50 dark:border-slate-700/50">
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => onResetEntity(entityKey)}
-                className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 text-xs sm:text-sm"
+                onClick={onShowAll}
+                disabled={allVisible}
+                className={cn(
+                  "text-xs h-7 px-2",
+                  "text-slate-500 hover:text-fuchsia-600 dark:text-slate-400 dark:hover:text-fuchsia-400",
+                  "disabled:opacity-40"
+                )}
               >
-                <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4 me-1 sm:me-2" />
-                {__("Show all fields", "whizmanage")}
+                <Eye className="w-3 h-3 me-1" />
+                {__("Show All", "whizmanage")}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onHideAll}
+                disabled={allHidden}
+                className={cn(
+                  "text-xs h-7 px-2",
+                  "text-slate-500 hover:text-fuchsia-600 dark:text-slate-400 dark:hover:text-fuchsia-400",
+                  "disabled:opacity-40"
+                )}
+              >
+                <EyeOff className="w-3 h-3 me-1" />
+                {__("Hide All", "whizmanage")}
               </Button>
             </div>
-          )}
 
-          {config.groups.map((group) => (
-            <div key={group.id} className="space-y-2">
-              <h5 className="text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-600 pb-1">
-                {__(group.title, "whizmanage")}
-              </h5>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
-                {group.fields.map((field) => (
-                  <div
-                    key={field.name}
-                    className="flex items-center justify-between p-1.5 sm:p-2 rounded-md bg-slate-50 dark:bg-slate-700/30"
-                  >
-                    <Label className="text-xs sm:text-sm cursor-pointer">
-                      {__(field.label, "whizmanage")}
-                      {field.required && (
-                        <span className="text-red-500 ms-1">*</span>
-                      )}
-                    </Label>
-                    <Switch
-                      checked={!isFieldHidden(field.name)}
-                      onCheckedChange={() => onToggleField(entityKey, field.name)}
-                      disabled={field.required}
-                      className="scale-90 sm:scale-100"
-                    />
+            {/* Fields by group */}
+            <div className="p-3 space-y-4">
+              {config.groups.map((group) => (
+                <div key={group.id}>
+                  <h5 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 px-1">
+                    {__(group.title, "whizmanage")}
+                  </h5>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-1">
+                    {group.fields.map((field) => (
+                      <FieldItem
+                        key={field.name}
+                        field={field}
+                        isHidden={isFieldHidden(field.name)}
+                        onToggle={() => onToggleField(entityKey, field.name)}
+                      />
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </CollapsibleContent>
+          </div>
+        </CollapsibleContent>
+      </div>
     </Collapsible>
   );
 }
@@ -391,38 +534,60 @@ export default function FieldVisibilitySettings({ settings, onUpdate }) {
     return stored;
   }, [settings.whizmanage_hidden_fields]);
 
-  const handleToggleField = (entityKey, fieldName) => {
-    const current = { ...hiddenFields };
-    if (!current[entityKey]) {
-      current[entityKey] = [];
-    }
+  const handleToggleField = useCallback(
+    (entityKey, fieldName) => {
+      const current = { ...hiddenFields };
+      if (!current[entityKey]) {
+        current[entityKey] = [];
+      }
 
-    const idx = current[entityKey].indexOf(fieldName);
-    if (idx === -1) {
-      // Hide the field
-      current[entityKey] = [...current[entityKey], fieldName];
-    } else {
-      // Show the field
-      current[entityKey] = current[entityKey].filter((f) => f !== fieldName);
-    }
+      const idx = current[entityKey].indexOf(fieldName);
+      if (idx === -1) {
+        // Hide the field
+        current[entityKey] = [...current[entityKey], fieldName];
+      } else {
+        // Show the field
+        current[entityKey] = current[entityKey].filter((f) => f !== fieldName);
+      }
 
-    // Clean up empty arrays
-    if (current[entityKey].length === 0) {
+      // Clean up empty arrays
+      if (current[entityKey].length === 0) {
+        delete current[entityKey];
+      }
+
+      onUpdate("whizmanage_hidden_fields", JSON.stringify(current));
+    },
+    [hiddenFields, onUpdate]
+  );
+
+  const handleShowAllInEntity = useCallback(
+    (entityKey) => {
+      const current = { ...hiddenFields };
       delete current[entityKey];
-    }
+      onUpdate("whizmanage_hidden_fields", JSON.stringify(current));
+    },
+    [hiddenFields, onUpdate]
+  );
 
-    onUpdate("whizmanage_hidden_fields", JSON.stringify(current));
-  };
+  const handleHideAllInEntity = useCallback(
+    (entityKey) => {
+      const config = ENTITY_CONFIGS[entityKey];
+      if (!config) return;
 
-  const handleResetEntity = (entityKey) => {
-    const current = { ...hiddenFields };
-    delete current[entityKey];
-    onUpdate("whizmanage_hidden_fields", JSON.stringify(current));
-  };
+      const allFields = config.groups.flatMap((group) =>
+        group.fields.filter((f) => !f.required).map((f) => f.name)
+      );
 
-  const handleResetAll = () => {
+      const current = { ...hiddenFields };
+      current[entityKey] = allFields;
+      onUpdate("whizmanage_hidden_fields", JSON.stringify(current));
+    },
+    [hiddenFields, onUpdate]
+  );
+
+  const handleResetAll = useCallback(() => {
     onUpdate("whizmanage_hidden_fields", JSON.stringify({}));
-  };
+  }, [onUpdate]);
 
   const totalHiddenCount = useMemo(() => {
     return Object.values(hiddenFields).reduce(
@@ -431,8 +596,10 @@ export default function FieldVisibilitySettings({ settings, onUpdate }) {
     );
   }, [hiddenFields]);
 
+  const entityOrder = ["products", "coupons", "orders", "customers", "discount_rules"];
+
   return (
-    <Card className="bg-white dark:bg-slate-700/50 border-slate-200 dark:border-slate-600">
+    <Card className="bg-white dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 overflow-hidden">
       <SettingsCardHeader
         icon={SlidersHorizontal}
         title={__("Form Fields Visibility", "whizmanage")}
@@ -446,21 +613,29 @@ export default function FieldVisibilitySettings({ settings, onUpdate }) {
             className="dark:bg-slate-700 dark:hover:bg-slate-600 shrink-0"
           >
             <RotateCcw className="w-4 h-4 sm:me-2" />
-            <span className="hidden sm:inline">{__("Reset all", "whizmanage")}</span>
+            <span className="hidden sm:inline">{__("Show All", "whizmanage")}</span>
           </Button>
         )}
       </SettingsCardHeader>
-      <CardContent className="space-y-2">
-        {Object.entries(ENTITY_CONFIGS).map(([key, config]) => (
-          <EntityFieldSettings
-            key={key}
-            entityKey={key}
-            config={config}
-            hiddenFields={hiddenFields}
-            onToggleField={handleToggleField}
-            onResetEntity={handleResetEntity}
-          />
-        ))}
+
+      <CardContent className="pt-0">
+        <div className="space-y-4">
+          {entityOrder.map((entityKey) => {
+            const config = ENTITY_CONFIGS[entityKey];
+            if (!config) return null;
+            return (
+              <EntityGroup
+                key={entityKey}
+                entityKey={entityKey}
+                config={config}
+                hiddenFields={hiddenFields}
+                onToggleField={handleToggleField}
+                onShowAll={() => handleShowAllInEntity(entityKey)}
+                onHideAll={() => handleHideAllInEntity(entityKey)}
+              />
+            );
+          })}
+        </div>
       </CardContent>
     </Card>
   );

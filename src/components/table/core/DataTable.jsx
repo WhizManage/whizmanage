@@ -405,9 +405,8 @@ export default function GenericDataTable({
     return optionValue;
   }, []);
 
-  // 🆕 Helper: בודק אם תת-שורה (ווריאציה) תואמת לפילטר
-  // משתמש בהמרת slug ל-name כדי לתמוך בחיפוש עברית
-  const subRowMatchesFilter = useCallback((subRow, parentRow, filter) => {
+  // Helper לחיפוש בודד (נפרד לשימוש חוזר)
+  const singleFilterMatch = useCallback((subRow, parentRow, filter) => {
     // בדיקה בשם הווריאציה (normalized)
     const name = normalizeForSearch(subRow.name || "");
     if (name.includes(filter)) return true;
@@ -430,7 +429,7 @@ export default function GenericDataTable({
         // decodeURIComponent failed, continue
       }
 
-      // 🆕 נסה להמיר slug ל-name באמצעות terms מהמוצר האב
+      // נסה להמיר slug ל-name באמצעות terms מהמוצר האב
       const optionName = convertOptionSlugToName(rawOption, attr, parentRow);
       if (optionName !== rawOption) {
         const normalizedName = normalizeForSearch(optionName);
@@ -444,6 +443,23 @@ export default function GenericDataTable({
       return false;
     });
   }, [normalizeForSearch, convertOptionSlugToName]);
+
+  // 🆕 Helper: בודק אם תת-שורה (ווריאציה) תואמת לפילטר
+  // משתמש בהמרת slug ל-name כדי לתמוך בחיפוש עברית
+  // 🆕 תומך בחיפוש מרובה ווריאציות עם סלש (/) - למשל "אדום/חשמלי"
+  const subRowMatchesFilter = useCallback((subRow, parentRow, filter) => {
+    // 🆕 פיצול הפילטר לפי סלש לתמיכה בחיפוש מרובה
+    const filterParts = filter.split("/").map((part) => part.trim()).filter(Boolean);
+
+    // אם אין סלש או יש רק חלק אחד - חיפוש רגיל
+    if (filterParts.length <= 1) {
+      return singleFilterMatch(subRow, parentRow, filter);
+    }
+
+    // 🆕 חיפוש מרובה - כל חלקי הפילטר חייבים להתאים
+    // כל חלק חייב להתאים לאחד מה-attributes או לשם הווריאציה
+    return filterParts.every((filterPart) => singleFilterMatch(subRow, parentRow, filterPart));
+  }, [singleFilterMatch]);
 
   // 🆕 פתיחה אוטומטית של כל המוצרים עם תתי-שורות כשיש סינון בעמודת variations_filter
   useEffect(() => {

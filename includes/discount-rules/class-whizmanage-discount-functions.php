@@ -91,38 +91,82 @@ class Whizmanage_Discount_Functions
 
     /**
      * בדיקה אם פריט עגלה מתאים לזוג {taxonomy, term_id}
-     * תומך גם בווריאציות כאשר המפתח הוא attribute_{taxonomy} והערך הוא slug של ה-term.
+     * תומך בצורה מקסימלית בווריאציות: אם לווריאציה יש ערך ספציפי, הוא קובע ובדיקת האב נמנעת.
      */
     public static function item_has_attribute_term(array $cart_item, string $taxonomy, int $term_id): bool {
         $term_id = (int)$term_id;
         if ($term_id <= 0 || !$taxonomy) return false;
 
-        $taxonomy = sanitize_key($taxonomy);
-        if (strpos($taxonomy, 'pa_') !== 0) $taxonomy = 'pa_' . $taxonomy;
+        $product_id = (int)($cart_item['product_id'] ?? 0);
+        $variation_id = (int)($cart_item['variation_id'] ?? 0);
+        if ($product_id <= 0) return false;
 
-        $pid = (int)($cart_item['product_id'] ?? 0);
-        $vid = (int)($cart_item['variation_id'] ?? 0);
+        // שימוש ב-urldecode + trim כדי לא לשבור שמות בעברית
+        $taxonomy = trim(urldecode($taxonomy));
+        $is_pa = (strpos($taxonomy, 'pa_') === 0);
 
-        // נסה קודם לפי בחירת הווריאציה (attribute_{taxonomy} => slug)
-        $variation = is_array($cart_item['variation'] ?? null) ? $cart_item['variation'] : [];
-        $attr_key = 'attribute_' . $taxonomy;
-        if (!empty($variation[$attr_key])) {
-            $slug = sanitize_title($variation[$attr_key]);
-            $term = get_term_by('slug', $slug, $taxonomy);
-            if ($term && !is_wp_error($term) && (int)$term->term_id === $term_id) {
-                return true;
+        // 1. קבלת אובייקט המוצר והAttributes שלו לבדיקת קיום התכונה
+        // אנו חייבים לבדוק אם התכונה *באמת* משויכת למוצר כדי למנוע מצב של "שאריות" במסד הנתונים
+        $target_product = wc_get_product($variation_id > 0 ? $variation_id : $product_id);
+        if (!$target_product) return false;
+
+        // אם זו ווריאציה, האב הוא זה שמחזיק את רשימת התכונות המלאה (כולל גלובליות)
+        $parent = null;
+        if ($target_product->is_type('variation')) {
+            $parent = wc_get_product($target_product->get_parent_id());
+            $attributes = $parent ? $parent->get_attributes() : [];
+        } else {
+            $attributes = $target_product->get_attributes();
+        }
+
+        // בדיקה: האם התכונה קיימת ברשימת התכונות של המוצר?
+        // wc_get_product_term_ids עלול להחזיר מונחים גם אם התכונה נמחקה מהמוצר אך נשארה ב-DB.
+        $attr_key = sanitize_title($taxonomy);
+        $attr_exists = isset($attributes[$taxonomy]) || isset($attributes[$attr_key]);
+        
+        if ($is_pa && !$attr_exists) {
+            return false; // התכונה לא מוגדרת במוצר זה -> התעלם ממונחים יתומים
+        }
+
+        // 2. בדיקה האם זו ווריאציה עם ערך ספציפי לתכונה הזו
+        if ($variation_id > 0) {
+            $attr_meta_key = 'attribute_' . $taxonomy;
+            // בדיקת meta ישירה
+            $val = get_post_meta($variation_id, $attr_meta_key, true); // true מחזיר מחרוזת בודדת או ריק
+
+            if ($val !== '' && $val !== null) {
+                if ($is_pa) {
+                    $term = get_term_by('slug', $val, $taxonomy);
+                    return ($term && !is_wp_error($term) && (int)$term->term_id === $term_id);
+                }
+                return false;
+            }
+
+            // אם הגענו לפה, הערך הוא "Any" (ריק).
+            // אנו בודקים האם התכונה משמשת לווריאציות.
+            $is_variation_attr = false;
+             if (isset($attributes[$taxonomy]) && $attributes[$taxonomy]->get_variation()) {
+                $is_variation_attr = true;
+            } elseif (isset($attributes[$attr_key]) && $attributes[$attr_key]->get_variation()) {
+                $is_variation_attr = true;
+            }
+
+            if ($is_variation_attr) {
+                // התכונה משמשת לווריאציות, אבל לווריאציה הספציפית הזו אין ערך (Any).
+                // לכן היא לא תואמת פילטר "שחור" ספציפי.
+                return false;
             }
         }
 
-        // אם לא נמצא בווריאציה, בדוק מוצרים מקושרים
-        if ($vid > 0) {
-            $ids = array_map('intval', (array) wc_get_product_term_ids($vid, $taxonomy));
-            if (in_array($term_id, $ids, true)) return true;
+        // 3. fallback לבדיקת מונחים (עבור מוצר פשוט או תכונה גלובלית שאינה ווריאציה)
+        // כעת זה בטוח כי כבר וידאנו שהתכונה קיימת ב-$attributes
+        if ($is_pa) {
+            // אם זו ווריאציה, אנחנו רוצים לבדוק את ה-Parent TERMS
+            $check_id = ($parent) ? $parent->get_id() : $target_product->get_id();
+            $ids = array_map('intval', (array) wc_get_product_term_ids($check_id, $taxonomy));
+            return in_array($term_id, $ids, true);
         }
-        if ($pid > 0) {
-            $ids = array_map('intval', (array) wc_get_product_term_ids($pid, $taxonomy));
-            if (in_array($term_id, $ids, true)) return true;
-        }
+
         return false;
     }
 
@@ -138,10 +182,64 @@ class Whizmanage_Discount_Functions
     }
 
     public static function product_has_attribute_term(int $product_id, string $taxonomy, int $term_id): bool {
-        $taxonomy = sanitize_key($taxonomy);
-        if (strpos($taxonomy, 'pa_') !== 0) $taxonomy = 'pa_' . $taxonomy;
-        $ids = array_map('intval', (array) wc_get_product_term_ids($product_id, $taxonomy));
-        return in_array((int)$term_id, $ids, true);
+        $term_id = (int)$term_id;
+        if ($term_id <= 0 || !$taxonomy) return false;
+
+        $target_product = wc_get_product($product_id);
+        if (!$target_product) return false;
+
+        // שימוש ב-urldecode + trim כדי לא לשבור שמות בעברית
+        $taxonomy = trim(urldecode($taxonomy));
+        $is_pa = (strpos($taxonomy, 'pa_') === 0);
+
+        // 1. קבלת רשימת התכונות "האמיתית" כדי לסנן יתומים
+        $parent = null;
+        if ($target_product->is_type('variation')) {
+            $parent = wc_get_product($target_product->get_parent_id());
+            $attributes = $parent ? $parent->get_attributes() : [];
+        } else {
+            $attributes = $target_product->get_attributes();
+        }
+
+        $attr_key = sanitize_title($taxonomy);
+        $attr_exists = isset($attributes[$taxonomy]) || isset($attributes[$attr_key]);
+        
+        if ($is_pa && !$attr_exists) {
+            return false;
+        }
+
+        // 2. אם זו ווריאציה, נבדוק את ה-Meta הישיר שלה
+        if ($target_product->is_type('variation')) {
+            $val = get_post_meta($target_product->get_id(), 'attribute_' . $taxonomy, true);
+            if ($val !== '' && $val !== null) {
+                if ($is_pa) {
+                    $term = get_term_by('slug', $val, $taxonomy);
+                    return ($term && !is_wp_error($term) && (int)$term->term_id === $term_id);
+                }
+                return false;
+            }
+            
+            // בדיקת "Any"
+            $is_variation_attr = false;
+            if (isset($attributes[$taxonomy]) && $attributes[$taxonomy]->get_variation()) {
+                $is_variation_attr = true;
+            } elseif (isset($attributes[$attr_key]) && $attributes[$attr_key]->get_variation()) {
+                $is_variation_attr = true;
+            }
+
+            if ($is_variation_attr) {
+                return false; // Any != Specific Term
+            }
+        }
+
+        // 3. Fallback לבדיקת מונחים
+        if ($is_pa) {
+            $check_id = ($parent) ? $parent->get_id() : $target_product->get_id();
+            $ids = array_map('intval', (array) wc_get_product_term_ids($check_id, $taxonomy));
+            return in_array($term_id, $ids, true);
+        }
+
+        return false;
     }
 }
 }

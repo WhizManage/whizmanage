@@ -260,7 +260,7 @@ if (!class_exists('Whiz_Discount_Rule')) {
             // ----- filters (pass-through normalized) -----
             $out['filters'] = [];
             if (isset($data['filters']) && is_array($data['filters'])) {
-                $out['filters'] = array_values(array_map(function ($f) {
+                $out['filters'] = array_values(array_map(function ($f) use ($norm_attr) {
                     $field = isset($f['field']) ? sanitize_key($f['field']) : '';
                     $opRaw = isset($f['op']) ? sanitize_key($f['op']) : 'include';
                     $op = in_array($opRaw, ['include', 'exclude'], true) ? $opRaw : 'include';
@@ -288,6 +288,10 @@ if (!class_exists('Whiz_Discount_Rule')) {
                             $values = array_values(array_unique(array_filter(array_map(function ($s) {
                                 return sanitize_key((string) $s);
                             }, $rawVals))));
+                            break;
+                        
+                        case 'attributes':
+                            $values = $norm_attr($rawVals);
                             break;
 
                         default:

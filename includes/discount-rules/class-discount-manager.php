@@ -1524,17 +1524,28 @@ if (!class_exists('Whiz_Discount_Manager')) {
                 return true;
 
             $pid = (int) ($item['product_id'] ?? 0);
-            if ($pid <= 0)
-                return false;
+    $vid = (int) ($item['variation_id'] ?? 0);
+    
+    // המזהה לחיפוש (ווריאציה אם קיימת, אחרת מוצר אב)
+    $target_id = ($vid > 0) ? $vid : $pid;
 
-            $productObj = $item['data'] ?? null;
+    if ($pid <= 0)
+        return false;
+
+    $productObj = $item['data'] ?? null;
 
             foreach ($filters as $f) {
                 $field = isset($f['field']) ? sanitize_key($f['field']) : '';
-                $op = (isset($f['op']) && in_array($f['op'], ['include', 'exclude'], true)) ? $f['op'] : 'include';
-                $values = array_map('intval', (array) ($f['values'] ?? []));
+                $op = (isset($f['op']) && in_array($f['op'], ['include', 'exclude', 'only'], true)) ? $f['op'] : 'include';
+                $rawValues = (array) ($f['values'] ?? []);
 
-                if ($field === '' || empty($values)) {
+                if ($field === '') {
+                    continue;
+                }
+
+                // For fields that don't need values (like on_sale), we allow empty.
+                // For others, if empty values, we skip this filter (don't block).
+                if ($field !== 'on_sale' && empty($rawValues)) {
                     continue;
                 }
 
@@ -1542,35 +1553,79 @@ if (!class_exists('Whiz_Discount_Manager')) {
 
                 switch ($field) {
                     case 'categories': {
-                            $pCats = array_map('intval', (array) wc_get_product_term_ids($pid, 'product_cat'));
-                            $vals = Whizmanage_Discount_Functions::expand_term_ids_with_children($values);
-                            $has = (bool) array_intersect($vals, $pCats);
-                            $passes = ($op === 'include') ? $has : !$has;
-                            break;
-                        }
+                    $values = array_map('intval', $rawValues);
+                    // קטגוריות נבדקות בדר"כ ברמת האב, אבל נבדוק קודם את היעד
+                    $pCats = array_map('intval', (array) wc_get_product_term_ids($target_id, 'product_cat'));
+                    if (empty($pCats) && $vid > 0) {
+                        $pCats = array_map('intval', (array) wc_get_product_term_ids($pid, 'product_cat'));
+                    }
+                    $vals = Whizmanage_Discount_Functions::expand_term_ids_with_children($values);
+                    $has = (bool) array_intersect($vals, $pCats);
+                    $passes = ($op === 'exclude') ? !$has : $has;
+                    break;
+                }
 
-                    case 'products': {
-                            $has = in_array($pid, $values, true);
-                            $passes = ($op === 'include') ? $has : !$has;
-                            break;
-                        }
+            case 'products': {
+                    $values = array_map('intval', $rawValues);
+                    // בדיקה האם המזהה הספציפי (Target) או האב (Parent) נמצאים ברשימה
+                    $has = in_array($target_id, $values, true) || ($vid > 0 && in_array($pid, $values, true));
+                    $passes = ($op === 'exclude') ? !$has : $has;
+                    break;
+                }
 
-                    case 'tags': {
-                            $pTags = array_map('intval', (array) wc_get_product_term_ids($pid, 'product_tag'));
-                            $has = (bool) array_intersect($values, $pTags);
-                            $passes = ($op === 'include') ? $has : !$has;
-                            break;
-                        }
-
+            case 'tags': {
+                    $values = array_map('intval', $rawValues);
+                    $pTags = array_map('intval', (array) wc_get_product_term_ids($target_id, 'product_tag'));
+                    if (empty($pTags) && $vid > 0) {
+                        $pTags = array_map('intval', (array) wc_get_product_term_ids($pid, 'product_tag'));
+                    }
+                    $has = (bool) array_intersect($values, $pTags);
+                    $passes = ($op === 'exclude') ? !$has : $has;
+                    break;
+                }
                     case 'skus': {
                             $sku = $productObj ? strtolower((string) $productObj->get_sku()) : '';
-                            $needles = array_map('strtolower', array_map('strval', (array) ($f['values'] ?? [])));
+                            $needles = array_map('strtolower', array_map('strval', $rawValues));
                             $has = ($sku !== '' && in_array($sku, $needles, true));
-                            $passes = ($op === 'include') ? $has : !$has;
+                            $passes = ($op === 'exclude') ? !$has : $has;
+                            break;
+                        }
+
+                    case 'attributes': {
+                            $has = false;
+                            foreach ($rawValues as $pair) {
+                                if (!is_array($pair)) continue;
+                                $tax = $pair['taxonomy'] ?? '';
+                                $tid = (int) ($pair['term_id'] ?? 0);
+                                if (!$tax || !$tid) continue;
+
+                                if (Whizmanage_Discount_Functions::item_has_attribute_term($item, $tax, $tid)) {
+                                    $has = true;
+                                    break;
+                                }
+                            }
+                            $passes = ($op === 'exclude') ? !$has : $has;
+                            break;
+                        }
+
+                    case 'user_roles': {
+                            $user = wp_get_current_user();
+                            $uRoles = $user->exists() ? (array) $user->roles : [];
+                            $values = array_map('strval', $rawValues);
+                            $has = (bool) array_intersect($values, $uRoles);
+                            $passes = ($op === 'exclude') ? !$has : $has;
+                            break;
+                        }
+
+                    case 'on_sale': {
+                            $has = $productObj ? $productObj->is_on_sale() : false;
+                            $passes = ($op === 'exclude') ? !$has : $has;
                             break;
                         }
 
                     default:
+                        // Unknown field? Default to true to not block the rule, 
+                        // but we should probably log this.
                         $passes = true;
                 }
 
