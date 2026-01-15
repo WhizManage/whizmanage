@@ -66,7 +66,11 @@ if (! class_exists('Whizmanage_rest_functions_main')) {
 					'permission_callback' => array($this, 'permission_admin_or_shop_manager'),
 				),
 			));
-
+			register_rest_route('whizmanage/v1', '/user-roles', [
+				'methods' => 'GET',
+				'callback' => [$this, 'wm_get_user_roles'],
+				'permission_callback' => [$this, 'permission_admin_or_shop_manager'],
+			]);
 
 
 			register_rest_route('whizmanage/v1', '/log_out', array(
@@ -209,6 +213,27 @@ if (! class_exists('Whizmanage_rest_functions_main')) {
 			}
 
 			return rest_ensure_response($responses);
+		}
+
+		public function wm_get_user_roles(WP_REST_Request $request)
+		{
+			if (!function_exists('wp_roles')) {
+				return new WP_Error('roles_unavailable', 'Roles API unavailable', ['status' => 500]);
+			}
+
+			// role_names already provides mapping slug => label
+			$role_names = wp_roles()->role_names;
+			$out = [];
+
+			foreach ($role_names as $slug => $label) {
+				// translate_user_role to preserve translation if exists
+				$out[] = [
+					'id' => $slug,
+					'name' => translate_user_role($label),
+				];
+			}
+
+			return rest_ensure_response($out);
 		}
 
 		/**

@@ -26,8 +26,18 @@ class Whizmanage_Discount_Shortcode
         remove_action('woocommerce_single_product_summary', 'whiz_dr_render_bxgy_banner_on_pdp', 24);
         remove_action('woocommerce_single_product_summary', 'whiz_dr_render_universal_discount_banner', 25);
 
-        // הוספת ההוק החדש
+        // הוספת ההוקים החדשים - מספר נקודות תצוגה לתמיכה בכל התבניות
+        // Hook 1: Standard WooCommerce hook (works with most themes)
         add_action('woocommerce_single_product_summary', __CLASS__ . '::render_universal_discount_banner', 25);
+        
+        // Hook 2: Before single product (fallback for themes that don't use summary hook)
+        add_action('woocommerce_before_single_product', __CLASS__ . '::render_universal_discount_banner_fallback', 25);
+        
+        // Hook 3: After single product summary (another fallback position)
+        add_action('woocommerce_after_single_product_summary', __CLASS__ . '::render_universal_discount_banner_fallback', 5);
+        
+        // Shortcode support for manual placement
+        add_shortcode('whiz_discount_message', __CLASS__ . '::render_discount_message_shortcode');
 
         add_action('wp_footer', __CLASS__ . '::output_footer_scripts');
         add_action('wp_head', __CLASS__ . '::output_header_styles');
@@ -488,9 +498,16 @@ class Whizmanage_Discount_Shortcode
 
     /**
      * הפונקציה הזו מציגה בנר הודעה לכל סוגי ההנחות (Bulk, BOGO, Cart Adjustment וכו')
+     * זוהי הפונקציה הראשית שנקראת מההוק הסטנדרטי
      */
     public static function render_universal_discount_banner()
     {
+        // מניעת הצגה כפולה - בודקים אם כבר הוצג
+        static $already_rendered = false;
+        if ($already_rendered) {
+            return;
+        }
+        
         if (is_admin() && !wp_doing_ajax())
             return;
         if (!function_exists('is_product') || !is_product())
@@ -501,16 +518,102 @@ class Whizmanage_Discount_Shortcode
             return;
 
         $product_id = (int) $product->get_id();
+        
+        // קריאה לפונקציה המשותפת שמציגה את ההודעה
+        $rendered = self::render_discount_message_html($product_id);
+        
+        if ($rendered) {
+            $already_rendered = true;
+        }
+    }
+    
+    /**
+     * פונקציית fallback שמציגה את ההודעה אם עדיין לא הוצגה
+     * נקראת מהוקים נוספים לתמיכה בתבניות שונות
+     */
+    public static function render_universal_discount_banner_fallback()
+    {
+        // בודקים אם כבר הוצג הבנר על ידי ההוק הראשי
+        static $already_rendered = false;
+        if ($already_rendered) {
+            return;
+        }
+        
+        if (is_admin() && !wp_doing_ajax())
+            return;
+        if (!function_exists('is_product') || !is_product())
+            return;
+
+        global $product;
+        if (!$product || !is_a($product, 'WC_Product'))
+            return;
+
+        $product_id = (int) $product->get_id();
+        
+        // בודקים אם הבנר כבר קיים בדף (למקרה שההוק הראשי כבר עבד)
+        ?>
+        <script>
+            if (document.getElementById('whiz-universal-banner')) {
+                // הבנר כבר קיים, לא צריך להציג שוב
+            } else {
+                // הבנר לא קיים, נציג אותו
+                <?php 
+                $rendered = self::render_discount_message_html($product_id);
+                if ($rendered) {
+                    $already_rendered = true;
+                }
+                ?>
+            }
+        </script>
+        <?php
+    }
+    
+    /**
+     * Shortcode להצגת הודעת ההנחה במיקום ידני
+     * שימוש: [whiz_discount_message]
+     */
+    public static function render_discount_message_shortcode($atts)
+    {
+        if (is_admin() && !wp_doing_ajax())
+            return '';
+        if (!function_exists('is_product') || !is_product())
+            return '';
+
+        global $product;
+        if (!$product || !is_a($product, 'WC_Product'))
+            return '';
+
+        $product_id = (int) $product->get_id();
+        
+        ob_start();
+        self::render_discount_message_html($product_id);
+        return ob_get_clean();
+    }
+    
+    /**
+     * הפונקציה המשותפת שמציגה את HTML של הודעת ההנחה
+     * @param int $product_id
+     * @return bool האם הוצגה הודעה
+     */
+    private static function render_discount_message_html($product_id)
+    {
+        if ($product_id <= 0) {
+            return false;
+        }
+        
+        global $product;
+        if (!$product || !is_a($product, 'WC_Product'))
+            return false;
 
         // 1. מציאת החוק הרלוונטי
         $rule = self::get_first_applicable_rule($product_id);
         if (!$rule)
-            return;
+            return false;
 
         // --- השינוי החדש: בדיקת המתג ---
         // אם show_message הוא '0' או false - יוצאים מיד ולא מציגים כלום
         if (isset($rule['show_message']) && empty($rule['show_message'])) {
-            return;
+            return false;
         }
         // 2. חילוץ נתונים
         $actions = Whizmanage_Discount_Functions::json_decode($rule['actions'] ?? []);
@@ -667,6 +770,7 @@ class Whizmanage_Discount_Shortcode
             <?php endif; ?>
         </div>
     <?php
+        return true;
     }
 
     
