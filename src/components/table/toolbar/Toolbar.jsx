@@ -122,10 +122,12 @@ export const SelectionToolbar = memo(
     });
 
     return (
-      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-0">
-        <div className={busy ? "pointer-events-none opacity-75" : ""}>
-          <FloatingDock items={dockItems} desktopClassName="shadow-xl" mobileClassName="shadow-xl" />
-        </div>
+      <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
+        {dockItems.length > 0 && (
+          <div className={busy ? "pointer-events-none opacity-75" : ""}>
+            <FloatingDock items={dockItems} desktopClassName="shadow-xl" mobileClassName="shadow-xl" />
+          </div>
+        )}
         <Button
           onClick={() => {
             if (busy) return;
@@ -134,7 +136,7 @@ export const SelectionToolbar = memo(
           }}
           variant="gradient"
           size="sm"
-          className="mt-[-6px] shadow-lg !py-0.5 h-6 gap-2"
+          className={`shadow-lg !py-0.5 h-6 gap-2 ${dockItems.length > 0 ? "mt-[-6px]" : ""}`}
           disabled={busy}
         >
           {busy && <Loader2 className="h-4 w-4 animate-spin" />}

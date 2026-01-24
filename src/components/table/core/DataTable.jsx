@@ -737,7 +737,6 @@ export default function GenericDataTable({
               <div className="flex items-center pt-1 gap-1">
                 <SelectAllCheckbox
                   table={table}
-                  rowSelection={table.getState().rowSelection}
                   __={__}
                 />
                 {/* {defaultConfig.enableGrouping && canExpandSome ? (

@@ -84,7 +84,7 @@ const getDir = () => {
 /* -----------------------------------------------------------------------
    AttributesPickerForRules
 ------------------------------------------------------------------------ */
-function AttributesPickerForRules({ value = [], onChange }) {
+function AttributesPickerForRules({ value = [], onChange, __ }) {
 
   const isRTL = window?.document?.documentElement?.dir === "rtl";
 
@@ -209,29 +209,31 @@ function AttributesPickerForRules({ value = [], onChange }) {
           `${window.siteUrl}/wp-json/wc/v3/products/attributes?per_page=100`
         );
         const attrs = Array.isArray(res?.data) ? res.data : [];
-        const all = [];
 
-        for (const attr of attrs) {
+        // Fetch all terms in parallel instead of sequentially
+        const termsPromises = attrs.map(async (attr) => {
           try {
             const termsRes = await getApi(
-              `${window.siteUrl}/wp-json/wc/v3/products/attributes/${attr.id}/terms?per_page=100`
+              `${window.siteUrl}/wp-json/whizmanage/v1/taxonomy/pa_${attr.slug}/terms`
             );
             const terms = Array.isArray(termsRes?.data) ? termsRes.data : [];
-            all.push({
+            return {
               id: attr.id,
               name: attr.name || attr.slug,
-              slug: attr.slug || attr.name,
+              slug: `pa_${attr.slug}`,
               options: terms.map((t) => ({
                 id: t.id ?? t.term_id,
                 name: decodeSafe(t.name),
                 slug: t.slug,
               })),
-            });
+            };
           } catch (e) {
             console.error("Failed to load terms for attribute", attr?.id, e);
+            return null;
           }
-        }
+        });
 
+        const all = (await Promise.all(termsPromises)).filter(Boolean);
         setAttributes(all);
       } catch (e) {
         console.error("Error loading global attributes via API:", e);
@@ -535,6 +537,7 @@ function ValuesEditor({ row, onChange, __ }) {
         <AttributesPickerForRules
           value={row.values}
           onChange={(pairs) => onChange(pairs)}
+          __={__}
         />
         {renderChips()}
       </div>

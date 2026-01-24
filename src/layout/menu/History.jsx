@@ -115,7 +115,9 @@ export function History({ isOpen, setIsOpen }) {
       const response = await getApi(
         `${window.siteUrl}/wp-json/whizmanage/v1/history`
       );
-      setHistory(response.data || []);
+      // response.data יכול להיות מערך ישירות או אובייקט עם data property
+      const historyData = response.data?.data ?? response.data;
+      setHistory(Array.isArray(historyData) ? historyData : []);
     } catch (err) {
       console.error("Error fetching history", err);
     } finally {

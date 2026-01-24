@@ -87,19 +87,21 @@ ColumnHeader.displayName = "MemoizedColumnHeader";
 /**
  * SelectAllCheckbox - מתעדכן רק כש-selection משתנה
  */
-export const SelectAllCheckbox = memo(
-  ({ table, rowSelection, __ }) => {
-    const flattenAll = (rows) => {
-      const out = [];
-      for (const r of rows) {
-        out.push(r);
-        if (r.subRows?.length) out.push(...flattenAll(r.subRows));
-      }
-      return out;
-    };
+export const SelectAllCheckbox = ({ table, __ }) => {
+  const flattenAll = (rows) => {
+    const out = [];
+    for (const r of rows) {
+      out.push(r);
+      if (r.subRows?.length) out.push(...flattenAll(r.subRows));
+    }
+    return out;
+  };
 
-    const filteredRoots = table.getFilteredRowModel().rows;
-    const allRows = flattenAll(filteredRoots);
+  const getRowsData = () => {
+    const filteredRoots = table.getFilteredRowModel()?.rows ?? [];
+    const rowModelRows = table.getRowModel()?.rows ?? [];
+    const rootRows = filteredRoots.length > 0 ? filteredRoots : rowModelRows;
+    const allRows = flattenAll(rootRows);
 
     const visibleRows = (() => {
       const bucket = [];
@@ -109,7 +111,7 @@ export const SelectAllCheckbox = memo(
           if (r.getIsExpanded() && r.subRows?.length) collectVisible(r.subRows);
         }
       };
-      collectVisible(filteredRoots);
+      collectVisible(rootRows);
       return bucket;
     })();
 
@@ -117,29 +119,48 @@ export const SelectAllCheckbox = memo(
     const areAnySelected = allRows.some((r) => r.getIsSelected());
     const areAllVisibleSelected = visibleRows.length > 0 && visibleRows.every((r) => r.getIsSelected());
 
-    const setRowsSelected = (rows, value) => {
-      for (const r of rows) r.toggleSelected(value);
-    };
+    return { allRows, visibleRows, isAllSelected, areAnySelected, areAllVisibleSelected };
+  };
 
-    const handleChange = (next) => {
-      if (!next) {
-        setRowsSelected(allRows, false);
-        return;
-      }
-      if (areAllVisibleSelected && !isAllSelected) {
-        setRowsSelected(allRows, true);
-      } else {
-        setRowsSelected(visibleRows, true);
-      }
-    };
+  // לרנדור - חשב פעם אחת
+  const { isAllSelected, areAnySelected, areAllVisibleSelected } = getRowsData();
 
-    return (
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // חשב מחדש בזמן ה-click כדי לקבל את הנתונים העדכניים
+    const { allRows, visibleRows, isAllSelected: currentIsAllSelected, areAnySelected: currentAreAnySelected, areAllVisibleSelected: currentAreAllVisibleSelected } = getRowsData();
+
+    // בנה את ה-selection object בפעם אחת במקום לקרוא ל-toggleSelected על כל שורה
+    let newSelection = {};
+
+    if (currentIsAllSelected || currentAreAnySelected) {
+      // בטל הכל - selection ריק
+      newSelection = {};
+    } else if (currentAreAllVisibleSelected && !currentIsAllSelected) {
+      // בחר הכל (כולל collapsed)
+      for (const r of allRows) {
+        newSelection[r.id] = true;
+      }
+    } else {
+      // בחר את הנראים
+      for (const r of visibleRows) {
+        newSelection[r.id] = true;
+      }
+    }
+
+    // עדכון אחד במקום מאות
+    table.setRowSelection(newSelection);
+  };
+
+  return (
+    <div onClick={handleClick} className="cursor-pointer">
       <Checkbox
         isSelected={isAllSelected}
         isIndeterminate={!isAllSelected && areAnySelected}
-        onValueChange={handleChange}
         classNames={{
-          base: "!p-0 !m-0",
+          base: "!p-0 !m-0 pointer-events-none",
           wrapper: "dark:border dark:!border-slate-600 text-white focus:!ring-slate-500 bg-white dark:!bg-slate-700 m-0 p-0",
         }}
         aria-label={
@@ -150,13 +171,7 @@ export const SelectAllCheckbox = memo(
               : __("Select all visible rows", "whizmanage")
         }
       />
-    );
-  },
-  (prevProps, nextProps) => {
-    // רנדר מחדש רק אם ה-selection השתנה
-    const prevSelectionKeys = Object.keys(prevProps.rowSelection || {}).sort().join(",");
-    const nextSelectionKeys = Object.keys(nextProps.rowSelection || {}).sort().join(",");
-    return prevSelectionKeys === nextSelectionKeys;
-  }
-);
+    </div>
+  );
+};
 SelectAllCheckbox.displayName = "SelectAllCheckbox";

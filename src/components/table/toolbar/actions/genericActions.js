@@ -57,20 +57,30 @@ export const createGenericActions = (config) => {
       .map(String);
 
     try {
+      // חלק את ה-IDs לבאצ'ים של 100 כדי לעמוד במגבלת WooCommerce
       if (actionType === "delete") {
-        await axios.post(
-          `${endpoint}/batch`,
-          { delete: idsToDelete },
-          { headers: { "X-WP-Nonce": window.rest } }
-        );
+        const batches = chunkBatchPayloads([], [], idsToDelete, 100);
+        for (const batch of batches) {
+          if (batch.delete.length > 0) {
+            await axios.post(
+              `${endpoint}/batch`,
+              { delete: batch.delete },
+              { headers: { "X-WP-Nonce": window.rest } }
+            );
+          }
+        }
       } else {
-        await axios.post(
-          `${endpoint}/batch`,
-          {
-            update: idsToDelete.map((id) => ({ id, status: "trash" })),
-          },
-          { headers: { "X-WP-Nonce": window.rest } }
-        );
+        const trashUpdates = idsToDelete.map((id) => ({ id, status: "trash" }));
+        const batches = chunkBatchPayloads([], trashUpdates, [], 100);
+        for (const batch of batches) {
+          if (batch.update.length > 0) {
+            await axios.post(
+              `${endpoint}/batch`,
+              { update: batch.update },
+              { headers: { "X-WP-Nonce": window.rest } }
+            );
+          }
+        }
 
         window.dispatchEvent?.(
           new CustomEvent("wm:trash:moved", {
@@ -115,15 +125,16 @@ export const createGenericActions = (config) => {
 
       // שמירה להיסטוריה
       try {
-        await postApi(`${window.siteUrl}/wp-json/whizmanage/v1/history`, {
+        const historyPayload = {
           location: entityName.toLowerCase(),
-          action: "delete",
+          action: actionType === "delete" ? "delete" : "trash",
           items: entitiesToHandle.map((item) => ({
             id: item.id,
             old: item,
             name: item.name || item.title || `#${item.id}`,
           })),
-        });
+        };
+        await postApi(`${window.siteUrl}/wp-json/whizmanage/v1/history`, historyPayload);
       } catch (historyError) {
         console.warn("Failed to log delete to history:", historyError);
       }
@@ -403,11 +414,18 @@ export const createGenericActions = (config) => {
     }
 
     try {
-      await axios.post(
-        `${endpoint}/batch`,
-        { update: idsToRestore.map((id) => ({ id, status: "publish" })) },
-        { headers: { "X-WP-Nonce": window.rest } }
-      );
+      // חלק את ה-IDs לבאצ'ים של 100 כדי לעמוד במגבלת WooCommerce
+      const restoreUpdates = idsToRestore.map((id) => ({ id, status: "publish" }));
+      const batches = chunkBatchPayloads([], restoreUpdates, [], 100);
+      for (const batch of batches) {
+        if (batch.update.length > 0) {
+          await axios.post(
+            `${endpoint}/batch`,
+            { update: batch.update },
+            { headers: { "X-WP-Nonce": window.rest } }
+          );
+        }
+      }
 
       // 1. Update Local Store
       setData((prev) =>
