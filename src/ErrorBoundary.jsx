@@ -141,7 +141,7 @@ class ErrorBoundary extends React.Component {
                     <img
                       src={
                         window.siteUrl +
-                        "/wp-content/plugins/whizmanage-pro/assets/images/logo/WHISEMANAGE.png"
+                        "/wp-content/plugins/whizmanage/assets/images/logo/WHISEMANAGE.png"
                       }
                       alt="WhizManage"
                       className="h-16 dark:hidden"
@@ -149,7 +149,7 @@ class ErrorBoundary extends React.Component {
                     <img
                       src={
                         window.siteUrl +
-                        "/wp-content/plugins/whizmanage-pro/assets/images/logo/WHISEMANAGE-dark.png"
+                        "/wp-content/plugins/whizmanage/assets/images/logo/WHISEMANAGE-dark.png"
                       }
                       alt="WhizManage"
                       className="h-16 hidden dark:block"

@@ -4,7 +4,7 @@
  * Plugin Name:       WhizManage
  * Plugin URI:        https://whizmanage.com/
  * Description:       Easily manage your WooCommerce store with advanced bulk editing, product organization, and smart tools.
- * Version:           2.1.3
+ * Version:           2.2.0
  * Author:            WhizManage
  * Author URI: https://whizmanage.com/
  * Requires at least: 6.4
@@ -30,7 +30,7 @@ if (! defined('ABSPATH')) {
 /**
  * Define plugin constants.
  */
-define('WHIZMANAGE_VERSION', '2.1.3');
+define('WHIZMANAGE_VERSION', '2.2.0');
 define('WHIZMANAGE_FILE', __FILE__);
 define('WHIZMANAGE_BASENAME', plugin_basename(__FILE__));
 define('WHIZMANAGE_DIR', plugin_dir_path(__FILE__));
@@ -140,6 +140,7 @@ function whizmanage_plugins_loaded_bootstrap()
 	// Discount rules: register routes, manager and helpers
 	require_once WHIZMANAGE_DIR . 'includes/discount-rules/class-whizmanage-discount-init.php';
 	require_once WHIZMANAGE_DIR  . 'includes/settings/rest-functions-settings.php';
+	require_once WHIZMANAGE_DIR  . 'includes/settings/rest-functions-shipping.php';
 	Whizmanage_Discount_Init::init();
 
 	// Bootstrap classes.
@@ -154,6 +155,8 @@ function whizmanage_plugins_loaded_bootstrap()
 	new Whizmanage_general_coupons_functions();
 	new Whizmanage_general_products_functions();
 	 new Whizmanage_rest_functions_settings();
+    new Whizmanage_rest_functions_shipping();
+
 }
 add_action('plugins_loaded', 'whizmanage_plugins_loaded_bootstrap', 5);
 

@@ -5,7 +5,7 @@ import Button from "@components/ui/button.jsx";
 import { Input } from "@components/ui/input.jsx";
 import { Columns, Filter, Plus, Search, X, Upload } from "lucide-react";
 import CustomTooltip from "@components/ui/nextUI/Tooltip";
-import { memo, useCallback, useEffect, useState, lazy, Suspense } from "react";
+import { memo, useCallback, useEffect, useState, lazy, Suspense, forwardRef, useImperativeHandle, useRef } from "react";
  import { __ } from "@wordpress/i18n";
 import { DisplayColumns } from "./DisplayColumns";
 import { UndoRedoButtons } from "./UndoRedoButtons.jsx";
@@ -28,7 +28,7 @@ const ImportSettings = lazy(() =>
 );
 
 export const TopPanel = memo(
-  ({
+  forwardRef(({
     // Filter props
     globalFilter,
     setGlobalFilter,
@@ -59,7 +59,15 @@ export const TopPanel = memo(
     importConfig = null,
     data = null,
     isTrash = false,
-  }) => {
+  }, ref) => {
+    const addItemRef = useRef(null);
+
+    // Expose methods via ref
+    useImperativeHandle(ref, () => ({
+      openFormModal: () => addItemRef.current?.openFormModal?.(),
+      closeFormModal: () => addItemRef.current?.closeFormModal?.(),
+      triggerAddInlineRow: () => onAddInlineRow?.(),
+    }), [onAddInlineRow]);
      
     const [localFilter, setLocalFilter] = useState(globalFilter || "");
     const [isColumnsOpen, setIsColumnsOpen] = useState(false);
@@ -314,6 +322,7 @@ export const TopPanel = memo(
 
           {entityName && !isTrash && (
             <AddItemDropdown
+              ref={addItemRef}
               entity={entityName}
               onCreated={onItemCreated}
               onAddInlineRow={onAddInlineRow}
@@ -323,7 +332,7 @@ export const TopPanel = memo(
         </div>
       </div>
     );
-  }
+  })
 );
 
 TopPanel.displayName = "TopPanel";

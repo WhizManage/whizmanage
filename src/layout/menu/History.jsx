@@ -13,6 +13,7 @@ import {
   Filter,
   History as HistoryIcon,
   LayoutGrid,
+  Layers,
   Lock,
   Package,
   Pencil,
@@ -133,7 +134,7 @@ export function History({ isOpen, setIsOpen }) {
   }, [isOpen]);
 
   const toRestoredPayload = (h) => {
-    if (h.action === "put") {
+    if (h.action === "put" || h.action === "bulk") {
       return {
         location: h.location,
         action: "put",
@@ -177,7 +178,7 @@ export function History({ isOpen, setIsOpen }) {
 
       if (obj.action === "add" || obj.action === "duplicate") {
         await postApi(url, { delete: obj.items.map((i) => i.id) });
-      } else if (obj.action === "put") {
+      } else if (obj.action === "put" || obj.action === "bulk") {
         await putApi(url, {
           update: obj.items.map((item) => ({ id: item.id, ...item.old })),
         });
@@ -231,6 +232,14 @@ export function History({ isOpen, setIsOpen }) {
           bgColor: "bg-fuchsia-100 dark:bg-fuchsia-900/30",
           iconColor: "text-fuchsia-600 dark:text-fuchsia-400",
           Icon: Pencil,
+        };
+      case "bulk":
+        return {
+          verb: __("Bulk Edited", "whizmanage"),
+          color: "text-slate-700 dark:text-slate-200",
+          bgColor: "bg-indigo-100 dark:bg-indigo-900/30",
+          iconColor: "text-indigo-600 dark:text-indigo-400",
+          Icon: Layers,
         };
       case "delete":
         return {
@@ -345,6 +354,7 @@ export function History({ isOpen, setIsOpen }) {
     { value: "all", label: __("All Actions", "whizmanage"), Icon: HistoryIcon },
     { value: "add", label: __("Added", "whizmanage"), Icon: Plus },
     { value: "put", label: __("Updated", "whizmanage"), Icon: Pencil },
+    { value: "bulk", label: __("Bulk Edited", "whizmanage"), Icon: Layers },
     { value: "delete", label: __("Deleted", "whizmanage"), Icon: Trash2 },
     { value: "duplicate", label: __("Duplicated", "whizmanage"), Icon: Copy },
     { value: "config", label: __("Config Changes", "whizmanage"), Icon: ArrowRightLeft },
@@ -668,7 +678,7 @@ export function History({ isOpen, setIsOpen }) {
   };
 
   const renderChangesTable = (item) => {
-    if (item.action !== "put" || !Array.isArray(item.items)) return null;
+    if ((item.action !== "put" && item.action !== "bulk") || !Array.isArray(item.items)) return null;
 
     return (
       <div className="mt-3 space-y-3">
@@ -1255,8 +1265,8 @@ export function History({ isOpen, setIsOpen }) {
                         >
                           <div className={`rounded-xl border ${isLocked ? "border-slate-200/50 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50" : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"} overflow-hidden transition-all ${!isLocked ? "hover:border-fuchsia-300 dark:hover:border-fuchsia-700" : ""}`}>
                             {/* Item Header */}
-                            <CollapsibleTrigger asChild disabled={item.action !== "put" || isLocked}>
-                              <div className={`flex items-center justify-between p-4 transition-colors ${item.action === "put" && !isLocked ? "cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50" : ""} ${isLocked ? "opacity-60" : ""}`}>
+                            <CollapsibleTrigger asChild disabled={(item.action !== "put" && item.action !== "bulk") || isLocked}>
+                              <div className={`flex items-center justify-between p-4 transition-colors ${(item.action === "put" || item.action === "bulk") && !isLocked ? "cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50" : ""} ${isLocked ? "opacity-60" : ""}`}>
                                 <div className="flex items-center gap-3">
                                   {/* Action Badge */}
                                   <div
@@ -1342,7 +1352,7 @@ export function History({ isOpen, setIsOpen }) {
                                   )}
                                   {!isLocked && (
                                     <div className="ps-2 border-s border-slate-200 dark:border-slate-600 w-7 flex justify-center">
-                                      {item.action === "put" ? (
+                                      {(item.action === "put" || item.action === "bulk") ? (
                                         isExpanded ? (
                                           <ChevronDown className="size-5 text-slate-400" />
                                         ) : (
@@ -1360,7 +1370,7 @@ export function History({ isOpen, setIsOpen }) {
                             </CollapsibleTrigger>
 
                             {/* Expanded Content */}
-                            {item.action === "put" && !isLocked && (
+                            {(item.action === "put" || item.action === "bulk") && !isLocked && (
                               <CollapsibleContent>
                                 <div className="border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30 p-4">
                                   {/* Table Header */}

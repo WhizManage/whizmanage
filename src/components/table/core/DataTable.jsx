@@ -630,6 +630,7 @@ export default function GenericDataTable({
   }, [locallyFilteredData, visibleSubRowCounts, defaultConfig.enableGrouping, variationsColumnFilter, subRowMatchesFilter]);
 
   const tableContainerRef = useRef(null);
+  const topPanelRef = useRef(null); // ref for keyboard shortcuts
   const hasLoadedOnceRef = useRef(false); // ⬅️ חדש: לזכור אם כבר נטענו פעם אחת
   const { handleTableError } = useTableErrorHandler();
 
@@ -1388,6 +1389,32 @@ export default function GenericDataTable({
     return [];
   }, [activeType]);
 
+  // ⌨️ Keyboard shortcuts for adding items
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Skip if user is typing in an input/textarea
+      const tagName = e.target.tagName.toLowerCase();
+      if (tagName === "input" || tagName === "textarea" || e.target.isContentEditable) {
+        return;
+      }
+
+      // Shift+N - Open form modal
+      if (e.shiftKey && !e.ctrlKey && !e.altKey && e.key.toLowerCase() === "n") {
+        e.preventDefault();
+        topPanelRef.current?.openFormModal?.();
+      }
+
+      // Ctrl+Enter - Add inline row
+      if (e.ctrlKey && !e.shiftKey && e.key === "Enter") {
+        e.preventDefault();
+        topPanelRef.current?.triggerAddInlineRow?.();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   // ✅ הצגת loading overlay - גם בטעינה ראשונה וגם בחיפוש/סינון
   const showLoadingOverlay =
     (store.isLoading && data.length === 0 && !hasLoadedOnceRef.current) ||
@@ -1398,6 +1425,7 @@ export default function GenericDataTable({
       {/* Header */}
       {defaultConfig.enableFiltering && (
         <TopPanel
+          ref={topPanelRef}
           globalFilter={globalFilter}
           setGlobalFilter={setGlobalFilter}
           totalRows={table.getPreFilteredRowModel().rows.length}

@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown, FileText, Plus, Grid2x2Plus } from "lucide-react";
 import { IconBadge } from "@components/ui/custom/IconBadge";
+import { Kbd, KbdGroup } from "@components/ui/kbd";
 import { useState, useEffect, useImperativeHandle, forwardRef } from "react";
  import { __ } from "@wordpress/i18n";
 import GenericItemModal from "./GenericItemModal";
@@ -25,10 +26,12 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
   const [showFormModal, setShowFormModal] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Expose openDropdown method via ref
+  // Expose methods via ref
   useImperativeHandle(ref, () => ({
     openDropdown: () => setDropdownOpen(true),
     closeDropdown: () => setDropdownOpen(false),
+    openFormModal: () => setShowFormModal(true),
+    closeFormModal: () => setShowFormModal(false),
   }), []);
 
   const cfg = getEntityConfig(entity) || getEntityConfig(entity?.replace(/s$/, ""));
@@ -82,10 +85,10 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
             </button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end" className="w-64" data-tour-dropdown="add-item">
+          <DropdownMenuContent align="end" className="w-72" data-tour-dropdown="add-item">
             <DropdownMenuItem
               onClick={() => setShowFormModal(true)}
-              className="flex items-center gap-3 cursor-pointer"
+              className="relative flex items-center gap-3 cursor-pointer"
             >
               <IconBadge icon={FileText} variant="default" size="default" />
               <div className="flex flex-col">
@@ -94,6 +97,11 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
                   {__("Complete form with all fields", "whizmanage")}
                 </span>
               </div>
+              <KbdGroup className="absolute top-2 end-2">
+                <Kbd>Shift</Kbd>
+                <span className="text-[9px] text-slate-400 dark:text-slate-500">+</span>
+                <Kbd>N</Kbd>
+              </KbdGroup>
             </DropdownMenuItem>
 
             {/* Quick add (Pro בפינה הימנית-עליונה, מוזז מעט שמאלה) */}
@@ -125,6 +133,11 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
                   {__("Add empty row directly in table", "whizmanage")}
                 </span>
               </div>
+              <KbdGroup className="absolute top-2 end-2">
+                <Kbd>Ctrl</Kbd>
+                <span className="text-[9px] text-slate-400 dark:text-slate-500">+</span>
+                <Kbd>Enter</Kbd>
+              </KbdGroup>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

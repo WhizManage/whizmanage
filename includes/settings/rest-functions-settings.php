@@ -1,6 +1,5 @@
 <?php
 /**
- * Settings REST API endpoints for WhizManage Pro
  *
  * @package WhizManage_Pro
  */

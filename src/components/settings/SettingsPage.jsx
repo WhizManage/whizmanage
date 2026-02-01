@@ -1,6 +1,6 @@
 // src/components/settings/SettingsPage.jsx
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { __ } from "@wordpress/i18n";
 import {
   AnimateTabs,
@@ -21,6 +21,7 @@ import {
   UserCircle,
   Package,
   Settings,
+  Truck,
 } from "lucide-react";
 import { addToast } from "@heroui/react";
 import { useSettings } from "@/hooks/useSettings";
@@ -32,6 +33,7 @@ import GeneralTab from "./tabs/GeneralTab";
 import CurrencyTab from "./tabs/CurrencyTab";
 import UnitsTab from "./tabs/UnitsTab";
 import TaxTab from "./tabs/TaxTab";
+import ShippingTab from "./tabs/ShippingTab";
 import InventoryTab from "./tabs/InventoryTab";
 import WhizManageTab from "./tabs/WhizManageTab";
 import AccountTab from "./tabs/AccountTab";
@@ -41,6 +43,7 @@ const TABS = [
   { id: "currency", label: "Currency", icon: Coins },
   { id: "units", label: "Units", icon: Ruler },
   { id: "tax", label: "Tax", icon: Receipt },
+  { id: "shipping", label: "Shipping", icon: Truck },
   { id: "inventory", label: "Inventory", icon: Package },
   { id: "whizmanage", label: "WhizManage", icon: Settings2 },
   { id: "account", label: "Account", icon: UserCircle },
@@ -51,6 +54,8 @@ const isRtl = document.documentElement.dir === "rtl" || document.body.dir === "r
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("general");
+  const [hasShippingMethodOrderChanges, setHasShippingMethodOrderChanges] = useState(false);
+  const shippingMethodOrderRef = useRef(null);
 
   const {
     settings,
@@ -79,7 +84,7 @@ export default function SettingsPage() {
   } = useSettings();
 
   // Combined hasChanges check
-  const hasAnyChanges = hasChanges || hasUserInfoChanges || hasPerPageChanges;
+  const hasAnyChanges = hasChanges || hasUserInfoChanges || hasPerPageChanges || hasShippingMethodOrderChanges;
 
   // Check if language was changed
   const languageChanged = settings.WPLANG !== originalSettings.WPLANG;
@@ -105,6 +110,11 @@ export default function SettingsPage() {
       // Save perPage settings if changed
       if (hasPerPageChanges) {
         await savePerPageSettings();
+      }
+
+      // Save shipping method order changes if any
+      if (hasShippingMethodOrderChanges && shippingMethodOrderRef.current?.save) {
+        await shippingMethodOrderRef.current.save();
       }
 
       // If language was changed, show toast and reload after delay
@@ -139,6 +149,9 @@ export default function SettingsPage() {
   const handleReset = () => {
     resetSettings();
     resetPerPageSettings();
+    if (shippingMethodOrderRef.current?.reset) {
+      shippingMethodOrderRef.current.reset();
+    }
   };
 
   if (isLoading) {
@@ -209,7 +222,7 @@ export default function SettingsPage() {
           className="flex-1 flex flex-col overflow-hidden"
           dir={isRtl ? "rtl" : "ltr"}
         >
-          <AnimateTabsList className="flex sm:grid sm:grid-cols-7 w-full mb-4 sm:mb-6 shrink-0 overflow-x-auto scrollbar-hide gap-1.5 sm:gap-0">
+          <AnimateTabsList className="flex sm:grid sm:grid-cols-8 w-full mb-4 sm:mb-6 shrink-0 overflow-x-auto scrollbar-hide gap-1.5 sm:gap-0">
             {TABS.map((tab) => (
               <AnimateTabsTriggerSimple
                 key={tab.id}
@@ -284,6 +297,21 @@ export default function SettingsPage() {
                   transition={{ duration: 0.2, ease: "easeInOut" }}
                 >
                   <TaxTab settings={settings} onUpdate={updateSetting} />
+                </motion.div>
+              )}
+
+              {activeTab === "shipping" && (
+                <motion.div
+                  key="shipping"
+                  initial={{ opacity: 0, x: isRtl ? -20 : 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: isRtl ? 20 : -20 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                >
+                  <ShippingTab
+                    onMethodOrderChange={setHasShippingMethodOrderChanges}
+                    saveMethodOrderRef={shippingMethodOrderRef}
+                  />
                 </motion.div>
               )}
 

@@ -475,7 +475,47 @@ function BulkEdit({
         return;
       }
 
-      Promise.all(promises).then(handleSuccess).catch(handleError);
+      Promise.all(promises).then(() => {
+        // Log to history
+        try {
+          const historyPayload = {
+            location: entity.toLowerCase(),
+            action: "bulk",
+            items: selectedRows.map((row) => {
+              const originalData = row.original;
+              const changes = itemsChanges.find(c => String(c.id) === String(originalData.id)) || {};
+
+              // Build old/new objects only for fields that were changed
+              const oldValues = {};
+              const newValues = {};
+
+              Object.keys(changes).forEach(key => {
+                if (key === 'id') return;
+                oldValues[key] = originalData[key];
+                newValues[key] = changes[key];
+              });
+
+              return {
+                id: originalData.id,
+                old: oldValues,
+                new: newValues,
+                name: originalData.name || originalData.title || `#${originalData.id}`,
+                __meta: {
+                  kind: "bulk-edit",
+                  ts: Date.now(),
+                },
+              };
+            }),
+          };
+
+          postApi(`${window.siteUrl}/wp-json/whizmanage/v1/history`, historyPayload)
+            .catch((e) => console.warn("History log failed:", e));
+        } catch (historyError) {
+          console.warn("Failed to log bulk edit to history:", historyError);
+        }
+
+        handleSuccess();
+      }).catch(handleError);
 
     } catch (criticalError) {
       console.error("Critical Error:", criticalError);

@@ -92,7 +92,7 @@ export function AppSidebar({ ...props }) {
               >
                 <div className="flex aspect-square size-10 group-data-[collapsible=icon]:size-8 items-center justify-center rounded-lg bg-transparent transition-all">
                   <img
-                    src={`${window.siteUrl}/wp-content/plugins/whizmanage-pro/assets/images/logo/symbol.svg`}
+                    src={`${window.siteUrl}/wp-content/plugins/whizmanage/assets/images/logo/symbol.svg`}
                     alt="WhizManage"
                     className="size-10 group-data-[collapsible=icon]:size-8 transition-all"
                   />

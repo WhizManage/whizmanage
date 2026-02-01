@@ -3,7 +3,7 @@ Contributors: whizmanage , yosefelishayov
 Tags: woocommerce, product management, variations, bulk edit, spreadsheet, coupons, discounts
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 2.1.3
+Stable tag: 2.2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -206,7 +206,16 @@ Yes. Full RTL support is included.
 WhizManage is designed to handle very large product catalogs efficiently.
 
 
+== Screenshots ==
+1. Smart Products Table – advanced bulk editing, inline actions, and powerful filters.
+2. Smart Orders Table – centralized order management with quick actions and real-time insights.
+3. Discount Rules Area – flexible discount rules with conditions, priorities, and scheduling.
+
+
 == Changelog ==
+
+= 2.2.0 =
+* Added easy-to-use Shipping Settings area
 
 = 2.1.3 =
 * Fixed history loading error
@@ -233,6 +242,7 @@ WhizManage is designed to handle very large product catalogs efficiently.
 * Advanced discount rules (Pro)
 * Google Sheets sync (Pro)
 * RTL and dark mode support
+
 
 
 == Upgrade Notice ==
