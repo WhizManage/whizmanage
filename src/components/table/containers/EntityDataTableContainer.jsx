@@ -17,12 +17,6 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useWithTrash } from "../trash/useWithTrash.js";
 
-const BulkEdit = lazy(() =>
-  import("@/components/table/toolbar/actions/bulk-edit/BulkEdit").catch(() => ({
-    default: () => <div>Bulk Edit Error</div>,
-  }))
-);
-
 function LoadingFallback() {
   return (
     <div className="flex items-center justify-center h-full p-4">
@@ -37,7 +31,6 @@ const LazyLoadedUI = ({
   useTrashStore,
   useStore,
   config,
-  onBulkEditClick,
   ...rest
 }) => {
   const [modules, setModules] = useState(null);
@@ -106,7 +99,6 @@ const LazyLoadedUI = ({
       useTrashStore={useTrashStore}
       useStore={useStore}
       config={config}
-      onBulkEditClick={onBulkEditClick}
       createColumns={modules.createColumns}
       toolbarConfigFactory={modules.toolbarConfigFactory}
       {...rest}
@@ -122,7 +114,6 @@ function DataTableUI({
   config,
   createColumns,
   toolbarConfigFactory,
-  onBulkEditClick,
 }) {
    
   const { api, adapters, tableConfigDefaults, fetchPage } = config;
@@ -409,7 +400,6 @@ function DataTableUI({
 
     return {
       ...resolvedToolbarConfig,
-      onBulkEdit: onBulkEditClick,
       // ✅ שמור את ה-customActions כדי שיעברו ל-buildActions
       customActions: [
         ...(canToggleTrash
@@ -452,7 +442,6 @@ function DataTableUI({
     isTrash,
     isToggling,
     __,
-    onBulkEditClick,
   ]);
 
 
@@ -510,9 +499,7 @@ function DataTableUI({
 }
 
 export default function EntityDataTableContainer({ entityConfig }) {
-  const { entityName, useStore, useTrashStoreFactory, bulkEditRows } =
-    entityConfig;
-  const [isBulkOpen, setIsBulkOpen] = useState(false);
+  const { entityName, useStore, useTrashStoreFactory } = entityConfig;
 
   // ✅ קריאה ל-store מתבצעת כאן, סטטית ומיידית
   const store = useStore();
@@ -531,20 +518,7 @@ export default function EntityDataTableContainer({ entityConfig }) {
           useStore={useStore}
           useTrashStore={useTrashStoreFactory}
           config={entityConfig}
-          onBulkEditClick={() => setIsBulkOpen(true)}
         />
-        {bulkEditRows && (
-          <BulkEdit
-            useTableStore={useStore}
-            open={isBulkOpen}
-            onOpenChange={setIsBulkOpen}
-            setHideToolbar={() => { }}
-            isTableImport={false}
-            setData={store?.setData}
-            entity={entityName}
-            initialRows={bulkEditRows}
-          />
-        )}
       </Suspense>
     </div>
   );

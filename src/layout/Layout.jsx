@@ -46,7 +46,6 @@ export default function Layout() {
  
   }, []);
 
-  window.hasLicence = false;
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {

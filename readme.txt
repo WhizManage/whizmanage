@@ -1,6 +1,6 @@
-=== WhizManage - The Ultimate WooCommerce Management Suite ===
+=== WhizManage — Management Suite for WooCommerce ===
 Contributors: whizmanage , yosefelishayov
-Tags: woocommerce, product management, variations, bulk edit, spreadsheet, coupons, discounts
+Tags: product management, bulk edit, spreadsheet, coupons, discounts
 Requires at least: 6.4
 Tested up to: 6.9
 Stable tag: 2.2.0
@@ -12,40 +12,27 @@ Manage your entire WooCommerce store smarter, faster, and with zero frustration.
 
 == Description ==
 
-**WhizManage - The Ultimate WooCommerce Management Suite**
+**WhizManage — Management Suite for WooCommerce**
 
-WhizManage is a powerful admin toolkit that replaces dozens of slow and repetitive WooCommerce screens with one modern, high-performance dashboard — from importing products with variations to creating discount rules in a single click — built for store owners, agencies, and developers who demand efficiency and control.
+WhizManage is a powerful admin toolkit that replaces dozens of slow and repetitive WooCommerce screens with one modern, high-performance dashboard — built for store owners, agencies, and developers who demand efficiency and control.
 
 = 🚀 Why WhizManage? =
 
-* Manage products, variations, taxonomies, coupons, customers, and orders — in seconds
+* Manage products, taxonomies, coupons, customers, and orders — in seconds
 * Clean, fast, React-based UI that feels native to WordPress
 * Full RTL and multilingual support
 * Built to scale from small stores to very large catalogs
 
 ---
 
-= 🆓 Free Version Features =
-
 = 🧾 Advanced Product Management =
 
-Spreadsheet-style interface for editing simple and variable products.
+Spreadsheet-style interface for editing simple products.
 
 * Quick table editing
 * Easy product creation
 * Customizable columns
 * Smart filtering and search
-
----
-
-= 💡 Variation Control =
-
-Manage prices, stock, attributes, and images for all variations from one panel.
-
-* Product and global attributes
-* Any Mode for shared price/stock
-* Bulk variation generation
-* Visual variation management
 
 ---
 
@@ -61,9 +48,9 @@ Spreadsheet-style coupon management.
 
 ---
 
-= 🏷️ Discount Rules (Free – Product Adjustments) =
+= 🏷️ Discount Rules =
 
-Basic product-level discount rules are included in the free version.
+Product-level discount rules.
 
 * Product price adjustments
 * Apply rules to specific products
@@ -104,67 +91,6 @@ Efficient order handling with bulk actions.
 
 ---
 
-= 💎 Pro Version Unlocks =
-
-= 🔄 Google Sheets Sync =
-
-Two-way synchronization with Google Sheets.
-
-* Product and variation import
-* Real-time updates
-* Image import
-* Category mapping
-* Team collaboration
-
----
-
-= 📦 Bulk Editing Everywhere =
-
-Mass updates across products, variations, prices, coupons, and taxonomies.
-
-* Edit hundreds of items at once
-* Apply changes to filtered results
-* Undo and redo support
-
----
-
-= 🏷️ Discount Rules Engine (Pro) =
-
-Note: The free version includes product-level discount rules only.
-
-The Pro version unlocks advanced discount logic:
-
-* Cart-level discounts
-* Quantity-based pricing
-* Buy X Get Y (BOGO)
-* Cross-product promotions
-* Shipping discounts
-* Bundle and spend rules
-* Scheduling and priorities
-* Complex conditions
-
----
-
-= 🏷️ Taxonomy Manager =
-
-Inline editing for categories, tags, and custom taxonomies.
-
----
-
-= ➕ Multi-Product Duplication =
-
-Duplicate multiple products with all variations in one action.
-
----
-
-= ⚙️ Advanced Variations Panel =
-
-Unified editor for attributes, variations, stock, SKU, pricing, and images.
-
-👉 Upgrade to Pro: https://whizmanage.com/
-
----
-
 = 🔮 Planned Features =
 
 * Advanced automation tools
@@ -178,7 +104,7 @@ Unified editor for attributes, variations, stock, SKU, pricing, and images.
 
 * Advanced Custom Fields (ACF)
 * JetEngine
-* Yoast SEO
+* Yoast SEO (read-only)
 
 == Installation ==
 
@@ -236,11 +162,8 @@ WhizManage is designed to handle very large product catalogs efficiently.
 = 2.0.0 =
 * Initial public release
 * Products editor
-* Variations management
 * Coupon manager
-* Product-level discount rules (Free)
-* Advanced discount rules (Pro)
-* Google Sheets sync (Pro)
+* Product-level discount rules
 * RTL and dark mode support
 
 
@@ -256,6 +179,6 @@ https://docs.whizmanage.com
 
 == Support ==
 
-Documentation: https://docs.whizmanage.com  
-Email: support@whizmanage.com  
+Documentation: https://docs.whizmanage.com
+Email: support@whizmanage.com
 Website: https://whizmanage.com

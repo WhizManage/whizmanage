@@ -177,9 +177,7 @@ export default function WhizManageTab({ settings, onUpdate, perPageSettings, onU
             </div>
             <div className="flex-1">
               <h3 className="font-semibold text-slate-800 dark:text-slate-200">
-                {window.hasLicence
-                  ? "WhizManage Pro"
-                  : "WhizManage"}
+                WhizManage
               </h3>
               <p className="text-sm text-muted-foreground">
                 {__("Version", "whizmanage")} {window?.version || "2.0"}
@@ -187,15 +185,10 @@ export default function WhizManageTab({ settings, onUpdate, perPageSettings, onU
             </div>
           </div>
           <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
-            {window.hasLicence
-              ? __(
-                "Thank you for using WhizManage Pro! For support and documentation, visit our website.",
-                "whizmanage"
-              )
-              : __(
-                "Thank you for using WhizManage! For support and documentation, visit our website.",
-                "whizmanage"
-              )}
+            {__(
+              "Thank you for using WhizManage! For support and documentation, visit our website.",
+              "whizmanage"
+            )}
           </p>
         </CardContent>
       </Card>

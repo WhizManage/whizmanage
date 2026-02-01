@@ -10,30 +10,13 @@ import CustomTooltip from "@components/ui/nextUI/Tooltip";
 import ProBadge from "@components/ui/nextUI/ProBadge";
 import { createColumnHelper } from "@tanstack/react-table";
 import { FileText, Package, Truck, User } from "lucide-react";
-import React from "react";
 import OrderBillingModal from "./components/OrderBillingModal";
-import OrderItemsModal from "./components/OrderItemsModal";
 import OrderNotesChat from "./components/OrderNotesChat";
 import OrderShippingModal from "./components/OrderShippingModal";
 import OrderSourceBadge from "./components/OrderSourceBadge";
 import OrderSummaryModal from "./components/OrderSummaryModal";
 import PaymentMethodCell from "./components/PaymentMethodCell.jsx";
 import { ORDER_STATUS_KEYS } from "./orders.constants";
-
-// ✅ מערכת לניהול פתיחה אוטומטית של מודלים
-const NEW_ORDER_HANDLERS = new Map();
-
-const registerNewOrderHandler = (orderId, openItemsModal) => {
-  NEW_ORDER_HANDLERS.set(String(orderId), openItemsModal);
-};
-
-const triggerNewOrderItemsModal = (orderId) => {
-  const handler = NEW_ORDER_HANDLERS.get(String(orderId));
-  if (handler) {
-    setTimeout(() => handler(), 50);
-    NEW_ORDER_HANDLERS.delete(String(orderId));
-  }
-};
 
 // ——————————————————————————————————————————————————————————————
 // Helpers
@@ -478,84 +461,23 @@ export const createOrdersColumns = (store, __, handleCellUpdate) => {
         );
         const totalLabel =
           row?.total != null ? formatValue(row.total, "currency") : "—";
-        const isNewRow = row?._isNew === true;
-        const [modalOpen, setModalOpen] = React.useState(false);
 
-        // 🔒 חסימה עבור Free users
-        const noLicence = typeof window !== "undefined" && window.hasLicence === false;
-
-        // ✅ רישום הפונקציה לפתיחת המודל עבור שורות חדשות
-        React.useEffect(() => {
-          if (isNewRow && items.length === 0 && !noLicence) {
-            registerNewOrderHandler(row.id, () => setModalOpen(true));
-          }
-        }, [isNewRow, row.id, items.length, noLicence]);
-
-        const tooltip = (
-          <div className="text-xs space-y-1">
-            {items.slice(0, 8).map((it, i) => (
-              <div key={i} className="flex items-center justify-between gap-2">
-                <span className="truncate max-w-[220px]">
-                  {it?.name || it?.product_id || "#"}
-                </span>
-                <span className="shrink-0">×{it?.quantity ?? 0}</span>
-              </div>
-            ))}
-            {items.length > 8 ? (
-              <div className="text-muted-foreground">
-                {`+${items.length - 8} ${__("more", "whizmanage")}`}
-              </div>
-            ) : null}
-          </div>
-        );
-
-        // 🔒 אם אין רישיון - הצג תצוגה נעולה
-        if (noLicence) {
-          return (
-            <CustomTooltip
-              title={__("Pro feature", "whizmanage")}
-              description={__("Upgrade to Pro to edit order items", "whizmanage")}
-            >
-              <div className="relative w-full h-full px-3 py-2 flex items-center gap-2 opacity-50 cursor-not-allowed">
-                <Package className="size-4 shrink-0" />
-                <span className="truncate text-sm">
-                  {`${count} ${__("items", "whizmanage")} • ${totalLabel}`}
-                </span>
-                <div className="absolute -top-1 -right-1 scale-75">
-                  <ProBadge />
-                </div>
-              </div>
-            </CustomTooltip>
-          );
-        }
-
+        // Pro feature - always show locked display
         return (
-          <OrderItemsModal
-            row={row}
-            onUpdate={onUpdate}
-            open={modalOpen}
-            onOpenChange={setModalOpen}
-            asChild
-            triggerClassName="cursor-pointer"
+          <CustomTooltip
+            title={__("Pro feature", "whizmanage")}
+            description={__("Upgrade to Pro to edit order items", "whizmanage")}
           >
-            <div
-              className={`w-full h-full px-3 py-2 flex items-center gap-2 ${isNewRow && items.length === 0 ? "ring-2 ring-fuchsia-500" : ""
-                }`}
-            >
+            <div className="relative w-full h-full px-3 py-2 flex items-center gap-2 opacity-60 cursor-not-allowed">
               <Package className="size-4 shrink-0" />
-              <CustomTooltip
-                title={__("Items", "whizmanage")}
-                description={tooltip}
-                contentClassName="max-w-[360px] w-fit max-h-96 overflow-auto scrollbar-whiz p-3 rounded-md shadow-md border text-xs bg-white dark:bg-gray-800"
-              >
-                <span className="truncate text-sm">
-                  {isNewRow && items.length === 0
-                    ? __("⚠️ Click to add products", "whizmanage")
-                    : `${count} ${__("items", "whizmanage")} • ${totalLabel}`}
-                </span>
-              </CustomTooltip>
+              <span className="truncate text-sm">
+                {`${count} ${__("items", "whizmanage")} • ${totalLabel}`}
+              </span>
+              <div className="absolute -top-1 -right-1 scale-75">
+                <ProBadge />
+              </div>
             </div>
-          </OrderItemsModal>
+          </CustomTooltip>
         );
       },
     }),

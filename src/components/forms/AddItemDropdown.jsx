@@ -9,8 +9,8 @@ import {
 import { ChevronDown, FileText, Plus, Grid2x2Plus } from "lucide-react";
 import { IconBadge } from "@components/ui/custom/IconBadge";
 import { Kbd, KbdGroup } from "@components/ui/kbd";
-import { useState, useEffect, useImperativeHandle, forwardRef } from "react";
- import { __ } from "@wordpress/i18n";
+import { useState, useImperativeHandle, forwardRef } from "react";
+import { __ } from "@wordpress/i18n";
 import GenericItemModal from "./GenericItemModal";
 import { getEntityConfig } from "./registry";
 import ProBadge from "@components/ui/nextUI/ProBadge";
@@ -18,11 +18,9 @@ import ProBadge from "@components/ui/nextUI/ProBadge";
 const AddItemDropdown = forwardRef(function AddItemDropdown({
   entity,
   onCreated,
-  onAddInlineRow,
   triggerLabel,
-  currentItemsCount = 0, // מספר הפריטים הקיימים (לשימוש בחסימת Free)
 }, ref) {
-   
+
   const [showFormModal, setShowFormModal] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -37,35 +35,12 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
   const cfg = getEntityConfig(entity) || getEntityConfig(entity?.replace(/s$/, ""));
   const uiSingular = cfg?.labels?.singular ?? entity?.replace(/s$/, "");
 
-  const handleAddInline = () => {
-    if (typeof onAddInlineRow === "function") onAddInlineRow();
-  };
-
-  const noLicence = typeof window !== "undefined" && window.hasLicence === false;
-  const lockedQuick = noLicence;
-
-  // חסימת הוספת חוק הנחה נוסף למשתמשי Free (מותר רק 1)
-  const lockedAddNew = noLicence && entity === "discount-rules" && currentItemsCount >= 1;
-
   return (
     <>
-      <div className={`inline-flex items-center h-8 rounded-md shadow-lg hover:shadow-xl transition-shadow relative ${
-        lockedAddNew
-          ? "bg-gradient-to-r from-slate-400 to-slate-500 cursor-not-allowed"
-          : "bg-gradient-to-r from-fuchsia-600 to-pink-500"
-      }`} data-tour="add-inline-row">
-        {lockedAddNew && (
-          <span className="pointer-events-none absolute -top-2 -right-2 z-[60] drop-shadow-sm">
-            <ProBadge />
-          </span>
-        )}
+      <div className="inline-flex items-center h-8 rounded-md shadow-lg hover:shadow-xl transition-shadow relative bg-gradient-to-r from-fuchsia-600 to-pink-500" data-tour="add-inline-row">
         <button
-          onClick={lockedAddNew ? undefined : () => setShowFormModal(true)}
-          disabled={lockedAddNew}
-          className={`flex items-center gap-1.5 sm:gap-2 h-full px-2 sm:px-3 text-white text-sm font-medium rounded-s-md transition-colors ${
-            lockedAddNew ? "cursor-not-allowed opacity-80" : "hover:bg-white/10"
-          }`}
-          title={lockedAddNew ? __("Pro feature - Free users can create only 1 discount rule", "whizmanage") : undefined}
+          onClick={() => setShowFormModal(true)}
+          className="flex items-center gap-1.5 sm:gap-2 h-full px-2 sm:px-3 text-white text-sm font-medium rounded-s-md transition-colors hover:bg-white/10"
         >
           <Plus className="h-4 w-4" />
           <span className="hidden sm:inline">{__(triggerLabel || cfg?.triggerLabel || `Add ${uiSingular}`, "whizmanage")}</span>
@@ -73,13 +48,10 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
 
         <div className="w-px h-5 bg-white/20" />
 
-        <DropdownMenu open={lockedAddNew ? false : dropdownOpen} onOpenChange={lockedAddNew ? undefined : setDropdownOpen}>
-          <DropdownMenuTrigger asChild disabled={lockedAddNew}>
+        <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+          <DropdownMenuTrigger asChild>
             <button
-              className={`flex items-center justify-center h-full px-2 text-white rounded-e-md transition-colors ${
-                lockedAddNew ? "cursor-not-allowed opacity-80" : "hover:bg-white/10"
-              }`}
-              disabled={lockedAddNew}
+              className="flex items-center justify-center h-full px-2 text-white rounded-e-md transition-colors hover:bg-white/10"
             >
               <ChevronDown className="h-3 w-3" />
             </button>
@@ -104,27 +76,19 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
               </KbdGroup>
             </DropdownMenuItem>
 
-            {/* Quick add (Pro בפינה הימנית-עליונה, מוזז מעט שמאלה) */}
+            {/* Quick add - Pro feature (always locked) */}
             <DropdownMenuItem
               onSelect={(e) => {
-                if (lockedQuick) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  return;
-                }
-                handleAddInline();
+                e.preventDefault();
+                e.stopPropagation();
               }}
-              className={`relative flex items-center gap-3 ${
-                lockedQuick ? "opacity-60 cursor-not-allowed" : "cursor-pointer"
-              }`}
-              aria-disabled={lockedQuick || undefined}
+              className="relative flex items-center gap-3 opacity-60 cursor-not-allowed"
+              aria-disabled
               data-tour="quick-add-row"
             >
-              {lockedQuick && (
-                <span className="pointer-events-none absolute -top-1 right-2 z-[60] -translate-y-[10%] drop-shadow-sm">
-                  <ProBadge />
-                </span>
-              )}
+              <span className="pointer-events-none absolute -top-1 right-2 z-[60] -translate-y-[10%] drop-shadow-sm">
+                <ProBadge />
+              </span>
 
               <IconBadge icon={Grid2x2Plus} variant="default" size="default" iconClassName="rotate-180" />
               <div className="flex flex-col">
@@ -133,11 +97,6 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
                   {__("Add empty row directly in table", "whizmanage")}
                 </span>
               </div>
-              <KbdGroup className="absolute top-2 end-2">
-                <Kbd>Ctrl</Kbd>
-                <span className="text-[9px] text-slate-400 dark:text-slate-500">+</span>
-                <Kbd>Enter</Kbd>
-              </KbdGroup>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

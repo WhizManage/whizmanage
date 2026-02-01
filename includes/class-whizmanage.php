@@ -544,8 +544,6 @@ window.placeholderImg = %s;',
         {
             $this->output_version_info();
 
-            $woo_lic = get_option('woo_lic');
-
             global $wpdb;
             $dataWhizmanage = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}whizmanage", ARRAY_A);
 
@@ -562,7 +560,6 @@ window.placeholderImg = %s;',
             }
 
             $inline_js  = 'window.getWhizmanage = ' . wp_json_encode($dataWhizmanage) . ';';
-            $inline_js .= 'window.licenseToken = ' . wp_json_encode($woo_lic) . ';';
             $inline_js .= 'window.shopUrl = ' . wp_json_encode($shop_url) . ';';
 
             if (is_user_logged_in()) {

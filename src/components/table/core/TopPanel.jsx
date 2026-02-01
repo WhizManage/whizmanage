@@ -5,8 +5,8 @@ import Button from "@components/ui/button.jsx";
 import { Input } from "@components/ui/input.jsx";
 import { Columns, Filter, Plus, Search, X, Upload } from "lucide-react";
 import CustomTooltip from "@components/ui/nextUI/Tooltip";
-import { memo, useCallback, useEffect, useState, lazy, Suspense, forwardRef, useImperativeHandle, useRef } from "react";
- import { __ } from "@wordpress/i18n";
+import { memo, useCallback, useEffect, useState, forwardRef, useImperativeHandle, useRef } from "react";
+import { __ } from "@wordpress/i18n";
 import { DisplayColumns } from "./DisplayColumns";
 import { UndoRedoButtons } from "./UndoRedoButtons.jsx";
 import ProBadge from "@components/ui/nextUI/ProBadge";
@@ -20,11 +20,13 @@ import {
 } from "@components/ui/dropdown-menu";
 import AddItemDropdown from "../../forms/AddItemDropdown.jsx";
 
-// ✅ Lazy load של Import component
-const ImportSettings = lazy(() =>
-  import("../import/ImportSettings").catch(() => ({
-    default: () => <div>Import Error</div>
-  }))
+// 🔒 סטייל/תגית לפריטים נעולים
+const lockStyle =
+  "opacity-50 grayscale cursor-not-allowed pointer-events-none relative";
+const ProCorner = () => (
+  <div className="absolute -top-1 -right-1 scale-90">
+    <ProBadge />
+  </div>
 );
 
 export const TopPanel = memo(
@@ -55,7 +57,7 @@ export const TopPanel = memo(
     // ✅ NEW: callback להוספת שורה ריקה
     onAddInlineRow = null,
 
-    // ✅ NEW: קונפיגורציה ליבוא (אופציונלי)
+    // ✅ קונפיגורציה ליבוא (אופציונלי)
     importConfig = null,
     data = null,
     isTrash = false,
@@ -68,18 +70,9 @@ export const TopPanel = memo(
       closeFormModal: () => addItemRef.current?.closeFormModal?.(),
       triggerAddInlineRow: () => onAddInlineRow?.(),
     }), [onAddInlineRow]);
-     
+
     const [localFilter, setLocalFilter] = useState(globalFilter || "");
     const [isColumnsOpen, setIsColumnsOpen] = useState(false);
-    const [isImportOpen, setIsImportOpen] = useState(false);
-    // 🔒 סטייל/תגית לפריטים נעולים
-    const lockStyle =
-      "opacity-50 grayscale cursor-not-allowed pointer-events-none relative";
-    const ProCorner = () => (
-      <div className="absolute -top-1 -right-1 scale-90">
-        <ProBadge />
-      </div>
-    );
 
     const debouncedSetGlobalFilter = useDebounceFn(
       (value) => setGlobalFilter(value),
@@ -240,84 +233,30 @@ export const TopPanel = memo(
           )}
         </div>
         <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-          {/* ✅ Import Button - נעילה לפי window.hasLicence בלבד */}
+          {/* ✅ Import Button - Pro feature (always locked) */}
           {importConfig?.enabled && importConfig?.showInTopPanel && !isTrash && (
-            <>
-              <CustomTooltip
-                title={
-                  (typeof window !== "undefined" &&
-                    window?.hasLicence === false)
-                    ? __("Pro feature", "whizmanage")
-                    : __("Import Settings", "whizmanage")
-                }
-                instantClose
-              >
-                <div className="relative">
-                  <Button
-                    onClick={
-                      (typeof window !== "undefined" &&
-                        window?.hasLicence === false)
-                        ? undefined /* 🔒 חסום */
-                        : () => setIsImportOpen(true)
-                    }
-                    variant="outline"
-                    size="sm"
-                    className={cn(
-                      "h-8 px-2 sm:px-3 flex items-center gap-2 font-normal text-muted-foreground",
-                      (typeof window !== "undefined" &&
-                        window?.hasLicence === false) && lockStyle // 🔒 סטייל נעול
-                    )}
-                    aria-disabled={
-                      (typeof window !== "undefined" &&
-                        window?.hasLicence === false)
-                        ? "true"
-                        : "false"
-                    }
-                  >
-                    <Upload className="h-4 w-4" strokeWidth={1.5} />
-                    <span className="hidden sm:inline">
-                      {__(importConfig.buttonLabel || "Import Settings", "whizmanage")}
-                    </span>
-                  </Button>
-                  {(typeof window !== "undefined" &&
-                    window?.hasLicence === false) && <ProCorner />} {/* 🔖 Pro */}
-                </div>
-              </CustomTooltip>
-
-              <Suspense fallback={null}>
-                {isImportOpen &&
-                  (typeof window !== "undefined" &&
-                    window?.hasLicence !== false) && (
-                    <ImportSettings
-                      isOpen={isImportOpen}
-                      onClose={() => setIsImportOpen(false)}
-                      config={importConfig}
-                      entityName={entityName}
-                      data={data}
-                    />
-                  )}
-              </Suspense>
-            </>
-          )}
-
-          {/* באנר שדרוג לפרו - מוצג רק ב-discount-rules למשתמשי Free עם חוק קיים */}
-          {entityName === "discount-rules" &&
-           typeof window !== "undefined" &&
-           window.hasLicence === false &&
-           Array.isArray(data) &&
-           data.length >= 1 && (
-            <a
-              href="https://whizmanage.com/pricing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-fuchsia-700 dark:text-fuchsia-300 bg-fuchsia-50 dark:bg-fuchsia-900/30 border border-fuchsia-200 dark:border-fuchsia-700 rounded-lg hover:bg-fuchsia-100 dark:hover:bg-fuchsia-900/50 hover:!text-fuchsia-800 dark:hover:!text-fuchsia-200 transition-colors"
+            <CustomTooltip
+              title={__("Pro feature", "whizmanage")}
+              instantClose
             >
-              <span>✨</span>
-              <span>{__("Upgrade to Pro for unlimited discount rules", "whizmanage")}</span>
-              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+              <div className="relative">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className={cn(
+                    "h-8 px-2 sm:px-3 flex items-center gap-2 font-normal text-muted-foreground",
+                    lockStyle
+                  )}
+                  aria-disabled="true"
+                >
+                  <Upload className="h-4 w-4" strokeWidth={1.5} />
+                  <span className="hidden sm:inline">
+                    {__(importConfig.buttonLabel || "Import Settings", "whizmanage")}
+                  </span>
+                </Button>
+                <ProCorner />
+              </div>
+            </CustomTooltip>
           )}
 
           {entityName && !isTrash && (
@@ -325,8 +264,6 @@ export const TopPanel = memo(
               ref={addItemRef}
               entity={entityName}
               onCreated={onItemCreated}
-              onAddInlineRow={onAddInlineRow}
-              currentItemsCount={Array.isArray(data) ? data.length : 0}
             />
           )}
         </div>

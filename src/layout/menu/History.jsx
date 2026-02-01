@@ -31,7 +31,6 @@ import {
   X,
 } from "lucide-react";
  import { __ } from "@wordpress/i18n";
-import ProBadge from "@components/ui/nextUI/ProBadge";
 import { getApi, postApi, putApi } from "../../services/services";
 import {
   Avatar,
@@ -74,9 +73,6 @@ export function History({ isOpen, setIsOpen }) {
   const [actionFilter, setActionFilter] = useState("all");
 
   const isRtl = window?.document?.documentElement?.dir === "rtl";
-
-  // 🔒 חסימה עבור Free users
-  const noLicence = typeof window !== "undefined" && window.hasLicence === false;
 
   // גישה ל-store של קטגוריות ותגיות לצורך תרגום IDs לשמות
   const { categories, tags, loadTaxonomiesOnce } = useCoreTaxonomiesStore();
@@ -366,7 +362,7 @@ export function History({ isOpen, setIsOpen }) {
     return firstItem?.__meta?.kind === "config" || firstItem?.id?.startsWith?.("config:");
   };
 
-  // סינון ההיסטוריה לפי הפילטרים
+  // סינון ההיסטוריה לפי הפילטרים + הגבלה ל-5 רשומות
   const filteredHistory = history.filter((item) => {
     // סינון לפי טבלה
     if (locationFilter !== "all" && item.location !== locationFilter) {
@@ -383,7 +379,7 @@ export function History({ isOpen, setIsOpen }) {
       }
     }
     return true;
-  });
+  }).slice(0, FREE_HISTORY_LIMIT); // הגבלה ל-5 רשומות
 
   // יצירת הודעה פשוטה לשינוי סדר עמודות
   const getColumnOrderMessage = (item) => {
@@ -989,8 +985,8 @@ export function History({ isOpen, setIsOpen }) {
                         ? item.items.length
                         : 0;
 
-                      // 🔒 בדיקה אם הפריט חסום (מעבר ל-5 הראשונים עבור Free users)
-                      const isLocked = noLicence && index >= FREE_HISTORY_LIMIT;
+                      // History is limited to 5 entries - no locked items
+                      const isLocked = false;
 
                       // בדיקה אם זה שינוי config (כמו columnOrder, columnVisibility או columnPinning)
                       const configChange = isConfigChange(item);
@@ -1028,11 +1024,6 @@ export function History({ isOpen, setIsOpen }) {
                                       </span>
                                     ))}
                                     {!isLocked && <LocationBadge location={item.location} />}
-                                    {isLocked && (
-                                      <span className="scale-75">
-                                        <ProBadge />
-                                      </span>
-                                    )}
                                   </div>
                                   <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-300">
                                     <span className="flex items-center gap-1">
@@ -1114,11 +1105,6 @@ export function History({ isOpen, setIsOpen }) {
                                       </span>
                                     ))}
                                     {!isLocked && <LocationBadge location={item.location} />}
-                                    {isLocked && (
-                                      <span className="scale-75">
-                                        <ProBadge />
-                                      </span>
-                                    )}
                                   </div>
                                   <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-300">
                                     <span className="flex items-center gap-1">
@@ -1195,11 +1181,6 @@ export function History({ isOpen, setIsOpen }) {
                                       {__("Column", "whizmanage")} <span className="font-semibold">{columnOrderMsg.column}</span> {__("moved from position", "whizmanage")} {columnOrderMsg.from} {__("to", "whizmanage")} {columnOrderMsg.to}
                                     </span>
                                     {!isLocked && <LocationBadge location={item.location} />}
-                                    {isLocked && (
-                                      <span className="scale-75">
-                                        <ProBadge />
-                                      </span>
-                                    )}
                                   </div>
                                   <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-300">
                                     <span className="flex items-center gap-1">
@@ -1292,17 +1273,7 @@ export function History({ isOpen, setIsOpen }) {
                                       <span className={isLocked ? "text-slate-400 dark:text-slate-500" : "text-slate-700 dark:text-slate-200"}>
                                         {count}
                                       </span>
-                                      {!isLocked && <LocationBadge location={item.location} />}
-                                      {isLocked && (
-                                        <>
-                                          <span className="text-slate-400 dark:text-slate-500">
-                                            {getLocationLabel(item.location)}
-                                          </span>
-                                          <span className="scale-75">
-                                            <ProBadge />
-                                          </span>
-                                        </>
-                                      )}
+                                      <LocationBadge location={item.location} />
                                     </div>
                                     <div className="flex items-center gap-3 mt-1 text-xs text-slate-500 dark:text-slate-300">
                                       <span className="flex items-center gap-1">

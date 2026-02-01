@@ -1,12 +1,12 @@
 // src/components/table/entities/products/components/TypeDisplay.jsx
 
-import AddVariations from "./variation/AddVariations";
 import ManageGrouped from "./grouped/ManageGrouped";
 import ManageExternal from "./external/ManageExternal";
 import ProBadge from "@components/ui/nextUI/ProBadge";
 import CustomTooltip from "@components/ui/nextUI/Tooltip";
 import { Button } from "@components/ui/button";
 import { Settings2 } from "lucide-react";
+import { __ } from "@wordpress/i18n";
 
 const TypeDisplay = ({ value, editOptions, row, t }) => {
   if (!value) {
@@ -31,32 +31,28 @@ const TypeDisplay = ({ value, editOptions, row, t }) => {
 
   // הגדרת הכפתור לפי סוג המוצר
   const renderButton = () => {
-    const hasLicence = typeof window !== "undefined" && window.hasLicence !== false;
-
     if (currentValue === "variable") {
-      if (!hasLicence) {
-        return (
-          <CustomTooltip
-            title={__("Pro feature", "whizmanage")}
-            description={__("Variable products require Pro license", "whizmanage")}
+      // Pro feature - always show locked button
+      return (
+        <CustomTooltip
+          title={__("Pro feature", "whizmanage")}
+          description={__("Variable products require Pro license", "whizmanage")}
+        >
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            className="flex px-2 !size-8 opacity-60 cursor-not-allowed"
+            disabled
+            aria-disabled
           >
-            <Button
-              type="button"
-              variant="outline"
-              size="icon"
-              className="flex px-2 !size-7 opacity-60 cursor-not-allowed"
-              disabled
-              aria-disabled
-            >
-              <Settings2 className="!size-4" />
-              <span className="pointer-events-none absolute -top-1 -right-1 z-[50]">
-                <ProBadge />
-              </span>
-            </Button>
-          </CustomTooltip>
-        );
-      }
-      return <AddVariations row={row} />;
+            <Settings2 className="!size-5" />
+            <span className="pointer-events-none absolute -top-1 -right-1 z-[50]">
+              <ProBadge />
+            </span>
+          </Button>
+        </CustomTooltip>
+      );
     }
 
     if (currentValue === "grouped") {

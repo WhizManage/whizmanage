@@ -45,9 +45,6 @@ export function NavUser() {
    
   const isRTL = window?.document?.documentElement?.dir === "rtl";
 
-  // 🔒 חסימה עבור Free users
-  const noLicence = typeof window !== "undefined" && window.hasLicence === false;
-
   const handleStartTour = () => {
     resetTour();
     setIsTourOpen(true);

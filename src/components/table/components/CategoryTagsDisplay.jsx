@@ -67,17 +67,17 @@ const CategoryTagsDisplay = ({ value, __, editOptions, column }) => {
   const displayItems = items.slice(0, 2);
   const remainingCount = items.length - 2;
 
-  // 🔒 ללא רישיון – נועל תצוגה
-  const locked = typeof window !== "undefined" && window.hasLicence === false;
+  // Pro feature - always locked for categories column
+  const isProFeature = column?.id === "categories";
 
   return (
     <div
       className="flex items-center whitespace-nowrap !flex-nowrap gap-1 max-w-full py-0.5 overflow-hidden"
       title={items.map((item, idx) => resolveName(item, idx)).join(", ")}
-      onMouseDown={locked ? (e) => { e.stopPropagation(); e.preventDefault(); } : undefined}
-      onClick={locked ? (e) => { e.stopPropagation(); e.preventDefault(); } : undefined}
-      aria-disabled={locked ? true : undefined}
-      data-locked={locked ? "true" : "false"}
+      onMouseDown={isProFeature ? (e) => { e.stopPropagation(); e.preventDefault(); } : undefined}
+      onClick={isProFeature ? (e) => { e.stopPropagation(); e.preventDefault(); } : undefined}
+      aria-disabled={isProFeature ? true : undefined}
+      data-locked={isProFeature ? "true" : "false"}
     >
       {displayItems.map((item, index) => {
         const displayName = resolveName(item, index);
@@ -86,7 +86,7 @@ const CategoryTagsDisplay = ({ value, __, editOptions, column }) => {
             key={index}
             size="sm"
             variant="solid"
-            className="!text-xs shadow-sm flex-shrink-0" // ← הוסף flex-shrink-0
+            className="!text-xs shadow-sm flex-shrink-0"
             classNames={{
               base: "bg-slate-100 dark:bg-slate-600 opacity-100 !text-xs shadow-sm dark:shadow-xl h-5 !rounded-sm",
               content: "dark:text-slate-300 !text-xs",
@@ -101,8 +101,8 @@ const CategoryTagsDisplay = ({ value, __, editOptions, column }) => {
         <span className="text-xs text-muted-foreground">+{remainingCount}</span>
       )}
 
-      {/* ✅ ProBadge אינלייני עם ריחוף עדין, לא נחתך ולא זולג */}
-      {locked && (
+      {/* ProBadge for categories - always shown */}
+      {isProFeature && (
         <span className="ml-1 inline-flex items-center shrink-0 align-middle leading-none drop-shadow-sm [transform:translateY(-1px)]">
           <ProBadge />
         </span>

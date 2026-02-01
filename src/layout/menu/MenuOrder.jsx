@@ -31,10 +31,6 @@ export function MenuOrder() {
   const [isLicenseSheetOpen, setIsLicenseSheetOpen] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
-   
-
-  // 🔒 חסימה עבור Free users
-  const noLicence = typeof window !== "undefined" && window.hasLicence === false;
 
   const handleStartTour = () => {
     resetTour();

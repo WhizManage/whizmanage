@@ -1,5 +1,5 @@
 import React, { memo, useState } from "react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { X, Copy, Trash2, RotateCcw, Loader2, Skull, Pencil, Archive, Settings2 } from "lucide-react";
 import { FloatingDock } from "@components/ui/aceternity/floating-dock";
 import { Button } from "@components/ui/button";
@@ -17,7 +17,7 @@ const ICONS = {
 
 export const SelectionToolbar = memo(
   ({ selectedCount, onClear, actions = [], onRequestClose }) => {
-     
+
     const [busy, setBusy] = useState(false);
     if (selectedCount === 0) return null;
 
@@ -40,18 +40,8 @@ export const SelectionToolbar = memo(
     });
 
     const dockItems = filteredActions.map((action) => {
-      const iconName = typeof action.icon === "string" ? action.icon : null;
-      const isBulkEdit =
-        iconName === "Settings2" ||
-        (typeof action.label === "string" && action.label.toLowerCase().includes("bulk"));
-      const isDuplicate =
-        iconName === "Copy" ||
-        (typeof action.label === "string" && action.label.toLowerCase().includes("duplicate"));
-
-      // 🔒 תנאי נעילה — בלי רישיון: Bulk תמיד נעול; Duplicate נעול כשנבחרו 2+
-      // או אם הפעולה עצמה סומנה כנעולה (lockedFeature / disabled)
-      const noLicence = (typeof window !== "undefined" && window?.hasLicence === false);
-      const shouldLock = action.lockedFeature || (noLicence && (isBulkEdit || (isDuplicate && selectedCount > 1)));
+      // Check if this action is locked (Pro feature)
+      const shouldLock = action.lockedFeature || false;
       const disabled = action.disabled || shouldLock;
 
       const baseIcon =
@@ -77,7 +67,7 @@ export const SelectionToolbar = memo(
             {baseIcon}
           </div>
 
-          {/* ה־ProBadge נשאר צבעוני כמו ב־Import */}
+          {/* ה־ProBadge נשאר צבעוני */}
           {shouldLock && (
             <div className="absolute -top-1 -right-1 scale-90 grayscale-0 opacity-100 drop-shadow">
               <ProBadge />
@@ -91,7 +81,7 @@ export const SelectionToolbar = memo(
         icon: iconWithBadge,
         onClick: async (e) => {
           e?.preventDefault?.();
-          if (busy || disabled) return; // חסימת לחיצה
+          if (busy || disabled) return;
 
           const keepOpen = !!action.keepOpen;
           const closeFirst = !!action.closeFirst;

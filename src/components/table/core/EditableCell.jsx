@@ -19,7 +19,6 @@ import { Textarea } from "../../ui/textarea";
 import CustomTooltip from "@components/ui/nextUI/Tooltip.jsx";
 import EditableTooltip from "@components/ui/nextUI/EditableTooltip.jsx";
 import { useTableSaveStateStore } from "../store/saveStateStore.js";
-import ProBadge from "@components/ui/nextUI/ProBadge";
 import { Expand } from "lucide-react";
 
 export const EditableCell = memo(function EditableCell({
@@ -486,13 +485,6 @@ export const EditableCell = memo(function EditableCell({
               }
             }}
             onValueChange={(val) => {
-              // 🔒 בדוק אם האפשרות נעולה
-              const selectedOption = editOptions.options?.find(
-                (opt) => (opt.value || opt.id) === val
-              );
-              if (selectedOption?.locked) {
-                return; // לא לאפשר בחירה באפשרות נעולה
-              }
               setValue(val);
               setTimeout(() => finishEditing(), 100);
             }}
@@ -518,30 +510,14 @@ export const EditableCell = memo(function EditableCell({
                 sideOffset={6}
                 className="z-[10000] max-h-[280px] min-w-[var(--radix-select-trigger-width)]"
               >
-                {editOptions.options?.map((option) => {
-                  const isLocked = option.locked === true;
-                  return (
-                    <SelectItem
-                      key={option.value || option.id}
-                      value={option.value || option.id}
-                      disabled={isLocked}
-                      className={cn(
-                        isLocked && "opacity-50 cursor-not-allowed"
-                      )}
-                    >
-                      <span className="flex items-center justify-between w-full gap-2">
-                        <span className={cn(isLocked && "text-slate-400")}>
-                          {option.label || option.name}
-                        </span>
-                        {isLocked && (
-                          <span className="scale-75">
-                            <ProBadge />
-                          </span>
-                        )}
-                      </span>
-                    </SelectItem>
-                  );
-                })}
+                {editOptions.options?.map((option) => (
+                  <SelectItem
+                    key={option.value || option.id}
+                    value={option.value || option.id}
+                  >
+                    {option.label || option.name}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Portal>
           </Select>

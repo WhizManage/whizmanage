@@ -14,7 +14,6 @@ import {
 } from "@components/table/utils/mediaUtils";
 import { createColumnHelper } from "@tanstack/react-table";
 import { Link2, Package } from "lucide-react";
-import ProBadge from "@components/ui/nextUI/ProBadge";
 import { formatCurrency, formatValue } from "../../../../utils/formatValue.js"; // 👈 תיקון סיומת
 import CategoryTagsDisplay from "../../components/CategoryTagsDisplay.jsx";
 import CategoryTagsEdit from "../../components/CategoryTagsEdit";
@@ -1053,38 +1052,20 @@ export const createProductsColumns = (store, __, handleCellUpdate) => {
       maxSize: 300,
       enableResizing: true,
       meta: {
-        editable: true,
+        editable: false,
         editType: "custom",
         customDisplayComponent: CategoryTagsDisplay,
-        customEditComponent: CategoryTagsEdit,
-        autoFinishOnChange: false,
         editOptions: {
           label: __("Categories", "whizmanage"),
-          allowCreate: true,
-          allowEdit: true,
-          allowDelete: true,
           hierarchical: true,
+          displayOnly: true,
         },
       },
       filterFn: columnFilterFn,
       cell: withVariationBehavior(
-        (props) => (
-          <EditableCell
-            {...props}
-            onUpdate={(id, _colId, value, rowData, isFromHistory) => {
-              return handleCategoriesUpdate(
-                id,
-                "categories",
-                value,
-                rowData,
-                store,
-                isFromHistory
-              );
-            }}
-          />
-        ),
-        "inheritFromParent", // 👈 שינוי מ-'hidden' ל-'inheritFromParent'
-        __("Same as parent", "whizmanage") // 👈 טקסט קצר
+        (props) => <EditableCell {...props} />,
+        "inheritFromParent",
+        __("Same as parent", "whizmanage")
       ),
     }),
 
@@ -1352,30 +1333,6 @@ export const createProductsColumns = (store, __, handleCellUpdate) => {
         return data.images?.[0]?.alt || "";
       },
       cell: (props) => {
-        // 🔒 חסימה עבור Free users
-        const locked = typeof window !== "undefined" && window.hasLicence === false;
-        const value = props.getValue();
-
-        if (locked) {
-          return (
-            <div
-              className="flex items-center gap-1 px-3 py-2 max-w-full overflow-hidden"
-              title={value || ""}
-              onMouseDown={(e) => { e.stopPropagation(); e.preventDefault(); }}
-              onClick={(e) => { e.stopPropagation(); e.preventDefault(); }}
-              aria-disabled={true}
-              data-locked="true"
-            >
-              <span className="text-muted-foreground truncate">
-                {value || "—"}
-              </span>
-              <span className="ml-1 inline-flex items-center shrink-0">
-                <ProBadge />
-              </span>
-            </div>
-          );
-        }
-
         return (
           <EditableCell
             {...props}

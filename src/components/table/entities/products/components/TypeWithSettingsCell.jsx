@@ -1,15 +1,11 @@
 // src/components/pages/table/products/components/TypeWithSettingsCell.jsx
 
 import { EditableCell } from "@/components/table/core/EditableCell";
-import CustomTooltip from "@components/ui/nextUI/Tooltip";
-import { Button } from "@/components/ui/button";
-import ProBadge from "@components/ui/nextUI/ProBadge";
-import { Settings2 } from "lucide-react";
 import React from "react";
 import ManageExternal from "./external/ManageExternal";
 import ManageGrouped from "./grouped/ManageGrouped";
-import AddVariations from "./variation/AddVariations";
 import { __ } from "@wordpress/i18n";
+
 export default function TypeWithSettingsCell(props) {
   const { row, table } = props;
   const handleCellUpdate = table?.options?.meta?.handleCellUpdate;
@@ -23,34 +19,11 @@ export default function TypeWithSettingsCell(props) {
     e.preventDefault();
   };
 
-  // הגדרת הכפתור לפי סוג המוצר (מועתקת מ-TypeDisplay)
+  // הגדרת הכפתור לפי סוג המוצר
   const renderButton = () => {
-    const hasLicence = typeof window !== "undefined" && window.hasLicence !== false;
-
+    // Variable products feature removed
     if (currentType === "variable") {
-      if (!hasLicence) {
-        return (
-          <CustomTooltip
-            title={__("Pro feature", "whizmanage")}
-            description={__("Variable products require Pro license", "whizmanage")}
-          >
-            <Button
-              type="button"
-              variant="outline"
-              size="icon"
-              className="flex px-2 !size-7 opacity-60 cursor-not-allowed"
-              disabled
-              aria-disabled
-            >
-              <Settings2 className="!size-4" />
-              <span className="pointer-events-none absolute -top-1 -right-1 z-[50]">
-                <ProBadge />
-              </span>
-            </Button>
-          </CustomTooltip>
-        );
-      }
-      return <AddVariations row={row} />;
+      return null;
     }
 
     if (currentType === "grouped") {

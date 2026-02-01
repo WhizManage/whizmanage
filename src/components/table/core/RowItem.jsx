@@ -28,7 +28,6 @@ export const DraggableRow = memo(
     onToggleSelect,
     config,
     style = {},
-    isLockedRow = false,
   }) {
     const isDragEnabled = config?.enableRowDragging && !row.original?.isVariant;
 
@@ -94,9 +93,7 @@ export const DraggableRow = memo(
           // ✅ סטיילינג מיוחד לשורות חדשות
           isNewRow &&
             !isDragging &&
-            "!bg-fuchsia-50/40 dark:!bg-fuchsia-900/20 ring-2 ring-inset ring-fuchsia-500/30 dark:ring-fuchsia-500/20",
-          // 🔒 סטיילינג לשורות נעולות
-          isLockedRow && "locked-row"
+            "!bg-fuchsia-50/40 dark:!bg-fuchsia-900/20 ring-2 ring-inset ring-fuchsia-500/30 dark:ring-fuchsia-500/20"
         )}
         aria-grabbed={isDragging ? "true" : undefined}
         role="row"
@@ -126,9 +123,6 @@ export const DraggableRow = memo(
 
     // אם ה-children (התאים) השתנו
     if (prevProps.children !== nextProps.children) return false;
-
-    // אם מצב הנעילה השתנה
-    if (prevProps.isLockedRow !== nextProps.isLockedRow) return false;
 
     // אם הגענו לכאן, שום דבר חשוב לא השתנה
     return true;

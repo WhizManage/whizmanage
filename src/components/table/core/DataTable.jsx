@@ -39,7 +39,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { __ } from "@wordpress/i18n";
+import { __, sprintf } from "@wordpress/i18n";
 
 import { toast } from "@/lib/utils";
 import { postApi } from "@/services/services";
@@ -1203,14 +1203,9 @@ export default function GenericDataTable({
   // ⚡ אופטימיזציה: יוצרים את pinKey פעם אחת במקום בכל תא
   const pinKey = useMemo(() => JSON.stringify(effectiveColumnPinning), [effectiveColumnPinning]);
 
-  // בדיקת חסימת שורות עבור משתמשי Free ב-discount-rules
-  const noLicence = typeof window !== "undefined" && window.hasLicence === false;
-  const isDiscountRules = entityName === "discount-rules";
-
   const renderRow = useCallback(
     (row, rowIndex) => {
       const isSelected = row.getIsSelected();
-      const isLockedRow = noLicence && isDiscountRules && rowIndex > 0;
 
       return (
         <DraggableRow
@@ -1219,7 +1214,6 @@ export default function GenericDataTable({
           isSelected={isSelected}
           onToggleSelect={() => row.toggleSelected()}
           config={memoizedConfig}
-          isLockedRow={isLockedRow}
         >
           {row.getVisibleCells().map((cell) => (
             <PinnableCell
@@ -1237,7 +1231,7 @@ export default function GenericDataTable({
         </DraggableRow>
       );
     },
-    [memoizedConfig, table, pinKey, expandedVersion, noLicence, isDiscountRules]
+    [memoizedConfig, table, pinKey, expandedVersion]
   );
 
   const memoizedRowsData = useMemo(() => {
@@ -1630,9 +1624,35 @@ export default function GenericDataTable({
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-slate-800 dark:text-white">
-                    {isTrash
-                      ? __("No entities in trash", { entity: __(entityName, "whizmanage") })
-                      : __("No entities found", { entity: __(entityName, "whizmanage") })}
+                    {(() => {
+                      const messages = {
+                        products: {
+                          found: __("No products found", "whizmanage"),
+                          trash: __("No products in trash", "whizmanage"),
+                        },
+                        orders: {
+                          found: __("No orders found", "whizmanage"),
+                          trash: __("No orders in trash", "whizmanage"),
+                        },
+                        coupons: {
+                          found: __("No coupons found", "whizmanage"),
+                          trash: __("No coupons in trash", "whizmanage"),
+                        },
+                        customers: {
+                          found: __("No customers found", "whizmanage"),
+                          trash: __("No customers in trash", "whizmanage"),
+                        },
+                        "discount-rules": {
+                          found: __("No discount rules found", "whizmanage"),
+                          trash: __("No discount rules in trash", "whizmanage"),
+                        },
+                      };
+                      const entityMessages = messages[entityName] || {
+                        found: __("No items found", "whizmanage"),
+                        trash: __("No items in trash", "whizmanage"),
+                      };
+                      return isTrash ? entityMessages.trash : entityMessages.found;
+                    })()}
                   </h3>
                   <p className="text-slate-500 dark:text-slate-300 text-sm">
                     {__("Try changing the filters", "whizmanage")}

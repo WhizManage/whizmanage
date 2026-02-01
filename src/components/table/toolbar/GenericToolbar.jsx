@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { toast } from "sonner";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { SelectionToolbar } from "./Toolbar";
 import { createGenericActions } from "./actions/genericActions";
 import { ExternalLink } from "lucide-react";
@@ -25,7 +25,6 @@ export const makeUnifiedActionsBuilder = ({
   actions,
   isTrash,
   duplicateTransform,
-  onBulkEdit,
   customActions = [],
   toolbarOverrides = {},
   entityName,
@@ -39,32 +38,19 @@ export const makeUnifiedActionsBuilder = ({
     onTrashSelected = null,
   } = toolbarOverrides || {};
 
-  // בדיקת רישיון עבור חסימות
-  const noLicence = typeof window !== "undefined" && window.hasLicence === false;
-  const isDiscountRules = entityName === "discount-rules";
-
   return (rowsSnapshot) => {
     const base = [];
 
-    // בדיקה אם יש שורות נעולות בין הנבחרות (עבור discount-rules ו-Free users)
-    const hasLockedRows = noLicence && isDiscountRules && rowsSnapshot.length > 0 &&
-      rowsSnapshot.some((row, index) => index > 0 || (row?.index !== undefined && row.index > 0));
-
     if (entityName !== "customers") {
-      // Duplicate - חסום עבור Free users ב-discount-rules
-      const isDuplicateLocked = noLicence && isDiscountRules;
+      // Duplicate
       base.push({
         label: __("Duplicate", "whizmanage"),
         icon: "Copy",
         showWhen: "any",
-        disabled: isDuplicateLocked,
-        lockedFeature: isDuplicateLocked,
-        onClick: isDuplicateLocked
-          ? () => {}
-          : () => actions.duplicateItems(rowsSnapshot, duplicateTransform),
+        onClick: () => actions.duplicateItems(rowsSnapshot, duplicateTransform),
       });
 
-      // Bulk edit לא יוצג ב-discount-rules
+      // Bulk edit - Pro feature (always locked)
       if (entityName !== "discount-rules") {
         base.push({
           label: __("Bulk edit", "whizmanage"),
@@ -73,7 +59,9 @@ export const makeUnifiedActionsBuilder = ({
           closeFirst: true,
           clearSelection: false,
           keepOpen: true,
-          onClick: () => onBulkEdit?.(),
+          lockedFeature: true,
+          disabled: true,
+          onClick: () => {},
         });
       }
     }
@@ -138,15 +126,9 @@ export const makeUnifiedActionsBuilder = ({
       }
     } else {
       if (allowTrash) {
-        // Move to Trash - חסום עבור Free users ב-discount-rules
-        const isTrashLocked = noLicence && isDiscountRules;
         base.push({
           label: __("Move to Trash", "whizmanage"), icon: "Archive", variant: "destructive", showWhen: "any",
-          disabled: isTrashLocked,
-          lockedFeature: isTrashLocked,
-          onClick: isTrashLocked
-            ? () => {}
-            : async () => onTrashSelected ? onTrashSelected(rowsSnapshot) : actions.deleteItems(rowsSnapshot, false)
+          onClick: async () => onTrashSelected ? onTrashSelected(rowsSnapshot) : actions.deleteItems(rowsSnapshot, false)
         });
       }
       if (allowDelete) {
@@ -174,7 +156,6 @@ export const GenericToolbar = ({
   isTrash = false,
   customActions = [],
   duplicateTransform = null,
-  onBulkEdit,
   onRestoreSelected,
   onDeleteSelected,
   onTrashSelected,
@@ -183,7 +164,7 @@ export const GenericToolbar = ({
   onActionSuccess,
   queryClient,
 }) => {
-   
+
   const [selectedRows, setSelectedRows] = useState([]);
   const TOAST_ID = "wm-selection-toolbar";
   const selectedCount = table.getSelectedRowModel().flatRows.length;
@@ -193,17 +174,13 @@ export const GenericToolbar = ({
       createGenericActions({
         entityName,
         endpoint,
-        setData: store.setData,           // 👈 מה-store
-        setRowSelection: store.setRowSelection, // 👈 מה-store
-        setIsLoading: store.setLoading,   // 👈 מה-store (שים לב: setLoading ולא setIsLoading)
+        setData: store.setData,
+        setRowSelection: store.setRowSelection,
+        setIsLoading: store.setLoading,
         __,
         isTrash,
         queryClient,
         onActionSuccess: () => {
-          // GenericToolbar doesn't have direct access to queryClient easily here without props.
-          // However, GenericToolbar is usually used inside GenericDataTable or similar context.
-          // If we want to support invalidation here, we might need to pass a callback prop.
-          // For now, let's assume the parent handles it or we pass a prop.
           if (typeof onActionSuccess === "function") {
             onActionSuccess();
           }
@@ -226,7 +203,7 @@ export const GenericToolbar = ({
 
   useEffect(() => {
     setSelectedRows(collectSelected(table.getRowModel().rows));
-  }, [table.getState().rowSelection]); // 👈 יציב וברור
+  }, [table.getState().rowSelection]);
 
   const buildActions = useMemo(
     () =>
@@ -235,14 +212,13 @@ export const GenericToolbar = ({
         actions,
         isTrash,
         duplicateTransform,
-        onBulkEdit,
         customActions,
         entityName,
         allowTrash,
         allowDelete,
         toolbarOverrides: { onRestoreSelected, onDeleteSelected, onTrashSelected },
       }),
-    [__, actions, isTrash, duplicateTransform, onBulkEdit, customActions, onRestoreSelected, onDeleteSelected, onTrashSelected, entityName, allowTrash, allowDelete]
+    [__, actions, isTrash, duplicateTransform, customActions, onRestoreSelected, onDeleteSelected, onTrashSelected, entityName, allowTrash, allowDelete]
   );
 
   const toolbarActions = useMemo(
@@ -258,7 +234,7 @@ export const GenericToolbar = ({
 
     const handleClear = () => {
       setSelectedRows([]);
-      store.setRowSelection({});  // 👈 מה-store
+      store.setRowSelection({});
       toast.dismiss(TOAST_ID);
     };
 

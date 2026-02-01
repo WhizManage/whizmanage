@@ -5,21 +5,16 @@ import { Separator } from "@components/ui/separator";
 import { SidebarTrigger } from "@components/ui/sidebar";
 import { Crown, TrendingUp, X } from "lucide-react";
 import { useEffect, useState } from "react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { MenuOrder } from "./menu/MenuOrder";
 
 const Navbar = () => {
   const [isUpdateAvailable, setIsUpdateAvailable] = useState(false);
-  const [showUpgradeBanner, setShowUpgradeBanner] = useState(false);
-   
+  const [showUpgradeBanner, setShowUpgradeBanner] = useState(true);
 
   useEffect(() => {
     if (window.newVersion && window.newVersion !== window.version) {
       setIsUpdateAvailable(true);
-    }
-    // Show upgrade banner for free users
-    if (window.hasLicence === false) {
-      setShowUpgradeBanner(true);
     }
   }, []);
 
