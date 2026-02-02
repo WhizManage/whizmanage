@@ -42,12 +42,15 @@ export const makeUnifiedActionsBuilder = ({
     const base = [];
 
     if (entityName !== "customers") {
-      // Duplicate
+      // Duplicate - locked for discount-rules (Pro feature)
+      const isDuplicateLocked = entityName === "discount-rules";
       base.push({
         label: __("Duplicate", "whizmanage"),
         icon: "Copy",
         showWhen: "any",
-        onClick: () => actions.duplicateItems(rowsSnapshot, duplicateTransform),
+        lockedFeature: isDuplicateLocked,
+        disabled: isDuplicateLocked,
+        onClick: isDuplicateLocked ? () => {} : () => actions.duplicateItems(rowsSnapshot, duplicateTransform),
       });
 
       // Bulk edit - Pro feature (always locked)
