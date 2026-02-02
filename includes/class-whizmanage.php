@@ -403,7 +403,8 @@ if (! class_exists('Whizmanage')) {
             }
 
             $manual_json = WHIZMANAGE_DIR . 'languages/whizmanage-he_IL-manual.json';
-            if (file_exists($manual_json)) {
+            $locale = function_exists('determine_locale') ? determine_locale() : get_locale();
+            if ($locale === 'he_IL' && file_exists($manual_json)) {
                 $jed = json_decode(file_get_contents($manual_json), true);
                 if (isset($jed['locale_data']['whizmanage'])) {
                     $data_js = wp_json_encode($jed['locale_data']['whizmanage']);
