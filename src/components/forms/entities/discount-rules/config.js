@@ -43,15 +43,19 @@ const discountRuleConfig = {
           label: "Discount type",
           type: "typewithsettings",
           actionsField: "actions",
-          options: [
-            { value: "product_adjustment", label: "Product adjustment" },
-            { value: "cart_adjustment", label: "Cart adjustment" },
-            { value: "bulk_discount", label: "Bulk discount" },
-            { value: "bogo_discount", label: "BOGO" },
-            { value: "bxgy_discount", label: "BXGY" },
-            { value: "shipping_discount", label: "Shipping discount" },
-            { value: "spend_bundle", label: "Spend bundle" },
-          ],
+          options: (() => {
+            // נעילה אם אין רישיון (hasLicence לא true)
+            const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
+            return [
+              { value: "product_adjustment", label: "Product adjustment" },
+              { value: "cart_adjustment", label: "Cart adjustment", locked: noLicence },
+              { value: "bulk_discount", label: "Bulk discount", locked: noLicence },
+              { value: "bogo_discount", label: "BOGO", locked: noLicence },
+              { value: "bxgy_discount", label: "BXGY", locked: noLicence },
+              { value: "shipping_discount", label: "Shipping discount", locked: noLicence },
+              { value: "spend_bundle", label: "Spend bundle", locked: noLicence },
+            ];
+          })(),
         },
         {
           name: "status",

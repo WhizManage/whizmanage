@@ -27,7 +27,8 @@ export function createEntityColumns(store, __, handleCellUpdate) {
     // --- Type (+ כפתור ההגדרות ליד) ---
     // 🔒 חסימת אפשרויות עבור Free users - רק product_adjustment זמין
     (() => {
-      const noLicence = typeof window !== "undefined" && window.hasLicence === false;
+      // נעילה אם אין רישיון (hasLicence לא true)
+      const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
       const allTypeOptions = [
         { value: "product_adjustment", label: __("Product adjustment", "whizmanage") },
         { value: "cart_adjustment", label: __("Cart adjustment", "whizmanage"), locked: noLicence },

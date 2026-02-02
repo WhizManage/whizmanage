@@ -66,9 +66,10 @@ const ALL_FIELDS = [
 
 // 🔒 פונקציה לבדיקת נעילה - מחשבת בזמן אמת
 const isFieldLocked = (fieldValue) => {
-  const noLicence = typeof window !== "undefined" && window.hasLicence === false;
-  // רק products לא נעול עבור Free users
-  return noLicence && fieldValue !== "products";
+  // נעילה אם אין רישיון (hasLicence לא true)
+  const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
+  // רק categories לא נעול עבור Free users
+  return noLicence && fieldValue !== "categories";
 };
 
 const getDir = () => {

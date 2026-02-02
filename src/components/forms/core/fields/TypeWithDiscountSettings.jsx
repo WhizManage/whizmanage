@@ -1,5 +1,6 @@
 // src/components/forms/core/fields/TypeWithDiscountSettings.jsx
 import { Settings2, X } from "lucide-react";
+import ProBadge from "@components/ui/nextUI/ProBadge";
 import { useEffect, useMemo, useState } from "react";
 import { Controller } from "react-hook-form";
  import { __ } from "@wordpress/i18n";
@@ -1142,18 +1143,20 @@ export default function TypeWithDiscountSettings({
     setValue(name, newType, { shouldValidate: true, shouldDirty: true });
   };
 
-  const discountTypes =
-    options.length > 0
-      ? options
-      : [
-        { value: "product_adjustment", label: "Product adjustment" },
-        { value: "cart_adjustment", label: "Cart adjustment" },
-        { value: "bulk_discount", label: "Bulk discount" },
-        { value: "bogo_discount", label: "BOGO" },
-        { value: "bxgy_discount", label: "BXGY" },
-        { value: "shipping_discount", label: "Shipping discount" },
-        { value: "spend_bundle", label: "Spend bundle" },
-      ];
+  const discountTypes = useMemo(() => {
+    if (options.length > 0) return options;
+    // נעילה אם אין רישיון (hasLicence לא true)
+    const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
+    return [
+      { value: "product_adjustment", label: "Product adjustment" },
+      { value: "cart_adjustment", label: "Cart adjustment", locked: noLicence },
+      { value: "bulk_discount", label: "Bulk discount", locked: noLicence },
+      { value: "bogo_discount", label: "BOGO", locked: noLicence },
+      { value: "bxgy_discount", label: "BXGY", locked: noLicence },
+      { value: "shipping_discount", label: "Shipping discount", locked: noLicence },
+      { value: "spend_bundle", label: "Spend bundle", locked: noLicence },
+    ];
+  }, [options]);
 
   return (
     <div className="flex flex-col w-full gap-3 px-2">
@@ -1188,8 +1191,17 @@ export default function TypeWithDiscountSettings({
                           <SelectItem
                             key={discountType.value}
                             value={discountType.value}
+                            disabled={discountType.locked}
+                            className={discountType.locked ? "opacity-60" : ""}
                           >
-                            {__(discountType.label, "whizmanage")}
+                            <span className="flex items-center gap-2">
+                              {__(discountType.label, "whizmanage")}
+                              {discountType.locked && (
+                                <span className="scale-90">
+                                  <ProBadge />
+                                </span>
+                              )}
+                            </span>
                           </SelectItem>
                         ))}
                       </SelectGroup>

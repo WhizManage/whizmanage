@@ -16,6 +16,7 @@ import AllowedEmailsCell from "./components/AllowedEmailsCell.jsx";
 import { COUPON_STATUS_KEYS } from "./coupons.constants.js";
 import MultiSelectEdit from "@components/table/components/MultiSelectEdit.jsx";
 import CustomTooltip from "@components/ui/nextUI/Tooltip";
+import ProBadge from "@components/ui/nextUI/ProBadge";
 
 const columnHelper = createColumnHelper();
 const toNum = (raw) => {
@@ -472,14 +473,19 @@ export const createCouponsColumns = (store, __, handleCellUpdate) => {
       cell: (props) => <EditableCell {...props} onUpdate={onUpdate} />,
     }),
 
-    // --- Product categories (custom) ---
+    // --- Product categories (custom) - locked in table, only editable on creation ---
     columnHelper.accessor((row) => row.product_categories || [], {
       id: "product_categories",
-      header: __("Product categories", "whizmanage"),
+      header: () => (
+        <span className="flex items-center gap-1">
+          {__("Product categories", "whizmanage")}
+          <span className="scale-75"><ProBadge /></span>
+        </span>
+      ),
       size: 240,
       minSize: 190,
       meta: {
-        editable: true,
+        editable: false,
         editType: "custom",
         customDisplayComponent: CategoryTagsDisplay,
         customEditComponent: CategoryTagsEdit,
@@ -510,14 +516,19 @@ export const createCouponsColumns = (store, __, handleCellUpdate) => {
       ),
     }),
 
-    // --- Excluded product categories (custom) ---
+    // --- Excluded product categories (custom) - locked in table, only editable on creation ---
     columnHelper.accessor((row) => row.excluded_product_categories || [], {
       id: "excluded_product_categories",
-      header: __("Excluded product categories", "whizmanage"),
+      header: () => (
+        <span className="flex items-center gap-1">
+          {__("Excluded product categories", "whizmanage")}
+          <span className="scale-75"><ProBadge /></span>
+        </span>
+      ),
       size: 240,
       minSize: 190,
       meta: {
-        editable: true,
+        editable: false,
         editType: "custom",
         customDisplayComponent: CategoryTagsDisplay,
         customEditComponent: CategoryTagsEdit,
@@ -548,14 +559,19 @@ export const createCouponsColumns = (store, __, handleCellUpdate) => {
       ),
     }),
 
-    // --- Products (custom) ---
+    // --- Products (custom) - locked in table, only editable on creation ---
     columnHelper.accessor((row) => row.product_ids || [], {
       id: "product_ids",
-      header: __("Products", "whizmanage"),
+      header: () => (
+        <span className="flex items-center gap-1">
+          {__("Products", "whizmanage")}
+          <span className="scale-75"><ProBadge /></span>
+        </span>
+      ),
       size: 220,
       minSize: 180,
       meta: {
-        editable: true,
+        editable: false,
         editType: "custom",
         customEditComponent: MultiSelectEdit,
         autoFinishOnChange: false,
@@ -645,14 +661,19 @@ export const createCouponsColumns = (store, __, handleCellUpdate) => {
       ),
     }),
 
-    // --- Excluded products (custom) ---
+    // --- Excluded products (custom) - locked in table, only editable on creation ---
     columnHelper.accessor((row) => row.excluded_product_ids || [], {
       id: "excluded_product_ids",
-      header: __("Excluded products", "whizmanage"),
+      header: () => (
+        <span className="flex items-center gap-1">
+          {__("Excluded products", "whizmanage")}
+          <span className="scale-75"><ProBadge /></span>
+        </span>
+      ),
       size: 240,
       minSize: 190,
       meta: {
-        editable: true,
+        editable: false,
         editType: "custom",
         customEditComponent: MultiSelectEdit,
         autoFinishOnChange: false,

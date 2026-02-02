@@ -62,10 +62,9 @@ class Whizmanage_Discount_Init
         // קבלת הבחירה מהטופס
         add_action('wp_loaded', __CLASS__ . '::handle_cart_post_data');
 
-        // הצגת לייבל טיר של Bulk
-        add_filter('woocommerce_get_item_data', __CLASS__ . '::display_bulk_tier_label', 20, 2);
-
-        add_filter('woocommerce_package_rates', ['Whiz_Discount_Manager', 'filter_package_rates_shipping_discount'], 31, 2);
+        // Pro features disabled in free version:
+        // - Bulk tier label display
+        // - Shipping discount filtering
         
         add_action('woocommerce_checkout_create_order', function (WC_Order $order, $data) {
             $rules = Whiz_Discount_Manager::get_applied_rules(true); // ← merge_session = true
@@ -92,22 +91,9 @@ class Whizmanage_Discount_Init
             }
         }, 20);
 
-        // Gift Notifications (BXGY)
-        add_action('template_redirect', __CLASS__ . '::handle_gift_actions');
-        
-        // הצגת הודעות (Floating Toasts)
-        add_action('wp_footer', __CLASS__ . '::output_floating_toasts');
+        // Pro features disabled (BOGO/BXGY gift notifications):
 
-        // ביטול דחייה אם המשתמש מוסיף ידנית
-        add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data) {
-            if (!empty($cart_item_data['whiz_dr_gift'])) return; // אם זו מתנה, אין מה לעשות
-
-            $sig = $product_id . '|' . $variation_id . '|' . md5(json_encode($variation));
-            Whiz_Discount_Manager::unreject_gift($sig);
-        }, 10, 6);
-
-        // מעקב אחרי מתנות שהוסרו - duplicated in original but keeping for safety/same logic
-        add_action('woocommerce_cart_item_removed', ['Whiz_Discount_Manager', 'track_rejected_gift'], 10, 2);
+        // Pro features disabled (gift rejection tracking for BOGO/BXGY):
 
         add_filter('woocommerce_cart_item_name', ['Whiz_Discount_Manager', 'customize_cart_item_name'], 10, 3);
         
