@@ -231,14 +231,6 @@ class Whiz_Discount_API
     public function create_rule(WP_REST_Request $req)
     {
         global $wpdb;
-
-        // Free version: maximum 1 discount rule allowed
-        $table = Whizmanage_Discount_Functions::get_table_name();
-        $existing_count = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$table} WHERE status != 'trash'");
-        if ($existing_count >= 1) {
-            return new WP_Error('whiz_dr_limit', __('Free version allows maximum 1 discount rule. Upgrade to Pro for unlimited rules.', 'whizmanage'), ['status' => 403]);
-        }
-
         $payload = Whiz_Discount_Rule::sanitize($req->get_json_params());
         unset($payload['id']);
 
@@ -511,14 +503,6 @@ class Whiz_Discount_API
         $out = ['create' => [], 'update' => [], 'delete' => []];
 
         // ===== CREATE =====
-        // Free version: maximum 1 discount rule allowed
-        if (!empty($create)) {
-            $existing_count = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$table} WHERE status != 'trash'");
-            if ($existing_count >= 1) {
-                return new WP_Error('whiz_dr_limit', __('Free version allows maximum 1 discount rule. Upgrade to Pro for unlimited rules.', 'whizmanage'), ['status' => 403]);
-            }
-        }
-
         foreach ($create as $item) {
             $payload = Whiz_Discount_Rule::sanitize($item);
             unset($payload['id']);

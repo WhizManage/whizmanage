@@ -8,8 +8,9 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useMemo, useState } from "react";
- import { __ } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import MultiSelectInput from "./MultiSelectInput";
+import ProBadge from "@components/ui/nextUI/ProBadge";
 
 export default function AdditionalTaxonomiesInput({
   name = "additional_taxonomies",
@@ -44,6 +45,9 @@ export default function AdditionalTaxonomiesInput({
     return null;
   }
 
+  // Pro feature - locked in free version
+  const isLocked = window.hasLicence !== true;
+
   return (
     <div className="flex flex-col w-full gap-3 px-2">
       <Collapsible open={isOpen} onOpenChange={setIsOpen} className="space-y-2">
@@ -56,6 +60,7 @@ export default function AdditionalTaxonomiesInput({
           >
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium">{__(label, "whizmanage")}</span>
+              {isLocked && <ProBadge />}
               <span className="text-xs text-muted-foreground">
                 {__("available", { count: filteredTaxonomies.length })}
               </span>
@@ -69,13 +74,14 @@ export default function AdditionalTaxonomiesInput({
         </CollapsibleTrigger>
 
         <CollapsibleContent className="space-y-4 px-0 pt-2">
-          <div className="flex flex-col gap-4 py-0 px-0 bg-slate-50 dark:bg-slate-900 rounded-lg">
+          <div className={`flex flex-col gap-4 py-0 px-0 bg-slate-50 dark:bg-slate-900 rounded-lg ${isLocked ? 'opacity-50 pointer-events-none' : ''}`}>
             {filteredTaxonomies.map((taxonomy) => (
               <MultiSelectInput
                 key={taxonomy.name}
                 name={taxonomy.name}
                 label={taxonomy.label || taxonomy.name}
                 taxonomyType={taxonomy.name}
+                disabled={isLocked}
               />
             ))}
           </div>

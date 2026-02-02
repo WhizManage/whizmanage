@@ -9,7 +9,6 @@ export const discountRulesCustomActions = (__) => [
 export const discountRulesToolbarConfig = (__) => ({
   entityName: "discount-rules",
   endpoint: `${window.siteUrl}/wp-json/whizmanage/v1/discount-rules`,
-  duplicateTransform: null, // Disabled - Pro feature
   customActions: discountRulesCustomActions(__),
 });
 

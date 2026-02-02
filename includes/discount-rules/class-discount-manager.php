@@ -388,12 +388,6 @@ if (!class_exists('Whiz_Discount_Manager')) {
 
             foreach ($rows as $rule) {
                 $type = $rule['type'] ?? '';
-
-                // Only product_adjustment is available in free version - skip all other types
-                if ($type !== 'product_adjustment') {
-                    continue;
-                }
-
                 $actions = Whizmanage_Discount_Functions::json_decode($rule['actions']);
                 $cond = Whizmanage_Discount_Functions::json_decode($rule['conditions']);
                 $filters = Whizmanage_Discount_Functions::json_decode($rule['filters'] ?? []);
@@ -403,10 +397,68 @@ if (!class_exists('Whiz_Discount_Manager')) {
                     continue;
                 }
 
+                if ($type === 'cart_adjustment')
+                    continue;
                 if (!self::rules_pass($cond, $cart))
                     continue;
 
-                // product_adjustment - only type available in free version
+                if ($type === 'bogo_discount') {
+                    self::sync_bogo_gifts($cart, $cond, $actions, (array) $filters, $rule['message'] ?? '');
+                    self::note_rule_applied($rule, [
+                        'bucket' => 'bogo',
+                        'descriptor' => self::build_min_descriptor('bogo', $actions),
+                    ]);
+                    continue;
+                }
+
+                if ($type === 'bxgy_discount') {
+                    self::sync_bxgy_gifts($cart, $cond, $actions, (array) $filters, $rule['message'] ?? '');
+                    self::note_rule_applied($rule, [
+                        'bucket' => 'bxgy',
+                        'descriptor' => self::build_min_descriptor('bxgy', $actions),
+                    ]);
+                    continue;
+                }
+
+                if ($type === 'bulk_discount' && !empty($actions['tiers']) && is_array($actions['tiers'])) {
+                    $asCoupon = self::should_apply_as_coupon($actions);
+                    if ($asCoupon) {
+                        $clabel = isset($actions['coupon_label']) ? (string) $actions['coupon_label'] : '';
+                        $saved = self::apply_bulk_tiers_as_coupon($cart, $cond, $actions['tiers'], $clabel, (array) $filters); // העברת filters
+                        if ($saved > 0) {
+                            $before = WC()->session ? (float) WC()->session->get('whiz_bulk_last_before', 0) : 0;
+                            $after = WC()->session ? (float) WC()->session->get('whiz_bulk_last_after', 0) : 0;
+                            $tier = WC()->session ? (array) WC()->session->get('whiz_bulk_last_tier', []) : [];
+                            self::note_rule_applied($rule, [
+                                'bucket' => 'bulk_coupon',
+                                'saved' => round($saved, 2),
+                                'affected_before' => round($before, 2),
+                                'affected_after' => round($after, 2),
+                                'before' => round($before, 2),
+                                'after' => round($after, 2),
+                                'descriptor' => self::build_min_descriptor('bulk_discount', $actions, ['picked_tier' => $tier]),
+                            ]);
+                        }
+                    } else {
+                        $saved = self::apply_bulk_tiers_to_cart($cart, $cond, $actions['tiers'], (array) $filters); // העברת filters
+                        if ($saved > 0) {
+                            $before = WC()->session ? (float) WC()->session->get('whiz_bulk_last_before', 0) : 0;
+                            $after = WC()->session ? (float) WC()->session->get('whiz_bulk_last_after', 0) : 0;
+                            $tier = WC()->session ? (array) WC()->session->get('whiz_bulk_last_tier', []) : [];
+                            self::note_rule_applied($rule, [
+                                'bucket' => 'bulk_price',
+                                'saved' => round($saved, 2),
+                                'affected_before' => round($before, 2),
+                                'affected_after' => round($after, 2),
+                                'before' => round($before, 2),
+                                'after' => round($after, 2),
+                                'descriptor' => self::build_min_descriptor('bulk_discount', $actions, ['picked_tier' => $tier]),
+                            ]);
+                        }
+                    }
+                    continue;
+                }
+
                 if ($type === 'product_adjustment') {
                     $__applied_any = false;
                     $__saved_total = 0.0;
@@ -551,6 +603,24 @@ if (!class_exists('Whiz_Discount_Manager')) {
                             'descriptor' => self::build_min_descriptor('product_adjustment', $actions),
                         ]);
                     }
+                    continue;
+                }
+
+                if ($type === 'spend_bundle') {
+                    $saved = self::apply_spend_bundle_to_items($cart, $cond, $actions, (array) $filters); // העברת filters
+                    if ($saved > 0) {
+                        self::note_rule_applied($rule, [
+                            'bucket' => 'spend_bundle',
+                            'saved' => round($saved, 2),
+                            'descriptor' => self::build_min_descriptor('spend_bundle', $actions),
+                        ]);
+                    } else {
+                        self::note_rule_applied($rule, [
+                            'bucket' => 'spend_bundle',
+                            'descriptor' => self::build_min_descriptor('spend_bundle', $actions),
+                        ]);
+                    }
+                    continue;
                 }
             }
 
@@ -643,11 +713,112 @@ if (!class_exists('Whiz_Discount_Manager')) {
         }
 
 
-        // הנחת עגלה (fee שלילי) - Pro feature only
+        // הנחת עגלה (fee שלילי)
         public static function apply_cart_discounts($cart)
         {
-            // cart_adjustment is a Pro feature - this function is disabled in free version
-            return;
+            if (is_admin() && !defined('DOING_AJAX'))
+                return;
+            if (empty($cart) || !method_exists($cart, 'get_cart'))
+                return;
+
+            global $wpdb;
+            $now = Whizmanage_Discount_Functions::get_current_time();
+            $table = Whizmanage_Discount_Functions::get_table_name();
+
+            $rows = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table}
+         WHERE status = 'publish'
+           AND (start_date IS NULL OR start_date <= %s)
+           AND (end_date   IS NULL OR end_date   >= %s)
+         ORDER BY priority ASC, id DESC",
+                $now,
+                $now
+            ), ARRAY_A);
+
+            if (!empty($rows)) {
+                foreach ($rows as $rule) {
+                    $type = $rule['type'] ?? '';
+
+                    if (!in_array($type, ['cart_adjustment', 'spend_bundle'], true))
+                        continue;
+
+                    $actions = Whizmanage_Discount_Functions::json_decode($rule['actions']);
+                    $cond = Whizmanage_Discount_Functions::json_decode($rule['conditions']);
+                    $filters = Whizmanage_Discount_Functions::json_decode($rule['filters'] ?? []);
+
+                    // ⬅️ כלל ברזל: אם יש filters ולא קיים בעגלה אפילו פריט אחד שעובר אותם – דלג
+                    if (!self::cart_has_any_matching_filters($cart, (array) $filters)) {
+                        continue;
+                    }
+
+                    if (!self::match_cart_conditions($cond, $cart))
+                        continue;
+                    if (!self::rules_pass($cond, $cart))
+                        continue;
+
+                    if ($type === 'cart_adjustment') {
+                        $base_subtotal = 0.0;
+                        if (function_exists('WC') && WC()->cart) {
+                            $base_subtotal = (float) WC()->cart->get_cart_contents_total();
+                        }
+                        if ($base_subtotal <= 0 && method_exists($cart, 'get_subtotal')) {
+                            $base_subtotal = (float) $cart->get_subtotal();
+                        }
+
+                        $method = $actions['method'] ?? 'percentage';
+                        $value = (float) ($actions['value'] ?? 0);
+                        $discount = 0.0;
+
+                        if ($method === 'percentage') {
+                            $discount = $base_subtotal * (max(0, min(100, $value)) / 100);
+                        } elseif ($method === 'fixed') {
+                            $discount = min(max(0, $value), $base_subtotal);
+                        }
+
+                        if ($discount > 0) {
+
+                            if (!empty($actions['coupon_label'])) {
+                                $label = (string) $actions['coupon_label'];
+                            } else {
+                                $label = sprintf(
+                                    /* translators: %s: discount rule name or ID */
+                                    __('Discount: %s', 'whizmanage'),
+                                    $rule['name'] ?? ('#' . $rule['id'])
+                                );
+                            }
+
+                            $taxable = false;
+                            $cart->add_fee($label, -1 * $discount, $taxable);
+
+                            $final = $base_subtotal - $discount;
+
+                            self::note_rule_applied($rule, [
+                                'bucket' => 'cart_adjustment',
+                                'base_subtotal'  => self::money_display($base_subtotal),
+                                'final_subtotal' => self::money_display($final),
+                                'saved'          => self::money_display($discount),
+                                'before'         => self::money_display($base_subtotal),
+                                'after'          => self::money_display($final),
+                                'descriptor'     => self::build_min_descriptor('cart_adjustment', $actions),
+                            ]);
+
+                            break; // כלל עגלה ראשון בלבד
+                        }
+                    }
+
+                    if ($type === 'spend_bundle') {
+                        // כבר מטופל ב-apply_spend_bundle_to_items (קורא מפה)
+                        $saved = self::apply_spend_bundle_to_items($cart, $cond, $actions, (array) $filters);
+                        if ($saved > 0) {
+                            self::note_rule_applied($rule, [
+                                'bucket' => 'spend_bundle',
+                                'saved' => round($saved, 2),
+                                'descriptor' => self::build_min_descriptor('spend_bundle', $actions),
+                            ]);
+                        }
+                    }
+                }
+            }
 
             // Fee מאוחד עבור product_adjustment/bulk_discount במצב "קופון"
             if (self::$as_coupon_total > 0) {

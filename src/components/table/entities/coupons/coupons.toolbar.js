@@ -5,15 +5,7 @@ import { confirm } from "@components/ui/custom/CustomConfirm";
 import Button from "@components/ui/button";
 import { RefreshCcw, RefreshCwOff } from "lucide-react";
 
-export const couponsTransform = (coupon) => {
-  const { id, date_created, date_modified, usage_count, ...rest } = coupon;
-  return {
-    ...rest,
-    code: `${rest.code}-copy`,
-    usage_count: 0,
-    status: "draft",
-  };
-};
+// Duplicate removed - Pro feature only
 
 // קומפוננטה לכפתור השבתת קופונים
 function DisableCouponsButton({ __ }) {
@@ -73,7 +65,6 @@ export const couponsCustomActions = (__) => [
 export const couponsToolbarConfig = (__) => ({
   entityName: "coupons",
   endpoint: `${window.siteUrl}/wp-json/wc/v3/coupons`,
-  duplicateTransform: couponsTransform,
   customActions: couponsCustomActions(__),
 });
 

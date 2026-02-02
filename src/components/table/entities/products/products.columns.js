@@ -34,6 +34,7 @@ import VariationNameDisplay from "./components/VariationNameDisplay.jsx";
 import VariationNameEdit from "./components/VariationNameEdit.jsx";
 import YoastSEOModal from "./components/YoastSEOModal.jsx";
 import LinkedProductsCell from "./components/LinkedProductsCell.jsx";
+import ProBadge from "@components/ui/nextUI/ProBadge";
 import {
   handleCategoriesUpdate,
   mediaApi,
@@ -340,7 +341,7 @@ const createMetaColumns = (store, __, handleCellUpdate) =>
     );
   });
 
-// -------- Taxonomies --------
+// -------- Taxonomies - locked in table, Pro feature --------
 export const createTaxonomyColumns = (store, __) => {
   const taxonomies =
     typeof window !== "undefined"
@@ -360,13 +361,18 @@ export const createTaxonomyColumns = (store, __) => {
   return taxonomies.map((taxonomy) => ({
     accessorKey: taxonomy.name,
     id: taxonomy.name,
-    header: __(taxonomy.label, "whizmanage"),
+    header: () => (
+      <span className="flex items-center gap-1">
+        {__(taxonomy.label, "whizmanage")}
+        <span className="scale-75"><ProBadge /></span>
+      </span>
+    ),
     size: 180,
     minSize: 150,
     maxSize: 300,
     enableResizing: true,
     meta: {
-      editable: true,
+      editable: false,
       editType: "custom",
       customDisplayComponent: CategoryTagsDisplay,
       customEditComponent: CategoryTagsEdit,
@@ -1310,14 +1316,20 @@ export const createProductsColumns = (store, __, handleCellUpdate) => {
       ),
     }),
 
+    // --- Image Alt - locked in table, Pro feature ---
     columnHelper.accessor("image_alt", {
-      header: __("Image Alt", "whizmanage"),
+      header: () => (
+        <span className="flex items-center gap-1">
+          {__("Image Alt", "whizmanage")}
+          <span className="scale-75"><ProBadge /></span>
+        </span>
+      ),
       size: 150,
       minSize: 120,
       maxSize: 250,
       enableResizing: true,
       meta: {
-        editable: true,
+        editable: false,
         editType: "text",
         editOptions: {
           placeholder: __("Enter image alt text", "whizmanage"),

@@ -24,7 +24,6 @@ export const makeUnifiedActionsBuilder = ({
   __,
   actions,
   isTrash,
-  duplicateTransform,
   customActions = [],
   toolbarOverrides = {},
   entityName,
@@ -68,16 +67,15 @@ export const makeUnifiedActionsBuilder = ({
       }
     }
 
-    // Edit in Form - רק למוצרים
-    if (onEditInForm && entityName === "products") {
+    // Edit in Form - Pro feature (locked for products in free version)
+    if (entityName === "products") {
       base.push({
         label: __("Edit in Form", "whizmanage"),
         icon: "Edit",
         showWhen: "single",
-        onClick: () => {
-          const entity = getEntity(rowsSnapshot[0]);
-          if (entity) onEditInForm(entity);
-        },
+        lockedFeature: true,
+        disabled: true,
+        onClick: () => {},
       });
     }
 
@@ -157,7 +155,6 @@ export const GenericToolbar = ({
   endpoint,
   isTrash = false,
   customActions = [],
-  duplicateTransform = null,
   onRestoreSelected,
   onDeleteSelected,
   onTrashSelected,
@@ -213,14 +210,13 @@ export const GenericToolbar = ({
         __,
         actions,
         isTrash,
-        duplicateTransform,
         customActions,
         entityName,
         allowTrash,
         allowDelete,
         toolbarOverrides: { onRestoreSelected, onDeleteSelected, onTrashSelected },
       }),
-    [__, actions, isTrash, duplicateTransform, customActions, onRestoreSelected, onDeleteSelected, onTrashSelected, entityName, allowTrash, allowDelete]
+    [__, actions, isTrash, customActions, onRestoreSelected, onDeleteSelected, onTrashSelected, entityName, allowTrash, allowDelete]
   );
 
   const toolbarActions = useMemo(
