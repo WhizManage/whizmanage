@@ -109,11 +109,15 @@ export const discountRulesApi = {
 
     let rowsArray = Array.isArray(res?.data) ? res.data : [];
 
-    // 🔒 סינון חוקים מסוגי Pro עבור Free users
+    // 🔒 סינון חוקים מסוגי Pro עבור Free users + הגבלה ל-1 חוק
     const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
     if (noLicence) {
       const allowedTypes = ["product_adjustment"];
       rowsArray = rowsArray.filter((rule) => allowedTypes.includes(rule?.type));
+      // הצג מקסימום 1 חוק בגרסה החינמית
+      if (rowsArray.length > 1) {
+        rowsArray = rowsArray.slice(0, 1);
+      }
     }
 
     const totalHeader =
