@@ -167,6 +167,36 @@ export const createGenericActions = (config) => {
   // duplicateItems removed - Pro feature only
 
   const restoreItems = async (selectedRows) => {
+    // 🔒 בדיקת מגבלת חוקי הנחות עבור Free users
+    const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
+    if (entityName === "discount-rules" && noLicence) {
+      try {
+        // בדוק כמה חוקים פעילים קיימים
+        const activeRes = await axios.get(
+          `${window.siteUrl}/wp-json/whizmanage/v1/discount-rules/?per_page=1&status=publish,draft`,
+          { headers: { "X-WP-Nonce": window.rest } }
+        );
+        const activeCount = parseInt(activeRes.headers?.["x-wp-total"] || "0", 10);
+
+        if (activeCount >= 1) {
+          toast.error(__("Free version limit reached", "whizmanage"), {
+            description: __("You can only have 1 discount rule in the free version. Please upgrade to Pro to restore more rules.", "whizmanage"),
+          });
+          return;
+        }
+
+        // אפשר לשחזר רק 1 אם אין חוקים פעילים
+        if (selectedRows.length > 1) {
+          toast.error(__("Free version limit", "whizmanage"), {
+            description: __("You can only restore 1 discount rule in the free version.", "whizmanage"),
+          });
+          return;
+        }
+      } catch (err) {
+        console.warn("Could not check active discount rules count:", err);
+      }
+    }
+
     const isConfirmed = await confirm({
       title: sprintf(__("Restore %s", "whizmanage"), __(entityName, "whizmanage")),
       message: sprintf(

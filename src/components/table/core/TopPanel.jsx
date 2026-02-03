@@ -259,13 +259,24 @@ export const TopPanel = memo(
             </CustomTooltip>
           )}
 
-          {entityName && !isTrash && (
-            <AddItemDropdown
-              ref={addItemRef}
-              entity={entityName}
-              onCreated={onItemCreated}
-            />
-          )}
+          {entityName && !isTrash && (() => {
+            // 🔒 הגבלת חוקי הנחות ל-1 עבור Free users
+            const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
+            const isDiscountRulesLimitReached =
+              entityName === "discount-rules" &&
+              noLicence &&
+              Array.isArray(data) &&
+              data.length >= 1;
+
+            return (
+              <AddItemDropdown
+                ref={addItemRef}
+                entity={entityName}
+                onCreated={onItemCreated}
+                isLimitReached={isDiscountRulesLimitReached}
+              />
+            );
+          })()}
         </div>
       </div>
     );

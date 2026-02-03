@@ -19,6 +19,8 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
   entity,
   onCreated,
   triggerLabel,
+  isLimitReached = false,
+  limitMessage = "",
 }, ref) {
 
   const [showFormModal, setShowFormModal] = useState(false);
@@ -34,6 +36,21 @@ const AddItemDropdown = forwardRef(function AddItemDropdown({
 
   const cfg = getEntityConfig(entity) || getEntityConfig(entity?.replace(/s$/, ""));
   const uiSingular = cfg?.labels?.singular ?? entity?.replace(/s$/, "");
+
+  // 🔒 אם הגיעו למגבלה - מציגים כפתור נעול
+  if (isLimitReached) {
+    return (
+      <div className="inline-flex items-center h-8 rounded-md shadow-lg relative bg-gradient-to-r from-slate-400 to-slate-500 opacity-70 cursor-not-allowed" data-tour="add-inline-row">
+        <div className="flex items-center gap-1.5 sm:gap-2 h-full px-2 sm:px-3 text-white text-sm font-medium">
+          <Plus className="h-4 w-4" />
+          <span className="hidden sm:inline">{__(triggerLabel || cfg?.triggerLabel || `Add ${uiSingular}`, "whizmanage")}</span>
+        </div>
+        <div className="absolute -top-2 -right-2">
+          <ProBadge />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

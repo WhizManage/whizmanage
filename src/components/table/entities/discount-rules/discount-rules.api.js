@@ -107,14 +107,23 @@ export const discountRulesApi = {
     const url = `${window.siteUrl}/wp-json/whizmanage/v1/discount-rules/?${params.toString()}`;
     const res = await getApi(url);
 
-    const rowsArray = Array.isArray(res?.data) ? res.data : [];
+    let rowsArray = Array.isArray(res?.data) ? res.data : [];
+
+    // 🔒 סינון חוקים מסוגי Pro עבור Free users
+    const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
+    if (noLicence) {
+      const allowedTypes = ["product_adjustment"];
+      rowsArray = rowsArray.filter((rule) => allowedTypes.includes(rule?.type));
+    }
+
     const totalHeader =
       res?.headers?.["x-wp-total"] ?? res?.headers?.["X-WP-Total"];
     const totalPagesHeader =
       res?.headers?.["x-wp-totalpages"] ?? res?.headers?.["X-WP-TotalPages"];
 
-    const total = totalHeader ? Number(totalHeader) : rowsArray.length;
-    const totalPages = totalPagesHeader
+    // עדכון total לפי הסינון
+    const total = noLicence ? rowsArray.length : (totalHeader ? Number(totalHeader) : rowsArray.length);
+    const totalPages = totalPagesHeader && !noLicence
       ? Number(totalPagesHeader)
       : Math.max(1, Math.ceil(total / perPage));
 

@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@components/ui/select";
+import ProBadge from "@components/ui/nextUI/ProBadge";
 
 const SelectEdit = ({ 
   value, 
@@ -76,9 +77,19 @@ const SelectEdit = ({
           {editOptions.options?.map((option) => {
             const optionValue = option.value || option.id;
             const optionLabel = option.label || option.name;
+            const isLocked = option.locked === true;
+
             return (
-              <SelectItem key={optionValue} value={optionValue}>
-                {optionLabel}
+              <SelectItem
+                key={optionValue}
+                value={optionValue}
+                disabled={isLocked}
+                className={cn(isLocked && "opacity-60 cursor-not-allowed")}
+              >
+                <span className="flex items-center gap-2">
+                  {optionLabel}
+                  {isLocked && <span className="scale-75"><ProBadge /></span>}
+                </span>
               </SelectItem>
             );
           })}

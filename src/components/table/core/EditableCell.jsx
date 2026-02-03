@@ -18,6 +18,7 @@ import {
 import { Textarea } from "../../ui/textarea";
 import CustomTooltip from "@components/ui/nextUI/Tooltip.jsx";
 import EditableTooltip from "@components/ui/nextUI/EditableTooltip.jsx";
+import ProBadge from "@components/ui/nextUI/ProBadge";
 import { useTableSaveStateStore } from "../store/saveStateStore.js";
 import { Expand } from "lucide-react";
 
@@ -510,14 +511,22 @@ export const EditableCell = memo(function EditableCell({
                 sideOffset={6}
                 className="z-[10000] max-h-[280px] min-w-[var(--radix-select-trigger-width)]"
               >
-                {editOptions.options?.map((option) => (
-                  <SelectItem
-                    key={option.value || option.id}
-                    value={option.value || option.id}
-                  >
-                    {option.label || option.name}
-                  </SelectItem>
-                ))}
+                {editOptions.options?.map((option) => {
+                  const isLocked = option.locked === true;
+                  return (
+                    <SelectItem
+                      key={option.value || option.id}
+                      value={option.value || option.id}
+                      disabled={isLocked}
+                      className={cn(isLocked && "opacity-60 cursor-not-allowed")}
+                    >
+                      <span className="flex items-center gap-2">
+                        {option.label || option.name}
+                        {isLocked && <span className="scale-75"><ProBadge /></span>}
+                      </span>
+                    </SelectItem>
+                  );
+                })}
               </SelectContent>
             </Portal>
           </Select>

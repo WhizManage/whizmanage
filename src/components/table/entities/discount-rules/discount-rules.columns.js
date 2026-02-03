@@ -25,7 +25,7 @@ export function createEntityColumns(store, __, handleCellUpdate) {
     }),
 
     // --- Type (+ כפתור ההגדרות ליד) ---
-    // 🔒 חסימת אפשרויות עבור Free users - רק product_adjustment זמין
+    // 🔒 חסימת עריכה עבור Free users - רק product_adjustment זמין
     (() => {
       // נעילה אם אין רישיון (hasLicence לא true)
       const noLicence = typeof window !== "undefined" && window.hasLicence !== true;
@@ -43,6 +43,7 @@ export function createEntityColumns(store, __, handleCellUpdate) {
         size: 200,
         cell: (ctx) => <TypeWithDiscountSettingsCell {...ctx} />,
         meta: {
+          // עריכה פעילה - אבל אופציות נעולות מוצגות עם ProBadge ולא ניתנות לבחירה
           editable: true,
           editType: "select",
           editOptions: {
