@@ -559,10 +559,10 @@ window.placeholderImg = %s;',
                     $shop_url = get_permalink($shop_page_id);
                 }
             }
-
+   $woo_lic = get_option('woo_lic');
             $inline_js  = 'window.getWhizmanage = ' . wp_json_encode($dataWhizmanage) . ';';
             $inline_js .= 'window.shopUrl = ' . wp_json_encode($shop_url) . ';';
-
+ $inline_js .= 'window.licenseToken = ' . wp_json_encode($woo_lic) . ';';
             if (is_user_logged_in()) {
                 $user_id      = get_current_user_id();
                 $user_info    = get_userdata($user_id);
