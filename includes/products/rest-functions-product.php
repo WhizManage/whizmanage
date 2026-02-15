@@ -615,6 +615,23 @@ if (! class_exists('Whizmanage_rest_functions_product')) {
 
                     // Save
                     $variation->save();
+
+                    // Attach variation image to parent product in media library
+                    $image_id = $variation->get_image_id();
+                    if ($image_id) {
+                        global $wpdb;
+                        $current_parent = (int) get_post_field('post_parent', $image_id);
+                        if ($current_parent !== $product_id) {
+                            $wpdb->update(
+                                $wpdb->posts,
+                                ['post_parent' => $product_id],
+                                ['ID' => $image_id],
+                                ['%d'],
+                                ['%d']
+                            );
+                            clean_post_cache($image_id);
+                        }
+                    }
                     $processed_variation_ids[] = $variation->get_id();
                 } catch (Exception $e) {
                     $errors[] = $e->getMessage();
