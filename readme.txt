@@ -3,8 +3,9 @@ Contributors: whizmanage , yosefelishayov
 Tags: woocommerce, product management, bulk edit, variations, discounts
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 Requires PHP: 7.4
+Requires Plugins: woocommerce
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -214,6 +215,9 @@ WhizManage is designed to handle very large product catalogs efficiently.
 
 
 == Changelog ==
+
+= 2.2.3 =
+* Bug fixes and stability improvements
 
 = 2.2.2 =
 * Bug fixes and stability improvements

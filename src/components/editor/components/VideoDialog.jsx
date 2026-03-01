@@ -185,7 +185,7 @@ const VideoDialog = ({ isOpen, onClose, onInsert }) => {
 
       return "";
     },
-    [autoplay, showControls, t]
+    [autoplay, showControls]
   );
 
   const generateShortcode = (url, w, h, mimeType = null) => {
