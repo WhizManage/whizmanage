@@ -133,6 +133,11 @@ const GenericItemModal = ({
         response = await postApi(endpoint, processedData);
         itemData = response.data ?? response;
 
+        // ✅ שמירת cost מהטופס - כמו שהשם נשמר
+        if (formData.cost !== undefined && formData.cost !== null && formData.cost !== "") {
+          itemData.cost = formData.cost;
+        }
+
         try {
           await postApi(`${window.siteUrl}/wp-json/whizmanage/v1/history`, {
             location: entityName,

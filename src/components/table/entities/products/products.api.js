@@ -99,6 +99,32 @@ const mapTaxonomiesToColumns = (product) => {
   return mapped;
 };
 
+/**
+ * Helper: Extract cost value from WooCommerce API response
+ * Tries: cost_of_goods_sold.values[0].defined_value, then meta_data._wc_cog_cost, then existing cost
+ */
+const extractCostFromResponse = (p) => {
+  // If cost is already set (from our PHP endpoint), use it
+  if (p?.cost !== undefined && p?.cost !== null && p?.cost !== "") {
+    return p.cost;
+  }
+
+  // Try to get from WooCommerce native COGS structure
+  if (p?.cost_of_goods_sold?.values?.[0]?.defined_value !== undefined) {
+    return p.cost_of_goods_sold.values[0].defined_value;
+  }
+
+  // Try to get from meta_data
+  if (Array.isArray(p?.meta_data)) {
+    const cogsMeta = p.meta_data.find((m) => m.key === "_wc_cog_cost");
+    if (cogsMeta?.value) {
+      return cogsMeta.value;
+    }
+  }
+
+  return "";
+};
+
 export const shape = {
   toActive: (p) => {
     const mapped = mapTaxonomiesToColumns(p);
@@ -106,6 +132,7 @@ export const shape = {
       ...mapped,
       price: mapped?.regular_price ?? mapped?.price ?? "",
       stock: mapped?.stock_quantity ?? mapped?.stock ?? 0,
+      cost: extractCostFromResponse(mapped), // ✅ חילוץ עלות מתשובת ה-API
     };
   },
   toTrash: (p) => ({
@@ -301,6 +328,7 @@ export const productsApi = {
       "date_created_gmt",
       "regular_price",
       "sale_price",
+      "cost", // עלות המוצר (Cost of Goods Sold)
       "stock_quantity",
       "inventory",
       "stock",
@@ -527,6 +555,36 @@ export const productsApi = {
 
       case "shipping_class":
         payload.shipping_class = cleanValue ? String(cleanValue) : "";
+        break;
+
+      case "cost":
+        // עלות המוצר (Cost of Goods Sold) - WooCommerce 8.5+ native COGS feature
+        // שולחים גם את המבנה הנכון של ווקומרס וגם את המטא כגיבוי
+        if (cleanValue !== null && cleanValue !== undefined && cleanValue !== "") {
+          payload.cost_of_goods_sold = {
+            values: [
+              {
+                defined_value: parseFloat(cleanValue)
+              }
+            ]
+          };
+        } else {
+          // ניקוי הערך - שולחים null
+          payload.cost_of_goods_sold = {
+            values: [
+              {
+                defined_value: null
+              }
+            ]
+          };
+        }
+        // גיבוי: גם עדכון ב-meta_data לתאימות אחורה
+        payload.meta_data = [
+          {
+            key: "_wc_cog_cost",
+            value: cleanValue !== null && cleanValue !== undefined ? String(cleanValue) : "",
+          },
+        ];
         break;
 
       default:

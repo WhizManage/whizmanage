@@ -43,7 +43,6 @@ const menuItems = [
     name: "Discount Rules",
     page: "whizmanage-discount-rules",
     icon: Percent,
-    badge: "BETA",
     tourId: "discount-rules-menu",
   },
   {

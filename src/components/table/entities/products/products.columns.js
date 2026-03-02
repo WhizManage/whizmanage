@@ -836,6 +836,37 @@ export const createProductsColumns = (store, __, handleCellUpdate) => {
       },
     }),
 
+    // עלות המוצר (Cost of Goods)
+    columnHelper.accessor("cost", {
+      header: __("Cost of Goods", "whizmanage"),
+      size: 130,
+      minSize: 100,
+      maxSize: 180,
+      enableResizing: true,
+      meta: {
+        editable: true,
+        editType: "number",
+        displayFormat: {
+          formatValue: (value) =>
+            value != null && value !== "" ? formatValue(value, "currency") : "",
+        },
+        editOptions: {
+          format: "currency",
+          min: 0,
+          step: 0.01,
+          placeholder: __("0.00", "whizmanage"),
+        },
+        validationRules: [
+          { required: false },
+          { min: 0, message: __("Cost cannot be negative", "whizmanage") },
+        ],
+      },
+      cell: (props) => {
+        // מוצר אב של ווריאציות - ניתן לערוך, זה יהיה ברירת מחדל לכל הווריאציות
+        return <EditableCell {...props} onUpdate={handleCellUpdate} />;
+      },
+    }),
+
     columnHelper.accessor("inventory", {
       header: __("Inventory", "whizmanage"),
       size: 140,

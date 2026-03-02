@@ -846,7 +846,7 @@ export default function GenericDataTable({
                   }
                 >
                   <ChevronRightIcon
-                    className={`size-4 text-slate-400 dark:text-slate-500 transition-transform duration-200 ${isRowExpanded ? "rotate-90" : __isRTL ? "rotate-180" : ""
+                    className={`size-4 text-fuchsia-500 dark:text-fuchsia-400 transition-transform duration-200 ${isRowExpanded ? "rotate-90" : __isRTL ? "rotate-180" : ""
                       }`}
                   />
                 </button>

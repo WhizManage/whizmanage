@@ -3732,6 +3732,12 @@
       "Sale Price": [
         "מחיר מבצע"
       ],
+      "Cost of Goods": [
+        "עלות המוצר"
+      ],
+      "Cost cannot be negative": [
+        "העלות לא יכולה להיות שלילית"
+      ],
       "Stock Status": [
         "מצב מלאי"
       ],

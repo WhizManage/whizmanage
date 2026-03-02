@@ -289,6 +289,25 @@ const registry = {
         meta_data: cleanValues.meta_data,
       };
 
+      // ✅ Cost of Goods Sold - WooCommerce 8.5+ native COGS
+      if (cleanValues.cost !== undefined && cleanValues.cost !== null && cleanValues.cost !== "") {
+        payload.cost_of_goods_sold = {
+          values: [
+            {
+              defined_value: parseFloat(cleanValues.cost)
+            }
+          ]
+        };
+        // גיבוי: גם עדכון ב-meta_data לתאימות אחורה
+        payload.meta_data = [
+          ...(payload.meta_data || []),
+          {
+            key: "_wc_cog_cost",
+            value: String(cleanValues.cost),
+          },
+        ];
+      }
+
       // ניקוי שדות ריקים
       Object.keys(payload).forEach((key) => {
         if (payload[key] === undefined || payload[key] === null) {
@@ -319,7 +338,28 @@ const registry = {
         `${window.siteUrl}/wp-json/wc/v3/products`,
         values
       );
-      return res.data;
+      const data = res.data;
+
+      // ✅ Extract cost from API response or preserve from form values
+      if (data && !data.cost) {
+        // Try to get from WooCommerce native COGS structure
+        if (data.cost_of_goods_sold?.values?.[0]?.defined_value !== undefined) {
+          data.cost = data.cost_of_goods_sold.values[0].defined_value;
+        }
+        // Try to get from meta_data
+        else if (Array.isArray(data.meta_data)) {
+          const cogsMeta = data.meta_data.find((m) => m.key === "_wc_cog_cost");
+          if (cogsMeta?.value) {
+            data.cost = cogsMeta.value;
+          }
+        }
+        // Fallback: use the value that was submitted
+        else if (values.cost_of_goods_sold?.values?.[0]?.defined_value !== undefined) {
+          data.cost = values.cost_of_goods_sold.values[0].defined_value;
+        }
+      }
+
+      return data;
     },
     afterSubmit: async (result) => {
       addToast({

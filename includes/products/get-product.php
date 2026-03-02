@@ -555,6 +555,25 @@ if (!class_exists('Whizmanage_get_product')) {
                     $product_data['price_html'] = $product->get_price_html();
                     $product_data['type'] = $product->get_type();
 
+                    // עלות המוצר (Cost of Goods Sold) - WooCommerce 8.5+ native or meta fallback
+                    $cost_value = '';
+                    // נסיון ראשון: שיטת ווקומרס המובנית (8.5+)
+                    if (method_exists($product, 'get_cogs_value')) {
+                        $cost_value = $product->get_cogs_value();
+                    }
+                    // נסיון שני: קריאה ישירה מה-COGS data
+                    if (empty($cost_value) && method_exists($product, 'get_cogs')) {
+                        $cogs_data = $product->get_cogs();
+                        if (is_object($cogs_data) && method_exists($cogs_data, 'get_defined_value')) {
+                            $cost_value = $cogs_data->get_defined_value();
+                        }
+                    }
+                    // גיבוי: קריאה מ-meta_data
+                    if (empty($cost_value)) {
+                        $cost_value = get_post_meta(get_the_ID(), '_wc_cog_cost', true);
+                    }
+                    $product_data['cost'] = $cost_value;
+
                     if ($product_data['low_stock_amount'] == "") {
                         $product_data['low_stock_amount'] = null;
                     }
@@ -804,11 +823,30 @@ if (!class_exists('Whizmanage_get_product')) {
                     $date_modified = $variation->get_date_modified() ? $variation->get_date_modified()->date('Y-m-d\TH:i:s') : null;
                     $global_unique_id = $variation->get_global_unique_id() ? $variation->get_global_unique_id() : "";
 
+                    // עלות המוצר לווריאציה (Cost of Goods Sold) - WooCommerce 8.5+ native or meta fallback
+                    $variation_cost = '';
+                    // נסיון ראשון: שיטת ווקומרס המובנית (8.5+)
+                    if (method_exists($variation, 'get_cogs_value')) {
+                        $variation_cost = $variation->get_cogs_value();
+                    }
+                    // נסיון שני: קריאה ישירה מה-COGS data
+                    if (empty($variation_cost) && method_exists($variation, 'get_cogs')) {
+                        $cogs_data = $variation->get_cogs();
+                        if (is_object($cogs_data) && method_exists($cogs_data, 'get_defined_value')) {
+                            $variation_cost = $cogs_data->get_defined_value();
+                        }
+                    }
+                    // גיבוי: קריאה מ-meta_data
+                    if (empty($variation_cost)) {
+                        $variation_cost = get_post_meta($variation_id, '_wc_cog_cost', true);
+                    }
+
                     $variation_data = array(
                         "id" => $variation_id,
                         "name" => urldecode($variation_name), // Updated name attribute
                         "attributes" => $attribute_data,
                         "dimensions" => $dimensions, // Adding dimensions attribute
+                        "cost" => $variation_cost, // עלות המוצר
                         "image" => $image_id != 0 ? array(
                             "id" => $image_id,
                             "date_created" => $image_date_created,

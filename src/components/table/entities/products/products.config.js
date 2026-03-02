@@ -155,7 +155,7 @@ const productsTableConfig = {
 
   columnOrder: [
     "actions", "select", "expand", "name", "status", "image", "image_alt", "sale_price",
-    "regular_price", "description", "short_description", "type", "attributes",
+    "regular_price", "cost", "description", "short_description", "type", "attributes",
     "tags", "categories", "sale_date_range", "downloadable", "shipping_class",
     "sold_individually", "inventory", "weight", "sku", "global_unique_id",
     "dimensions", "meta_data", "gallery", "linked_products", "post_password",
@@ -171,6 +171,7 @@ const productsTableConfig = {
     sku: 130,
     regular_price: 130,
     sale_price: 120,
+    cost: 130,
     inventory: 140,
     status: 134,
     date_created_gmt: 200,
@@ -204,6 +205,7 @@ const productsTableConfig = {
     image: true,
     image_alt: false, // 👈 כבוי כברירת מחדל
     price: true,
+    cost: true, // עלות המוצר
     description: true,
     short_description: true,
     type: true,

@@ -18,6 +18,8 @@ const productConfig = {
     type: "simple",
     status: "draft",
     regular_price: "",
+    sale_price: "",
+    cost: "", // עלות המוצר (Cost of Goods)
     stock_quantity: null,
     manage_stock: false,
     date_on_sale_from: null,
@@ -96,6 +98,18 @@ const productConfig = {
           scheduleButtonLabel: "Schedule",
           clearButtonLabel: "Clear",
           helperText: "Leave empty to keep sale price active indefinitely",
+        },
+        {
+          name: "cost",
+          label: "Cost of Goods",
+          type: "number",
+          step: 0.01,
+          min: 0,
+          placeholder: "0.00",
+          showCurrency: true,
+          rules: {
+            min: { value: 0, message: "Cost cannot be negative" },
+          },
         },
       ],
     },
