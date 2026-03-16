@@ -953,6 +953,43 @@ export function createTableStore(
                 d.label || d.column,
               ])
             );
+
+            // Merge saved filters with default filters - add any new filters from defaults
+            const mergeEnableFilters = () => {
+              const defaultFilters = defaults.enableFilters || [];
+              if (!Array.isArray(savedEnableFilters) || !savedEnableFilters.length) {
+                return defaultFilters;
+              }
+
+              // Map saved filters by column for quick lookup
+              const savedByColumn = new Map(
+                savedEnableFilters.map((f) => [f.column, f])
+              );
+
+              // Start with saved filters (updated with current labels and options)
+              const merged = savedEnableFilters.map((s) => {
+                const defaultFilter = defaultFilters.find((d) => d.column === s.column);
+                return {
+                  ...s,
+                  label: labelByCol.get(s.column) || s.column,
+                  // Merge options from defaults if they exist
+                  ...(defaultFilter?.options ? { options: defaultFilter.options } : {}),
+                };
+              });
+
+              // Add any new filters from defaults that don't exist in saved
+              for (const defaultFilter of defaultFilters) {
+                if (!savedByColumn.has(defaultFilter.column)) {
+                  merged.push({
+                    ...defaultFilter,
+                    label: labelByCol.get(defaultFilter.column) || defaultFilter.column,
+                  });
+                }
+              }
+
+              return merged;
+            };
+
             set({
               columnOrder: finalOrder,
               columnVisibility:
@@ -966,13 +1003,7 @@ export function createTableStore(
                 ...get().pagination, // שמור על pageIndex קיים
                 pageSize: initialPageSize,
               },
-              enableFilters:
-                Array.isArray(savedEnableFilters) && savedEnableFilters.length
-                  ? savedEnableFilters.map((s) => ({
-                      ...s,
-                      label: labelByCol.get(s.column) || s.column,
-                    }))
-                  : defaults.enableFilters || null,
+              enableFilters: mergeEnableFilters(),
             });
           },
           resetConfiguration: async () => {

@@ -11,6 +11,7 @@ const buildProductsQueryString = ({
   status = [],
   type = [],
   downloadable,
+  stock_status = [],
   categories = [],
   tags = [],
   tax = {},
@@ -33,6 +34,7 @@ const buildProductsQueryString = ({
 
   appendArray("status", status);
   appendArray("type", type);
+  appendArray("stock_status", stock_status);
 
   if (downloadable && ["yes", "no"].includes(String(downloadable))) {
     params.set("downloadable", String(downloadable));
@@ -187,6 +189,7 @@ export const productsApi = {
     status,      // ["publish",...]
     type,        // ["simple","variable",...]
     downloadable,
+    stock_status, // ["instock", "outofstock", "onbackorder"]
     categories,
     tags,
     extraTax = {},
@@ -222,7 +225,7 @@ export const productsApi = {
 
     const qs = buildProductsQueryString({
       page, perPage, search: finalSearch,
-      status, type, downloadable,
+      status, type, downloadable, stock_status,
       categories, tags,
       tax: mergedExtraTax,
     });
@@ -250,6 +253,7 @@ export const productsApi = {
         status: status ?? [],
         type: type ?? [],
         downloadable: downloadable ?? null,
+        stock_status: stock_status ?? [],
         categories: categories ?? [],
         tags: tags ?? [],
         extraTax: mergedExtraTax ?? {},

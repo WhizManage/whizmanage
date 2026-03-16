@@ -9,6 +9,7 @@ if (!class_exists('Whizmanage_get_product')) {
             $status = !empty($filters['status']) ? (array) $filters['status'] : array('publish', 'draft', 'pending', 'future', 'private');
             $type = !empty($filters['type']) ? (array) $filters['type'] : [];
             $downloadable = isset($filters['downloadable']) ? $filters['downloadable'] : null;
+            $stock_status = !empty($filters['stock_status']) ? (array) $filters['stock_status'] : [];
             $product_cat = !empty($filters['product_cat']) ? (array) $filters['product_cat'] : [];
             $product_tag = !empty($filters['product_tag']) ? (array) $filters['product_tag'] : [];
             $tax_filters = !empty($filters['tax_filters']) && is_array($filters['tax_filters']) ? $filters['tax_filters'] : [];
@@ -131,6 +132,13 @@ if (!class_exists('Whizmanage_get_product')) {
                     'key' => '_downloadable',
                     'value' => $downloadable === 'yes' ? 'yes' : 'no',
                     'compare' => '=',
+                );
+            }
+            if (!empty($stock_status)) {
+                $meta_query[] = array(
+                    'key' => '_stock_status',
+                    'value' => array_map('sanitize_text_field', $stock_status),
+                    'compare' => 'IN',
                 );
             }
             if (count($meta_query) > 1) {

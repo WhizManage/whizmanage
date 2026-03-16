@@ -117,6 +117,11 @@ const PRODUCT_FILTER_OPTIONS = {
     { value: "yes", label: "Yes" },
     { value: "no", label: "No" },
   ],
+  stock_status: [
+    { value: "instock", label: "In Stock" },
+    { value: "outofstock", label: "Out of Stock" },
+    { value: "onbackorder", label: "On Backorder" },
+  ],
 };
 
 // ✅ פונקציית עזר לסידור נתונים לפני עריכה (תמונות + שדות מותאמים)
@@ -256,6 +261,12 @@ const productsTableConfig = {
       enable: true,
       label: "Downloadable",
       options: PRODUCT_FILTER_OPTIONS.downloadable,
+    },
+    {
+      column: "stock_status",
+      enable: true,
+      label: "Stock Status",
+      options: PRODUCT_FILTER_OPTIONS.stock_status,
     },
     { column: "categories", enable: true, label: "categories" },
     { column: "tags", enable: true, label: "tags" },

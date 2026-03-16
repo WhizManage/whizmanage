@@ -73,6 +73,7 @@ export const TopPanel = memo(
 
     const [localFilter, setLocalFilter] = useState(globalFilter || "");
     const [isColumnsOpen, setIsColumnsOpen] = useState(false);
+    const [filterSearch, setFilterSearch] = useState("");
 
     const debouncedSetGlobalFilter = useDebounceFn(
       (value) => setGlobalFilter(value),
@@ -128,7 +129,7 @@ export const TopPanel = memo(
 
           {Array.isArray(enableFilters) &&
             typeof setEnableFilters === "function" && (
-              <DropdownMenu>
+              <DropdownMenu onOpenChange={(open) => !open && setFilterSearch("")}>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
@@ -139,17 +140,54 @@ export const TopPanel = memo(
                     <span className="hidden sm:inline">{__("Filters", "whizmanage")}</span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="start">
-                  {enableFilters.map((f) => (
-                    <DropdownMenuCheckboxItem
-                      key={f.column}
-                      className="capitalize"
-                      checked={!!f.enable}
-                      onCheckedChange={() => toggleFilter(f.column)}
-                    >
-                      {__(f.label, "whizmanage")}
-                    </DropdownMenuCheckboxItem>
-                  ))}
+                <DropdownMenuContent align="start" className="w-56">
+                  {/* Search input */}
+                  <div className="px-2 pb-2">
+                    <div className="relative">
+                      <Search className="absolute start-2 top-1/2 -translate-y-1/2 text-slate-400 h-3.5 w-3.5 pointer-events-none" />
+                      <Input
+                        value={filterSearch}
+                        onChange={(e) => setFilterSearch(e.target.value)}
+                        className="h-8 !ps-7 text-sm text-start"
+                        dir="auto"
+                        placeholder={__("Search...", "whizmanage")}
+                        onClick={(e) => e.stopPropagation()}
+                        onKeyDown={(e) => e.stopPropagation()}
+                      />
+                    </div>
+                  </div>
+                  {/* Scrollable list */}
+                  <div className="max-h-64 overflow-y-auto">
+                    {enableFilters
+                      .filter((f) => {
+                        if (!filterSearch) return true;
+                        const search = filterSearch.toLowerCase();
+                        const originalLabel = (f.label || f.column).toLowerCase();
+                        const translatedLabel = __(f.label, "whizmanage").toLowerCase();
+                        return originalLabel.includes(search) || translatedLabel.includes(search);
+                      })
+                      .map((f) => (
+                        <DropdownMenuCheckboxItem
+                          key={f.column}
+                          className="capitalize"
+                          checked={!!f.enable}
+                          onCheckedChange={() => toggleFilter(f.column)}
+                        >
+                          {__(f.label, "whizmanage")}
+                        </DropdownMenuCheckboxItem>
+                      ))}
+                    {enableFilters.filter((f) => {
+                      if (!filterSearch) return true;
+                      const search = filterSearch.toLowerCase();
+                      const originalLabel = (f.label || f.column).toLowerCase();
+                      const translatedLabel = __(f.label, "whizmanage").toLowerCase();
+                      return originalLabel.includes(search) || translatedLabel.includes(search);
+                    }).length === 0 && (
+                      <div className="px-2 py-4 text-center text-sm text-muted-foreground">
+                        {__("No filters found", "whizmanage")}
+                      </div>
+                    )}
+                  </div>
                 </DropdownMenuContent>
               </DropdownMenu>
             )}

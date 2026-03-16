@@ -149,7 +149,7 @@ const columnHelper = createColumnHelper();
 const createMetaColumns = (store, __, handleCellUpdate) =>
   mergedMetaData.map((field) => {
     const { key, label, type, choices } = field;
-    const isImg = type === "image" || isImageKey(key);
+    const isImg = type === "image" || type === "media" || isImageKey(key);
     const isGal = type === "gallery" || isGalleryKey(key);
     let editType = "text";
     let editOptions = {};

@@ -198,6 +198,27 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
                 }
             }
 
+            // ------- WhizManage Custom Fields Integration -------
+            $whizmanage_fields = get_option('whizmanage_custom_fields', array());
+            if (is_string($whizmanage_fields)) {
+                $whizmanage_fields = json_decode($whizmanage_fields, true);
+                if (!is_array($whizmanage_fields)) {
+                    $whizmanage_fields = array();
+                }
+            }
+
+            foreach ($whizmanage_fields as $field) {
+                $field_data_array[] = array(
+                    'source'  => 'WhizManage',
+                    'label'   => esc_html($field['label'] ?? ''),
+                    'key'     => esc_html($field['key'] ?? ''),
+                    'value'   => esc_html($field['value'] ?? ''),
+                    'type'    => esc_html($field['type'] ?? 'text'),
+                    'format'  => esc_html($field['format'] ?? ''),
+                    'choices' => $field['choices'] ?? array(),
+                    'help'    => esc_html($field['help'] ?? ''),
+                );
+            }
             return $field_data_array;
         }
 
