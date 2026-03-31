@@ -1007,6 +1007,42 @@ export const createProductsColumns = (store, __, handleCellUpdate) => {
         "Variation"
       ),
     }),
+    columnHelper.accessor("catalog_visibility", {
+      header: __("Catalog visibility", "whizmanage"),
+      size: 160,
+      minSize: 140,
+      maxSize: 220,
+      enableResizing: true,
+      meta: {
+        editable: true,
+        editType: "select",
+        editOptions: {
+          options: [
+            { value: "visible", label: __("Shop and search results", "whizmanage") },
+            { value: "catalog", label: __("Shop only", "whizmanage") },
+            { value: "search", label: __("Search results only", "whizmanage") },
+            { value: "hidden", label: __("Hidden", "whizmanage") },
+          ],
+        },
+        displayFormat: {
+          formatValue: (value) => {
+            const labels = {
+              visible: __("Shop and search results", "whizmanage"),
+              catalog: __("Shop only", "whizmanage"),
+              search: __("Search results only", "whizmanage"),
+              hidden: __("Hidden", "whizmanage"),
+            };
+            return labels[value] || value || "";
+          },
+        },
+      },
+      filterFn: columnFilterFn,
+      cell: withVariationBehavior(
+        (props) => <EditableCell {...props} onUpdate={handleCellUpdate} />,
+        "hidden"
+      ),
+    }),
+
     columnHelper.accessor("post_password", {
       header: __("Password", "whizmanage"),
       size: 120,

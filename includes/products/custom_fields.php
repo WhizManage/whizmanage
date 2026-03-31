@@ -226,10 +226,50 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
         {
             $field_data_array = self::get_registered_fields_data();
 
-            // Encode as JSON and send to React
-            // $jsonAssociativeArray = wp_json_encode($field_data_array);
+            // Apply type overrides saved by the Custom Fields Manager
+            $overrides_raw = get_option('whizmanage_field_overrides', array());
+            if (is_string($overrides_raw)) {
+                $overrides_raw = json_decode($overrides_raw, true);
+            }
+            $overrides = is_array($overrides_raw) ? $overrides_raw : array();
+
+            if (!empty($overrides)) {
+                // Apply overrides to existing registered fields
+                $known_keys = array();
+                foreach ($field_data_array as &$field) {
+                    $key = isset($field['key']) ? $field['key'] : '';
+                    $known_keys[] = $key;
+                    if (isset($overrides[$key])) {
+                        if (!empty($overrides[$key]['type'])) {
+                            $field['type'] = $overrides[$key]['type'];
+                        }
+                        if (!empty($overrides[$key]['choices'])) {
+                            $field['choices'] = $overrides[$key]['choices'];
+                        }
+                    }
+                }
+                unset($field);
+
+                // Add orphan fields that have overrides but aren't from known sources
+                foreach ($overrides as $key => $override) {
+                    if (!in_array($key, $known_keys, true) && !empty($override['type'])) {
+                        $label = ucwords(str_replace('_', ' ', $key));
+                        $field_data_array[] = array(
+                            'source'  => 'Other',
+                            'label'   => $label,
+                            'key'     => $key,
+                            'value'   => '',
+                            'type'    => $override['type'],
+                            'format'  => '',
+                            'choices' => isset($override['choices']) ? $override['choices'] : array(),
+                            'help'    => '',
+                        );
+                    }
+                }
+            }
+
             wp_add_inline_script(
-                'whizmanage-script', // Your handle from enqueue
+                'whizmanage-script',
                 'window.WhizManageCustomFields = ' . wp_json_encode($field_data_array) . ';',
                 'before'
             );
@@ -254,6 +294,13 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
             $registered_fields = self::get_registered_fields_data();
             $allowed_keys = array_column($registered_fields, 'key');
 
+            // Load type overrides saved by the Custom Fields Manager
+            $overrides_raw = get_option('whizmanage_field_overrides', array());
+            if (is_string($overrides_raw)) {
+                $overrides_raw = json_decode($overrides_raw, true);
+            }
+            $overrides = is_array($overrides_raw) ? $overrides_raw : array();
+
             foreach ($meta_keys as $key) {
                 if (!is_string($key)) {
                     continue;
@@ -266,13 +313,25 @@ if (!class_exists('Whizmanage_Custom_Fields_Manager')) {
                 if ($key === '' || $key === 'total_sales') {
                     continue;
                 }
-                
+
                 // If it starts with _ AND it is NOT in the allowed list, skip it.
                 if ($key[0] === '_' && !in_array($key, $allowed_keys, true)) {
                     continue;
                 }
 
-                $meta_keys_objects[] = ['key' => $key];
+                $entry = ['key' => $key];
+
+                // Apply type override if exists
+                if (isset($overrides[$key])) {
+                    if (!empty($overrides[$key]['type'])) {
+                        $entry['type'] = $overrides[$key]['type'];
+                    }
+                    if (!empty($overrides[$key]['choices'])) {
+                        $entry['choices'] = $overrides[$key]['choices'];
+                    }
+                }
+
+                $meta_keys_objects[] = $entry;
             }
 
             wp_add_inline_script(

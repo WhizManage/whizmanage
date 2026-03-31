@@ -2454,10 +2454,9 @@ msgid "Price Preview"
 msgstr "תצוגה מקדימה"
 
 #: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:187
-#, fuzzy
-#| msgid "Hidden columns"
+#: src/components/table/entities/products/products.columns.js
 msgid "Hidden"
-msgstr "עמודות מוסתרות"
+msgstr "מוסתר"
 
 #: src/components/settings/tabs/CustomFieldsVisibilitySettings.jsx:251
 #: src/components/settings/tabs/FieldVisibilitySettings.jsx:308
@@ -7441,6 +7440,22 @@ msgstr "הפעל רישיון"
 #~ "לכל וריאציה, כמו מחירים שונים, רמות מלאי, או תמונות שונות. אם מדובר "
 #~ "בתכונה גלובלית, ניתן לייבא את האפשרויות ממונחים קיימים במקום ליצור אותם "
 #~ "באופן עצמאי."
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Catalog visibility"
+msgstr "נראות הקטלוג"
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Shop and search results"
+msgstr "חנות ותוצאות חיפוש"
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Shop only"
+msgstr "חנות בלבד"
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Search results only"
+msgstr "תוצאות חיפוש בלבד"
 
 #~ msgid "Step 3: "
 #~ msgstr "שלב 3: "

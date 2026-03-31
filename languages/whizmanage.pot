@@ -6761,3 +6761,23 @@ msgstr ""
 #: src/layout/_components/LicensePopup.jsx:272
 msgid "Activate License"
 msgstr ""
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Catalog visibility"
+msgstr ""
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Shop and search results"
+msgstr ""
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Shop only"
+msgstr ""
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Search results only"
+msgstr ""
+
+#: src/components/table/entities/products/products.columns.js
+msgid "Hidden"
+msgstr ""

@@ -75,25 +75,25 @@ export default function Layout() {
                   }
                 >
                   {(() => {
-                    const currentUrl = window.location.href;
-                    const baseUrl = window.siteUrl + "/wp-admin/admin.php?page=";
+                    const params = new URLSearchParams(window.location.search);
+                    const page = params.get("page");
 
-                    if (currentUrl === baseUrl + "whizmanage") {
+                    if (page === "whizmanage") {
                       return <ProductsTablePage />;
                     }
-                    if (currentUrl === baseUrl + "whizmanage-coupons") {
+                    if (page === "whizmanage-coupons") {
                       return <CouponsTablePage />;
                     }
-                    if (currentUrl === baseUrl + "whizmanage-orders") {
+                    if (page === "whizmanage-orders") {
                       return <OrdersTablePage />;
                     }
-                    if (currentUrl === baseUrl + "whizmanage-customers") {
+                    if (page === "whizmanage-customers") {
                       return <CustomersTablePage />;
                     }
-                    if (currentUrl === baseUrl + "whizmanage-discount-rules") {
+                    if (page === "whizmanage-discount-rules") {
                       return <DiscountRulesPage />;
                     }
-                    if (currentUrl === baseUrl + "whizmanage-settings") {
+                    if (page === "whizmanage-settings") {
                       return <SettingsPage />;
                     }
 

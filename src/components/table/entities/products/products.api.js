@@ -370,6 +370,7 @@ export const productsApi = {
       "cross_sell_ids",
       "shipping_class",
       "downloadable_settings",
+      "catalog_visibility",
     ]);
 
     if (!knownFields.has(field)) {
@@ -559,6 +560,9 @@ export const productsApi = {
 
       case "shipping_class":
         payload.shipping_class = cleanValue ? String(cleanValue) : "";
+        break;
+      case "catalog_visibility":
+        payload.catalog_visibility = cleanValue || "visible";
         break;
 
       case "cost":

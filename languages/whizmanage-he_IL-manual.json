@@ -6229,8 +6229,11 @@
       "Pickup location deleted": ["מיקום האיסוף נמחק"],
       "Failed to delete pickup location": ["מחיקת מיקום האיסוף נכשלה"],
       "Update Location": ["עדכן מיקום"],
-      "Create Location": ["צור מיקום"]
-
+      "Create Location": ["צור מיקום"],
+      "Catalog visibility": ["נראות הקטלוג"],
+      "Shop and search results": ["חנות ותוצאות חיפוש"],
+      "Shop only": ["חנות בלבד"],
+      "Search results only": ["תוצאות חיפוש בלבד"]
 
     }
   }

@@ -3,7 +3,7 @@ Contributors: whizmanage , yosefelishayov
 Tags: woocommerce, product management, bulk edit, variations, discounts
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 Requires PHP: 7.4
 Requires Plugins: woocommerce
 License: GPLv2 or later
@@ -215,6 +215,11 @@ WhizManage is designed to handle very large product catalogs efficiently.
 
 
 == Changelog ==
+
+= 2.3.2 =
+* Added Catalog Visibility column for products
+* Added Custom Fields type overrides support
+* Fixed page routing reliability
 
 = 2.3.1 =
 * Added stock status filter (In Stock, Out of Stock, On Backorder)
