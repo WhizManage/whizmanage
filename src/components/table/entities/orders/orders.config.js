@@ -2,6 +2,7 @@
 import { createTableStore } from "../../store/createTableStore.js";
 
 import { ordersAdapters } from "./orders.adapters.js";
+import { ORDER_STATUS_KEYS } from "./orders.constants.js";
 import {
   entityApi,
   ordersApiForTrash,
@@ -160,15 +161,7 @@ const ordersTableConfig = {
       column: "status",
       enable: true,
       label: "status",
-      options: [
-        "pending",
-        "processing",
-        "on-hold",
-        "completed",
-        "cancelled",
-        "refunded",
-        "failed",
-      ],
+      options: Object.keys(ORDER_STATUS_KEYS),
     },
     {
       column: "payment_method",
@@ -232,16 +225,7 @@ export const ordersConfig = {
     {
       id: "status",
       type: "select",
-      options: [
-        "No Change",
-        "pending",
-        "processing",
-        "on-hold",
-        "completed",
-        "cancelled",
-        "refunded",
-        "failed",
-      ],
+      options: ["No Change", ...Object.keys(ORDER_STATUS_KEYS)],
       value: "",
       isChangeTypeEditable: false,
       changeType: "-",

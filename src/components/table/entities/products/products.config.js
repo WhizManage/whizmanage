@@ -267,6 +267,12 @@ const productsTableConfig = {
       enable: true,
       label: "Stock Status",
       options: PRODUCT_FILTER_OPTIONS.stock_status,
+      extraInput: {
+        column: "stock_quantity",
+        type: "number",
+        label: "Stock quantity",
+        placeholder: "Exact quantity",
+      },
     },
     { column: "categories", enable: true, label: "categories" },
     { column: "tags", enable: true, label: "tags" },

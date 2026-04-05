@@ -974,6 +974,8 @@ export function createTableStore(
                   label: labelByCol.get(s.column) || s.column,
                   // Merge options from defaults if they exist
                   ...(defaultFilter?.options ? { options: defaultFilter.options } : {}),
+                  // Merge extraInput from defaults if it exists
+                  ...(defaultFilter?.extraInput ? { extraInput: defaultFilter.extraInput } : {}),
                 };
               });
 

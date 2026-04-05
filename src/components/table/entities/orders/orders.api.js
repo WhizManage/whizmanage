@@ -4,9 +4,8 @@ import { getApi, postApi, putApi } from "/src/services/services";
 // import { deleteApi } from "/src/services/services";
 import { useTableSaveStateStore } from "@/components/table/store/saveStateStore"; // תעדכן מסלול נכון
 import { __ } from "@wordpress/i18n";
-export const orderStatusList = [
-  "pending", "processing", "on-hold", "completed", "cancelled", "refunded", "failed"
-];
+import { ORDER_STATUS_KEYS } from "./orders.constants";
+export const orderStatusList = Object.keys(ORDER_STATUS_KEYS);
 
 export const shape = {
   toActive: (o) => ({

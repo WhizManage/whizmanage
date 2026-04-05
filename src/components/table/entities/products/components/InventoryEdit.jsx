@@ -22,6 +22,40 @@ import { RadioGroup } from "@heroui/react";
 import { AlertCircle, Loader2, Package } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { __ } from "@wordpress/i18n";
+import { toast } from "@/lib/utils";
+
+// מוצר variable - המלאי מנוהל ברמת הוריאציות.
+// לחיצה על התא:
+//   - אם שורת הוריאציות סגורה → פותחת אותה כדי שהמשתמש יראה/יערוך את המלאי לכל וריאציה.
+//   - אם כבר פתוחה → מציגה הודעה שהמלאי מנוהל ברמת הוריאציות.
+const VariableInventoryEdit = ({ row, onFinish }) => {
+  useEffect(() => {
+    if (!row) {
+      onFinish?.();
+      return;
+    }
+
+    const canExpand =
+      typeof row.getCanExpand === "function" ? row.getCanExpand() : true;
+    const isExpanded =
+      typeof row.getIsExpanded === "function" ? row.getIsExpanded() : false;
+
+    if (canExpand && !isExpanded && typeof row.toggleExpanded === "function") {
+      row.toggleExpanded(true);
+    } else if (isExpanded) {
+      toast.info(
+        __(
+          "Stock is managed at the variation level - edit each variation in the rows below.",
+          "whizmanage"
+        )
+      );
+    }
+
+    onFinish?.();
+  }, []);
+
+  return null;
+};
 
 const InventoryEdit = ({
   onChange,
@@ -39,6 +73,12 @@ const InventoryEdit = ({
   // מוצר חיצוני - לא מציג כלום
   if (productType === "external") {
     return <span className="text-muted-foreground text-sm">—</span>;
+  }
+
+  // מוצר עם וריאציות - מלאי מנוהל ברמת הוריאציות.
+  // פותח את שורת הוריאציות במקום לאפשר עריכה ברמת האב.
+  if (productType === "variable") {
+    return <VariableInventoryEdit row={row} onFinish={onFinish} />;
   }
 
   // שמירת ערכים מקוריים לצורך ביטול

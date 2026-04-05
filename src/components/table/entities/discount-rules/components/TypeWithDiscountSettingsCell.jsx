@@ -169,7 +169,7 @@ export default function TypeWithDiscountSettingsCell(props) {
         isDismissable={!isLoading}
         classNames={{
           backdrop: "z-[9990] bg-black/50 dark:bg-black/70",
-          base: "z-[9995] rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-2xl overflow-hidden", // 👈 הוסף
+          base: "z-[9995] rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-2xl !overflow-visible",
           wrapper: "z-[9995]",
           header: "p-0",
           footer: "p-0",

@@ -508,11 +508,33 @@ export default function GenericDataTable({
       }));
   }, [columnFilters]);
 
+  // 🆕 מיפוי columnId -> meta של העמודה (לתמיכה ב-filterSearchValue עבור עמודות וירטואליות)
+  const columnsMetaMap = useMemo(() => {
+    const map = {};
+    columns.forEach((col) => {
+      const id = col?.id || col?.accessorKey;
+      if (id && col?.meta) {
+        map[id] = col.meta;
+      }
+    });
+    return map;
+  }, [columns]);
+
   // 🆕 פונקציה לבדיקה אם שורה עוברת את הפילטרים המקומיים
   const rowPassesLocalFilters = useCallback((row, filters, boolFilters) => {
     // בדיקת פילטרים טקסטואליים
     if (filters && filters.length > 0) {
       const passesTextFilters = filters.every(({ columnId, value }) => {
+        // תמיכה בעמודות וירטואליות (accessorFn) - מאפשר לעמודה לספק ערך חיפוש מותאם
+        const columnMeta = columnsMetaMap[columnId];
+        if (typeof columnMeta?.filterSearchValue === "function") {
+          const customSearchValue = columnMeta.filterSearchValue(row);
+          if (customSearchValue === null || customSearchValue === undefined || customSearchValue === "") {
+            return false;
+          }
+          return String(customSearchValue).toLowerCase().includes(value);
+        }
+
         const cellValue = row[columnId];
 
         // אם אין ערך בתא
@@ -570,13 +592,51 @@ export default function GenericDataTable({
     }
 
     return true;
-  }, []);
+  }, [columnsMetaMap]);
 
   // 🆕 נתונים מסוננים מקומית (לפני עיבוד subRows)
+  // שורת אב נכללת אם היא עוצמה עומדת בפילטר או אם לפחות אחת מתתי-השורות עומדת בו
   const locallyFilteredData = useMemo(() => {
     if (localHeaderFilters.length === 0 && localBoolFilters.length === 0) return data;
-    return data.filter((row) => rowPassesLocalFilters(row, localHeaderFilters, localBoolFilters));
+    return data.filter((row) => {
+      if (rowPassesLocalFilters(row, localHeaderFilters, localBoolFilters)) return true;
+      const subRows = row?.subRows;
+      if (Array.isArray(subRows) && subRows.length > 0) {
+        return subRows.some((subRow) =>
+          rowPassesLocalFilters(subRow, localHeaderFilters, localBoolFilters)
+        );
+      }
+      return false;
+    });
   }, [data, localHeaderFilters, localBoolFilters, rowPassesLocalFilters]);
+
+  // 🆕 האם יש פילטרים מקומיים פעילים (טקסט או בוליאני)
+  const hasLocalFilters = localHeaderFilters.length > 0 || localBoolFilters.length > 0;
+
+  // 🆕 פתיחה אוטומטית של מוצרים שעונים לפילטרים המקומיים דרך תתי-שורות (ווריאציות)
+  useEffect(() => {
+    if (!defaultConfig.enableGrouping || !hasLocalFilters) return;
+
+    const rowsToExpand = data
+      .filter((row) => {
+        // אם האב עצמו עובר את הפילטר - אין צורך להרחיב
+        if (rowPassesLocalFilters(row, localHeaderFilters, localBoolFilters)) return false;
+        const subRows = row?.subRows ?? [];
+        if (subRows.length === 0) return false;
+        return subRows.some((subRow) =>
+          rowPassesLocalFilters(subRow, localHeaderFilters, localBoolFilters)
+        );
+      })
+      .map((row) => String(getAnyId(row)));
+
+    if (rowsToExpand.length > 0) {
+      const newExpanded = {};
+      rowsToExpand.forEach((id) => {
+        newExpanded[id] = true;
+      });
+      setExpanded((prev) => ({ ...prev, ...newExpanded }));
+    }
+  }, [hasLocalFilters, localHeaderFilters, localBoolFilters, data, defaultConfig.enableGrouping, rowPassesLocalFilters]);
 
   // ⚡ יוצרים דאטה מעובד עם תתי-שורות מוגבלות לפי visibleSubRowCounts
   // 🆕 + סינון מקומי של תתי-שורות לפי variations_filter
@@ -611,6 +671,24 @@ export default function GenericDataTable({
         };
       }
 
+      // 🆕 סינון תתי-שורות לפי פילטרים מקומיים מהכותרות (טקסט/בוליאני)
+      // אם האב עצמו לא עומד בפילטר, נציג רק את הווריאציות התואמות.
+      // אם האב עומד בפילטר, נשאיר את כל הווריאציות כדי לא להפתיע את המשתמש.
+      if (hasLocalFilters) {
+        const parentMatches = rowPassesLocalFilters(row, localHeaderFilters, localBoolFilters);
+        if (!parentMatches) {
+          filteredSubRows = originalSubRows.filter((subRow) =>
+            rowPassesLocalFilters(subRow, localHeaderFilters, localBoolFilters)
+          );
+          return {
+            ...row,
+            subRows: filteredSubRows,
+            _totalSubRows: originalSubRows.length,
+            _filteredSubRowsCount: filteredSubRows.length,
+          };
+        }
+      }
+
       // ללא פילטר - הלוגיקה המקורית של chunked rendering
       const rowId = String(getAnyId(row));
       const visibleCount = visibleSubRowCounts[rowId];
@@ -627,7 +705,7 @@ export default function GenericDataTable({
         _totalSubRows: originalSubRows.length,
       };
     });
-  }, [locallyFilteredData, visibleSubRowCounts, defaultConfig.enableGrouping, variationsColumnFilter, subRowMatchesFilter]);
+  }, [locallyFilteredData, visibleSubRowCounts, defaultConfig.enableGrouping, variationsColumnFilter, subRowMatchesFilter, hasLocalFilters, localHeaderFilters, localBoolFilters, rowPassesLocalFilters]);
 
   const tableContainerRef = useRef(null);
   const topPanelRef = useRef(null); // ref for keyboard shortcuts

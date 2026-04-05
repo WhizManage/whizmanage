@@ -311,6 +311,7 @@ export const TopPanel = memo(
                 ref={addItemRef}
                 entity={entityName}
                 onCreated={onItemCreated}
+                onAddInlineRow={onAddInlineRow}
                 isLimitReached={isDiscountRulesLimitReached}
               />
             );

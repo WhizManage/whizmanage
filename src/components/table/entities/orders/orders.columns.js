@@ -16,7 +16,7 @@ import OrderShippingModal from "./components/OrderShippingModal";
 import OrderSourceBadge from "./components/OrderSourceBadge";
 import OrderSummaryModal from "./components/OrderSummaryModal";
 import PaymentMethodCell from "./components/PaymentMethodCell.jsx";
-import { ORDER_STATUS_KEYS } from "./orders.constants";
+import { ORDER_STATUS_KEYS, ORDER_STATUS_LABELS } from "./orders.constants";
 
 // ——————————————————————————————————————————————————————————————
 // Helpers
@@ -330,7 +330,7 @@ export const createOrdersColumns = (store, __, handleCellUpdate) => {
           statusKeys: ORDER_STATUS_KEYS,
           options: Object.keys(ORDER_STATUS_KEYS).map((k) => ({
             value: k,
-            label: __(k, "whizmanage"),
+            label: ORDER_STATUS_LABELS[k] || __(k, "whizmanage"),
           })),
         },
       },

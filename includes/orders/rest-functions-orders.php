@@ -21,6 +21,12 @@ if (!class_exists('Whizmanage_rest_functions_orders')) {
                 'permission_callback' => [$this, 'check_permissions'],
             ]);
 
+            register_rest_route('wm/v1', '/order-statuses', [
+                'methods' => 'GET',
+                'callback' => [$this, 'handle_get_order_statuses'],
+                'permission_callback' => [$this, 'check_permissions'],
+            ]);
+
             register_rest_route('whizmanage/v1', '/check_coupons/', [
                 'methods' => 'POST',
                 'callback' => [$this, 'check_coupons'],
@@ -88,6 +94,23 @@ if (!class_exists('Whizmanage_rest_functions_orders')) {
                     ],
                 ],
             ]);
+        }
+
+        /**
+         * GET /wp-json/wm/v1/order-statuses
+         * מחזיר את כל סטטוסי ההזמנות הרשומים ב-WooCommerce (כולל מותאמים אישית).
+         * המפתחות מוחזרים ללא הקידומת 'wc-' כדי להתאים ל-$order->get_status().
+         */
+        public function handle_get_order_statuses(WP_REST_Request $req)
+        {
+            $statuses = array();
+            if (function_exists('wc_get_order_statuses')) {
+                foreach (wc_get_order_statuses() as $key => $label) {
+                    $clean_key = (strpos($key, 'wc-') === 0) ? substr($key, 3) : $key;
+                    $statuses[$clean_key] = $label;
+                }
+            }
+            return rest_ensure_response((object) $statuses);
         }
 
         /**
@@ -514,7 +537,12 @@ if (!class_exists('Whizmanage_rest_functions_orders')) {
                 $status = array_filter(array_map('trim', explode(',', $status)));
             }
             if (!is_array($status) || empty($status)) {
-                $status = ['completed', 'processing', 'on-hold', 'pending', 'cancelled', 'refunded', 'failed'];
+                $status = function_exists('wc_get_order_statuses')
+                    ? array_map(
+                        function ($k) { return (strpos($k, 'wc-') === 0) ? substr($k, 3) : $k; },
+                        array_keys(wc_get_order_statuses())
+                    )
+                    : ['completed', 'processing', 'on-hold', 'pending', 'cancelled', 'refunded', 'failed'];
             }
 
             // payment_method: מחרוזת/CSV או מערך

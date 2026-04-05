@@ -71,7 +71,10 @@ const SelectContent = React.forwardRef(
     const portalRoot =
       portalContainer ??
       (typeof document !== "undefined"
-        ? document.getElementById("radix-select-portal")
+        ? (() => {
+            const all = document.querySelectorAll("#radix-select-portal");
+            return all.length > 0 ? all[all.length - 1] : null;
+          })()
         : null);
 
     return (

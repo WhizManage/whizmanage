@@ -56,6 +56,7 @@ function StatusBarFilter({
                   defaultValues={column.defaultValues}
                   options={column.options}
                   data={data}
+                  extraInput={column.extraInput}
                   // ⬅️ נעביר flag שזו טקסונומיה שצריכה טעינה lazy
                   isCoreTaxonomy={
                     column.column === "categories" ||

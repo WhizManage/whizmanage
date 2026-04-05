@@ -604,7 +604,12 @@ export function DiscountActionsBody({ type, local, setLocal, __ }) {
               <SelectTrigger className="h-10">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent
+                onCloseAutoFocus={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+              >
                 <SelectItem value="percentage">{__("Percentage", "whizmanage")}</SelectItem>
                 <SelectItem value="fixed">{__("Fixed amount", "whizmanage")}</SelectItem>
               </SelectContent>
@@ -891,7 +896,12 @@ export function DiscountActionsBody({ type, local, setLocal, __ }) {
               <SelectTrigger className="h-10">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent
+                onCloseAutoFocus={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+              >
                 <SelectItem value="percentage">{__("Percentage", "whizmanage")}</SelectItem>
                 <SelectItem value="fixed">{__("Fixed amount", "whizmanage")}</SelectItem>
               </SelectContent>
@@ -956,7 +966,12 @@ export function DiscountActionsBody({ type, local, setLocal, __ }) {
               <SelectTrigger className="h-10">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent
+                onCloseAutoFocus={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
+              >
                 <SelectItem value="fixed">{__("Fixed amount", "whizmanage")}</SelectItem>
                 <SelectItem value="percentage">{__("Percentage", "whizmanage")}</SelectItem>
               </SelectContent>
@@ -1244,7 +1259,7 @@ export default function TypeWithDiscountSettings({
         isDismissable={!isLoading}
         classNames={{
           backdrop: "z-[9990] bg-black/50 dark:bg-black/70",
-          base: "z-[9995] rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-2xl overflow-hidden",
+          base: "z-[9995] rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-2xl !overflow-visible",
           wrapper: "z-[9995]",
           header: "p-0",
           footer: "p-0",

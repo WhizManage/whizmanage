@@ -4,6 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -11,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Label } from "@components/ui/label";
 import { Switch } from "@components/ui/switch";
+import ProBadge from "@components/ui/nextUI/ProBadge";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
  import { __ } from "@wordpress/i18n";
@@ -121,12 +123,46 @@ const ColumnFilter = ({
   data,
   keyPath = "name",
   isCoreTaxonomy = false,
+  extraInput = null, // 🆕 { column: string, placeholder?: string, type?: string, label?: string }
 }) => {
   const [filterValue, setFilterValue] = useState(defaultValues || []);
   const [uniqueValues, setUniqueValues] = useState([]);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isLocalLoading, setIsLocalLoading] = useState(true);
+
+  // 🆕 ערך של אינפוט נוסף (למשל חיפוש לפי כמות מלאי) - נשמר כפילטר נפרד
+  const extraInputExternal = extraInput
+    ? columnFilters?.find((f) => f.id === extraInput.column)?.value ?? ""
+    : "";
+  const [extraInputValue, setExtraInputValue] = useState(
+    typeof extraInputExternal === "string" ? extraInputExternal : String(extraInputExternal || "")
+  );
+
+  // 🆕 סנכרון האינפוט הנוסף עם ערך חיצוני (למשל בלחיצה על איפוס פילטרים)
+  useEffect(() => {
+    if (!extraInput) return;
+    const external = typeof extraInputExternal === "string"
+      ? extraInputExternal
+      : String(extraInputExternal || "");
+    if (external !== extraInputValue) {
+      setExtraInputValue(external);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [extraInputExternal]);
+
+  // 🆕 Handler לעדכון האינפוט הנוסף ב-columnFilters
+  const handleExtraInputChange = (value) => {
+    setExtraInputValue(value);
+    if (!extraInput) return;
+    setColumnFilters((old = []) => {
+      const filtered = old.filter((f) => f.id !== extraInput.column);
+      if (value !== "" && value !== null && value !== undefined) {
+        return [...filtered, { id: extraInput.column, value: String(value).trim() }];
+      }
+      return filtered;
+    });
+  };
 
    
   const isRTL = window?.document?.documentElement?.dir === "rtl";
@@ -171,8 +207,10 @@ const ColumnFilter = ({
 
   // update active state
   useEffect(() => {
-    setIsFilterActive(!!filterValue?.length);
-  }, [filterValue]);
+    const isLocked = typeof window !== "undefined" && window.hasLicence !== true;
+    const extraActive = !!extraInput && !isLocked && extraInputValue !== "";
+    setIsFilterActive(!!filterValue?.length || extraActive);
+  }, [filterValue, extraInput, extraInputValue]);
 
   // CORE lazy load
   useEffect(() => {
@@ -284,8 +322,12 @@ const ColumnFilter = ({
   };
 
   const handleFilterToggle = () => {
-    if (isFilterActive) setFilterValue([]);
-    else setFilterValue(uniqueValues.map((o) => o.value));
+    if (isFilterActive) {
+      setFilterValue([]);
+      if (extraInput) handleExtraInputChange("");
+    } else {
+      setFilterValue(uniqueValues.map((o) => o.value));
+    }
   };
 
   const isBusy =
@@ -311,7 +353,7 @@ const ColumnFilter = ({
           {__(label, "whizmanage")}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="max-h-[222px] overflow-y-auto scrollbar-whiz">
+      <DropdownMenuContent align="end" className="p-0">
         <DropdownMenuLabel className="flex items-center justify-between">
           <Label>{__("Enable", "whizmanage")}</Label>
           <Switch
@@ -323,6 +365,45 @@ const ColumnFilter = ({
 
         <DropdownMenuSeparator />
 
+        {extraInput && (() => {
+          const isLocked = typeof window !== "undefined" && window.hasLicence !== true;
+          return (
+            <>
+              <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="flex flex-col items-stretch gap-1 focus:bg-transparent p-2"
+              >
+                {extraInput.label && (
+                  <Label className="text-xs text-muted-foreground flex items-center gap-2">
+                    <span>{__(extraInput.label, "whizmanage")}</span>
+                    {isLocked && <ProBadge />}
+                  </Label>
+                )}
+                <input
+                  type={extraInput.type || "text"}
+                  placeholder={
+                    extraInput.placeholder
+                      ? __(extraInput.placeholder, "whizmanage")
+                      : ""
+                  }
+                  value={isLocked ? "" : extraInputValue}
+                  onChange={(e) => !isLocked && handleExtraInputChange(e.target.value)}
+                  onKeyDown={(e) => e.stopPropagation()}
+                  onClick={(e) => e.stopPropagation()}
+                  disabled={isLocked}
+                  className={cn(
+                    "h-8 w-full text-xs rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-2 focus:outline-none focus:ring-1 focus:ring-fuchsia-500",
+                    isLocked && "opacity-50 cursor-not-allowed"
+                  )}
+                  min={extraInput.type === "number" ? 0 : undefined}
+                />
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+            </>
+          );
+        })()}
+
+        <div className="max-h-[222px] overflow-y-auto scrollbar-whiz">
         {isBusy ? (
           <div className="w-full flex justify-center py-4">
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-fuchsia-600"></div>
@@ -358,6 +439,8 @@ const ColumnFilter = ({
         >
           {__("No Value", "whizmanage")}
         </DropdownMenuCheckboxItem>
+        </div>
+
       </DropdownMenuContent>
     </DropdownMenu>
   );

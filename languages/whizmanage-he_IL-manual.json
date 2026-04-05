@@ -942,6 +942,9 @@
       "Stock quantity": [
         "כמות במלאי"
       ],
+      "Exact quantity": [
+        "כמות מדויקת"
+      ],
       "Featured": [
         "מומלץ"
       ],
@@ -974,6 +977,9 @@
       ],
       "Out of stock": [
         "לא במלאי"
+      ],
+      "Stock is managed at the variation level - edit each variation in the rows below.": [
+        "המלאי מנוהל ברמת הוריאציות - ערוך כל וריאציה בשורות שמתחת."
       ],
       "Bulk Edit": [
         "עריכה בכמות גדולה"

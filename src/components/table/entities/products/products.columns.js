@@ -25,6 +25,7 @@ import DimensionsEdit from "./components/DimensionsEdit.jsx";
 import DownloadableCell from "./components/DownloadableCell.jsx";
 import FeaturedCell from "./components/FeaturedCell.jsx";
 import InventoryDisplay from "./components/InventoryDisplay";
+import { getInventoryConfig } from "@/data/inventoryStyles";
 import InventoryEdit from "./components/InventoryEdit";
 import RichTextDisplay from "./components/RichTextDisplay";
 import RichTextEdit from "./components/RichTextEdit";
@@ -879,6 +880,26 @@ export const createProductsColumns = (store, __, handleCellUpdate) => {
         customDisplayComponent: InventoryDisplay,
         customEditComponent: InventoryEdit,
         autoFinishOnChange: false,
+        // סינון מקומי: בונה מחרוזת חיפוש מהמלאי (כמות + תווית סטטוס מתורגמת)
+        filterSearchValue: (row) => {
+          if (!row) return "";
+          const productType = row.type;
+          if (productType === "external") return "";
+          const data = {
+            manage_stock: row.manage_stock,
+            stock_quantity: row.stock_quantity ?? row.stock,
+            low_stock_amount: row.low_stock_amount,
+            stock_status: row.stock_status,
+          };
+          const config = getInventoryConfig(data);
+          const label = config?.label || "";
+          const translatedLabel = __(String(label), "whizmanage");
+          const parts = [label, translatedLabel];
+          if (productType !== "grouped" && data.manage_stock) {
+            parts.push(String(data.stock_quantity ?? ""));
+          }
+          return parts.filter(Boolean).join(" ");
+        },
       },
       accessorFn: (row) => ({
         manage_stock: row.manage_stock,

@@ -441,8 +441,18 @@ if (! class_exists('Whizmanage')) {
                 $custom_meta_keys = array();
             }
 
+            // Load all order statuses (built-in + custom) with wc- prefix stripped
+            $order_statuses = array();
+            if (function_exists('wc_get_order_statuses')) {
+                foreach (wc_get_order_statuses() as $key => $label) {
+                    $clean_key = (strpos($key, 'wc-') === 0) ? substr($key, 3) : $key;
+                    $order_statuses[$clean_key] = $label;
+                }
+            }
+
             $inline_js  = 'window.summary_meta = ' . wp_json_encode($summary_meta) . ';';
             $inline_js .= 'window.listOrdersMetaData = ' . wp_json_encode($custom_meta_keys) . ';';
+            $inline_js .= 'window.wmOrderStatuses = ' . wp_json_encode((object) $order_statuses) . ';';
 
             wp_add_inline_script('whizmanage-script', $inline_js, 'before');
 

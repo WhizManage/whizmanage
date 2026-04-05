@@ -17,7 +17,12 @@ if (!class_exists('WhizManage_Orders')) {
 
             $statuses = isset($args['status']) && is_array($args['status'])
                 ? $args['status']
-                : ['completed', 'processing', 'on-hold', 'pending', 'cancelled', 'refunded', 'failed'];
+                : (function_exists('wc_get_order_statuses')
+                    ? array_map(
+                        function ($k) { return (strpos($k, 'wc-') === 0) ? substr($k, 3) : $k; },
+                        array_keys(wc_get_order_statuses())
+                    )
+                    : ['completed', 'processing', 'on-hold', 'pending', 'cancelled', 'refunded', 'failed']);
 
             $date_from = $args['date_from'] ?? null;
             $date_to = $args['date_to'] ?? null;
@@ -574,9 +579,16 @@ if (!class_exists('WhizManage_Orders')) {
          */
         public function get_all_custom_order_meta_keys($limit = 200)
         {
+            $all_statuses = function_exists('wc_get_order_statuses')
+                ? array_map(
+                    function ($k) { return (strpos($k, 'wc-') === 0) ? substr($k, 3) : $k; },
+                    array_keys(wc_get_order_statuses())
+                )
+                : ['completed', 'processing', 'on-hold', 'pending', 'cancelled', 'refunded', 'failed'];
+
             $args = [
                 'type' => 'shop_order',
-                'status' => ['completed', 'processing', 'on-hold', 'pending', 'cancelled', 'refunded', 'failed'],
+                'status' => $all_statuses,
                 'limit' => $limit,
                 'orderby' => 'date',
                 'order' => 'DESC',

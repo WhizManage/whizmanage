@@ -10,6 +10,9 @@ if (!class_exists('Whizmanage_get_product')) {
             $type = !empty($filters['type']) ? (array) $filters['type'] : [];
             $downloadable = isset($filters['downloadable']) ? $filters['downloadable'] : null;
             $stock_status = !empty($filters['stock_status']) ? (array) $filters['stock_status'] : [];
+            $stock_quantity = isset($filters['stock_quantity']) && $filters['stock_quantity'] !== '' && $filters['stock_quantity'] !== null
+                ? $filters['stock_quantity']
+                : null;
             $product_cat = !empty($filters['product_cat']) ? (array) $filters['product_cat'] : [];
             $product_tag = !empty($filters['product_tag']) ? (array) $filters['product_tag'] : [];
             $tax_filters = !empty($filters['tax_filters']) && is_array($filters['tax_filters']) ? $filters['tax_filters'] : [];
@@ -143,6 +146,62 @@ if (!class_exists('Whizmanage_get_product')) {
             }
             if (count($meta_query) > 1) {
                 $args['meta_query'] = $meta_query;
+            }
+
+            // חיפוש לפי כמות מלאי מדויקת (מוצרים + ווריאציות)
+            // מחפש גם במוצרים פשוטים/variable וגם בווריאציות, ומחזיר את ההורים של ווריאציות תואמות
+            if ($stock_quantity !== null && is_numeric($stock_quantity)) {
+                global $wpdb;
+                $qty = intval($stock_quantity);
+
+                // מוצרים (simple/variable) עם _stock תואם
+                $product_stock_ids = $wpdb->get_col(
+                    $wpdb->prepare("
+                        SELECT p.ID
+                        FROM {$wpdb->posts} p
+                        INNER JOIN {$wpdb->postmeta} m_stock ON m_stock.post_id = p.ID AND m_stock.meta_key = '_stock'
+                        INNER JOIN {$wpdb->postmeta} m_manage ON m_manage.post_id = p.ID AND m_manage.meta_key = '_manage_stock'
+                        WHERE p.post_type = 'product'
+                          AND CAST(m_stock.meta_value AS SIGNED) = %d
+                          AND m_manage.meta_value = 'yes'
+                    ", $qty)
+                );
+
+                // ווריאציות עם _stock תואם - מחזירים את ההורים
+                $variation_parent_ids = $wpdb->get_col(
+                    $wpdb->prepare("
+                        SELECT DISTINCT p.post_parent
+                        FROM {$wpdb->posts} p
+                        INNER JOIN {$wpdb->postmeta} m_stock ON m_stock.post_id = p.ID AND m_stock.meta_key = '_stock'
+                        INNER JOIN {$wpdb->postmeta} m_manage ON m_manage.post_id = p.ID AND m_manage.meta_key = '_manage_stock'
+                        WHERE p.post_type = 'product_variation'
+                          AND CAST(m_stock.meta_value AS SIGNED) = %d
+                          AND m_manage.meta_value = 'yes'
+                    ", $qty)
+                );
+
+                $stock_ids = array_values(array_unique(array_filter(array_map('intval', array_merge(
+                    (array) $product_stock_ids,
+                    (array) $variation_parent_ids
+                )))));
+
+                if (empty($stock_ids)) {
+                    // אין התאמות - מוודא שלא יוחזר כלום
+                    $args['post__in'] = array(0);
+                } else {
+                    if (isset($args['post__in']) && !empty($args['post__in'])) {
+                        // חיתוך עם post__in קיים (למשל מחיפוש)
+                        $args['post__in'] = array_values(array_intersect(
+                            array_map('intval', (array) $args['post__in']),
+                            $stock_ids
+                        ));
+                        if (empty($args['post__in'])) {
+                            $args['post__in'] = array(0);
+                        }
+                    } else {
+                        $args['post__in'] = $stock_ids;
+                    }
+                }
             }
 
             // ===== tax_query (categories / tags / type / additional taxonomies) =====
