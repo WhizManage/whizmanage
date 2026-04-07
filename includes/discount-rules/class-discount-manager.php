@@ -657,6 +657,21 @@ if (!class_exists('Whiz_Discount_Manager')) {
                 WC()->session->set('whiz_bulk_last_tier', $tier);
             }
 
+            // Precompute group_price ratio once
+            $group_price_ratio = 1.0;
+            if (($tier['method'] ?? '') === 'group_price') {
+                $group_price_ratio = self::calc_group_price_ratio(
+                    $cart,
+                    $cond,
+                    $filters,
+                    (int) ($tier['min'] ?? 0),
+                    (float) ($tier['amount'] ?? 0),
+                    $total_qty
+                );
+                if ($group_price_ratio >= 1.0)
+                    return 0.0;
+            }
+
             $saved_total = 0.0;
             $affected_before = 0.0;
             $affected_after = 0.0;
@@ -681,6 +696,8 @@ if (!class_exists('Whiz_Discount_Manager')) {
                 if ($tier['method'] === 'percentage') {
                     $pct = max(0, min(100, (float) $tier['amount']));
                     $new = $base * (1 - $pct / 100);
+                } elseif ($tier['method'] === 'group_price') {
+                    $new = max(0.0, $base * $group_price_ratio);
                 } else {
                     $fixed = max(0, (float) $tier['amount']);
                     $new = max(0, $base - $fixed);
@@ -2409,6 +2426,55 @@ if (!class_exists('Whiz_Discount_Manager')) {
             return intdiv($qty, $x) * $y;
         }
 
+        /**
+         * Compute the group_price discount ratio (option 1: only full groups are discounted,
+         * remainder stays at full price; discount distributed proportionally across all qualifying units).
+         *
+         * Returns a ratio in [0..1] to multiply each qualifying item's base price by.
+         * Returns 1.0 when no discount applies.
+         */
+        protected static function calc_group_price_ratio($cart, array $cond, array $filters, int $group_size, float $target_price, int $total_qty): float
+        {
+            if ($group_size < 1 || $total_qty <= 0)
+                return 1.0;
+            $full_groups = (int) floor($total_qty / $group_size);
+            if ($full_groups <= 0)
+                return 1.0;
+            $covered_qty = $full_groups * $group_size;
+
+            $original_total = 0.0;
+            foreach ($cart->get_cart() as $item) {
+                if (!empty($item['whiz_dr_gift']))
+                    continue;
+                if (!self::match_item_filters($filters, (array) $item))
+                    continue;
+                if (!self::match_item_conditions($cond, $cart, $item))
+                    continue;
+                $product = $item['data'] ?? null;
+                if (!$product || !method_exists($product, 'get_price'))
+                    continue;
+                $base_raw = isset($item['whiz_dr_base_price']) ? (float) $item['whiz_dr_base_price'] : (float) $product->get_price();
+                $base = self::display_price_for_product($product, $base_raw);
+                $qty = (int) ($item['quantity'] ?? 1);
+                $original_total += $base * max(1, $qty);
+            }
+            if ($original_total <= 0)
+                return 1.0;
+
+            $covered_original = $original_total * ($covered_qty / max(1, $total_qty));
+            $covered_target = $full_groups * max(0.0, $target_price);
+            $total_discount = max(0.0, $covered_original - $covered_target);
+            if ($total_discount <= 0)
+                return 1.0;
+
+            $ratio = 1.0 - ($total_discount / $original_total);
+            if ($ratio < 0)
+                $ratio = 0.0;
+            if ($ratio > 1)
+                $ratio = 1.0;
+            return $ratio;
+        }
+
         protected static function apply_bulk_tiers_to_cart($cart, array $cond, array $tiers, array $filters = []): float
         {
             $total_qty = 0;
@@ -2430,6 +2496,22 @@ if (!class_exists('Whiz_Discount_Manager')) {
 
             if (function_exists('WC') && WC()->session) {
                 WC()->session->set('whiz_bulk_last_tier', $tier);
+            }
+
+            // Precompute group_price ratio once
+            $group_price_ratio = 1.0;
+            if (($tier['method'] ?? '') === 'group_price') {
+                $group_price_ratio = self::calc_group_price_ratio(
+                    $cart,
+                    $cond,
+                    $filters,
+                    (int) ($tier['min'] ?? 0),
+                    (float) ($tier['amount'] ?? 0),
+                    $total_qty
+                );
+                // Nothing to discount
+                if ($group_price_ratio >= 1.0)
+                    return 0.0;
             }
 
             $saved_total = 0.0;
@@ -2454,6 +2536,8 @@ if (!class_exists('Whiz_Discount_Manager')) {
                 if ($tier['method'] === 'percentage') {
                     $pct = max(0, min(100, (float) $tier['amount']));
                     $new = $base * (1 - $pct / 100);
+                } elseif ($tier['method'] === 'group_price') {
+                    $new = max(0.0, $base * $group_price_ratio);
                 } else {
                     $fixed = max(0, (float) $tier['amount']);
                     $new = max(0, $base - $fixed);
@@ -2492,7 +2576,7 @@ if (!class_exists('Whiz_Discount_Manager')) {
                     $method = 'percentage';
                     $amount = (float) $t['pct'];
                 } else {
-                    $method = in_array($t['method'] ?? '', ['percentage', 'fixed'], true) ? $t['method'] : 'percentage';
+                    $method = in_array($t['method'] ?? '', ['percentage', 'fixed', 'group_price'], true) ? $t['method'] : 'percentage';
                     $amount = (float) ($t['amount'] ?? 0);
                 }
 

@@ -204,7 +204,7 @@ if (!class_exists('Whiz_Discount_Rule')) {
                             $min = isset($t['min']) ? (int) $t['min'] : 0;
                             $maxRaw = $t['max'] ?? null;
                             $max = ($maxRaw === '' || $maxRaw === null) ? null : (int) $maxRaw;
-                            $method = $has_pct ? 'percentage' : (in_array(($t['method'] ?? ''), ['percentage', 'fixed'], true) ? $t['method'] : 'percentage');
+                            $method = $has_pct ? 'percentage' : (in_array(($t['method'] ?? ''), ['percentage', 'fixed', 'group_price'], true) ? $t['method'] : 'percentage');
                             $amount = $has_pct ? floatval($t['pct']) : floatval($t['amount'] ?? 0);
                             $label = isset($t['label']) && is_scalar($t['label']) ? sanitize_text_field($t['label']) : '';
                             $T[] = ['min' => $min, 'max' => $max, 'method' => $method, 'amount' => $amount, 'label' => $label];
@@ -469,12 +469,14 @@ if (!class_exists('Whiz_Discount_Rule')) {
                                 $errors[] = "actions.tiers[$i].max must be null or >= 0";
                             if ($max !== null && $max < $min)
                                 $errors[] = "actions.tiers[$i].max must be >= min";
-                            if (!in_array($method, ['percentage', 'fixed'], true))
+                            if (!in_array($method, ['percentage', 'fixed', 'group_price'], true))
                                 $errors[] = "actions.tiers[$i].method invalid";
                             if ($amount < 0)
                                 $errors[] = "actions.tiers[$i].amount must be >= 0";
                             if ($method === 'percentage' && $amount > 100)
                                 $errors[] = "actions.tiers[$i].amount must be between 0-100 for percentage";
+                            if ($method === 'group_price' && $min < 1)
+                                $errors[] = "actions.tiers[$i].min must be >= 1 for group_price (group size)";
                             if (isset($t['label']) && !is_scalar($t['label']))
                                 $errors[] = "actions.tiers[$i].label must be a string";
 
